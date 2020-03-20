@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const db = require('../server/db');
 // importing all models
 const {User, Friend, Snapshot, Place} = require('../server/db/models');
