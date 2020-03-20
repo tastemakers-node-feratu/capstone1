@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const db = require('../server/db');
 // importing all models
 const {User, Friend, Snapshot, Place} = require('../server/db/models');
@@ -55,22 +54,22 @@ async function seed() {
   const places = [
     {
       name: 'Sanrio Puroland',
-      category: ['experience'],
+      category: 'experience',
       location: '1-31 Ochiai, Tama, Tokyo 206-8588, Japan',
-      all_tags: ['amusement park']
+      all_tags: 'amusement park'
     },
     {
       name: 'Sanrio World Ginza',
-      category: ['shop'],
+      category: 'shop',
       location:
         'Japan, 〒104-0061 Tokyo, Chuo City, Ginza, 4−1 先 西銀座 1F・2F',
-      all_tags: ['kawaii']
+      all_tags: 'kawaii'
     },
     {
       name: 'DiverCity Tokyo Plaza',
-      category: ['shop'],
+      category: 'shop',
       location: '1 Chome-1-10 Aomi, Koto City, Tokyo 135-0064, Japan',
-      all_tags: ['mall']
+      all_tags: 'mall'
     }
   ];
 
@@ -119,21 +118,21 @@ async function seed() {
       description: 'pastel colored indoor theme park',
       photos: 'https://m.justgola.com/media/a/00/0a/44442_og_1.jpeg',
       price_rating: '2',
-      tags: ['cute', 'kid-friendly']
+      tags: 'cute,kid-friendly'
     },
     {
       description: 'nice sanrio giftshop',
       photos:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFjBpBES6O7rSW6Jnyd8DW3L6HhU_TrEO8bbrHamWBru0kzEgw',
       price_rating: '3',
-      tags: ['cute', 'kid-friendly']
+      tags: 'cute,kid-friendly'
     },
     {
       description: 'huge japanese shopping mall',
       photos:
         'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
       price_rating: '3',
-      tags: ['cute', 'kid-friendly', 'shopping center', 'shopping mall']
+      tags: 'cute,kid-friendly,shopping center,shopping mall'
     }
   ];
 
