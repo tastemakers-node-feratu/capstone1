@@ -46,12 +46,6 @@ async function seed() {
     }
   ];
 
-  await Promise.all(
-    users.map(element => {
-      return User.create(element);
-    })
-  );
-
   const places = [
     {
       name: 'Sanrio Puroland',
@@ -75,71 +69,47 @@ async function seed() {
   ];
 
   await Promise.all(
-    places.map(element => {
-      return Place.create(element);
-    })
-  );
+    places.map(async element => {
+      // iterating places array and creating instance for all
+      const placeInstance = await Place.create(element);
 
-  const friends = [
-    {
-      sender_id: 1,
-      reciever_id: 2,
-      friendship_status: 'pending'
-    },
-    {
-      sender_id: 1,
-      reciever_id: 3,
-      friendship_status: 'pending'
-    },
-    {
-      sender_id: 1,
-      reciever_id: 4,
-      friendship_status: 'pending'
-    },
-    {
-      sender_id: 2,
-      reciever_id: 3,
-      friendship_status: 'approved'
-    },
-    {
-      sender_id: 2,
-      reciever_id: 4,
-      friendship_status: 'approved'
-    }
-  ];
+      // creating one snapshot to associate with all users and places
+      const oneSnapshot = await Snapshot.create({
+        description: 'huge japanese shopping mall',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '3',
+        tags: 'cute,kid-friendly,shopping center,shopping mall'
+      });
 
-  await Promise.all(
-    friends.map(element => {
-      return Friend.create(element);
-    })
-  );
+      await Promise.all(
+        users.map(async userElement => {
+          // iterating users array and creating instance for all
+          const userInstance = await User.create(userElement);
+          // associating all users to friend with id: 1
+          const firstUser = await User.findOne({where: {id: 1}});
+          // add all users to friend with id 1
+          if (userInstance.id !== 1) {
+            await userInstance.addFriend(firstUser, {
+              through: {
+                sender_id: userInstance.id,
+                reciever_id: firstUser.id,
+                friendship_status: 'approved'
+              }
+            });
+          }
+          // associating all users to all places
+          await userInstance.addPlace(placeInstance);
+          // associating all users to a single snapshot
+          await userInstance.addSnapshot(oneSnapshot);
+          // associating all places to a single snapshot
+          await placeInstance.addSnapshot(oneSnapshot);
 
-  const snapshots = [
-    {
-      description: 'pastel colored indoor theme park',
-      photos: 'https://m.justgola.com/media/a/00/0a/44442_og_1.jpeg',
-      price_rating: '2',
-      tags: 'cute,kid-friendly'
-    },
-    {
-      description: 'nice sanrio giftshop',
-      photos:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFjBpBES6O7rSW6Jnyd8DW3L6HhU_TrEO8bbrHamWBru0kzEgw',
-      price_rating: '3',
-      tags: 'cute,kid-friendly'
-    },
-    {
-      description: 'huge japanese shopping mall',
-      photos:
-        'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
-      price_rating: '3',
-      tags: 'cute,kid-friendly,shopping center,shopping mall'
-    }
-  ];
+          return userElement;
+        })
+      );
 
-  await Promise.all(
-    snapshots.map(element => {
-      return Snapshot.create(element);
+      return placeInstance;
     })
   );
 }
