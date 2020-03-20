@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -45,17 +46,17 @@ export default class LoginScreen extends React.Component {
               style={styles.input}
               ref={(input) => this.passwordInput = input} />
 
-            <Button
-              title="Sign In"
-              color={'#2980b9'}
-            />
-            <Button
-              title="Create New User"
-              onPress={() => navigate('SignUp')}
-              color={'#2980b9'}
-            />
 
-            <View style={{ flex: 1 }} />
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>LOGIN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigate('SignUp')} style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>Create New User</Text>
+            </TouchableOpacity>
+
+
+            {/* <View style={{ flex: 1 }} /> */}
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -71,9 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#74b9ff'
   },
   inner: {
-    padding: 24,
-    flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   brandName: {
     fontSize: 50,
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    width: 200,
+    width: 300,
     marginTop: 10,
     padding: 10,
     borderRadius: 5,
@@ -115,6 +114,18 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100
   },
+  buttonContainer: {
+    backgroundColor: "#2980b9",
+    width: 200,
+    paddingVertical: 10,
+    marginBottom: 10,
+    borderRadius: 10
+  },
+  buttonText: {
+    textAlign: "center",
+    color: '#FFFFFF',
+    fontWeight: '700'
+  }
 });
 
 

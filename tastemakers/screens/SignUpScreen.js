@@ -1,76 +1,61 @@
-import * as React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, StatusBar, TextInput } from 'react-native'
-import * as WebBrowser from 'expo-web-browser';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView, SafeAreaView } from 'react-native'
 
 import { MonoText } from '../components/StyledText';
 
-export default function SignUpScreen() {
-    return (
-        <View style={styles.container}>
-            <StatusBar barStyle="light-content" />
-            <TextInput
-                placeholder="email"
-                placeholderTextColor='rgba(255,255,255,0.7)'
-                returnKeyType="next"
-                onSubmitEditing={() => this.passwordInput.focus()}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.input} />
+export default class SignUpScreen extends React.Component {
 
-            <TextInput
-                placeholder="password"
-                placeholderTextColor='rgba(255,255,255,0.7)'
-                secureTextEntry
-                returnKeyType="go"
-                style={styles.input}
-                ref={(input) => this.passwordInput = input} />
-
-            <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>SIGN UP</Text>
-            </TouchableOpacity>
-
-        </View>
-    );
-}
-
-SignUpScreen.navigationOptions = {
-    header: null,
-};
-
-function DevelopmentModeNotice() {
-    if (__DEV__) {
-        const learnMoreButton = (
-            <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-                Learn more
-            </Text>
-        );
-
+    render() {
+        const { navigate } = this.props.navigation;
         return (
-            <Text style={styles.developmentModeText}>
-                Development mode is enabled: your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-            </Text>
-        );
-    } else {
-        return (
-            <Text style={styles.developmentModeText}>
-                You are not in development mode: your app will run at full speed.
-            </Text>
+            <KeyboardAvoidingView
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={64}
+                behavior="padding"
+            >
+                <SafeAreaView style={styles.container}>
+                    <View style={styles.inner}>
+                        <Text style={styles.brandName}>Taste Makers</Text>
+                        {/* <Image source={../logo} style={styles.welcomeImage} /> */}
+                        <Text style={styles.title}>What are you loving this week? </Text>
+
+                        <TextInput
+                            placeholder="email"
+                            placeholderTextColor='rgba(255,255,255,0.7)'
+                            returnKeyType="next"
+                            onSubmitEditing={() => this.passwordInput.focus()}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            style={styles.input} />
+
+                        <TextInput
+                            placeholder="password"
+                            placeholderTextColor='rgba(255,255,255,0.7)'
+                            secureTextEntry
+                            returnKeyType="go"
+                            style={styles.input}
+                            ref={(input) => this.passwordInput = input} />
+
+
+                        <TouchableOpacity style={styles.buttonContainer}>
+                            <Text style={styles.buttonText}>SIGN UP</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                </SafeAreaView>
+            </KeyboardAvoidingView >
         );
     }
 }
 
-function handleHelpPress() {
-    WebBrowser.openBrowserAsync(
-        'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change' //to be changed
-    );
-}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#74b9ff',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     developmentModeText: {
         marginBottom: 20,
@@ -82,32 +67,21 @@ const styles = StyleSheet.create({
     contentContainer: {
         paddingTop: 30,
     },
-    welcomeContainer: {
-        alignItems: 'center',
+    brandName: {
+        fontSize: 50,
+        color: '#FFFFFF',
+        textAlign: 'center',
+    },
+    input: {
+        width: 300,
         marginTop: 10,
-        marginBottom: 20,
-    },
-    welcomeImage: {
-        width: 100,
-        height: 80,
-        resizeMode: 'contain',
-        marginTop: 3,
-        marginLeft: -10,
-    },
-    getStartedContainer: {
-        alignItems: 'center',
-        marginHorizontal: 50,
-    },
-    homeScreenFilename: {
-        marginVertical: 7,
-    },
-    codeHighlightText: {
-        color: 'rgba(96,100,109, 0.8)',
-    },
-    codeHighlightContainer: {
-        backgroundColor: 'rgba(0,0,0,0.05)',
-        borderRadius: 3,
-        paddingHorizontal: 4,
+        padding: 10,
+        borderRadius: 5,
+        height: 40,
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        marginBottom: 15,
+        color: '#FFF',
+        paddingHorizontal: 10,
     },
     helpLink: {
         paddingBottom: 10
@@ -117,8 +91,21 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         textAlign: 'center',
     },
-    container: {
-        padding: 20
+    title: {
+        color: '#FFF',
+        marginTop: 10,
+        width: 160,
+        textAlign: 'center',
+        opacity: 0.9,
+    },
+    logoContainer: {
+        alignItems: 'center',
+        flexGrow: 1,
+        justifyContent: 'center'
+    },
+    logo: {
+        width: 100,
+        height: 100
     },
     input: {
         height: 40,
@@ -129,7 +116,10 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: "#2980b9",
-        paddingVertical: 15
+        width: 200,
+        paddingVertical: 10,
+        marginBottom: 10,
+        borderRadius: 10
     },
     buttonText: {
         textAlign: "center",
