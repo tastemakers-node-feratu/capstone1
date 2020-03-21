@@ -3,8 +3,7 @@ const Sequelize = require('sequelize');
 const db = new Sequelize('capstone', 'root', 'node-feratu', {
   dialect: 'mysql',
   host: 'localhost',
-  port: 3306,
-  password: ''
+  port: 3306
 });
 
 // 'mysql://localhost:3306/capstone', {logging: false}
