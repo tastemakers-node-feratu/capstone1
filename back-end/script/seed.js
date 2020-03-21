@@ -46,7 +46,7 @@ const users = [
 const places = [
   {
     name: 'Sanrio Puroland',
-    category: ['experience, shop'],
+    category: ['experience', 'shop'],
     location: '1-31 Ochiai, Tama, Tokyo 206-8588, Japan',
     all_tags: ['amusement park']
   },
