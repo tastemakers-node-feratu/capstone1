@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const User = db.define('user', {
   id: {
@@ -20,18 +20,18 @@ const User = db.define('user', {
   imageURL: {
     type: Sequelize.STRING,
     defaultValue: ''
-    //https://favpng.com/png_view/booth-vector-selfie-social-media-celebrity-png/PSp4WHDX
+    // https://favpng.com/png_view/booth-vector-selfie-social-media-celebrity-png/PSp4WHDX
   },
   bio: {
     type: Sequelize.STRING
   },
   phone: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   pushNotifs: {
     type: Sequelize.BOOLEAN,
     defaultValue: true
   }
-})
+});
 
 module.exports = User;
