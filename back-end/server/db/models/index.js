@@ -13,9 +13,6 @@ User.belongsToMany(User, {through: Friend, as: 'friends'});
 // one user can have many places
 Place.belongsToMany(User, {through: 'snapshot'});
 User.belongsToMany(Place, {through: 'snapshot'});
-// one place can have many snapshots
-// one user can have many snapshots
-// snapshots can only belong to one place and one user
 
 module.exports = {
   User,
