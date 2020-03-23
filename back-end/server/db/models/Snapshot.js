@@ -36,7 +36,7 @@ const Snapshot = db.define('snapshot', {
   }
 });
 
-Snapshot.getRandomSnaps =  function() {
+Snapshot.getSnaps =  function() {
   const oneMonthAgo = moment().subtract(1, 'months').format();
   const all =  this.findAll({
     where: {
