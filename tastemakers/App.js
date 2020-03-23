@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
-import store from './client/store';
+import store from './store';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
@@ -31,7 +31,7 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -63,10 +63,9 @@ export default function App(props) {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#74b9ff'
   }
 });
