@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const crypto = require('crypto');
 const db = require('../db');
 
 const User = db.define('user', {
@@ -16,6 +17,18 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('password');
+    }
+  },
+  salt: {
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('salt');
+    }
   },
   imageURL: {
     type: Sequelize.STRING,
@@ -38,3 +51,32 @@ const User = db.define('user', {
 });
 
 module.exports = User;
+
+User.prototype.correctPassword = function(passw) {
+  return User.excryptPassword(passw, this.salt()) === this.password();
+};
+
+User.generateSalt = function() {
+  return crypto.randomBytes(16).toString('base64');
+};
+
+User.encryptPassword = function(plainPW, salt) {
+  return crypto
+    .createHash('RSA-SHA256')
+    .update(plainPW)
+    .update(salt)
+    .digest('hex');
+};
+
+const setSaltAndPW = user => {
+  if (user.changed('password')) {
+    user.salt = User.generateSalt();
+    user.password = User.encryptPassword(user.password(), user.salt());
+  }
+};
+
+User.beforeCreate(setSaltAndPW);
+User.beforeUpdate(setSaltAndPW);
+User.beforeBulkCreate(users => {
+  users.forEach(setSaltAndPW);
+});
