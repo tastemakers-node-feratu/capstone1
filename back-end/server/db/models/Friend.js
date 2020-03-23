@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const db = require('../db');
 
 const Friend = db.define('friend', {
@@ -16,5 +17,23 @@ const Friend = db.define('friend', {
     type: Sequelize.STRING
   }
 });
+
+Friend.findFriends = function(id){
+  return this.findAll({
+    where: {
+      [Op.and]: [
+        {
+          [Op.or]: [
+            { sender_id: id},
+            { receiver_id: id }
+          ]
+        },
+        {
+          friendship_status: 'approved'
+        }
+      ]
+    }
+  })
+}
 
 module.exports = Friend;
