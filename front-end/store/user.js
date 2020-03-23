@@ -22,13 +22,14 @@ const gotFriends = friends => {
 // Thunk Creator
 export const getFriendsThunk = (userId) => async dispatch  => {
     try {
-      console.log('thunk')
+
       //for now, i'm making an axios call to my computer's ip address, with
       //the server running on it (npm start within back-end), and I've hardcoded
       //id of 1 since we don't have a user logged in on the state yet.
       const {data} = await axios.get('http://192.168.1.3:3000/api/friends/1');
-      console.log('got data')
+
       // const {data} = await axios.get(`/api/friends/${userId}`);
+
       dispatch(gotFriends(data));
     } catch (error) {
       console.error(error);

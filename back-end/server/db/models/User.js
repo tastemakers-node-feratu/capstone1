@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const Friend = require('./Friend')
+// const Friend = require('./Friend')
 const crypto = require('crypto');
 const db = require('../db');
 
@@ -46,10 +46,10 @@ const User = db.define('user', {
   }
 });
 
-User.prototype.getFriends = function(){
-  const myFriends = Friend.findFriends(this.id);
-  console.log('my friends!', myFriends);
-}
+// User.prototype.getFriends = function(){
+//   const myFriends = Friend.findFriends(this.id);
+//   console.log('my friends!', myFriends);
+// }
 
 module.exports = User;
 
