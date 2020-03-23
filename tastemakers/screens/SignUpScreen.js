@@ -5,6 +5,7 @@ import { MonoText } from '../components/StyledText';
 
 export default class SignUpScreen extends React.Component {
 
+
     render() {
         const { navigate } = this.props.navigation;
         return (
