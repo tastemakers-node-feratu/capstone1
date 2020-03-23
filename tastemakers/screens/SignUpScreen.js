@@ -90,15 +90,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    developmentModeText: {
-        marginBottom: 20,
-        color: 'rgba(0,0,0,0.4)',
-        fontSize: 14,
-        lineHeight: 19,
-        textAlign: 'center',
-    },
-    contentContainer: {
-        paddingTop: 30,
+    inner: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     brandName: {
         fontSize: 50,
@@ -116,14 +110,6 @@ const styles = StyleSheet.create({
         color: '#FFF',
         paddingHorizontal: 10,
     },
-    helpLink: {
-        paddingBottom: 10
-    },
-    helpLinkText: {
-        fontSize: 14,
-        color: '#FFFFFF',
-        textAlign: 'center',
-    },
     title: {
         color: '#FFF',
         marginTop: 10,
@@ -139,13 +125,6 @@ const styles = StyleSheet.create({
     logo: {
         width: 100,
         height: 100
-    },
-    input: {
-        height: 40,
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        marginBottom: 20,
-        color: '#FFF',
-        paddingHorizontal: 10
     },
     buttonContainer: {
         backgroundColor: "#2980b9",

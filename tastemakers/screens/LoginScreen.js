@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
   },
   inner: {
     justifyContent: 'center',
+    alignItems: 'center',
   },
   brandName: {
     fontSize: 50,

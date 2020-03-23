@@ -1,13 +1,17 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-native'
 
 export default function Snapshots() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Name</Text>
-            <Image source={{ uri: 'https://reactjs.org/logo-og.png' }}
-                style={{ width: 300, height: 250, }} />
-        </View>
+        <SafeAreaView>
+            <View style={styles.container}>
+                <Text style={styles.name}>Name</Text>
+                <Image source={{ uri: 'https://reactjs.org/logo-og.png' }}
+                    style={{ width: 300, height: 250, }} />
+                <Text style={styles.title}>Snap Shot title</Text>
+                <Text style={styles.content}>Snap Shot paragraph paragraph: “I got to the resto around 10am but there was STILL a long wait. Food was well worth it though. Pro-tip: get there at 8am!” </Text>
+            </View>
+        </SafeAreaView>
     );
 }
 
@@ -20,15 +24,31 @@ const styles = StyleSheet.create({
         margin: 15,
         marginLeft: 20,
         marginRight: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 10
     },
     contentContainer: {
         paddingTop: 15,
     },
-    title: {
-        fontSize: 30,
+    name: {
+        fontSize: 20,
         color: '#FFFFFF',
         textAlign: 'center',
-        fontWeight: '400'
+        fontWeight: '400',
+        marginTop: 15,
+        marginBottom: 5,
     },
+    title: {
+        fontSize: 20,
+        fontStyle: 'italic',
+        color: '#FFFFFF',
+        margin: 10
+    },
+    content: {
+        color: '#FFFFFF',
+        marginRight: 25,
+        marginLeft: 25,
+        marginBottom: 15,
+        textAlign: 'center',
+    }
 })

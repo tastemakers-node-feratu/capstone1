@@ -6,7 +6,6 @@ import {
     Text,
     TextInput,
     ScrollView,
-    TouchableOpacity,
     View,
 } from 'react-native';
 import MiniSnapShot from '../components/MiniSnapShot'
@@ -20,13 +19,22 @@ export default class SnapShotsScreen extends React.Component {
 
     render() {
         return (
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} >
-                {/* {this.props.allSnapShots.map(snapshot => ( */}
-                <MiniSnapShot />
-                <MiniSnapShot />
-                <MiniSnapShot />
-                {/* ))} */}
-            </ScrollView>
+            <SafeAreaView style={styles.container} >
+                <View style={styles.topContainer}>
+                    <Button title="Home" color={'white'} />
+                    <View style={styles.rightButtons}>
+                        <Button title="Check in" color={'white'} />
+                        <Button title="Find Friends" color={'white'} />
+                    </View>
+                </View>
+                <ScrollView contentContainerStyle={styles.contentContainer} >
+                    {/* {this.props.allSnapShots.map(snapshot => ( */}
+                    <MiniSnapShot />
+                    <MiniSnapShot />
+                    <MiniSnapShot />
+                    {/* ))} */}
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 }
@@ -38,6 +46,13 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingTop: 15,
+    },
+    topContainer: {
+        flexDirection: "row",
+        justifyContent: 'space-between'
+    },
+    rightButtons: {
+        flexDirection: "row",
     }
 })
 
