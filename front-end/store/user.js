@@ -12,7 +12,6 @@ const GOT_FRIENDS = 'GOT_FRIENDS'
 
 // Action Creator
 const gotFriends = friends => {
-  console.log('got friendsaction creator')
   return {
     type: GOT_FRIENDS,
     friends

@@ -19,23 +19,23 @@ const Friend = db.define('friend', {
   }
 });
 
-Friend.findFriends = function(id){
-  return this.findAll({
-    where: {
-      [Op.and]: [
-        {
-          [Op.or]: [
-            { sender_id: id},
-            { receiver_id: id }
-          ]
-        },
-        {
-          friendship_status: 'approved'
-        }
-      ]
-    },
-    // include: [User]
-  })
-}
+// Friend.findFriends = function(id){
+//   return this.findAll({
+//     where: {
+//       [Op.and]: [
+//         {
+//           [Op.or]: [
+//             { sender_id: id},
+//             { receiver_id: id }
+//           ]
+//         },
+//         {
+//           friendship_status: 'approved'
+//         }
+//       ]
+//     },
+//     // include: [User]
+//   })
+// }
 
 module.exports = Friend;
