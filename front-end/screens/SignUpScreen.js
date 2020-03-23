@@ -50,47 +50,50 @@ export default class SignUpScreen extends React.Component {
     const {navigate} = this.props.navigation;
     return (
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
+        style={{flex: 1}}
         keyboardVerticalOffset={64}
         behavior="padding"
         enabled
       >
         <SafeAreaView style={styles.container}>
           <View style={styles.inner}>
-                    <Text style={styles.brandName}>Taste Makers</Text>
-                    {/* <Image source={../logo} style={styles.welcomeImage} /> */}
-                    <Text style={styles.title}>What are you loving this week? </Text>
+            <Text style={styles.brandName}>Taste Makers</Text>
+            {/* <Image source={../logo} style={styles.welcomeImage} /> */}
+            <Text style={styles.title}>What are you loving this week? </Text>
 
             <TextInput
-                        placeholder="email"
-                        placeholderTextColor='rgba(255,255,255,0.7)'
-                        returnKeyType="next"
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        value={this.state.email}
-                        onChangeText={email => this.setState({ email: email.toLowerCase() })}
-                        autoCorrect={false}
+              placeholder="email"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              returnKeyType="next"
+              onSubmitEditing={() => this.passwordInput.focus()}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              value={this.state.email}
+              onChangeText={email =>
+                this.setState({email: email.toLowerCase()})
+              }
+              autoCorrect={false}
               style={styles.input}
-                      />
+            />
 
             <TextInput
-                        placeholder="password"
-                        placeholderTextColor='rgba(255,255,255,0.7)'
-                        secureTextEntry
-                        returnKeyType="go"
-                        value={this.state.password}
-                        onChangeText={password => this.setState({ password })}
-                        style={styles.input}
-                        ref={(input) => this.passwordInput = input}
-                      />
+              placeholder="password"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              secureTextEntry
+              returnKeyType="go"
+              value={this.state.password}
+              onChangeText={password => this.setState({password})}
+              style={styles.input}
+              ref={input => (this.passwordInput = input)}
+            />
 
             <TouchableOpacity
               style={styles.buttonContainer}
               onPress={this.submitHandler}
-                        <Text style={styles.buttonText}>SIGN UP</Text>
-                      </TouchableOpacity>
-                  </View>
+            >
+              <Text style={styles.buttonText}>SIGN UP</Text>
+            </TouchableOpacity>
+          </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
     );
