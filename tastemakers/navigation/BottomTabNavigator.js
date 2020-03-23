@@ -4,6 +4,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import LoginScreen from '../screens/LoginScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import SnapShotsScreen from '../screens/SnapShotsScreen';
+
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -37,6 +39,14 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={SignUpScreen}
         options={{
           title: 'SignUp',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="AllSnapShots"
+        component={SnapShotsScreen}
+        options={{
+          title: 'SnapShots',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
