@@ -4,7 +4,6 @@ import {
     SafeAreaView,
     StyleSheet,
     Text,
-    TextInput,
     ScrollView,
     View,
 } from 'react-native';
@@ -23,7 +22,7 @@ class SnapShotsScreen extends React.Component {
     }
 
     render() {
-        return (
+        return !this.props.allLoading ? (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
                     <Button title="Home" color={'white'} />
@@ -34,11 +33,15 @@ class SnapShotsScreen extends React.Component {
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     {this.props.allSnapshots.map(snapshot => (
-                        <MiniSnapShot snapshot={snapshot} />
+                        <MiniSnapShot key={snapshot.placeId} snapshot={snapshot} />
                     ))}
                 </ScrollView>
             </SafeAreaView>
-        )
+        ) : (
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Text>Loading...</Text>
+                </View>
+            )
     }
 }
 
@@ -60,7 +63,8 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    allSnapshots: state.snapshots.allSnapshots
+    allSnapshots: state.snapshots.allSnapshots,
+    allLoading: state.snapshots.allLoading
 });
 
 const mapDispatch = dispatch => ({

@@ -2,15 +2,15 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-native'
 
 export default function Snapshots(props) {
-    const { snapshot } = props.snapshot
+    const { snapshot } = props
     return (
         <SafeAreaView>
             <View style={styles.container}>
                 <Text style={styles.name}>Name</Text>
-                <Image source={{ uri: snapshot.photos }}
-                    style={{ width: 300, height: 250, }} />
-                <Text style={styles.title}>{snapshot.description}</Text>
-                <Text style={styles.content}>Snap Shot paragraph paragraph: “I got to the resto around 10am but there was STILL a long wait. Food was well worth it though. Pro-tip: get there at 8am!” </Text>
+                {/* <Image source={{ uri: snapshot.photos) }}
+                    style={{ width: 300, height: 250, }} /> */}
+                <Text style={styles.title}>Location Name</Text>
+                <Text style={styles.content}>{snapshot.description}</Text>
             </View>
         </SafeAreaView>
     );

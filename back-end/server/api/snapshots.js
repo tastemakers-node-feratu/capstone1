@@ -2,10 +2,10 @@ const router = require('express').Router();
 const Snapshot = require('../db/models/Snapshot')
 
 router.get('/', async (req, res, next) => {
-  try{
+  try {
     const all = await Snapshot.getSnaps();
     res.send(all);
-  } catch(err){
+  } catch (err) {
     next(err);
   }
 });
