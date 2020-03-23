@@ -5,15 +5,15 @@ const db = require('../server/db');
 // importing all models
 const {User, Place} = require('../server/db/models');
 
-const fakerUser = faker.array({
-  username: faker.internet.userName,
-  email: faker.internet.email,
-  password: faker.internet.password,
-  imageURL: faker.internet.avatar,
-  bio: faker.lorem.paragraph,
-  phone: faker.phone.phoneNumber,
-  pushNotifs: true
-});
+// const fakerUser = faker.array({
+//   username: faker.internet.userName,
+//   email: faker.internet.email,
+//   password: faker.internet.password,
+//   imageURL: faker.internet.avatar,
+//   bio: faker.lorem.paragraph,
+//   phone: faker.phone.phoneNumber,
+//   pushNotifs: true
+// });
 
 const users = [
   {

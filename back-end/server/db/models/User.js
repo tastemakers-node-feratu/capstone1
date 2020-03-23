@@ -4,11 +4,6 @@ const crypto = require('crypto');
 const db = require('../db');
 
 const User = db.define('user', {
-  // id: {
-  //   type: Sequelize.UUID,
-  //   defaultValue: Sequelize.UUIDV4, // Generates a UUID V4
-  //   primaryKey: true
-  // },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
