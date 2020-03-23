@@ -64,6 +64,7 @@ export default class LoginScreen extends React.Component {
   }
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
   },
   inner: {
     justifyContent: 'center',
+    alignItems: 'center',
   },
   brandName: {
     fontSize: 50,
