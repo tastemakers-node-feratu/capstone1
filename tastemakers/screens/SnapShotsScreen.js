@@ -9,12 +9,13 @@ import {
     View,
 } from 'react-native';
 import MiniSnapShot from '../components/MiniSnapShot'
+import { allSnapshotsThunk } from '../store/snapshots'
 
 import { MonoText } from '../components/StyledText';
 
 export default class SnapShotsScreen extends React.Component {
     // componentDidMount() {
-    //     this.props.allSnapShots()
+    //     this.props.allSnapshotsThunk()
     // }
 
     render() {
@@ -28,8 +29,8 @@ export default class SnapShotsScreen extends React.Component {
                     </View>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
-                    {/* {this.props.allSnapShots.map(snapshot => ( */}
-                    <MiniSnapShot />
+                    {/* {this.props.allSnapshots.map(snapshot => ( */}
+                    <MiniSnapShot snapshot={snapshot} />
                     <MiniSnapShot />
                     <MiniSnapShot />
                     {/* ))} */}
@@ -56,12 +57,12 @@ const styles = StyleSheet.create({
     }
 })
 
-// const mapState = state => ({
-//     snapShots: state.snapShots
-// });
+const mapState = state => ({
+    allSnapshots: state.snapshots.allSnapshots
+});
 
-// const mapDispatch = dispatch => ({
-//     allSnapShots: () => dispatch(allSnapshotsThunk())
-// })
+const mapDispatch = dispatch => ({
+    allSnapshotsThunk: () => dispatch(allSnapshotsThunk())
+})
 
 // export default connect(mapState, mapDispatch)(SnapShotsScreen)

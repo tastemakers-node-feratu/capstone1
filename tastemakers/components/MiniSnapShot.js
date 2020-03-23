@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-native'
 
-export default function Snapshots() {
+export default function Snapshots(props) {
+    const snapshot = props.snapshot
     return (
         <SafeAreaView>
             <View style={styles.container}>
