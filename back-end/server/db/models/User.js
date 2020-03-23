@@ -23,7 +23,10 @@ const User = db.define('user', {
     // https://favpng.com/png_view/booth-vector-selfie-social-media-celebrity-png/PSp4WHDX
   },
   bio: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT,
+    validate: {
+      len: [0, 150]
+    }
   },
   phone: {
     type: Sequelize.STRING
