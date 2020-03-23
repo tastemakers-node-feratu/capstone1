@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -12,7 +13,7 @@ app.use(express.json());
 // static middleware
 app.use(express.static(path.join(__dirname, './public')));
 
-app.use('/api', require('./api'));
+app.use('/api', require('./server/api'));
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, './public/index.html'));
@@ -25,5 +26,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 module.exports = app;
