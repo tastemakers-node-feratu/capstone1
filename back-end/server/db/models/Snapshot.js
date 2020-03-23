@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const db = require('../db');
+const moment = require('moment');
 
 const Snapshot = db.define('snapshot', {
   id: {
@@ -33,5 +35,17 @@ const Snapshot = db.define('snapshot', {
     }
   }
 });
+
+Snapshot.getSnaps =  function() {
+  const oneMonthAgo = moment().subtract(1, 'months').format();
+  const all =  this.findAll({
+    where: {
+      createdAt: {
+        [Op.gte]: oneMonthAgo
+      }
+    }
+  })
+  return all;
+}
 
 module.exports = Snapshot;

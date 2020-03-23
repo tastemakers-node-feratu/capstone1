@@ -80,8 +80,14 @@ async function seed() {
       })
     );
     const allUsers = await User.findAll();
-    const onePlace = await Place.findOne();
-    // making user[0] friends with user[1]
+    const plazaPlace = await Place.findOne({
+      where: {name: 'DiverCity Tokyo Plaza'}
+    });
+    const parkPlace = await Place.findOne({where: {name: 'Sanrio Puroland'}});
+    const shopPlace = await Place.findOne({
+      where: {name: 'Sanrio World Ginza'}
+    });
+    // making user[0] friends with all user[]
     await allUsers[0].addFriend(allUsers[1], {
       through: {
         sender_id: allUsers[0].id,
@@ -89,14 +95,93 @@ async function seed() {
         friendship_status: 'approved'
       }
     });
-    // add place[0] to user[0] through snapshot
-    await allUsers[0].addPlace(onePlace, {
+    await allUsers[0].addFriend(allUsers[2], {
+      through: {
+        sender_id: allUsers[0].id,
+        receiver_id: allUsers[2].id,
+        friendship_status: 'approved'
+      }
+    });
+    await allUsers[0].addFriend(allUsers[3], {
+      through: {
+        sender_id: allUsers[0].id,
+        receiver_id: allUsers[3].id,
+        friendship_status: 'approved'
+      }
+    });
+    // add plazaPlace to all user[] through snapshot
+    await allUsers[0].addPlace(plazaPlace, {
       through: {
         description: 'huge japanese shopping mall',
         photos:
           'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
         price_rating: '3',
         tags: ['cute', 'kid-friendly', 'shopping center', 'shopping mall']
+      }
+    });
+    await allUsers[1].addPlace(plazaPlace, {
+      through: {
+        description: 'expensive shopping mall, do not bring kids',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '4',
+        tags: ['cute', 'shopping center', 'shopping mall']
+      }
+    });
+    await allUsers[2].addPlace(plazaPlace, {
+      through: {
+        description: 'japanese shopping mall',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '3',
+        tags: ['cute', 'kid-friendly', 'shopping center', 'shopping mall']
+      }
+    });
+    await allUsers[3].addPlace(plazaPlace, {
+      through: {
+        description: 'Amazing shopping center!!',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '2',
+        tags: ['cute', 'kid-friendly', 'shopping center', 'shopping mall']
+      }
+    });
+    // associating users to parkPlace
+    await allUsers[1].addPlace(parkPlace, {
+      through: {
+        description: 'So much fun!',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '2',
+        tags: ['cute', 'kid-friendly', 'theme park', 'amusement park']
+      }
+    });
+    await allUsers[2].addPlace(parkPlace, {
+      through: {
+        description: 'colorful theme park',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '2',
+        tags: ['kid-friendly', 'theme park', 'amusement park']
+      }
+    });
+    await allUsers[3].addPlace(parkPlace, {
+      through: {
+        description: 'Bring your family to this amusement park!',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '2',
+        tags: ['cute', 'kid-friendly', 'theme park', 'amusement park', 'fun']
+      }
+    });
+    // associating user[1] to shopPlace
+    await allUsers[1].addPlace(shopPlace, {
+      through: {
+        description: 'lots of wonderful gifts to buy',
+        photos:
+          'https://lh3.googleusercontent.com/proxy/J1hjBOwzuRef1A5ddTkaHG3s1_dr7J6NvHr6B-HbW4lDEXLLHIN9CjJVwSYC_5SBUCrXEl74DwzzHjI3wX1tXW6RxRP20yp2wEX7-EF1L60UUAeHQkZwSSWZ4g',
+        price_rating: '3',
+        tags: ['cute', 'kid-friendly', 'gift shop']
       }
     });
   } catch (error) {
