@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const db = require('../db');
+const User = require('./User')
 
 const Friend = db.define('friend', {
   // we must be sure to manually set the sender and receiver ids when we
@@ -32,7 +33,8 @@ Friend.findFriends = function(id){
           friendship_status: 'approved'
         }
       ]
-    }
+    },
+    // include: [User]
   })
 }
 

@@ -1,14 +1,9 @@
 const Sequelize = require('sequelize');
-const Friend = require('./Friend')
+// const Friend = require('./Friend')
 const crypto = require('crypto');
 const db = require('../db');
 
 const User = db.define('user', {
-  // id: {
-  //   type: Sequelize.UUID,
-  //   defaultValue: Sequelize.UUIDV4, // Generates a UUID V4
-  //   primaryKey: true
-  // },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -51,10 +46,10 @@ const User = db.define('user', {
   }
 });
 
-User.prototype.getFriends = function(){
-  const myFriends = Friend.findFriends(this.id);
-  console.log('my friends!', myFriends);
-}
+// User.prototype.getFriends = function(){
+//   const myFriends = Friend.findFriends(this.id);
+//   console.log('my friends!', myFriends);
+// }
 
 module.exports = User;
 
