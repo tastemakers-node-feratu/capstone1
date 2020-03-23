@@ -4,11 +4,11 @@ const db = require('../db');
 const moment = require('moment');
 
 const Snapshot = db.define('snapshot', {
-  id: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4, // Generates a UUID V4
-    primaryKey: true
-  },
+  // id: {
+  //   type: Sequelize.UUID,
+  //   defaultValue: Sequelize.UUIDV4, // Generates a UUID V4
+  //   primaryKey: true
+  // },
 
   // we can access DATE from the created_at field
 

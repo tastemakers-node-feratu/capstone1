@@ -3,7 +3,9 @@ const router = require('express').Router();
 // ./api/users
 router.use('/users', require('./users'));
 
-router.use('/snapshots', require('./snapshots'))
+router.use('/snapshots', require('./snapshots'));
+
+router.use('/friends', require('./friends'));
 
 // error handling: 404 api router not found
 router.use(function(req, res, next) {
