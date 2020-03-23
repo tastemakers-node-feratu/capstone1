@@ -29,8 +29,8 @@ faker.array = function(structure, count = 1) {
   return results;
 };
 
-const randomNumber = max => {
-  return Math.floor(Math.random() * max);
+const randomNumber = (max, min = 0) => {
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
 const randomCategory = () => {
@@ -98,7 +98,7 @@ async function fakerSeed() {
           through: {
             description: faker.lorem.sentence(),
             photos: faker.image.imageUrl(),
-            price_rating: '3',
+            price_rating: randomNumber(5, 1),
             tags: faker.array(faker.lorem.word, randomNumber(5))
           }
         });
