@@ -8,11 +8,11 @@ const Snapshot = require('./Snapshot');
  * we can just require it from 'db/models'
  */
 
-User.belongsToMany(User, {through: Friend, as: 'friends'});
+User.belongsToMany(User, { through: Friend, as: 'friends' });
 // one place can have many users
 // one user can have many places
-Place.belongsToMany(User, {through: 'snapshot'});
-User.belongsToMany(Place, {through: 'snapshot'});
+Place.belongsToMany(User, { through: Snapshot });
+User.belongsToMany(Place, { through: Snapshot });
 
 module.exports = {
   User,
