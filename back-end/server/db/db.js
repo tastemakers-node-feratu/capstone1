@@ -6,8 +6,8 @@ if (process.env.NODE_ENV === 'development') {
 
 const db = new Sequelize(
   process.env.CLEARDB_DATABASE_URL,
-  process.env.CLEARDB_DATABASE_USER,
-  process.env.CLEARDB_DATABASE_PASS,
+  // process.env.CLEARDB_DATABASE_USER,
+  // process.env.CLEARDB_DATABASE_PASS,
   {
     dialect: 'mysql',
     host: 'localhost',
