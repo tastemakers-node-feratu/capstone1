@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 
 const db = new Sequelize(
   process.env.CLEARDB_DATABASE_URL || 'capstone',
-  process.env.CLEARDB_DATABASE_USER || 'root',
-  process.env.CLEARDB_DATABASE_PASS || 'node-feratu',
+  'root',
+  'node-feratu',
   {
     dialect: 'mysql',
     host: 'localhost',
