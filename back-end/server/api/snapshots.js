@@ -3,7 +3,8 @@ const Snapshot = require('../db/models/Snapshot')
 
 router.get('/', async (req, res, next) => {
   try{
-    res.send(await Snapshot.getSnaps());
+    const all = await Snapshot.getSnaps();
+    res.send(all);
   } catch(err){
     next(err);
   }
