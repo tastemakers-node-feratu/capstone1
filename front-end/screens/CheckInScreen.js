@@ -9,6 +9,7 @@ import {
     View,
 } from 'react-native';
 import { CheckBox } from 'react-native-elements'
+//import add snapshot thunk
 // import {connect} from 'react-redux'
 
 import { MonoText } from '../components/StyledText';
