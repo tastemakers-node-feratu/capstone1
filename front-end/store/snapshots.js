@@ -4,6 +4,7 @@ import axios from 'axios';
 // initial State
 const initialState = {
   allSnapshots: [],
+  allLoading: true,
   selectedSnapshot: {}
 };
 
@@ -29,7 +30,8 @@ const gotSingleSnapshot = info => {
 export const allSnapshotsThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/snapshots');
+      const tempUserId = 1;
+      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/${tempUserId}`);
       dispatch(gotAllSnapshots(data));
     } catch (error) {
       console.error(error);
@@ -40,7 +42,7 @@ export const allSnapshotsThunk = () => {
 export const singleSnapshotThunk = id => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/snapshots/${id}`);
+      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/${id}`);
       dispatch(gotSingleSnapshot(data));
     } catch (error) {
       console.error(error);
@@ -51,9 +53,9 @@ export const singleSnapshotThunk = id => {
 const snapshotReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_ALL:
-      return {...state, allSnapshots: action.info};
+      return { ...state, allSnapshots: action.info, allLoading: false };
     case GOT_ONE:
-      return {...state, selectedSnapshot: action.info};
+      return { ...state, selectedSnapshot: action.info };
     default:
       return state;
   }
