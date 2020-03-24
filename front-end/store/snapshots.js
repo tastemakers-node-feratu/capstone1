@@ -30,7 +30,8 @@ const gotSingleSnapshot = info => {
 export const allSnapshotsThunk = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get('http://192.168.1.98:3000/api/snapshots');
+      const tempUserId = 1;
+      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/${tempUserId}`);
       dispatch(gotAllSnapshots(data));
     } catch (error) {
       console.error(error);

@@ -3,11 +3,12 @@ const Snapshot = require('../db/models/Snapshot')
 
 const User = require('../db/models/User')
 
-const userfriends = [4, 48, 50];
-
-router.get('/', async (req, res, next) => {
+// const userFriends = [4, 50]
+router.get('/:id', async (req, res, next) => {
   try {
-    const all = await User.getSnapShots(userfriends);
+    const friendsArr = await User.getFriends(req.params.id);
+    const userFriends = friendsArr.friends.map(friend => friend.id)
+    const all = await User.getSnapShots(userFriends);
     res.send(all);
   } catch (err) {
     next(err);

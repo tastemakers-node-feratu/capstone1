@@ -8,14 +8,14 @@ export default function Snapshots(props) {
         <SafeAreaView>
             <View style={styles.container}>
                 <Text style={styles.name}>{snapshot.username}</Text>
-                {/* <Image source={snapshot.photos}
-                    style={{ width: 300, height: 250, }} /> */}
+                <Image source={{ uri: places[0].snapshot.photos }}
+                    style={{ width: 300, height: 250, }} />
                 <Text style={styles.title}>{places[0].name} </Text>
                 <Text style={styles.content}>{places[0].snapshot.description}</Text>
             </View>
         </SafeAreaView>
     ) : places.map(place => (
-        <SafeAreaView key={place.id}>
+        <SafeAreaView key={snapshot.id}>
             <View style={styles.container}>
                 <Text style={styles.name}>{snapshot.username}</Text>
                 {/* <Image source={snapshot.photos}
