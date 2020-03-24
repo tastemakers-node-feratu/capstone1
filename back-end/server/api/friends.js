@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const Friend = require('../db/models/Friend')
+const User = require('../db/models/User')
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const friends = await Friend.findFriends(req.params.id);
-    console.log('friends', friends);
-
-    res.send(friends);
+    const data = await User.getFriends(req.params.id);
+    const friendships = data.dataValues.friends;
+    const friends = friendships.filter((friendship) => {
+      return (friendship.dataValues.friend.friendship_status === 'approved')
+    })
+    res.send(friends)
   } catch (err) {
     next(err);
   }
