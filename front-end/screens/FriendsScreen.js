@@ -4,25 +4,24 @@ import {
     SafeAreaView,
     StyleSheet,
     Text,
+    TextInput,
     ScrollView,
     View,
 } from 'react-native';
-import MiniSnapShot from '../components/MiniSnapShot'
-import { allSnapshotsThunk } from '../store/snapshots'
-import { connect } from 'react-redux';
+import { getFriendsThunk } from '../store/user'
+import MiniFriendView from '../components/MiniFriendView'
+import {connect} from 'react-redux'
+
 import { MonoText } from '../components/StyledText';
 
-class SnapShotsScreen extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
+class FriendsScreen extends React.Component {
     componentDidMount() {
-        this.props.allSnapshotsThunk()
+        this.props.getFriends(1)
     }
 
     render() {
-        return !this.props.allLoading ? (
+      console.log('PROPS IN FRIENDS', this.props)
+        return (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
                     <Button title="Home" color={'white'} />
@@ -32,16 +31,16 @@ class SnapShotsScreen extends React.Component {
                     </View>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
-                    {this.props.allSnapshots.map(snapshot => (
-                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} />
-                    ))}
+                  {
+                    this.props.friends.map((friend) => {
+                      return(
+                        <MiniFriendView info={friend} key={friend.friendId}/>
+                      )
+                    })
+                  }
                 </ScrollView>
             </SafeAreaView>
-        ) : (
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>Loading...</Text>
-                </View>
-            )
+        )
     }
 }
 
@@ -63,12 +62,11 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    allSnapshots: state.snapshots.allSnapshots,
-    allLoading: state.snapshots.allLoading
+    friends: state.user.friends
 });
 
 const mapDispatch = dispatch => ({
-    allSnapshotsThunk: () => dispatch(allSnapshotsThunk())
+    getFriends: () => dispatch(getFriendsThunk(1))
 })
 
-export default connect(mapState, mapDispatch)(SnapShotsScreen)
+export default connect(mapState, mapDispatch)(FriendsScreen)

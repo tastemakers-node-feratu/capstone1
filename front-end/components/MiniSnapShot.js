@@ -3,20 +3,29 @@ import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-nativ
 
 export default function Snapshots(props) {
     const { snapshot } = props
-    return (
+    const places = snapshot.places;
+    return places.length === 1 ? (
         <SafeAreaView>
             <View style={styles.container}>
-                <Text style={styles.name}>Name</Text>
-                {/* <Image source={{ uri: snapshot.photos) }}
+                <Text style={styles.name}>{snapshot.username}</Text>
+                {/* <Image source={snapshot.photos}
                     style={{ width: 300, height: 250, }} /> */}
-                <Text style={styles.title}>Location Name</Text>
-                <Text style={styles.content}>{snapshot.description}</Text>
+                <Text style={styles.title}>{places[0].name} </Text>
+                <Text style={styles.content}>{places[0].snapshot.description}</Text>
             </View>
         </SafeAreaView>
-    );
+    ) : places.map(place => (
+        <SafeAreaView key={place.id}>
+            <View style={styles.container}>
+                <Text style={styles.name}>{snapshot.username}</Text>
+                {/* <Image source={snapshot.photos}
+                    style={{ width: 300, height: 250, }} /> */}
+                <Text style={styles.title}>{place.name} </Text>
+                <Text style={styles.content}>{place.snapshot.description}</Text>
+            </View>
+        </SafeAreaView>
+    ))
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

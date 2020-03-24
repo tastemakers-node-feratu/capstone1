@@ -2,15 +2,8 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const db = require('../db');
 const moment = require('moment');
-const Place = require('./Place')
 
 const Snapshot = db.define('snapshot', {
-  // id: {
-  //   type: Sequelize.UUID,
-  //   defaultValue: Sequelize.UUIDV4, // Generates a UUID V4
-  //   primaryKey: true
-  // },
-
   // we can access DATE from the created_at field
 
   description: {
@@ -37,10 +30,13 @@ const Snapshot = db.define('snapshot', {
   }
 });
 
+//get all a user's friend's snapshots 
+
 Snapshot.getSnaps = function () {
   const oneMonthAgo = moment().subtract(1, 'months').format();
   const all = this.findAll({
     where: {
+      // userId: id,
       createdAt: {
         [Op.gte]: oneMonthAgo
       }
@@ -48,5 +44,6 @@ Snapshot.getSnaps = function () {
   })
   return all;
 }
+
 
 module.exports = Snapshot;
