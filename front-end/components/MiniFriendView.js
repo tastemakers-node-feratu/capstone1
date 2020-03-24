@@ -6,7 +6,10 @@ export default MiniFriendView = (props) => {
     return (
         <SafeAreaView>
             <View style={styles.container}>
-              <Text style={styles.name}>A friend</Text>
+              <Text style={styles.name}>{props.info.email}</Text>
+              <Image source={{ uri: props.info.imageURL }}
+                    style={{ width: 300, height: 250, }} />
+              <Text style={styles.contet}>{props.info.bio}</Text>
             </View>
         </SafeAreaView>
     );
