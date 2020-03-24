@@ -1,9 +1,11 @@
 /* eslint-disable global-require */
 const Sequelize = require('sequelize');
 
+let db;
+
 if (process.env.NODE_ENV === 'development') {
   require('../../../secrets.js');
-  const db = new Sequelize(
+  db = new Sequelize(
     process.env.DATABASE_URL,
     process.env.DATABASE_USER,
     process.env.DATABASE_PASS,
@@ -15,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   );
 }
 
-const db = new Sequelize(
+db = new Sequelize(
   process.env.CLEARDB_DATABASE_URL,
 
   {
