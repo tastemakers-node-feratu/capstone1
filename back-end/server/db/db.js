@@ -1,10 +1,13 @@
-// require('../../../secrets.js');
 const Sequelize = require('sequelize');
 
+if (process.env.NODE_ENV === 'development') {
+  require('../../../secrets.js');
+}
+
 const db = new Sequelize(
-  process.env.CLEARDB_DATABASE_URL || 'capstone',
-  'root',
-  'node-feratu',
+  process.env.CLEARDB_DATABASE_URL,
+  process.env.CLEARDB_DATABASE_USER,
+  process.env.CLEARDB_DATABASE_PASS,
   {
     dialect: 'mysql',
     host: 'localhost',
