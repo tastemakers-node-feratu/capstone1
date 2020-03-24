@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js",
-    "start-dev": "NODE_ENV=production nodemon main.js",
-    "seed": "NODE_ENV=production node script/seed.js"
+    "start-dev": "nodemon main.js",
+    "seed": "node script/seed.js"
   },
   "keywords": [],
   "author": "",

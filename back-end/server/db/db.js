@@ -1,4 +1,4 @@
-require('../../../secrets.js');
+// require('../../../secrets.js');
 const Sequelize = require('sequelize');
 
 const db = new Sequelize(
