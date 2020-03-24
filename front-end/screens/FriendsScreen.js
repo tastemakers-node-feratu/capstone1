@@ -16,11 +16,12 @@ import { MonoText } from '../components/StyledText';
 
 class FriendsScreen extends React.Component {
     componentDidMount() {
-        this.props.getFriends(1)
+        const tempUserId = 2;
+        this.props.getFriends(tempUserId)
     }
 
     render() {
-      console.log('PROPS IN FRIENDS', this.props)
+    //   console.log('PROPS IN FRIENDS', this.props)
         return (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
@@ -34,7 +35,7 @@ class FriendsScreen extends React.Component {
                   {
                     this.props.friends.map((friend) => {
                       return(
-                        <MiniFriendView info={friend} key={friend.friendId}/>
+                        <MiniFriendView key={friend.email} info={friend} />
                       )
                     })
                   }
@@ -66,7 +67,7 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-    getFriends: () => dispatch(getFriendsThunk(1))
+    getFriends: () => dispatch(getFriendsThunk(2))
 })
 
 export default connect(mapState, mapDispatch)(FriendsScreen)
