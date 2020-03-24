@@ -3,9 +3,12 @@ const User = require('../db/models/User')
 
 router.get('/:id', async (req, res, next) => {
   try{
-    const friends = await User.getFriends(req.params.id);
-    // console.log('backend friends', friends)
-    res.send(friends.dataValues.friends);
+    const data = await User.getFriends(req.params.id);
+    const friendships = data.dataValues.friends;
+    const friends = friendships.filter((friendship) => {
+      return (friendship.dataValues.friend.friendship_status === 'approved')
+    })
+    res.send(friends)
   } catch(err){
     next(err);
   }

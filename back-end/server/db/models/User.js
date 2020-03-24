@@ -51,7 +51,9 @@ User.getFriends = function(id){
 
   const friends = this.findOne({
     where: {id: id},
-    include: [ { model: User, as: 'friends' } ]
+    include: [ {
+       model: User, as: 'friends',
+      } ]
   })
   return friends;
 }

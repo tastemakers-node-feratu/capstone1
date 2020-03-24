@@ -16,7 +16,7 @@ import { MonoText } from '../components/StyledText';
 
 class FriendsScreen extends React.Component {
     componentDidMount() {
-        this.props.getFriends(1)
+        this.props.getFriends(2)
     }
 
     render() {
@@ -66,7 +66,7 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-    getFriends: () => dispatch(getFriendsThunk(1))
+    getFriends: () => dispatch(getFriendsThunk(2))
 })
 
 export default connect(mapState, mapDispatch)(FriendsScreen)

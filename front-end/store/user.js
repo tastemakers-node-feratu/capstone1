@@ -25,7 +25,7 @@ export const getFriendsThunk = (userId) => async dispatch  => {
       //for now, i'm making an axios call to my computer's ip address, with
       //the server running on it (npm start within back-end), and I've hardcoded
       //id of 1 since we don't have a user logged in on the state yet.
-      const {data} = await axios.get('http://192.168.1.3:3000/api/friends/1');
+      const {data} = await axios.get('http://192.168.1.3:3000/api/friends/2');
 
       // const {data} = await axios.get(`/api/friends/${userId}`);
 
