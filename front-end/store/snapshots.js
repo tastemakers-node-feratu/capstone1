@@ -10,6 +10,14 @@ const initialState = {
 // Action Types
 const GOT_ALL = 'GOT_ALL';
 const GOT_ONE = 'GOT_ONE';
+const ADD_ONE = 'ADD_ONE';
+
+const addOneSnapshot = snapshot => {
+  return{
+    type: ADD_ONE,
+    snapshot
+  }
+}
 
 // Action Creator
 const gotAllSnapshots = info => {
@@ -47,6 +55,17 @@ export const singleSnapshotThunk = id => {
     }
   };
 };
+
+export const addSnapshotThunk = (snapshot, userId) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/user/snapshot/${userId}`, snapshot)
+      dispatch(addOneSnapshot(data));
+    } catch(err){
+      console.error(err);
+    }
+  }
+}
 
 const snapshotReducer = (state = initialState, action) => {
   switch (action.type) {
