@@ -20,7 +20,7 @@ class FriendsScreen extends React.Component {
     }
 
     render() {
-      console.log('PROPS IN FRIENDS', this.props)
+    //   console.log('PROPS IN FRIENDS', this.props)
         return (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>

@@ -38,7 +38,6 @@ export const getFriendsThunk = (userId) => async dispatch  => {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_FRIENDS:{
-      console.log('reducer')
       return {...state, friends: action.friends};
     }
     default:

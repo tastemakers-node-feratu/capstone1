@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const Friend = require('./Friend')
 const crypto = require('crypto');
 const db = require('../db');
+const Op = Sequelize.Op;
 
 const User = db.define('user', {
   username: {
@@ -47,6 +48,7 @@ const User = db.define('user', {
 });
 
 User.getFriends = function(id){
+
   const friends = this.findOne({
     where: {id: id},
     include: [ { model: User, as: 'friends' } ]

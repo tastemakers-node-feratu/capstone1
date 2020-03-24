@@ -2,14 +2,12 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-native'
 
 export default MiniFriendView = (props) => {
-  console.log('props', props)
     return (
         <SafeAreaView>
             <View style={styles.container}>
               <Text style={styles.name}>{props.info.email}</Text>
               <Image source={{ uri: props.info.imageURL }}
-                    style={{ width: 300, height: 250, }} />
-              <Text style={styles.contet}>{props.info.bio}</Text>
+                    style={{ width: 225, height: 175 }} />
             </View>
         </SafeAreaView>
     );
@@ -22,10 +20,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#a29bfe',
         margin: 15,
-        marginLeft: 20,
-        marginRight: 20,
+        marginLeft: 30,
+        marginRight: 30,
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        paddingBottom: 15
     },
     contentContainer: {
         paddingTop: 15,
