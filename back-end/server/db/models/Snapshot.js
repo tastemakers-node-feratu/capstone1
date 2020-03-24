@@ -30,16 +30,20 @@ const Snapshot = db.define('snapshot', {
   }
 });
 
-Snapshot.getSnaps =  function() {
+//get all a user's friend's snapshots 
+
+Snapshot.getSnaps = function () {
   const oneMonthAgo = moment().subtract(1, 'months').format();
-  const all =  this.findAll({
+  const all = this.findAll({
     where: {
+      // userId: id,
       createdAt: {
         [Op.gte]: oneMonthAgo
       }
-    }
+    },
   })
   return all;
 }
+
 
 module.exports = Snapshot;

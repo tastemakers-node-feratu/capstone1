@@ -4,21 +4,25 @@ import {
     SafeAreaView,
     StyleSheet,
     Text,
-    TextInput,
     ScrollView,
     View,
 } from 'react-native';
 import MiniSnapShot from '../components/MiniSnapShot'
-
+import { allSnapshotsThunk } from '../store/snapshots'
+import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 
-export default class SnapShotsScreen extends React.Component {
-    // componentDidMount() {
-    //     this.props.allSnapShots()
-    // }
+class SnapShotsScreen extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        this.props.allSnapshotsThunk()
+    }
 
     render() {
-        return (
+        return !this.props.allLoading ? (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
                     <Button title="Home" color={'white'} />
@@ -28,14 +32,16 @@ export default class SnapShotsScreen extends React.Component {
                     </View>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
-                    {/* {this.props.allSnapShots.map(snapshot => ( */}
-                    <MiniSnapShot />
-                    <MiniSnapShot />
-                    <MiniSnapShot />
-                    {/* ))} */}
+                    {this.props.allSnapshots.map(snapshot => (
+                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} />
+                    ))}
                 </ScrollView>
             </SafeAreaView>
-        )
+        ) : (
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Text>Loading...</Text>
+                </View>
+            )
     }
 }
 
@@ -56,12 +62,13 @@ const styles = StyleSheet.create({
     }
 })
 
-// const mapState = state => ({
-//     snapShots: state.snapShots
-// });
+const mapState = state => ({
+    allSnapshots: state.snapshots.allSnapshots,
+    allLoading: state.snapshots.allLoading
+});
 
-// const mapDispatch = dispatch => ({
-//     allSnapShots: () => dispatch(allSnapshotsThunk())
-// })
+const mapDispatch = dispatch => ({
+    allSnapshotsThunk: () => dispatch(allSnapshotsThunk())
+})
 
-// export default connect(mapState, mapDispatch)(SnapShotsScreen)
+export default connect(mapState, mapDispatch)(SnapShotsScreen)
