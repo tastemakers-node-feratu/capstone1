@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
-
-if (process.env.NODE_ENV === 'development') {
-  require('../secrets.js');
-}
+// if (process.env.NODE_ENV === 'development') {
+//   require('../secrets.js');
+// }
 
 // allow cross origin communication
 app.use(cors());
