@@ -16,7 +16,8 @@ import { MonoText } from '../components/StyledText';
 
 class FriendsScreen extends React.Component {
     componentDidMount() {
-        this.props.getFriends(2)
+        const tempUserId = 2;
+        this.props.getFriends(tempUserId)
     }
 
     render() {
@@ -34,7 +35,7 @@ class FriendsScreen extends React.Component {
                   {
                     this.props.friends.map((friend) => {
                       return(
-                        <MiniFriendView info={friend} key={friend.friendId}/>
+                        <MiniFriendView key={friend.email} info={friend} />
                       )
                     })
                   }
