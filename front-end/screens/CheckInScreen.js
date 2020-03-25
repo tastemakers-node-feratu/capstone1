@@ -44,7 +44,11 @@ class CheckInScreen extends React.Component {
   }
 
   submit(){
-    this.props.addSnapshot(this.state, 1)
+    const tempUserId = 1;
+    this.props.addSnapshot(this.state, tempUserId);
+    const { navigate } = this.props.navigation;
+    const { snapshot } = this.props;
+    navigate('SingleSnap', { userId: tempUserId, placeId: snapshot.placeId, })
   }
 
     render() {
@@ -168,12 +172,16 @@ const styles = StyleSheet.create({
   },
 })
 
-// const mapState = state => ({
-//   userId: state.user.id
-// })
+const mapState = state => {
+  console.log('state is', state.snapshots.selectedSnapshot)
+  return {
+  // userId: state.user.id
+  snapshot: state.snapshots.selectedSnapshot
+  }
+}
 
 const mapDispatch = dispatch => ({
     addSnapshot: (snapshot, userId) => {dispatch(addSnapshotThunk(snapshot, userId))}
 })
 
-export default connect(null, mapDispatch)(CheckInScreen)
+export default connect(mapState, mapDispatch)(CheckInScreen)

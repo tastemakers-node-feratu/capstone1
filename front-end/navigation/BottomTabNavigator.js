@@ -30,6 +30,16 @@ function Feed() {
   );
 }
 
+const CheckInTab = createStackNavigator();
+function CheckIn() {
+  return (
+    <CheckInTab.Navigator initialRouteName="Check In" headerMode="none">
+      <CheckInTab.Screen name="Check In" component={CheckInScreen} />
+      <CheckInTab.Screen name="SingleSnap" component={OneSnapScreen} />
+    </CheckInTab.Navigator>
+  )
+}
+
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
@@ -45,7 +55,7 @@ export default function BottomTabNavigator({ navigation, route }) {
           title: 'Home',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
         }}
-      /> */}
+      />
       <BottomTab.Screen
         name="SignUp"
         component={SignUpScreen}
@@ -55,19 +65,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
+        name="Check In"
+        component={CheckIn}
+        options={{
+          title: 'Check In',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
+        }}
+      />
+      <BottomTab.Screen
         name="AllSnapShots"
         component={Feed}
         options={{
           title: 'Feed',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Check In"
-        component={CheckInScreen}
-        options={{
-          title: 'Check In',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
         }}
       />
       <BottomTab.Screen

@@ -20,7 +20,7 @@ router.put('/snapshot/:userId', async (req, res, next) => {
           { userId: user.id },
           { placeId: place[0].id }
         ]
-      }
+      },
     })
     res.send(newSnap);
   }catch(err){
