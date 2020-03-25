@@ -31,11 +31,8 @@ class FriendsScreen extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
-=======
         //   console.log('PROPS IN FRIENDS', this.props)
         const filteredFriends = this.props.friends.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
->>>>>>> master
         return (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>

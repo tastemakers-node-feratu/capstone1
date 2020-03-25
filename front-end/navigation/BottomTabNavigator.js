@@ -43,19 +43,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={LoginScreen}
         options={{
           title: 'Home',
-<<<<<<< HEAD
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
-        }}
-      />
-      {/* <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
-        options={{
-          title: 'Resources',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
-=======
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
->>>>>>> master
         }}
       /> */}
       <BottomTab.Screen
@@ -75,6 +63,14 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
+        name="Check In"
+        component={CheckInScreen}
+        options={{
+          title: 'Check In',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
+        }}
+      />
+      <BottomTab.Screen
         name="AllFriends"
         component={FriendsScreen}
         options={{
@@ -82,19 +78,7 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
         }}
       />
-<<<<<<< HEAD
-      <BottomTab.Screen
-        name="Check In"
-        component={CheckInScreen}
-        options={{
-          title: 'Check In',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
-        }}
-      />
-      <BottomTab.Screen
-=======
       {/* <BottomTab.Screen
->>>>>>> master
         name="SnapShot"
         component={SnapShotsStack}
         options={{
