@@ -5,9 +5,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
-// if (process.env.NODE_ENV === 'development') {
-//   require('../secrets.js');
-// }
 
 // allow cross origin communication
 app.use(cors());
@@ -26,7 +23,8 @@ app.get('*', function (req, res) {
 });
 
 // error handling: 500 internal server error
-app.use(function (err, req, res, next) {
+
+app.use(function(err, req, res) {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
