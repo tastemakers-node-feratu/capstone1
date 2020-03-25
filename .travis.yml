@@ -13,10 +13,10 @@ notifications:
 #   database: myapp_test
 #   username: travis
 #   encoding: utf8
-# before_install:
+before_install:
+  - cd back-end
 #   - mysql -e 'CREATE DATABASE myapp_test;'
 install:
-  - cd back-end
   - npm ci # faster, goes only from package-lock
 # script:
 #   - npm run seed
