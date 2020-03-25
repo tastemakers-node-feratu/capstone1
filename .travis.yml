@@ -15,11 +15,11 @@ notifications:
 #   encoding: utf8
 before_install:
   - cd back-end
-#   - mysql -e 'CREATE DATABASE myapp_test;'
+  - mysql -e 'CREATE DATABASE myapp_test;'
 install:
   - npm ci # faster, goes only from package-lock
 script:
-  - npm run seed
+  # - npm run seed
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 # deploy:
