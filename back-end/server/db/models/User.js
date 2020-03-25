@@ -93,6 +93,25 @@ User.beforeBulkCreate(users => {
 
 User.getSnapShots = function (arr) {
   const oneMonthAgo = moment().subtract(1, 'months').format();
+  // if (filter) {
+  //   all = this.findAll(
+  //     {
+  //       where: {
+  //         id: { [Op.in]: arr },
+  //       },
+  //       include: [{
+  //         model: Place, through: Snapshot,
+  //         where: {
+  //           createdAt: {
+  //             [Op.gte]: oneMonthAgo
+  //           },
+  //           category: { [Op.in]: filter }
+  //         }
+  //       }]
+  //     }
+  //   )
+  // }
+  // else {
   const all = this.findAll(
     {
       where: {
@@ -108,6 +127,7 @@ User.getSnapShots = function (arr) {
       }]
     }
   )
+
   return all;
 }
 
