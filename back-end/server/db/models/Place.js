@@ -40,7 +40,6 @@ const Place = db.define('place', {
 });
 
 Place.newSnapshot = function(info) {
-  console.log('info is', info)
   const place = this.findOrCreate({
     where: {
       [Op.and]: [

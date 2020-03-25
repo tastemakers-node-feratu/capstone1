@@ -11,12 +11,7 @@ router.put('/snapshot/:userId', async (req, res, next) => {
   const { description, tags } = snapshotInfo;
   try{
     const place = await Place.newSnapshot(snapshotInfo);
-    // console.log('place ', place);
     const user = await User.findByPk(req.params.userId);
-    // console.log('\nuser', user);
-    console.log('tags', tags)
-    const tagsArr =
-    // console.log('magic methods', user.__proto__)
     await user.addPlace( place[0].id, { through: { description, tags } });
     const newSnap = await Snapshot.findOne({
       where: {

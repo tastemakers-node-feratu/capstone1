@@ -46,12 +46,10 @@ class CheckInScreen extends React.Component {
   }
 
   submit(){
-    console.log('hello in submit');
     this.props.addSnapshot(this.state, 1)
   }
 
     render() {
-    //   console.log('PROPS IN FRIENDS', this.props)
         return (
             <SafeAreaView style={styles.container} >
                 <ScrollView contentContainerStyle={styles.contentContainer} >

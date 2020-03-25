@@ -82,7 +82,7 @@ export const addSnapshotThunk = (snapshot, userId) => {
         category
       }
 
-      const {data} = await axios.put(`http://192.168.1.3:3000/api/users/snapshot/${userId}`, snapshotInfo)
+      const {data} = await axios.put(`${apiUrl}/api/users/snapshot/${userId}`, snapshotInfo)
       dispatch(addOneSnapshot(data));
     } catch(err){
       console.error(err);
