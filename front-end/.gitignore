@@ -10,5 +10,6 @@ npm-debug.*
 web-build/
 web-report/
 
+environment.js
 # macOS
 .DS_Store
