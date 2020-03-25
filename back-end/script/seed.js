@@ -140,7 +140,11 @@ async function runSeed() {
   console.log('seeding...');
   try {
     await fakerSeed();
-    console.log(green('Seeding Sucessful!'));
+    console.log(
+      green(
+        'fakerSeed finished, may or may not have seeded successfully, check for error messages'
+      )
+    );
   } catch (error) {
     console.error(red('Oh noes! Something went wrong!'), red(error));
     process.exitCode = 1;
