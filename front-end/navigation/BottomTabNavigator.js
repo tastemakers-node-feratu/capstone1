@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import LoginScreen from '../screens/LoginScreen';
 import LinksScreen from '../screens/LinksScreen';
@@ -7,10 +8,27 @@ import SignUpScreen from '../screens/SignUpScreen';
 import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 import OneSnapScreen from '../screens/OneSnapScreen'
-
+import { createStackNavigator } from '@react-navigation/stack';
 
 const BottomTab = createBottomTabNavigator();
+
 const INITIAL_ROUTE_NAME = 'Home';
+const FeedTab = createStackNavigator();
+
+function Feed() {
+  return (
+    <FeedTab.Navigator initialRouteName="MainFeed" headerMode="none"
+    // screenOptions={{
+    //   headerStyle: {
+    //     backgroundColor: '#74b9ff',
+    //   }
+    // }}
+    >
+      <FeedTab.Screen name="MainFeed" component={SnapShotsScreen} />
+      <FeedTab.Screen name="SingleSnap" component={OneSnapScreen} />
+    </FeedTab.Navigator >
+  );
+}
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -25,7 +43,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={LoginScreen}
         options={{
           title: 'Home',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
         }}
       />
       <BottomTab.Screen
@@ -41,15 +59,15 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={SignUpScreen}
         options={{
           title: 'SignUp',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
         }}
       />
       <BottomTab.Screen
         name="AllSnapShots"
-        component={SnapShotsScreen}
+        component={Feed}
         options={{
-          title: 'AllSnapShots',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'Feed',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
         }}
       />
       <BottomTab.Screen
@@ -60,14 +78,14 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="SnapShot"
-        component={OneSnapScreen}
+        component={SnapShotsStack}
         options={{
           title: 'SnapShot',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
   );
 }

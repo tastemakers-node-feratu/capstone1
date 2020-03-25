@@ -9,9 +9,11 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+
 import useLinking from './navigation/useLinking';
 
 const Stack = createStackNavigator();
+
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -53,7 +55,7 @@ export default function App(props) {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-            <Stack.Navigator>
+            <Stack.Navigator headerMode="none" >
               <Stack.Screen name="Root" component={BottomTabNavigator} />
             </Stack.Navigator>
           </NavigationContainer>
@@ -62,6 +64,7 @@ export default function App(props) {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

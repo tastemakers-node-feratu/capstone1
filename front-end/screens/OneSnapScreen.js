@@ -18,32 +18,34 @@ class OneSnapScreen extends React.Component {
     }
 
     componentDidMount() {
+        const { route } = this.props;
+        const { userId } = route.params
+        const { placeId } = route.params
 
-        const tempUserId = 1
-        const tempPlaceId = 39;
-        this.props.singleSnapshotThunk(tempUserId, tempPlaceId)
+        // const tempUserId = 1
+        // const tempPlaceId = 39;
+        this.props.singleSnapshotThunk(userId, placeId)
     }
 
     render() {
         const snapshot = this.props.selectedSnapshot
         return !this.props.oneLoading ? (
             <SafeAreaView style={styles.container} >
-                <View style={styles.topContainer}>
+                {/* <View style={styles.topContainer}>
                     <Button title="Home" color={'white'} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                         <Button title="Find Friends" color={'white'} />
-                    </View>
-                </View>
+                    </View> 
+                </View>*/}
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     <SafeAreaView>
                         <View style={styles.container}>
                             <View style={styles.userContainer}>
                                 <Image source={{ uri: snapshot.imageURL }}
                                     style={{ width: 120, height: 120, borderRadius: 30 }} />
-                                <View >
+                                <View style={styles.outerText}>
                                     <Text style={styles.name}>{snapshot.username} pinned {snapshot.places[0].name}</Text>
-                                    <Text style={styles.name}></Text>
                                     <Text style={styles.location}> {snapshot.places[0].location}</Text>
                                 </View>
                             </View>
@@ -53,7 +55,7 @@ class OneSnapScreen extends React.Component {
                         </View>
                     </SafeAreaView>
                 </ScrollView>
-            </SafeAreaView>
+            </SafeAreaView >
         ) : (
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Text>Loading...</Text>
@@ -66,19 +68,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#74b9ff',
+
+    },
+    contentContainer: {
+        marginTop: 25
     },
     topContainer: {
         flexDirection: "row",
         justifyContent: 'space-between'
     },
+    outerText: {
+        flexShrink: 1,
+        justifyContent: 'space-around'
+    },
     name: {
-        flex: 0.8,
+        flex: 1,
         fontSize: 20,
         color: '#FFFFFF',
-        // textAlign: 'center',
+        textAlign: 'center',
         fontWeight: '400',
-        margin: 15,
-        flexShrink: 1
+        flexWrap: 'wrap'
     },
     title: {
         fontSize: 20,
@@ -95,6 +104,10 @@ const styles = StyleSheet.create({
     location: {
         color: '#FFFFFF',
         marginLeft: 15,
+        fontStyle: 'italic',
+        fontSize: 16,
+        textAlign: 'center',
+        fontWeight: '400',
     },
     rightButtons: {
         flexDirection: "row",
