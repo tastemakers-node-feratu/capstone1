@@ -26,7 +26,6 @@ const Place = db.define('place', {
   location: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
   },
   // priceratingaverage
   all_tags: {
@@ -34,13 +33,14 @@ const Place = db.define('place', {
     get() {
       return this.getDataValue('all_tags').split(',');
     },
-    // set(value) {
-    //   return this.setDataValue('all_tags', value.join());
-    // }
+    set(value) {
+      return this.setDataValue('all_tags', value.join());
+    }
   }
 });
 
 Place.newSnapshot = function(info) {
+  console.log('info is', info)
   const place = this.findOrCreate({
     where: {
       [Op.and]: [
@@ -49,6 +49,8 @@ Place.newSnapshot = function(info) {
       ]
     },
     defaults: {
+      name: info.name,
+      location: info.location,
       all_tags: info.tags,
       category: info.category
     }

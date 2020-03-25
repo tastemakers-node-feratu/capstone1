@@ -30,7 +30,7 @@ const Snapshot = db.define('snapshot', {
   }
 });
 
-//get all a user's friend's snapshots 
+//get all a user's friend's snapshots
 
 Snapshot.getSnaps = function () {
   const oneMonthAgo = moment().subtract(1, 'months').format();

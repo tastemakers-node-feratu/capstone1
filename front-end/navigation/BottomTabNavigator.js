@@ -61,19 +61,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-<<<<<<< HEAD
         name="Check In"
         component={CheckInScreen}
         options={{
           title: 'Check In',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
-=======
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
+        }}
+      />
+      <BottomTab.Screen
         name="SnapShot"
         component={OneSnapScreen}
         options={{
           title: 'SnapShot',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
->>>>>>> master
         }}
       />
     </BottomTab.Navigator>

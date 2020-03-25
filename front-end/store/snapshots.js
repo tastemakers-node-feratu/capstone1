@@ -65,20 +65,23 @@ export const singleSnapshotThunk = (userId, placeId) => {
 export const addSnapshotThunk = (snapshot, userId) => {
   return async dispatch => {
     try {
-      console.log('user id is', userId);
       const category = snapshot.checkboxes.reduce((accum, curr) => {
         if(curr.checked === true){
           accum.push(curr.name);
         }
         return accum;
-      }, [])
+      }, []);
+
+      const tags = snapshot.tags.split(' ');
+
       const snapshotInfo = {
         description: snapshot.description,
         location: snapshot.location,
-        name: snapshot.name,
-        tags: snapshot.tags,
+        name: snapshot.placeName,
+        tags,
         category
       }
+
       const {data} = await axios.put(`http://192.168.1.3:3000/api/users/snapshot/${userId}`, snapshotInfo)
       dispatch(addOneSnapshot(data));
     } catch(err){
@@ -89,6 +92,12 @@ export const addSnapshotThunk = (snapshot, userId) => {
 
 const snapshotReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_ONE:
+      return {
+        ...state,
+        allSnapshots: [...state.allSnapshots, action.snapshot],
+        selectedSnapshot: action.snapshot
+      }
     case GOT_ALL:
       return { ...state, allSnapshots: action.info, allLoading: false };
     case GOT_ONE:

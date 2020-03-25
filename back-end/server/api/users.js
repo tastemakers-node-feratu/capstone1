@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Snapshot } = require('../db/models')
+const { User, Snapshot, Place } = require('../db/models')
 const { Op } = require('sequelize');
 
 router.get('/', (req, res, next) => {
@@ -7,20 +7,30 @@ router.get('/', (req, res, next) => {
 });
 
 router.put('/snapshot/:userId', async (req, res, next) => {
-  console.log('hello????')
-  const snapshotInfo = req.body.snapshotInfo;
+  const snapshotInfo = req.body;
   const { description, tags } = snapshotInfo;
-  console.log('snapshot', req.body.snapshotInfo);
-  const place = await Place.newSnapshot(snapshotInfo);
-  const user = User.findByPk(req.params.userId);
-  const updatedUser = user.addPlace({
-    through: {
-      description,
-      tags
-    }
-  })
-  // res.send(newSnap);
-  res.send('ok')
+  try{
+    const place = await Place.newSnapshot(snapshotInfo);
+    // console.log('place ', place);
+    const user = await User.findByPk(req.params.userId);
+    // console.log('\nuser', user);
+    console.log('tags', tags)
+    const tagsArr =
+    // console.log('magic methods', user.__proto__)
+    await user.addPlace( place[0].id, { through: { description, tags } });
+    const newSnap = await Snapshot.findOne({
+      where: {
+        [Op.and]: [
+          { userId: user.id },
+          { placeId: place[0].id }
+        ]
+      }
+    })
+    res.send(newSnap);
+    // res.send('ok')
+  }catch(err){
+    next(err)
+  }
 })
 
 

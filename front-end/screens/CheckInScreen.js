@@ -47,8 +47,7 @@ class CheckInScreen extends React.Component {
 
   submit(){
     console.log('hello in submit');
-    const tempUserId = 1;
-    this.props.addSnapshot(this.state, tempUserId)
+    this.props.addSnapshot(this.state, 1)
   }
 
     render() {
@@ -119,7 +118,7 @@ class CheckInScreen extends React.Component {
                       onChangeText={description => {this.setState({ description })}}
                     />
                     <Text>
-                      Add some tags, denoted by hashtags and separated by commas, so we can learn more about it.
+                      Add some tags, denoted by hashtags and separated by a space, so we can learn more about it.
                     </Text>
                     <TextInput
                       placeholder={'#AvocadoToast'}
@@ -171,13 +170,6 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     margin: 10
   },
-    topContainer: {
-        flexDirection: "row",
-        justifyContent: 'space-between'
-    },
-    rightButtons: {
-        flexDirection: "row",
-    }
 })
 
 // const mapState = state => ({
@@ -185,7 +177,7 @@ const styles = StyleSheet.create({
 // })
 
 const mapDispatch = dispatch => ({
-    addSnapshot: (userId) => {dispatch(addSnapshotThunk(userId))}
+    addSnapshot: (snapshot, userId) => {dispatch(addSnapshotThunk(snapshot, userId))}
 })
 
 export default connect(null, mapDispatch)(CheckInScreen)
