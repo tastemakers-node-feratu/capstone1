@@ -18,8 +18,8 @@ before_install:
 #   - mysql -e 'CREATE DATABASE myapp_test;'
 install:
   - npm ci # faster, goes only from package-lock
-# script:
-#   - npm run seed
+script:
+  - npm run seed
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 # deploy:
