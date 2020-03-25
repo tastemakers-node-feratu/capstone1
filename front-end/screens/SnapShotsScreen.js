@@ -15,6 +15,9 @@ import { MonoText } from '../components/StyledText';
 class SnapShotsScreen extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            category: ''
+        }
     }
 
     componentDidMount() {
@@ -29,13 +32,12 @@ class SnapShotsScreen extends React.Component {
                     <Button title="Log Out" color={'white'} onPress={() => navigate('Home')} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
-                        <Button title="Find Friends" color={'white'} />
+                        <Button title="Find Friends" color={'white'} onPress={() => navigate('AllFriends')} />
                     </View>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     {this.props.allSnapshots.map(snapshot => (
-                        <MiniSnapShot key={snapshot.id} snapshot={snapshot}
-                            onPress={() => navigate('SnapShot', { userId: snapshot.id, placeId: snapshot.places[0].id })} />
+                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
                     ))}
                 </ScrollView>
             </SafeAreaView>
