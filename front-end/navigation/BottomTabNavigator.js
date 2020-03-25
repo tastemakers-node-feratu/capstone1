@@ -6,6 +6,7 @@ import CheckInScreen from '../screens/CheckInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
+import OneSnapScreen from '../screens/OneSnapScreen'
 
 
 const BottomTab = createBottomTabNavigator();
@@ -23,7 +24,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Home"
         component={LoginScreen}
         options={{
-          title: 'Login',
+          title: 'Home',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
         }}
       />
@@ -47,7 +48,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="AllSnapShots"
         component={SnapShotsScreen}
         options={{
-          title: 'SnapShots',
+          title: 'AllSnapShots',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
@@ -60,11 +61,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
+<<<<<<< HEAD
         name="Check In"
         component={CheckInScreen}
         options={{
           title: 'Check In',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+=======
+        name="SnapShot"
+        component={OneSnapScreen}
+        options={{
+          title: 'SnapShot',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
+>>>>>>> master
         }}
       />
     </BottomTab.Navigator>

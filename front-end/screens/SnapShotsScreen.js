@@ -22,10 +22,11 @@ class SnapShotsScreen extends React.Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return !this.props.allLoading ? (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
-                    <Button title="Home" color={'white'} />
+                    <Button title="Log Out" color={'white'} onPress={() => navigate('Home')} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                         <Button title="Find Friends" color={'white'} />
@@ -33,7 +34,8 @@ class SnapShotsScreen extends React.Component {
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     {this.props.allSnapshots.map(snapshot => (
-                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} />
+                        <MiniSnapShot key={snapshot.id} snapshot={snapshot}
+                            onPress={() => navigate('SnapShot', { userId: snapshot.id, placeId: snapshot.places[0].id })} />
                     ))}
                 </ScrollView>
             </SafeAreaView>

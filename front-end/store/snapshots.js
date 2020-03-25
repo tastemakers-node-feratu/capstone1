@@ -1,11 +1,15 @@
 /* eslint-disable no-console */
 import axios from 'axios';
+import getEnvVars from '../environment';
+
+const { apiUrl } = getEnvVars();
 
 // initial State
 const initialState = {
   allSnapshots: [],
   allLoading: true,
-  selectedSnapshot: {}
+  selectedSnapshot: {},
+  oneLoading: true
 };
 
 // Action Types
@@ -39,7 +43,7 @@ export const allSnapshotsThunk = () => {
   return async dispatch => {
     try {
       const tempUserId = 1;
-      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/${tempUserId}`);
+      const { data } = await axios.get(`${apiUrl}/api/snapshots/${tempUserId}`);
       dispatch(gotAllSnapshots(data));
     } catch (error) {
       console.error(error);
@@ -47,10 +51,10 @@ export const allSnapshotsThunk = () => {
   };
 };
 
-export const singleSnapshotThunk = id => {
+export const singleSnapshotThunk = (userId, placeId) => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/${id}`);
+      const { data } = await axios.get(`${apiUrl}/api/snapshots/snapshot/${userId}/${placeId}`);
       dispatch(gotSingleSnapshot(data));
     } catch (error) {
       console.error(error);
@@ -88,7 +92,7 @@ const snapshotReducer = (state = initialState, action) => {
     case GOT_ALL:
       return { ...state, allSnapshots: action.info, allLoading: false };
     case GOT_ONE:
-      return { ...state, selectedSnapshot: action.info };
+      return { ...state, selectedSnapshot: action.info, oneLoading: false };
     default:
       return state;
   }
