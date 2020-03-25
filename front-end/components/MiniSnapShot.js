@@ -18,8 +18,8 @@ export default function Snapshots(props) {
         <SafeAreaView key={snapshot.id}>
             <View style={styles.container}>
                 <Text style={styles.name}>{snapshot.username}</Text>
-                {/* <Image source={snapshot.photos}
-                    style={{ width: 300, height: 250, }} /> */}
+                <Image source={{ uri: place.snapshot.photos }}
+                    style={{ width: 300, height: 250, }} />
                 <Text style={styles.title}>{place.name} </Text>
                 <Text style={styles.content}>{place.snapshot.description}</Text>
             </View>

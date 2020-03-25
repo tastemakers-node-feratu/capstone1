@@ -5,7 +5,8 @@ import axios from 'axios';
 const initialState = {
   allSnapshots: [],
   allLoading: true,
-  selectedSnapshot: {}
+  selectedSnapshot: {},
+  oneLoading: true
 };
 
 // Action Types
@@ -39,10 +40,10 @@ export const allSnapshotsThunk = () => {
   };
 };
 
-export const singleSnapshotThunk = id => {
+export const singleSnapshotThunk = (userId, placeId) => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/${id}`);
+      const { data } = await axios.get(`http://192.168.1.98:3000/api/snapshots/snapshot/${userId}/${placeId}`);
       dispatch(gotSingleSnapshot(data));
     } catch (error) {
       console.error(error);
@@ -55,7 +56,7 @@ const snapshotReducer = (state = initialState, action) => {
     case GOT_ALL:
       return { ...state, allSnapshots: action.info, allLoading: false };
     case GOT_ONE:
-      return { ...state, selectedSnapshot: action.info };
+      return { ...state, selectedSnapshot: action.info, oneLoading: false };
     default:
       return state;
   }
