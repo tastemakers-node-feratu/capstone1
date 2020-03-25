@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
+    // userId: state.user.id,
     friends: state.user.friends
 });
 

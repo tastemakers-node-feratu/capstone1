@@ -22,7 +22,6 @@ router.put('/snapshot/:userId', async (req, res, next) => {
       }
     })
     res.send(newSnap);
-    // res.send('ok')
   }catch(err){
     next(err)
   }

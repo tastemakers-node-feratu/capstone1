@@ -12,8 +12,6 @@ import { CheckBox } from 'react-native-elements'
 import { addSnapshotThunk } from '../store/snapshots'
 import {connect} from 'react-redux'
 
-import { MonoText } from '../components/StyledText';
-
 class CheckInScreen extends React.Component {
   constructor(){
     super();
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     input: {
       padding: 8,
       marginBottom: 8,
-      borderColor: 'blue',
+      borderColor: 'gray',
       borderWidth: 1,
       borderRadius: 4,
       // alignItems: 'flex-start'
