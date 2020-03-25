@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 
 router.get('/', (req, res, next) => {
   res.send('ok');
+
 });
 
 router.put('/snapshot/:userId', async (req, res, next) => {

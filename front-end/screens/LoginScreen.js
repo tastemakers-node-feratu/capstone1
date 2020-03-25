@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button,
+  StatusBar,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -22,6 +22,7 @@ export default class LoginScreen extends React.Component {
         keyboardVerticalOffset={64}
         behavior="padding"
       >
+        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView style={styles.container}>
           <View style={styles.inner}>
             <Text style={styles.brandName}>Taste Makers</Text>

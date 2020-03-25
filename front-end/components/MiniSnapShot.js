@@ -1,28 +1,37 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-native'
+import { Text, View, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 'react-native'
 
 export default function Snapshots(props) {
-    const { snapshot } = props
+    const { snapshot, navigate } = props
     const places = snapshot.places;
+
     return places.length === 1 ? (
-        <SafeAreaView>
-            <View style={styles.container}>
-                <Text style={styles.name}>{snapshot.username}</Text>
-                <Image source={{ uri: places[0].snapshot.photos }}
-                    style={{ width: 300, height: 250, }} />
-                <Text style={styles.title}>{places[0].name} </Text>
-                <Text style={styles.content}>{places[0].snapshot.description}</Text>
-            </View>
+        <SafeAreaView >
+            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId: snapshot.id, placeId: snapshot.places[0].id, }) }} >
+                <View style={styles.container}>
+                    <Text style={styles.name}>{snapshot.username}</Text>
+                    <Image source={{ uri: places[0].snapshot.photos }}
+                        style={{ width: 300, height: 250, }}
+                    />
+
+                    <Text style={styles.title}>{places[0].name} </Text>
+                    <Text style={styles.content}>{places[0].snapshot.description}</Text>
+                </View>
+            </TouchableHighlight>
         </SafeAreaView>
     ) : places.map(place => (
-        <SafeAreaView key={snapshot.id}>
-            <View style={styles.container}>
-                <Text style={styles.name}>{snapshot.username}</Text>
-                <Image source={{ uri: place.snapshot.photos }}
-                    style={{ width: 300, height: 250, }} />
-                <Text style={styles.title}>{place.name} </Text>
-                <Text style={styles.content}>{place.snapshot.description}</Text>
-            </View>
+        <SafeAreaView key={snapshot.id} >
+            <TouchableHighlight onPress={() => {
+                navigate('SingleSnap', { userId: snapshot.id, placeId: place.id })
+            }} >
+                <View style={styles.container}>
+                    <Text style={styles.name}>{snapshot.username}</Text>
+                    <Image source={{ uri: place.snapshot.photos }}
+                        style={{ width: 300, height: 250, }} />
+                    <Text style={styles.title}>{place.name} </Text>
+                    <Text style={styles.content}>{place.snapshot.description}</Text>
+                </View>
+            </TouchableHighlight>
         </SafeAreaView>
     ))
 }
