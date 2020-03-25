@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const Snapshot = require('./Snapshot')
 
 const Place = db.define('place', {
   name: {
@@ -37,5 +38,13 @@ const Place = db.define('place', {
     }
   }
 });
+
+Place.getSnapShot = function (id) {
+  const snap = this.findOne({
+    where: { id: id },
+    include: [{ model: Place, through: SnapShot }]
+  })
+  return snap
+}
 
 module.exports = Place;
