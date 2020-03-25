@@ -15,17 +15,17 @@ if (process.env.NODE_ENV === 'development') {
       port: 3306
     }
   );
+} else {
+  db = new Sequelize(
+    process.env.CLEARDB_DATABASE_URL,
+
+    {
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306
+    }
+  );
 }
-
-db = new Sequelize(
-  process.env.CLEARDB_DATABASE_URL,
-
-  {
-    dialect: 'mysql',
-    host: 'localhost',
-    port: 3306
-  }
-);
 
 // const db = new Sequelize('capstone', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
 //   dialect: 'mysql',
