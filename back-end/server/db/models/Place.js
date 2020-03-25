@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const Op = Sequelize.Op;
 
 const Place = db.define('place', {
   name: {
@@ -32,10 +33,26 @@ const Place = db.define('place', {
     get() {
       return this.getDataValue('all_tags').split(',');
     },
-    set(value) {
-      return this.setDataValue('all_tags', value.join());
-    }
+    // set(value) {
+    //   return this.setDataValue('all_tags', value.join());
+    // }
   }
 });
+
+Place.newSnapshot = function(info) {
+  const place = this.findOrCreate({
+    where: {
+      [Op.and]: [
+        {name: info.name},
+        {location: info.location}
+      ]
+    },
+    defaults: {
+      all_tags: info.tags,
+      category: info.category
+    }
+  })
+  return place;
+}
 
 module.exports = Place;

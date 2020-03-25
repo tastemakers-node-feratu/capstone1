@@ -9,12 +9,12 @@ import {
     View,
 } from 'react-native';
 import { CheckBox } from 'react-native-elements'
-//import add snapshot thunk
-// import {connect} from 'react-redux'
+import { addSnapshotThunk } from '../store/snapshots'
+import {connect} from 'react-redux'
 
 import { MonoText } from '../components/StyledText';
 
-export default class CheckInScreen extends React.Component {
+class CheckInScreen extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -23,6 +23,7 @@ export default class CheckInScreen extends React.Component {
       description: '',
       tags: '',
       checkboxes: [
+        //{ food: false }, reach by title?
         { name: 'food', checked: false },
         { name: 'fitness', checked: false },
         { name: 'nightlife', checked: false },
@@ -45,8 +46,9 @@ export default class CheckInScreen extends React.Component {
   }
 
   submit(){
-
-    //thunk for adding this snapshot to the db!
+    console.log('hello in submit');
+    const tempUserId = 1;
+    this.props.addSnapshot(this.state, tempUserId)
   }
 
     render() {
@@ -179,11 +181,11 @@ const styles = StyleSheet.create({
 })
 
 // const mapState = state => ({
-//     friends: state.user.friends
-// });
-
-// const mapDispatch = dispatch => ({
-//     getFriends: () => dispatch(getFriendsThunk(2))
+//   userId: state.user.id
 // })
 
-// export default connect(mapState, mapDispatch)(CheckInScreen)
+const mapDispatch = dispatch => ({
+    addSnapshot: (userId) => {dispatch(addSnapshotThunk(userId))}
+})
+
+export default connect(null, mapDispatch)(CheckInScreen)
