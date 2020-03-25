@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 if (process.env.NODE_ENV === 'development') {
-require('secrets.js');
+  require('./secrets.js');
 }
 
 const db = require('./server/db');
