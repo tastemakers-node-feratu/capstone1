@@ -61,7 +61,7 @@ export const singleSnapshotThunk = id => {
 export const addSnapshotThunk = (snapshot, userId) => {
   return async dispatch => {
     try {
-      console.log('thunk - snapshot is', snapshot);
+      console.log('user id is', userId);
       const category = snapshot.checkboxes.reduce((accum, curr) => {
         if(curr.checked === true){
           accum.push(curr.name);
@@ -75,7 +75,7 @@ export const addSnapshotThunk = (snapshot, userId) => {
         tags: snapshot.tags,
         category
       }
-      const {data} = await axios.put(`http://192.168.1.98:3000/api/users/snapshot/${userId}`, snapshotInfo)
+      const {data} = await axios.put(`http://192.168.1.3:3000/api/users/snapshot/${userId}`, snapshotInfo)
       dispatch(addOneSnapshot(data));
     } catch(err){
       console.error(err);
