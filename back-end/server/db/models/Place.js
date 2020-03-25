@@ -1,10 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-<<<<<<< HEAD
 const Op = Sequelize.Op;
-=======
 const Snapshot = require('./Snapshot')
->>>>>>> master
 
 const Place = db.define('place', {
   name: {
@@ -62,7 +59,7 @@ Place.newSnapshot = function(info) {
 Place.getSnapShot = function (id) {
   const snap = this.findOne({
     where: { id: id },
-    include: [{ model: Place, through: SnapShot }]
+    include: [{ model: Place, through: Snapshot }]
   })
   return snap
 }
