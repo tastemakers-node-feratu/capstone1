@@ -1,16 +1,29 @@
-require('../../../secrets.js');
+/* eslint-disable global-require */
 const Sequelize = require('sequelize');
 
-const db = new Sequelize(
-  process.env.DATABASE_URL || 'capstone',
-  process.env.DATABASE_USER || 'root',
-  process.env.DATABASE_PASS || 'node-feratu',
-  {
-    dialect: 'mysql',
-    host: 'localhost',
-    port: 3306
-  }
-);
+let db;
+if (process.env.NODE_ENV === 'development') {
+  db = new Sequelize(
+    process.env.DATABASE_URL,
+    process.env.DATABASE_USER,
+    process.env.DATABASE_PASS,
+    {
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306
+    }
+  );
+} else {
+  db = new Sequelize(
+    process.env.CLEARDB_DATABASE_URL,
+
+    {
+      dialect: 'mysql',
+      host: 'localhost',
+      port: 3306
+    }
+  );
+}
 
 // const db = new Sequelize('capstone', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
 //   dialect: 'mysql',
