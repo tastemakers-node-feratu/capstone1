@@ -26,7 +26,7 @@ class SnapShotsScreen extends React.Component {
         return !this.props.allLoading ? (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
-                    <Button title="Home" color={'white'} onPress={() => navigate('Home')} />
+                    <Button title="Log Out" color={'white'} onPress={() => navigate('Home')} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                         <Button title="Find Friends" color={'white'} />
