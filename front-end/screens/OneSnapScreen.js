@@ -38,7 +38,7 @@ class OneSnapScreen extends React.Component {
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                         <Button title="Find Friends" color={'white'} />
-                    </View> 
+                    </View>
                 </View>*/}
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     <SafeAreaView>
@@ -139,4 +139,4 @@ const mapDispatch = dispatch => ({
     singleSnapshotThunk: (userId, placeId) => dispatch(singleSnapshotThunk(userId, placeId))
 })
 
-export default connect(mapState, mapDispatch)(OneSnapScreen);
+export default connect(mapState, mapDispatch)(OneSnapScreen)

@@ -31,7 +31,6 @@ class FriendsScreen extends React.Component {
     }
 
     render() {
-        //   console.log('PROPS IN FRIENDS', this.props)
         const { navigate } = this.props.navigation;
         const filteredFriends = this.props.friends.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
         return (
@@ -85,7 +84,8 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-  friends: state.user.friends
+    // userId: state.user.id,
+    friends: state.user.friends
 });
 
 const mapDispatch = dispatch => ({

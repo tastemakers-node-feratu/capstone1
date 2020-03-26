@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import LoginScreen from '../screens/LoginScreen';
-import LinksScreen from '../screens/LinksScreen';
+import CheckInScreen from '../screens/CheckInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
@@ -71,6 +71,14 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: 'SignUp',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Check In"
+        component={CheckInScreen}
+        options={{
+          title: 'Check In',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
         }}
       />
       <BottomTab.Screen
