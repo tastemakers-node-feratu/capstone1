@@ -19,6 +19,8 @@ import { addSnapshotThunk } from '../store/snapshots'
 import {connect} from 'react-redux'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import SnapPreview from '../components/SnapPreview'
+// import { Image } from 'react-native'
+// import PhotoUpload from 'react-native-photo-upload'
 
 class CheckInScreen extends React.Component {
   constructor(){
@@ -205,6 +207,27 @@ class CheckInScreen extends React.Component {
                       onChangeText={tags => {this.setState({ tags })}}
                       />
 
+                      {/* <PhotoUpload
+                        onPhotoSelect={avatar => {
+                          if (avatar) {
+                            console.log('Image base64 string: ', avatar)
+                          }
+                        }}
+                      >
+                        <Image
+                          style={{
+                            paddingVertical: 30,
+                            width: 150,
+                            height: 150,
+                            borderRadius: 75
+                          }}
+                          resizeMode='cover'
+                          source={{
+                            uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+                          }}
+                        />
+                      </PhotoUpload> */}
+
                     <TouchableOpacity
                       onPress={this.done}
                       style={styles.button}
@@ -287,7 +310,7 @@ const mapState = state => {
   return {
     user: {
       username: 'mtoff',
-      imageUrl: 'https://unsplash.com/photos/rDEOVtE7vOs'
+      imageURL: 'https://unsplash.com/photos/rDEOVtE7vOs'
     },
   // user: state.user,
   snapshot: state.snapshots.selectedSnapshot
