@@ -105,3 +105,4 @@ dist
 
 # storing private variables
 secrets.js
+environment.js

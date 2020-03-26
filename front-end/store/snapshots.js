@@ -15,6 +15,14 @@ const initialState = {
 // Action Types
 const GOT_ALL = 'GOT_ALL';
 const GOT_ONE = 'GOT_ONE';
+const ADD_ONE = 'ADD_ONE';
+
+const addOneSnapshot = snapshot => {
+  return{
+    type: ADD_ONE,
+    snapshot
+  }
+}
 
 // Action Creator
 const gotAllSnapshots = info => {
@@ -54,8 +62,40 @@ export const singleSnapshotThunk = (userId, placeId) => {
   };
 };
 
+export const addSnapshotThunk = (snapshot, userId) => {
+  return async dispatch => {
+    try {
+      const category = snapshot.checkboxes.reduce((accum, curr) => {
+        if(curr.checked === true){
+          accum.push(curr.name);
+        }
+        return accum;
+      }, []);
+
+      const tags = snapshot.tags.split(' ');
+
+      const snapshotInfo = {
+        description: snapshot.description,
+        location: snapshot.location,
+        name: snapshot.placeName,
+        tags,
+        category
+      }
+      const {data} = await axios.put(`${apiUrl}/api/users/snapshot/${userId}`, snapshotInfo)
+      dispatch(addOneSnapshot(data));
+    } catch(err){
+      console.error(err);
+    }
+  }
+}
+
 const snapshotReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_ONE:
+      return {
+        ...state,
+        selectedSnapshot: action.snapshot
+      }
     case GOT_ALL:
       return { ...state, allSnapshots: action.info, allLoading: false };
     case GOT_ONE:
