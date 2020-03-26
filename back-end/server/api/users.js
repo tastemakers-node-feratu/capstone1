@@ -14,15 +14,18 @@ router.put('/snapshot/:userId', async (req, res, next) => {
     const place = await Place.newSnapshot(snapshotInfo);
     const user = await User.findByPk(req.params.userId);
     await user.addPlace( place[0].id, { through: { description, tags } });
-    const newSnap = await Snapshot.findOne({
-      where: {
-        [Op.and]: [
-          { userId: user.id },
-          { placeId: place[0].id }
-        ]
-      },
+    const snapshot = await User.findOne({
+      where: { id: user.id },
+      include: [{
+        model: Place, through: Snapshot,
+        where: {
+          //the newsnapshot method on Place used findOrCreate, which returned
+          //an array. the "place" itsel is the first item, therefore...
+          id: place[0].id
+        }
+      }]
     })
-    res.send(newSnap);
+    res.send(snapshot);
   }catch(err){
     next(err)
   }

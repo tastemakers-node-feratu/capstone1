@@ -30,15 +30,15 @@ function Feed() {
   );
 }
 
-const CheckInTab = createStackNavigator();
-function CheckIn() {
-  return (
-    <CheckInTab.Navigator initialRouteName="Check In" headerMode="none">
-      <CheckInTab.Screen name="Check In" component={CheckInScreen} />
-      <CheckInTab.Screen name="SingleSnap" component={OneSnapScreen} />
-    </CheckInTab.Navigator>
-  )
-}
+// const CheckInTab = createStackNavigator();
+// function CheckIn() {
+//   return (
+//     <CheckInTab.Navigator initialRouteName="Check In" headerMode="none">
+//       <CheckInTab.Screen name="Check In" component={CheckInScreen} />
+//       <CheckInTab.Screen name="Feed" component={Feed} />
+//     </CheckInTab.Navigator>
+//   )
+// }
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -66,7 +66,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Check In"
-        component={CheckIn}
+        component={CheckInScreen}
         options={{
           title: 'Check In',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />

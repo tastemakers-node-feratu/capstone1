@@ -14,6 +14,7 @@ import { MonoText } from '../components/StyledText';
 
 class OneSnapScreen extends React.Component {
     constructor(props) {
+        console.log('one snap constructor')
         super(props)
     }
 
@@ -28,6 +29,8 @@ class OneSnapScreen extends React.Component {
     }
 
     render() {
+        console.log('one snap render')
+
         const snapshot = this.props.selectedSnapshot
         return !this.props.oneLoading ? (
             <SafeAreaView style={styles.container} >
@@ -36,7 +39,7 @@ class OneSnapScreen extends React.Component {
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                         <Button title="Find Friends" color={'white'} />
-                    </View> 
+                    </View>
                 </View>*/}
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     <SafeAreaView>
