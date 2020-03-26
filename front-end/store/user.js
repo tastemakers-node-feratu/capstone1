@@ -6,14 +6,22 @@ const {apiUrl} = getEnvVars();
 
 // initial State
 const initialState = {
+  user: {},
   userId: null,
   friends: []
 };
 
 // Action Types
+const GOT_USER = 'GOT_USER';
 const GOT_FRIENDS = 'GOT_FRIENDS';
 
 // Action Creator
+const gotUser = user => {
+  return {
+    type: GOT_USER,
+    user
+  };
+};
 const gotFriends = friends => {
   return {
     type: GOT_FRIENDS,
@@ -22,6 +30,14 @@ const gotFriends = friends => {
 };
 
 // Thunk Creator
+export const getUserThunk = authData => async dispatch => {
+  try {
+    const {data} = await axios.put(`${apiUrl}/auth/login`, {authData});
+    dispatch(gotUser(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 export const getFriendsThunk = userId => async dispatch => {
   try {
     // for now, i'm making an axios call to my computer's ip address, with
@@ -40,6 +56,9 @@ export const getFriendsThunk = userId => async dispatch => {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GOT_USER: {
+      return {...state, user: action.user};
+    }
     case GOT_FRIENDS: {
       return {...state, friends: action.friends};
     }
