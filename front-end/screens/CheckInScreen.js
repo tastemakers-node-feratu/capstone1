@@ -19,8 +19,7 @@ import { addSnapshotThunk } from '../store/snapshots'
 import {connect} from 'react-redux'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import SnapPreview from '../components/SnapPreview'
-// import { Image } from 'react-native'
-// import PhotoUpload from 'react-native-photo-upload'
+import {checkboxes} from '../components/helpers/checkboxes'
 
 class CheckInScreen extends React.Component {
   constructor(){
@@ -30,20 +29,11 @@ class CheckInScreen extends React.Component {
       location: '',
       description: '',
       tags: '',
-      checkboxes: [
-        //{ food: false }, reach by title?
-        { name: 'food', checked: false },
-        { name: 'fitness', checked: false },
-        { name: 'nightlife', checked: false },
-        { name: 'shop', checked: false },
-        { name: 'beauty', checked: false },
-        { name: 'experience', checked: false },
-      ],
-      photos: [],
+      checkboxes: checkboxes,
+      imageURL: 'https://reactnative.dev/img/tiny_logo.png',
       modalVisible: false
     }
     this.toggleCheckBox = this.toggleCheckBox.bind(this);
-    // this.done = this.done.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.confirm = this.confirm.bind(this);
     this.done = this.done.bind(this);
@@ -78,8 +68,7 @@ class CheckInScreen extends React.Component {
   }
 
   confirm(){
-      const tempUserId = 1;
-      this.props.addSnapshot(this.state, tempUserId);
+      this.props.addSnapshot(this.state, this.props.user.id);
       console.log('navigate props', this.props)
       const { navigate } = this.props.navigation;
       const { snapshot } = this.props;
@@ -207,27 +196,6 @@ class CheckInScreen extends React.Component {
                       onChangeText={tags => {this.setState({ tags })}}
                       />
 
-                      {/* <PhotoUpload
-                        onPhotoSelect={avatar => {
-                          if (avatar) {
-                            console.log('Image base64 string: ', avatar)
-                          }
-                        }}
-                      >
-                        <Image
-                          style={{
-                            paddingVertical: 30,
-                            width: 150,
-                            height: 150,
-                            borderRadius: 75
-                          }}
-                          resizeMode='cover'
-                          source={{
-                            uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
-                          }}
-                        />
-                      </PhotoUpload> */}
-
                     <TouchableOpacity
                       onPress={this.done}
                       style={styles.button}
@@ -276,7 +244,8 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       // backgroundColor: '#f7021a',
-      padding: 100,
+      paddingHorizontal: 50,
+      paddingVertical: 100
    },
     button: {
       marginTop: 10,
@@ -309,8 +278,9 @@ const styles = StyleSheet.create({
 const mapState = state => {
   return {
     user: {
+      id: 1,
       username: 'mtoff',
-      imageURL: 'https://unsplash.com/photos/rDEOVtE7vOs'
+      imageURL: 'https://reactnative.dev/img/tiny_logo.png'
     },
   // user: state.user,
   snapshot: state.snapshots.selectedSnapshot

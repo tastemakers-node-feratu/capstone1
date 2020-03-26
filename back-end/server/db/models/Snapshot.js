@@ -11,7 +11,8 @@ const Snapshot = db.define('snapshot', {
     allowNull: false
   },
   photos: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: ''
   },
   price_rating: {
     type: Sequelize.INTEGER,

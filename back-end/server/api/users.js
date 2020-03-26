@@ -1,12 +1,6 @@
 const router = require('express').Router();
-<<<<<<< HEAD
 const { User, Snapshot, Place } = require('../db/models')
 const { Op } = require('sequelize');
-=======
-const User = require('../db/models/User')
-const Place = require('../db/models/Place')
-const Snapshot = require('../db/models/Snapshot')
->>>>>>> master
 
 router.get('/:id', async (req, res, next) => {
   try {

@@ -7,7 +7,7 @@ export default function SnapPreview(props) {
         <SafeAreaView >
           <View style={styles.container}>
             <View style={styles.userContainer}>
-              <Image source={{ uri: user.imageURL }}
+              <Image source={user.imageURL ? {uri: user.imageURL} : {uri: 'https://reactnative.dev/img/tiny_logo.png'}}
                 style={{ width: 120, height: 120, borderRadius: 30 }} />
               <View style={styles.outerText}>
                 <Text style={styles.name}>{user.username} pinned {snapshot.placeName}</Text>
@@ -15,8 +15,8 @@ export default function SnapPreview(props) {
               </View>
             </View>
             <Text style={styles.content}>{snapshot.description}</Text>
-            <Image source={{ uri: snapshot.photos }}
-              style={{ width: 300, height: 250, alignSelf: "center" }} />
+            <Image source={snapshot.imageURL ? {uri: snapshot.imageURL} : {uri: ''}}
+              style={{ width: 200, height: 200, alignSelf: "center", padding: 10 }} />
           </View>
         </SafeAreaView>
     )
@@ -45,17 +45,19 @@ const styles = StyleSheet.create({
       color: '#FFFFFF',
       textAlign: 'center',
       fontWeight: '400',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      padding: 15
   },
   title: {
       fontSize: 20,
       fontStyle: 'italic',
       color: '#FFFFFF',
       textAlign: 'center',
-      margin: 10
+      margin: 10,
   },
   userContainer: {
-      paddingLeft: 60,
+      paddingTop: 30,
+      paddingHorizontal: 25,
       paddingBottom: 20,
       flexDirection: "row",
   },
@@ -72,8 +74,6 @@ const styles = StyleSheet.create({
   },
   content: {
       color: '#FFFFFF',
-      marginRight: 25,
-      marginLeft: 25,
       marginBottom: 15,
       textAlign: 'center',
   }
