@@ -69,9 +69,10 @@ class CheckInScreen extends React.Component {
 
   confirm(){
       this.props.addSnapshot(this.state, this.props.user.id);
-      console.log('navigate props', this.props)
       const { navigate } = this.props.navigation;
       const { snapshot } = this.props;
+      //For now, it navigates back to feed. But in the future, I want to navigate to the
+      //user's pins on their profile
       navigate('AllSnapShots');
   }
 

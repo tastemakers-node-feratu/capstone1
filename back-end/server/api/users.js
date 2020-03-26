@@ -33,6 +33,7 @@ router.put('/snapshot/:userId', async (req, res, next) => {
         }
       }]
     })
+
     res.send(snapshot);
   }catch(err){
     next(err)

@@ -94,7 +94,6 @@ const snapshotReducer = (state = initialState, action) => {
     case ADD_ONE:
       return {
         ...state,
-        allSnapshots: [...state.allSnapshots, action.snapshot],
         selectedSnapshot: action.snapshot
       }
     case GOT_ALL:

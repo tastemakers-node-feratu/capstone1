@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - node
+services: 
+  - mysql
+dist: xenial # uses xenial environment
+notifications:
+  email:
+    on_success: change # default: change (only when going from broken to fixed)
+    on_failure: always # default: always (which is annoying, as it should be)
+# test:
+#   adapter: mysql2
+#   database: myapp_test
+#   username: travis
+#   encoding: utf8
+# before_install:
+#   - mysql -e 'CREATE DATABASE myapp_test;'
+install:
+  - npm ci # faster, goes only from package-lock
+# script:
+#   - npm run seed
+before_deploy:
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: secret-wildwood-89779 # see README
+  api_key:
+    secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README

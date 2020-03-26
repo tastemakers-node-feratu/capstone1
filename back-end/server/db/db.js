@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 let db;
 
 if (process.env.NODE_ENV === 'development') {
+  require('../../secrets.js');
   db = new Sequelize(
     process.env.DATABASE_URL,
     process.env.DATABASE_USER,

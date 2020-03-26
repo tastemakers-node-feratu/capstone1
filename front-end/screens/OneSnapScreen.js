@@ -15,7 +15,6 @@ import { MonoText } from '../components/StyledText';
 
 class OneSnapScreen extends React.Component {
     constructor(props) {
-        console.log('one snap constructor')
         super(props)
     }
 
@@ -30,8 +29,6 @@ class OneSnapScreen extends React.Component {
     }
 
     render() {
-        console.log('one snap render')
-
         const snapshot = this.props.selectedSnapshot
         const { navigate } = this.props.navigation;
         return !this.props.oneLoading ? (
