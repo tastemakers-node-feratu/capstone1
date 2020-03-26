@@ -5,32 +5,31 @@ export default function UserProfileSnapView(props) {
     const { snapshot, userId, navigate } = props
 
     return (
-        <SafeAreaView >
+        <View style={styles.snapContainer}>
             <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId: userId, placeId: snapshot.id, }) }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.name}</Text>
-                    <Text style={styles.content}>{snapshot.description}</Text>
-                    <Image source={{ uri: snapshot.photos }}
+                    <Text style={styles.content}>{snapshot.snapshot.description}</Text>
+                    <Image source={{ uri: snapshot.snapshot.photos }}
                         style={{ width: 300, height: 250, }}
                     />
                 </View>
             </TouchableHighlight>
-        </SafeAreaView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    // snapContainer: {
+    //     width: 300,
+    //     height: 250
+    // },
     container: {
         flex: 1,
         backgroundColor: '#a29bfe',
-        margin: 15,
-        marginLeft: 20,
-        marginRight: 20,
+        margin: 10,
         alignItems: 'center',
         borderRadius: 10
-    },
-    contentContainer: {
-        paddingTop: 15,
     },
     name: {
         fontSize: 20,
@@ -40,17 +39,9 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginBottom: 5,
     },
-    title: {
-        fontSize: 20,
-        fontStyle: 'italic',
-        color: '#FFFFFF',
-        margin: 10
-    },
     content: {
         color: '#FFFFFF',
-        marginRight: 25,
-        marginLeft: 25,
-        marginBottom: 15,
+        fontStyle: 'italic',
         textAlign: 'center',
     }
 })
