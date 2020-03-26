@@ -32,6 +32,7 @@ class FriendsScreen extends React.Component {
 
     render() {
         //   console.log('PROPS IN FRIENDS', this.props)
+        const { navigate } = this.props.navigation;
         const filteredFriends = this.props.friends.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
         return (
             <SafeAreaView style={styles.container} >
@@ -39,7 +40,6 @@ class FriendsScreen extends React.Component {
                     <Button title="Home" color={'white'} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
-                        <Button title="Find Friends" color={'white'} />
                     </View>
                 </View>
                 <SearchInput
@@ -51,7 +51,7 @@ class FriendsScreen extends React.Component {
                     {
                         filteredFriends.map((friend) => {
                             return (
-                                <MiniFriendView key={friend.email} info={friend} />
+                                <MiniFriendView key={friend.email} info={friend} navigate={navigate} />
                             )
                         })
                     }

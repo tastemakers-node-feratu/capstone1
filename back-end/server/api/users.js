@@ -1,9 +1,23 @@
 const router = require('express').Router();
+<<<<<<< HEAD
 const { User, Snapshot, Place } = require('../db/models')
 const { Op } = require('sequelize');
+=======
+const User = require('../db/models/User')
+const Place = require('../db/models/Place')
+const Snapshot = require('../db/models/Snapshot')
+>>>>>>> master
 
-router.get('/', (req, res, next) => {
-  res.send('ok');
+router.get('/:id', async (req, res, next) => {
+  try {
+    const friend = await User.findOne({
+      where: { id: req.params.id },
+      include: [{ model: Place, through: Snapshot }]
+    })
+    res.send(friend);
+  } catch (err) {
+    next(err);
+  }
 
 });
 
@@ -33,3 +47,4 @@ router.put('/snapshot/:userId', async (req, res, next) => {
 
 
 module.exports = router;
+
