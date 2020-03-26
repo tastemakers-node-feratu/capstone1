@@ -9,6 +9,7 @@ import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 import OneSnapScreen from '../screens/OneSnapScreen'
 import { createStackNavigator } from '@react-navigation/stack';
+import SingleFriendScreen from '../screens/SingleFriendScreen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -17,15 +18,17 @@ const FeedTab = createStackNavigator();
 
 function Feed() {
   return (
-    <FeedTab.Navigator initialRouteName="MainFeed" headerMode="none"
-    // screenOptions={{
-    //   headerStyle: {
-    //     backgroundColor: '#74b9ff',
-    //   }
-    // }}
+    <FeedTab.Navigator initialRouteName="MainFeed"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#74b9ff',
+        },
+        title: ''
+      }}
     >
       <FeedTab.Screen name="MainFeed" component={SnapShotsScreen} />
       <FeedTab.Screen name="SingleSnap" component={OneSnapScreen} />
+      <FeedTab.Screen name="SingleFriend" component={SingleFriendScreen} />
     </FeedTab.Navigator >
   );
 }
