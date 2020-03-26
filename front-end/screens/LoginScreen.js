@@ -32,7 +32,7 @@ class LoginScreen extends React.Component {
               {/* <Image source={../logo} style={styles.welcomeImage} /> */}
               <Text style={styles.title}>What are you loving this week? </Text>
             </View>
-            <LoginForm style={styles.loginForm} />
+            <LoginForm style={styles.loginForm} navigate={navigate} />
             <View>
               <TouchableOpacity
                 onPress={() => navigate('SignUp')}

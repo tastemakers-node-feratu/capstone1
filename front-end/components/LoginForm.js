@@ -17,17 +17,17 @@ import {getUserThunk} from '../store/user';
 const LoginForm = props => {
   const [authName, setAuthName] = useState('');
   const [password, setPassword] = useState('');
-
-  // const {navigate} = props.navigation;
+  console.log('this is props, where is nav', props);
+  const {navigate} = props;
 
   const handleSubmit = event => {
-    event.preventDefault();
+    // event.preventDefault();
     const authData = {authName, password};
     props.getUserThunk(authData);
     setAuthName('');
     setPassword('');
     // navigate should take us to all snapshots if login was successful
-    // navigate('AllSnapShots');
+    navigate('AllSnapShots');
   };
 
   return (
