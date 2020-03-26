@@ -93,26 +93,43 @@ User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPW);
 });
 
-User.getSnapShots = function(arr) {
-  const oneMonthAgo = moment()
-    .subtract(1, 'months')
-    .format();
-  const all = this.findAll({
-    where: {
-      id: {[Op.in]: arr}
-    },
-    include: [
-      {
-        model: Place,
-        through: Snapshot,
+User.getSnapShots = function (arr) {
+  const oneMonthAgo = moment().subtract(1, 'months').format();
+  // if (filter) {
+  //   all = this.findAll(
+  //     {
+  //       where: {
+  //         id: { [Op.in]: arr },
+  //       },
+  //       include: [{
+  //         model: Place, through: Snapshot,
+  //         where: {
+  //           createdAt: {
+  //             [Op.gte]: oneMonthAgo
+  //           },
+  //           category: { [Op.in]: filter }
+  //         }
+  //       }]
+  //     }
+  //   )
+  // }
+  // else {
+  const all = this.findAll(
+    {
+      where: {
+        id: { [Op.in]: arr },
+      },
+      include: [{
+        model: Place, through: Snapshot,
         where: {
           createdAt: {
             [Op.gte]: oneMonthAgo
           }
         }
-      }
-    ]
-  });
+      }]
+    }
+  )
+
   return all;
 };
 

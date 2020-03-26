@@ -13,17 +13,18 @@ notifications:
 #   database: myapp_test
 #   username: travis
 #   encoding: utf8
-# before_install:
-#   - mysql -e 'CREATE DATABASE myapp_test;'
+before_install:
+  - cd back-end
+  - mysql -e 'CREATE DATABASE myapp_test;'
 install:
   - npm ci # faster, goes only from package-lock
-# script:
-#   - npm run seed
-before_deploy:
-  - rm -rf node_modules # omit from the tarball, since we skip cleanup
-deploy:
-  skip_cleanup: true # prevents travis from deleting the build
-  provider: heroku
-  app: secret-wildwood-89779 # see README
-  api_key:
-    secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+script:
+  # - npm run seed
+# before_deploy:
+#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
+# deploy:
+#   skip_cleanup: true # prevents travis from deleting the build
+#   provider: heroku
+#   app: secret-wildwood-89779 # see README
+#   api_key:
+#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README

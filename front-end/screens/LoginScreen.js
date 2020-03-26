@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {
-  Button,
+  StatusBar,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -24,6 +24,7 @@ class LoginScreen extends React.Component {
         keyboardVerticalOffset={-150}
         behavior="padding"
       >
+        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView style={styles.container}>
           <View style={styles.inner}>
             <View>
