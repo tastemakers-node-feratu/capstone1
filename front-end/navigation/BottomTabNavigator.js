@@ -15,6 +15,7 @@ const BottomTab = createBottomTabNavigator();
 
 const INITIAL_ROUTE_NAME = 'Home';
 const FeedTab = createStackNavigator();
+const FriendTab = createStackNavigator();
 
 function Feed() {
   return (
@@ -31,6 +32,21 @@ function Feed() {
       <FeedTab.Screen name="SingleFriend" component={SingleFriendScreen} />
     </FeedTab.Navigator >
   );
+}
+
+function Friends() {
+  return (< FriendTab.Navigator initialRouteName="All Friends"
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#74b9ff',
+      },
+      title: ''
+    }}
+  >
+    <FriendTab.Screen name="All Friends" component={FriendsScreen} />
+    <FriendTab.Screen name="SingleFriend" component={SingleFriendScreen} />
+    <FriendTab.Screen name="SingleSnap" component={OneSnapScreen} />
+  </FriendTab.Navigator>)
 }
 
 export default function BottomTabNavigator({ navigation, route }) {
@@ -67,7 +83,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="AllFriends"
-        component={FriendsScreen}
+        component={Friends}
         options={{
           title: 'Friends',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,

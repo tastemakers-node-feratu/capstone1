@@ -39,6 +39,7 @@ class SingleFriendScreen extends React.Component {
                         <View style={styles.userInfo}>
                             <Text style={styles.name}>{singlefriend.username}</Text>
                             <Text style={styles.email}>{singlefriend.email}</Text>
+                            <Text style={styles.email}>Friendship: </Text>
                         </View>
                     </View>
                     <Text style={styles.userContent}>Bio: {singlefriend.bio} {"\n"}
@@ -76,9 +77,8 @@ const styles = StyleSheet.create({
     },
     userInfo: {
         flexShrink: 1,
-        margin: 10,
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingTop: 20,
+        paddingBottom: 20
     },
     name: {
         flex: 1,
@@ -103,12 +103,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     snapContainer: {
-        color: '#FFFFFF',
         marginLeft: 15,
-        fontStyle: 'italic',
-        fontSize: 16,
-        textAlign: 'center',
-        fontWeight: '400',
     },
 })
 

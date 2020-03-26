@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     },
     outerText: {
         flexShrink: 1,
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        marginLeft: 10
     },
     name: {
         flex: 1,

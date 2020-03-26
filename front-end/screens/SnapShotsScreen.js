@@ -33,7 +33,7 @@ class SnapShotsScreen extends React.Component {
                     <Button title="Log Out" color={'white'} onPress={() => navigate('Home')} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
-                        <Button title="Find Friends" color={'white'} onPress={() => navigate('AllFriends')} />
+                        <Button title="My Friends" color={'white'} onPress={() => navigate('AllFriends')} />
                     </View>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
