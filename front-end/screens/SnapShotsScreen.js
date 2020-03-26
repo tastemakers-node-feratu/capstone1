@@ -7,6 +7,7 @@ import {
     ScrollView,
     View,
 } from 'react-native';
+import { Spinner } from 'native-base'
 import MiniSnapShot from '../components/MiniSnapShot'
 import { allSnapshotsThunk } from '../store/snapshots'
 import { connect } from 'react-redux';
@@ -33,7 +34,7 @@ class SnapShotsScreen extends React.Component {
                     <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
-                        <Button title="Find Friends" color={'white'} onPress={() => navigate('AllFriends')} />
+                        <Button title="My Friends" color={'white'} onPress={() => navigate('AllFriends')} />
                     </View>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer} >
@@ -43,9 +44,9 @@ class SnapShotsScreen extends React.Component {
                 </ScrollView>
             </SafeAreaView>
         ) : (
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>Loading...</Text>
-                </View>
+                <SafeAreaView style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: '#74b9ff' }}>
+                    <Spinner color="#7d5fff" />
+                </SafeAreaView>
             )
     }
 }
