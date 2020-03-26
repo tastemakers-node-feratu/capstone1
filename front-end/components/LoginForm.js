@@ -17,18 +17,28 @@ import {getUserThunk} from '../store/user';
 const LoginForm = props => {
   const [authName, setAuthName] = useState('');
   const [password, setPassword] = useState('');
-  console.log('this is props, where is nav', props);
   const {navigate} = props;
 
-  const handleSubmit = event => {
+  const handleSubmit = () => {
     // event.preventDefault();
+    if (authName === '') alert('Please enter an email address');
+    else if (password === '') alert('Please enter a password');
     const authData = {authName, password};
     props.getUserThunk(authData);
-    setAuthName('');
-    setPassword('');
-    // navigate should take us to all snapshots if login was successful
-    navigate('AllSnapShots');
+    clearTextInput();
+    // if (props.user) {
+      navigate('AllSnapShots');
+    // } else {
+    //   alert('try again');
+    // }
   };
+
+  const clearTextInput = () => {
+    setAuthName();
+    setPassword();
+  };
+
+  let passwordInput;
 
   return (
     <View style={styles.container}>
@@ -36,12 +46,16 @@ const LoginForm = props => {
         placeholder="username or email"
         placeholderTextColor="rgba(255,255,255,0.7)"
         returnKeyType="next"
-        // onSubmitEditing={() => props.passwordInput.focus()}
+        onSubmitEditing={() => {
+          passwordInput.focus();
+        }}
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
         style={styles.input}
         onChangeText={value => setAuthName(value)}
+        clearButtonMode="always"
+        value={authName}
       />
       <TextInput
         placeholder="password"
@@ -49,7 +63,12 @@ const LoginForm = props => {
         secureTextEntry
         returnKeyType="go"
         style={styles.input}
-        // ref={input => (props.passwordInput = input)}
+        clearButtonMode="always"
+        value={password}
+        name="passwordInput"
+        ref={input => {
+          passwordInput = input;
+        }}
         onChangeText={value => setPassword(value)}
       />
 
@@ -92,8 +111,12 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapState = state => ({
+  user: state.user
+});
+
 const mapDispatch = dispatch => ({
   getUserThunk: data => dispatch(getUserThunk(data))
 });
 
-export default connect(null, mapDispatch)(LoginForm);
+export default connect(mapState, mapDispatch)(LoginForm);

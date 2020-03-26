@@ -130,4 +130,4 @@ const mapDispatch = dispatch => ({
     singleSnapshotThunk: (userId, placeId) => dispatch(singleSnapshotThunk(userId, placeId))
 })
 
-export default connect(mapState, mapDispatch)(OneSnapScreen)
+export default connect(mapState, mapDispatch)(OneSnapScreen);

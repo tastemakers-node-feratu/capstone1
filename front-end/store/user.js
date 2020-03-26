@@ -14,11 +14,18 @@ const initialState = {
 // Action Types
 const GOT_USER = 'GOT_USER';
 const GOT_FRIENDS = 'GOT_FRIENDS';
+const SIGN_UP = 'SIGN_UP';
 
 // Action Creator
 const gotUser = user => {
   return {
     type: GOT_USER,
+    user
+  };
+};
+const gotSignUp = user => {
+  return {
+    type: SIGN_UP,
     user
   };
 };
@@ -34,6 +41,14 @@ export const getUserThunk = authData => async dispatch => {
   try {
     const {data} = await axios.put(`${apiUrl}/auth/login`, {authData});
     dispatch(gotUser(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const signUp = userData => async dispatch => {
+  try {
+    const {data} = await axios.post(`${apiUrl}/auth/signup`, {userData});
+    dispatch(gotSignUp(data));
   } catch (error) {
     console.error(error);
   }
@@ -56,6 +71,9 @@ export const getFriendsThunk = userId => async dispatch => {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SIGN_UP: {
+      return {...state, user: action.user};
+    }
     case GOT_USER: {
       return {...state, user: action.user};
     }
