@@ -48,7 +48,7 @@ class OneSnapScreen extends React.Component {
                                     style={{ width: 120, height: 120, borderRadius: 30 }} />
                                 <View style={styles.outerText}>
                                     <TouchableHighlight onPress={() => {
-                                        navigate('SingleFriend', { userId: snapshot.id })
+                                        navigate('SingleFriend', { friendId: snapshot.id })
                                     }} >
                                         <Text style={styles.name}>{snapshot.username} pinned {snapshot.places[0].name}</Text>
                                     </TouchableHighlight>

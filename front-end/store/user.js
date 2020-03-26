@@ -9,27 +9,31 @@ const initialState = {
   userId: null,
   friends: [],
   singlefriend: {},
-  singleFriendLoading: true
+  singleFriendLoading: true,
+  singleFriendship: {},
+  friendshipLoading: true
 };
 
 // Action Types
 const GOT_FRIENDS = 'GOT_FRIENDS';
 const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
+const GOT_FRIENDSHIP = 'GOT_FRIENDSHIP'
 
 // Action Creator
-const gotFriends = friends => {
-  return {
-    type: GOT_FRIENDS,
-    friends
-  };
-};
+const gotFriends = friends => ({
+  type: GOT_FRIENDS,
+  friends
+});
 
-const gotSingleFriend = friend => {
-  return {
-    type: GOT_ONE_FRIEND,
-    friend
-  };
-};
+const gotSingleFriend = friend => ({
+  type: GOT_ONE_FRIEND,
+  friend
+});
+
+const gotFriendship = friendship => ({
+  type: GOT_FRIENDSHIP,
+  friendship
+});
 
 // Thunk Creator
 export const getFriendsThunk = userId => async dispatch => {
@@ -58,6 +62,16 @@ export const getSingleFriendThunk = id => async dispatch => {
   }
 };
 
+export const gotFriendshipThunk = (userId, friendId) => async dispatch => {
+  try {
+    const { data } = await axios.get(`${apiUrl}/api/friends/friendship/${userId}/${friendId}`)
+
+    dispatch(gotFriendship(data));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_FRIENDS: {
@@ -65,6 +79,9 @@ const userReducer = (state = initialState, action) => {
     }
     case GOT_ONE_FRIEND: {
       return { ...state, singlefriend: action.friend, singleFriendLoading: false }
+    }
+    case GOT_FRIENDSHIP: {
+      return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
     }
     default:
       return state;

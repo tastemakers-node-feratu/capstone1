@@ -6,7 +6,7 @@ export default MiniFriendView = (props) => {
     return (
         <SafeAreaView>
             <TouchableHighlight onPress={() => {
-                navigate('SingleFriend', { userId: info.id })
+                navigate('SingleFriend', { friendId: info.id })
             }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{info.username}</Text>
