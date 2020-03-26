@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize');
-const Friend = require('./Friend')
 const crypto = require('crypto');
-const db = require('../db');
-const Op = Sequelize.Op;
 const moment = require('moment');
-const Place = require('./Place')
-const Snapshot = require('./Snapshot')
+const Friend = require('./Friend');
+const db = require('../db');
+
+const {Op} = Sequelize;
+const Place = require('./Place');
+const Snapshot = require('./Snapshot');
 
 const User = db.define('user', {
   username: {
@@ -50,27 +51,28 @@ const User = db.define('user', {
   }
 });
 
-User.getFriends = function (id) {
-
+User.getFriends = function(id) {
   const friends = this.findOne({
-    where: { id: id },
-    include: [{
-      model: User, as: 'friends',
-    }]
-  })
+    where: {id},
+    include: [
+      {
+        model: User,
+        as: 'friends'
+      }
+    ]
+  });
   return friends;
-}
-
-
-User.prototype.correctPassword = function (passw) {
-  return User.excryptPassword(passw, this.salt()) === this.password();
 };
 
-User.generateSalt = function () {
+User.prototype.correctPassword = function(passw) {
+  return User.encryptPassword(passw, this.salt()) === this.password();
+};
+
+User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64');
 };
 
-User.encryptPassword = function (plainPW, salt) {
+User.encryptPassword = function(plainPW, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainPW)
@@ -129,6 +131,6 @@ User.getSnapShots = function (arr) {
   )
 
   return all;
-}
+};
 
 module.exports = User;

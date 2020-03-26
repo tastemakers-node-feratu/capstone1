@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-    Button,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TextInput,
-    ScrollView,
-    View,
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  ScrollView,
+  View
 } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import { getFriendsThunk } from '../store/user'
@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    friends: state.user.friends
+  friends: state.user.friends
 });
 
 const mapDispatch = dispatch => ({
-    getFriends: () => dispatch(getFriendsThunk(2))
-})
+  getFriends: () => dispatch(getFriendsThunk(2))
+});
 
-export default connect(mapState, mapDispatch)(FriendsScreen)
+export default connect(mapState, mapDispatch)(FriendsScreen);
