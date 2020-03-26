@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     Text,
     ScrollView,
     Image,
     View,
+    TouchableHighlight
 } from 'react-native';
+import { Spinner } from 'native-base'
 import { singleSnapshotThunk } from '../store/snapshots'
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
@@ -29,6 +30,7 @@ class OneSnapScreen extends React.Component {
 
     render() {
         const snapshot = this.props.selectedSnapshot
+        const { navigate } = this.props.navigation;
         return !this.props.oneLoading ? (
             <SafeAreaView style={styles.container} >
                 {/* <View style={styles.topContainer}>
@@ -45,7 +47,11 @@ class OneSnapScreen extends React.Component {
                                 <Image source={{ uri: snapshot.imageURL }}
                                     style={{ width: 120, height: 120, borderRadius: 30 }} />
                                 <View style={styles.outerText}>
-                                    <Text style={styles.name}>{snapshot.username} pinned {snapshot.places[0].name}</Text>
+                                    <TouchableHighlight onPress={() => {
+                                        navigate('SingleFriend', { userId: snapshot.id })
+                                    }} >
+                                        <Text style={styles.name}>{snapshot.username} pinned {snapshot.places[0].name}</Text>
+                                    </TouchableHighlight>
                                     <Text style={styles.location}> {snapshot.places[0].location}</Text>
                                 </View>
                             </View>
@@ -57,9 +63,10 @@ class OneSnapScreen extends React.Component {
                 </ScrollView>
             </SafeAreaView >
         ) : (
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>Loading...</Text>
-                </View>
+                <SafeAreaView style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: '#74b9ff' }
+                }>
+                    <Spinner color="#7d5fff" />
+                </SafeAreaView >
             )
     }
 }
@@ -79,7 +86,8 @@ const styles = StyleSheet.create({
     },
     outerText: {
         flexShrink: 1,
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        marginLeft: 10
     },
     name: {
         flex: 1,
@@ -97,7 +105,8 @@ const styles = StyleSheet.create({
         margin: 10
     },
     userContainer: {
-        paddingLeft: 60,
+        paddingLeft: 30,
+        paddingRight: 30,
         paddingBottom: 20,
         flexDirection: "row",
     },

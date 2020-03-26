@@ -1,15 +1,20 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Button, SafeAreaView } from 'react-native'
+import { Text, View, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 'react-native'
 
 export default MiniFriendView = (props) => {
+    const { info, navigate } = props
     return (
         <SafeAreaView>
-            <View style={styles.container}>
-                <Text style={styles.name}>{props.info.username}</Text>
-                <Text style={styles.name}>{props.info.email}</Text>
-                <Image source={{ uri: props.info.imageURL }}
-                    style={{ width: 225, height: 175 }} />
-            </View>
+            <TouchableHighlight onPress={() => {
+                navigate('SingleFriend', { userId: info.id })
+            }} >
+                <View style={styles.container}>
+                    <Text style={styles.name}>{info.username}</Text>
+                    <Text style={styles.name}>{info.email}</Text>
+                    <Image source={{ uri: info.imageURL }}
+                        style={{ width: 225, height: 175 }} />
+                </View>
+            </TouchableHighlight>
         </SafeAreaView>
     );
 }
