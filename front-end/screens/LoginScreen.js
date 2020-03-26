@@ -1,3 +1,6 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {
   StatusBar,
@@ -7,56 +10,37 @@ import {
   TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
+import {MonoText} from '../components/StyledText';
+import LoginForm from '../components/LoginForm';
 
-import { MonoText } from '../components/StyledText';
-
-export default class LoginScreen extends React.Component {
-
+class LoginScreen extends React.Component {
   render() {
-    const { navigate } = this.props.navigation;
+    const {navigate} = this.props.navigation;
     return (
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={64}
+        style={styles.keyboardAvoid}
+        keyboardVerticalOffset={-150}
         behavior="padding"
       >
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView style={styles.container}>
           <View style={styles.inner}>
-            <Text style={styles.brandName}>Taste Makers</Text>
-            {/* <Image source={../logo} style={styles.welcomeImage} /> */}
-            <Text style={styles.title}>What are you loving this week? </Text>
-
-            <TextInput
-              placeholder="email"
-              placeholderTextColor='rgba(255,255,255,0.7)'
-              returnKeyType="next"
-              onSubmitEditing={() => this.passwordInput.focus()}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              style={styles.input} />
-
-            <TextInput
-              placeholder="password"
-              placeholderTextColor='rgba(255,255,255,0.7)'
-              secureTextEntry
-              returnKeyType="go"
-              style={styles.input}
-              ref={(input) => this.passwordInput = input} />
-
-
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigate('SignUp')} style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Create New User</Text>
-            </TouchableOpacity>
-
-
+            <View>
+              <Text style={styles.brandName}>Taste Makers</Text>
+              {/* <Image source={../logo} style={styles.welcomeImage} /> */}
+              <Text style={styles.title}>What are you loving this week? </Text>
+            </View>
+            <LoginForm style={styles.loginForm} navigate={navigate} />
+            <View>
+              <TouchableOpacity
+                onPress={() => navigate('SignUp')}
+                style={styles.buttonContainer}
+              >
+                <Text style={styles.buttonText}>Create New User</Text>
+              </TouchableOpacity>
+            </View>
             {/* <View style={{ flex: 1 }} /> */}
           </View>
         </SafeAreaView>
@@ -65,52 +49,38 @@ export default class LoginScreen extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
+  keyboardAvoid: {},
   container: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#74b9ff'
   },
-  inner: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  inner: {},
   brandName: {
+    marginTop: 150,
     fontSize: 50,
     color: '#FFFFFF',
-    textAlign: 'center',
+    textAlign: 'center'
   },
-  input: {
-    width: 300,
-    marginTop: 10,
-    padding: 10,
-    borderRadius: 5,
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 15,
-    color: '#FFF',
-    paddingHorizontal: 10,
-  },
-  welcomeImage: {
-    width: 200,
-    height: 200,
-    marginTop: 3,
-  },
+  // welcomeImage: {
+  //   width: 200,
+  //   height: 200,
+  //   marginTop: 30
+  // },
   error: {
-    color: `#eb4034`,
+    color: `#eb4034`
   },
   title: {
+    alignSelf: 'center',
     color: '#FFF',
-    marginTop: 10,
+    // marginTop: 10,
     width: 160,
     textAlign: 'center',
-    opacity: 0.9,
+    opacity: 0.9
   },
   logoContainer: {
     alignItems: 'center',
-    flexGrow: 1,
+    // flexGrow: 1,
     justifyContent: 'center'
   },
   logo: {
@@ -118,17 +88,20 @@ const styles = StyleSheet.create({
     height: 100
   },
   buttonContainer: {
-    backgroundColor: "#2980b9",
+    alignSelf: 'center',
+    backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-    marginBottom: 10,
+
+    marginBottom: 250,
     borderRadius: 10
   },
   buttonText: {
-    textAlign: "center",
+    textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: '700'
-  }
+  },
+  loginForm: {}
 });
 
-
+export default LoginScreen;

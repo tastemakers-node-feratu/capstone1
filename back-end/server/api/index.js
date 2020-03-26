@@ -1,8 +1,6 @@
 const router = require('express').Router();
 
-// ./api/users
-router.use('/users', require('./users'));
-
+// ./api/snapshots
 router.use('/snapshots', require('./snapshots'));
 
 router.use('/friends', require('./friends'));

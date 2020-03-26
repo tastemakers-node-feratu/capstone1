@@ -12,6 +12,7 @@ import MiniSnapShot from '../components/MiniSnapShot'
 import { allSnapshotsThunk } from '../store/snapshots'
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
+import LogOutButton from '../components/LogOutButton';
 
 class SnapShotsScreen extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class SnapShotsScreen extends React.Component {
         return !this.props.allLoading ? (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
-                    <Button title="Log Out" color={'white'} onPress={() => navigate('Home')} />
+                    <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                         <Button title="My Friends" color={'white'} onPress={() => navigate('AllFriends')} />

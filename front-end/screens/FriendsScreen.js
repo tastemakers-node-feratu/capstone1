@@ -6,7 +6,7 @@ import {
     Text,
     TextInput,
     ScrollView,
-    View,
+    View
 } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import { getFriendsThunk } from '../store/user'
@@ -31,7 +31,7 @@ class FriendsScreen extends React.Component {
     }
 
     render() {
-        //   console.log('PROPS IN FRIENDS', this.props)
+
         const { navigate } = this.props.navigation;
         const filteredFriends = this.props.friends.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
         return (
@@ -90,6 +90,6 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
     getFriends: () => dispatch(getFriendsThunk(2))
-})
+});
 
-export default connect(mapState, mapDispatch)(FriendsScreen)
+export default connect(mapState, mapDispatch)(FriendsScreen);

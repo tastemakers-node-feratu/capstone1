@@ -23,8 +23,7 @@ class OneSnapScreen extends React.Component {
         const { userId } = route.params
         const { placeId } = route.params
 
-        // const tempUserId = 1
-        // const tempPlaceId = 39;
+   
         this.props.singleSnapshotThunk(userId, placeId)
     }
 
@@ -139,4 +138,4 @@ const mapDispatch = dispatch => ({
     singleSnapshotThunk: (userId, placeId) => dispatch(singleSnapshotThunk(userId, placeId))
 })
 
-export default connect(mapState, mapDispatch)(OneSnapScreen)
+export default connect(mapState, mapDispatch)(OneSnapScreen);
