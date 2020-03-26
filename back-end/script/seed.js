@@ -15,7 +15,8 @@ faker.array = function(structure, count = 1) {
         if (
           property !== 'category' &&
           property !== 'pushNotifs' &&
-          property !== 'all_tags'
+          property !== 'all_tags' &&
+          property !== 'password'
         ) {
           item[property] = item[property]();
         }
@@ -50,7 +51,7 @@ const fakerUsers = faker.array(
   {
     username: faker.internet.userName,
     email: faker.internet.email,
-    password: faker.internet.password,
+    password: 'password',
     imageURL: faker.internet.avatar,
     bio: faker.lorem.sentence,
     phone: faker.phone.phoneNumber,
