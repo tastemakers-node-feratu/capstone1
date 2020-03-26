@@ -15,6 +15,7 @@ const initialState = {
 const GOT_USER = 'GOT_USER';
 const GOT_FRIENDS = 'GOT_FRIENDS';
 const SIGN_UP = 'SIGN_UP';
+const LOG_OUT = 'LOG_OUT';
 
 // Action Creator
 const gotUser = user => {
@@ -29,6 +30,11 @@ const gotSignUp = user => {
     user
   };
 };
+const gotLogOut = () => {
+  return {
+    type: LOG_OUT
+  };
+};
 const gotFriends = friends => {
   return {
     type: GOT_FRIENDS,
@@ -39,7 +45,7 @@ const gotFriends = friends => {
 // Thunk Creator
 export const getUserThunk = authData => async dispatch => {
   try {
-    const {data} = await axios.put(`${apiUrl}/auth/login`, {authData});
+    const {data} = await axios.put(`${apiUrl}/auth/login`, authData);
     dispatch(gotUser(data));
   } catch (error) {
     console.error(error);
@@ -47,8 +53,16 @@ export const getUserThunk = authData => async dispatch => {
 };
 export const signUp = userData => async dispatch => {
   try {
-    const {data} = await axios.post(`${apiUrl}/auth/signup`, {userData});
+    const {data} = await axios.post(`${apiUrl}/auth/signup`, userData);
     dispatch(gotSignUp(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const logOut = () => async dispatch => {
+  try {
+    await axios.put(`${apiUrl}/auth/logout`);
+    dispatch(gotLogOut());
   } catch (error) {
     console.error(error);
   }
@@ -79,6 +93,9 @@ const userReducer = (state = initialState, action) => {
     }
     case GOT_FRIENDS: {
       return {...state, friends: action.friends};
+    }
+    case LOG_OUT: {
+      return {...state, user: {}};
     }
     default:
       return state;

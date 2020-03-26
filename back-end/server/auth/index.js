@@ -4,8 +4,7 @@ const User = require('../db/models/User');
 // ./auth/signup
 router.post('/signup', async (req, res, next) => {
   try {
-    console.log('in signup route', req.body.userData);
-    const newUser = await User.create(req.body.userData);
+    const newUser = await User.create(req.body);
     req.login(newUser, err => (err ? next(err) : res.json(newUser)));
   } catch (error) {
     if (error.name === 'SequelizeUniqueConstraintError') {
@@ -19,7 +18,7 @@ router.post('/signup', async (req, res, next) => {
 // ./auth/login
 router.put('/login', async (req, res, next) => {
   try {
-    const {authName, password} = req.body.authData;
+    const {authName, password} = req.body;
     let field;
     if (authName.includes('@')) {
       field = 'email';
@@ -47,11 +46,7 @@ router.put('/login', async (req, res, next) => {
 router.put('/logout', async (req, res, next) => {
   try {
     req.logout();
-    req.session.destroy(err => {
-      if (err) return next(err);
-      res.status(204).end();
-    });
-    res.redirect('/');
+    req.session.destroy();
   } catch (error) {
     next(error);
   }
