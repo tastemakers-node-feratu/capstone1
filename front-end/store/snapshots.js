@@ -9,40 +9,43 @@ const initialState = {
   allSnapshots: [],
   allLoading: true,
   selectedSnapshot: {},
-  oneLoading: true
+  oneLoading: true,
+  catFilter: ''
 };
 
 // Action Types
 const GOT_ALL = 'GOT_ALL';
 const GOT_ONE = 'GOT_ONE';
 const ADD_ONE = 'ADD_ONE';
+const ADD_FILTER = 'ADD_FILTER'
 
-const addOneSnapshot = snapshot => {
-  return {
-    type: ADD_ONE,
-    snapshot
-  }
-}
+const addOneSnapshot = snapshot => ({
+  type: ADD_ONE,
+  snapshot
+})
 
 // Action Creator
-const gotAllSnapshots = info => {
-  return {
-    type: GOT_ALL,
-    info
-  };
-};
-const gotSingleSnapshot = info => {
-  return {
-    type: GOT_ONE,
-    info
-  };
-};
+const gotAllSnapshots = info => ({
+  type: GOT_ALL,
+  info
+});
+const gotSingleSnapshot = info => ({
+  type: GOT_ONE,
+  info
+});
+
+const gotFilter = boxes => ({
+  type: ADD_FILTER,
+  boxes
+});
+
 
 // Thunk Creator
-export const allSnapshotsThunk = (userId) => {
+export const allSnapshotsThunk = (userId, categories = 'all') => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${apiUrl}/api/snapshots/${userId}`);
+      const { data } = await axios.get(`${apiUrl}/api/snapshots/${userId}?categories=${categories}`);
+
       dispatch(gotAllSnapshots(data));
     } catch (error) {
       console.error(error);
@@ -58,6 +61,19 @@ export const singleSnapshotThunk = (userId, placeId) => {
     } catch (error) {
       console.error(error);
     }
+  };
+};
+
+export const snapFilterThunk = (checkboxes) => {
+  return dispatch => {
+    let boxes = checkboxes.checkboxes.reduce((accum, curr) => {
+      if (curr.checked === true) {
+        accum.push(curr.name);
+      }
+      return accum;
+    }, []);
+    boxes = boxes.join(',')
+    dispatch(gotFilter(boxes));
   };
 };
 
@@ -100,6 +116,8 @@ const snapshotReducer = (state = initialState, action) => {
       return { ...state, allSnapshots: action.info, allLoading: false };
     case GOT_ONE:
       return { ...state, selectedSnapshot: action.info, oneLoading: false };
+    case ADD_FILTER:
+      return { ...state, catFilter: action.boxes }
     default:
       return state;
   }
