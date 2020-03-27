@@ -19,12 +19,18 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/addFriend', async (req, res, next) => {
   try {
-    const data = await User.addFriend(req.body.receiver, {
-      through: {
-        sender_id: req.body.sender,
-        receiver_id: req.body.receiver
-      }
-    });
+    // return one of the following: 'we're friends', 'user sent request', 'friend sent request'
+    let data = {
+      status: ''
+    };
+    if () {}
+    // const data = await User.addFriend(req.body.receiver, {
+    //   through: {
+    //     sender_id: req.body.sender,
+    //     receiver_id: req.body.receiver
+    //   }
+    // });
+    
     res.send(data);
   } catch (error) {
     next(error);

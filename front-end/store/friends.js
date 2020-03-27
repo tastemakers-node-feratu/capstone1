@@ -6,10 +6,10 @@ const { apiUrl } = getEnvVars();
 
 // initial State
 const initialState = {
-  userId: null,
   friends: [],
   singlefriend: {},
-  singleFriendLoading: true
+  singleFriendLoading: true,
+  friendStatus: ''
 };
 
 // Action Types
@@ -20,10 +20,10 @@ const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
 
 const ADD_FRIEND = 'ADD_FRIEND';
 // Action Creator
-const gotAddFriend = friend => {
+const gotAddFriend = status => {
   return {
     type: ADD_FRIEND,
-    friend
+    status
   };
 };
 const gotFriends = friends => {
@@ -47,7 +47,7 @@ export const addFriendThunk = friendIds => async dispatch => {
     const {data} = await axios.post(
       `${apiUrl}/api/friends/addfriend${friendIds}`
     );
-    console.log('what is data from magic method', data);
+    console.log('what is data from magic method, data should be status', data);
     dispatch(gotAddFriend(data));
   } catch (error) {
     console.error(error);
@@ -88,7 +88,10 @@ const friendsReducer = (state = initialState, action) => {
     }
     // case GOT_FRIENDSHIP: {
     //   return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
-    // }
+    // },
+    case ADD_FRIEND: {
+      return {...state, friendStatus: action.status};
+    }
     default:
       return state;
   }
