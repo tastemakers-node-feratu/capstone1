@@ -95,7 +95,7 @@ class CheckInScreen extends React.Component {
             animationType={'slide'}
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => console.log('modal closed')}
+            // onRequestClose={() => console.log('modal closed')}
           >
             <View style={styles.modal}>
               <TouchableHighlight
