@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const User = require('../db/models/User');
 
+// ./auth/google
+router.use('/google', require('./googleOAuth'));
+
 // ./auth/signup
 router.post('/signup', async (req, res, next) => {
   try {
