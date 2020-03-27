@@ -97,14 +97,6 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
         }}
       />
-      {/* <BottomTab.Screen
-        name="SnapShot"
-        component={SnapShotsStack}
-        options={{
-          title: 'SnapShot',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
-        }}
-      /> */}
     </BottomTab.Navigator>
   );
 }

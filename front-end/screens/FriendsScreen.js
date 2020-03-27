@@ -8,7 +8,7 @@ import {
     View
 } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
-import { getFriendsThunk } from '../store/user'
+import { getFriendsThunk } from '../store/friends'
 import MiniFriendView from '../components/MiniFriendView'
 import { connect } from 'react-redux'
 const KEYS_TO_FILTERS = ['username'];
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
 const mapState = state => ({
     // userId: state.user.id,
-    friends: state.user.friends
+    friends: state.friends.friends
 });
 
 const mapDispatch = dispatch => ({

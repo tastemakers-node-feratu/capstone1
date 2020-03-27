@@ -9,7 +9,7 @@ import {
     View,
 } from 'react-native';
 import { Spinner } from 'native-base'
-import { getSingleFriendThunk, gotFriendshipThunk } from '../store/user'
+import { getSingleFriendThunk, gotFriendshipThunk } from '../store/friends'
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import UserProfileSnapView from '../components/UserProfileSnapView'
@@ -27,8 +27,8 @@ class SingleFriendScreen extends React.Component {
     }
     render() {
         const singlefriend = this.props.singlefriend
-        const friendship = this.props.singleFriendship
-        console.log(friendship.userId)
+
+
         const { navigate } = this.props.navigation;
         return !this.props.singleFriendLoading ? (
 
@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    singlefriend: state.user.singlefriend,
-    singleFriendLoading: state.user.singleFriendLoading,
-    singleFriendship: state.user.singleFriendship,
-    friendshipLoading: state.user.friendshipLoading
+    singlefriend: state.friends.singlefriend,
+    singleFriendLoading: state.friends.singleFriendLoading,
+    // singleFriendship: state.friends.singleFriendship,
+    // friendshipLoading: state.friends.friendshipLoading
 });
 
 const mapDispatch = dispatch => ({
