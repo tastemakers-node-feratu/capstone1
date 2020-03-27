@@ -2,7 +2,7 @@
 import axios from 'axios';
 import getEnvVars from '../environment';
 
-const {apiUrl} = getEnvVars();
+const { apiUrl } = getEnvVars();
 
 // initial State
 const initialState = {
@@ -37,7 +37,7 @@ const gotSingleFriend = friend => {
 export const getFriendsThunk = userId => async dispatch => {
   try {
     const tempUserId = 1;
-    const {data} = await axios.get(`${apiUrl}/api/friends/${tempUserId}`);
+    const { data } = await axios.get(`${apiUrl}/api/friends/${tempUserId}`);
 
     dispatch(gotFriends(data));
   } catch (error) {
@@ -47,7 +47,7 @@ export const getFriendsThunk = userId => async dispatch => {
 
 export const getSingleFriendThunk = id => async dispatch => {
   try {
-    const {data} = await axios.get(`${apiUrl}/api/users/${id}`);
+    const { data } = await axios.get(`${apiUrl}/api/users/${id}`);
 
     dispatch(gotSingleFriend(data));
   } catch (error) {
@@ -58,7 +58,7 @@ export const getSingleFriendThunk = id => async dispatch => {
 const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_FRIENDS: {
-      return {...state, friends: action.friends};
+      return { ...state, friends: action.friends };
     }
     case GOT_ONE_FRIEND: {
       return {
@@ -67,6 +67,9 @@ const friendsReducer = (state = initialState, action) => {
         singleFriendLoading: false
       };
     }
+    // case GOT_FRIENDSHIP: {
+    //   return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
+    // }
     default:
       return state;
   }

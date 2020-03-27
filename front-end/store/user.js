@@ -34,7 +34,7 @@ const gotLogOut = () => {
 // Thunk Creator
 export const getUserThunk = authData => async dispatch => {
   try {
-    const {data} = await axios.put(`${apiUrl}/auth/login`, authData);
+    const { data } = await axios.put(`${apiUrl}/auth/login`, authData);
     dispatch(gotUser(data));
   } catch (error) {
     console.error(error);
@@ -42,7 +42,7 @@ export const getUserThunk = authData => async dispatch => {
 };
 export const signUp = userData => async dispatch => {
   try {
-    const {data} = await axios.post(`${apiUrl}/auth/signup`, userData);
+    const { data } = await axios.post(`${apiUrl}/auth/signup`, userData);
     dispatch(gotSignUp(data));
   } catch (error) {
     console.error(error);
