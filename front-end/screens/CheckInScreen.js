@@ -20,6 +20,7 @@ import {connect} from 'react-redux'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import SnapPreview from '../components/SnapPreview'
 import {checkboxes} from '../components/helpers/checkboxes'
+import MyImagePicker from './ImagePicker'
 
 class CheckInScreen extends React.Component {
   constructor(){
@@ -31,12 +32,14 @@ class CheckInScreen extends React.Component {
       tags: '',
       checkboxes: checkboxes,
       imageURL: 'https://reactnative.dev/img/tiny_logo.png',
-      modalVisible: false
+      modalVisible: false,
+      imageURL: null
     }
     this.toggleCheckBox = this.toggleCheckBox.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.confirm = this.confirm.bind(this);
     this.done = this.done.bind(this);
+    this.imageHandler = this.imageHandler.bind(this);
   }
 
   toggleCheckBox(name){
@@ -77,12 +80,11 @@ class CheckInScreen extends React.Component {
       navigate('AllSnapShots');
   }
 
-  capitalize(str){
-    return str.charAt(0).toUpperCase() + str.slice(1);
-    }
+  imageHandler(imageURL){
+    this.setState({imageURL})
+  }
 
   render() {
-    console.log('check in props', this.props)
     return(
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -124,6 +126,7 @@ class CheckInScreen extends React.Component {
                   {this.state.checkboxes.map((checkbox) => {
                     return(
                       <CheckBox
+                      key={checkbox.name}
                       title={checkbox.name}
                       checked={checkbox.checked}
                       onPress={() => this.toggleCheckBox(checkbox.name)}
@@ -141,7 +144,6 @@ class CheckInScreen extends React.Component {
                       style={styles.input}
                       value={this.state.placeName}
                       onChangeText={placeName => {
-                        const updated = this.capitalize(placeName)
                         this.setState({ placeName: updated })
                       }}
                     />
@@ -172,7 +174,10 @@ class CheckInScreen extends React.Component {
                       placeholder={'#AvocadoToast'}
                       style={styles.input}
                       onChangeText={tags => {this.setState({ tags })}}
-                      />
+                    />
+                    <MyImagePicker
+                      handler={this.imageHandler}
+                    />
 
                     <TouchableOpacity
                       onPress={this.done}
