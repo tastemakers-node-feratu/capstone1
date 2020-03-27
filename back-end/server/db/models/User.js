@@ -31,6 +31,14 @@ const User = db.define('user', {
       return () => this.getDataValue('salt');
     }
   },
+  googleId: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
+  name: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
   imageURL: {
     type: Sequelize.STRING,
     defaultValue: ''
