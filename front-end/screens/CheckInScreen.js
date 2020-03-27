@@ -142,9 +142,7 @@ class CheckInScreen extends React.Component {
                       placeholder={'The Butcher\'s daughter'}
                       style={styles.input}
                       value={this.state.placeName}
-                      onChangeText={placeName => {
-                        this.setState({ placeName: updated })
-                      }}
+                      onChangeText={placeName => this.setState({ placeName })}
                     />
                     <Text>
                       Where is {this.state.placeName}?
