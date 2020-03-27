@@ -20,6 +20,7 @@ import {connect} from 'react-redux'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import SnapPreview from '../components/SnapPreview'
 import {checkboxes} from '../components/helpers/checkboxes'
+import MyImagePicker from './ImagePicker'
 
 class CheckInScreen extends React.Component {
   constructor(){
@@ -30,18 +31,20 @@ class CheckInScreen extends React.Component {
       description: '',
       tags: '',
       checkboxes: checkboxes,
-      imageURL: 'https://reactnative.dev/img/tiny_logo.png',
-      modalVisible: false
+      modalVisible: false,
+      imageURL: null
     }
     this.toggleCheckBox = this.toggleCheckBox.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.confirm = this.confirm.bind(this);
     this.done = this.done.bind(this);
+    this.imageHandler = this.imageHandler.bind(this);
   }
 
-  toggleCheckBox(index){
+  toggleCheckBox(name){
+    const boxIndex = this.state.checkboxes.findIndex(box => box.name === name);
     let newBoxes = this.state.checkboxes;
-    newBoxes[index].checked = !newBoxes[index].checked
+    newBoxes[boxIndex].checked = !newBoxes[boxIndex].checked
     this.setState({
       ...this.state,
       checkboxes: newBoxes,
@@ -76,9 +79,9 @@ class CheckInScreen extends React.Component {
       navigate('AllSnapShots');
   }
 
-  capitalize(str){
-    return str.charAt(0).toUpperCase() + str.slice(1);
-    }
+  imageHandler(imageURL){
+    this.setState({imageURL})
+  }
 
   render() {
     return(
@@ -92,7 +95,7 @@ class CheckInScreen extends React.Component {
             animationType={'slide'}
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => console.log('modal closed')}
+            // onRequestClose={() => console.log('modal closed')}
           >
             <View style={styles.modal}>
               <TouchableHighlight
@@ -118,41 +121,17 @@ class CheckInScreen extends React.Component {
                 What'd you discover?
               </Text>
               <View>
-                <View style={styles.checkboxesRow}>
-                  <CheckBox
-                    title='food'
-                    checked={this.state.checkboxes[0].checked}
-                    onPress={() => this.toggleCheckBox(0)}
-                  />
-                  <CheckBox
-                    title='fitness'
-                    checked={this.state.checkboxes[1].checked}
-                    onPress={() => this.toggleCheckBox(1)}
-                  />
-                </View>
-                <View style={styles.checkboxesRow}>
-                  <CheckBox
-                    title='nightlife'
-                    checked={this.state.checkboxes[2].checked}
-                    onPress={() => this.toggleCheckBox(2)}
-                  />
-                  <CheckBox
-                    title='shop'
-                    checked={this.state.checkboxes[3].checked}
-                    onPress={() => this.toggleCheckBox(3)}
-                  />
-                </View>
-                <View style={styles.checkboxesRow}>
-                  <CheckBox
-                    title='beauty'
-                    checked={this.state.checkboxes[4].checked}
-                    onPress={() => this.toggleCheckBox(4)}
-                  />
-                  <CheckBox
-                    title='experience'
-                    checked={this.state.checkboxes[5].checked}
-                    onPress={() => this.toggleCheckBox(5)}
-                  />
+                <View /*style={styles.checkboxesRow}*/ >
+                  {this.state.checkboxes.map((checkbox) => {
+                    return(
+                      <CheckBox
+                      key={checkbox.name}
+                      title={checkbox.name}
+                      checked={checkbox.checked}
+                      onPress={() => this.toggleCheckBox(checkbox.name)}
+                    />
+                    )
+                  })}
                 </View>
               </View>
               <Text style={{paddingTop: 10}}>
@@ -163,10 +142,7 @@ class CheckInScreen extends React.Component {
                       placeholder={'The Butcher\'s daughter'}
                       style={styles.input}
                       value={this.state.placeName}
-                      onChangeText={placeName => {
-                        const updated = this.capitalize(placeName)
-                        this.setState({ placeName: updated })
-                      }}
+                      onChangeText={placeName => this.setState({ placeName })}
                     />
                     <Text>
                       Where is {this.state.placeName}?
@@ -195,7 +171,10 @@ class CheckInScreen extends React.Component {
                       placeholder={'#AvocadoToast'}
                       style={styles.input}
                       onChangeText={tags => {this.setState({ tags })}}
-                      />
+                    />
+                    <MyImagePicker
+                      handler={this.imageHandler}
+                    />
 
                     <TouchableOpacity
                       onPress={this.done}
@@ -217,7 +196,6 @@ class CheckInScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: 20,
         backgroundColor: '#74b9ff',
     },
     contentContainer: {
@@ -244,7 +222,6 @@ const styles = StyleSheet.create({
     modal: {
       flex: 1,
       alignItems: 'center',
-      // backgroundColor: '#f7021a',
       paddingHorizontal: 50,
       paddingVertical: 100
    },
@@ -278,12 +255,12 @@ const styles = StyleSheet.create({
 
 const mapState = state => {
   return {
-    user: {
-      id: 1,
-      username: 'mtoff',
-      imageURL: 'https://reactnative.dev/img/tiny_logo.png'
-    },
-  // user: state.user,
+    // user: {
+    //   id: 1,
+    //   username: 'mtoff',
+    //   imageURL: 'https://reactnative.dev/img/tiny_logo.png'
+    // },
+  user: state.user,
   snapshot: state.snapshots.selectedSnapshot
   }
 }
