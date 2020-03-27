@@ -9,7 +9,7 @@ import {
     View,
 } from 'react-native';
 import { Spinner } from 'native-base'
-import { getSingleFriendThunk } from '../store/user'
+import { getSingleFriendThunk, gotFriendshipThunk } from '../store/friends'
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import UserProfileSnapView from '../components/UserProfileSnapView'
@@ -21,12 +21,14 @@ class SingleFriendScreen extends React.Component {
 
     componentDidMount() {
         const { route } = this.props;
-        const { userId } = route.params
-
-        this.props.getSingleFriendThunk(userId)
+        const { friendId } = route.params
+        this.props.getSingleFriendThunk(friendId)
+        // this.props.gotFriendshipThunk(userId, friendId)
     }
     render() {
         const singlefriend = this.props.singlefriend
+
+
         const { navigate } = this.props.navigation;
         return !this.props.singleFriendLoading ? (
 
@@ -39,11 +41,10 @@ class SingleFriendScreen extends React.Component {
                         <View style={styles.userInfo}>
                             <Text style={styles.name}>{singlefriend.username}</Text>
                             <Text style={styles.email}>{singlefriend.email}</Text>
-                            <Text style={styles.email}>Friendship: </Text>
                         </View>
                     </View>
                     <Text style={styles.userContent}>Bio: {singlefriend.bio} {"\n"}
-                            Experiences: {singlefriend.places.length}</Text>
+                    </Text>
                     <ScrollView style={styles.snapContainer}>
                         {singlefriend.places.map(place => (
                             <UserProfileSnapView
@@ -108,12 +109,15 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    singlefriend: state.user.singlefriend,
-    singleFriendLoading: state.user.singleFriendLoading
+    singlefriend: state.friends.singlefriend,
+    singleFriendLoading: state.friends.singleFriendLoading,
+    // singleFriendship: state.friends.singleFriendship,
+    // friendshipLoading: state.friends.friendshipLoading
 });
 
 const mapDispatch = dispatch => ({
-    getSingleFriendThunk: (userId) => dispatch(getSingleFriendThunk(userId))
+    getSingleFriendThunk: (userId) => dispatch(getSingleFriendThunk(userId)),
+    gotFriendshipThunk: (userId, friendId) => dispatch(gotFriendshipThunk(userId, friendId)),
 })
 
 export default connect(mapState, mapDispatch)(SingleFriendScreen)
