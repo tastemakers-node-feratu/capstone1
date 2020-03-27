@@ -20,7 +20,6 @@ const LoginForm = props => {
   const {navigate} = props;
 
   const handleSubmit = () => {
-    // event.preventDefault();
     if (authName === '') alert('Please enter an email address');
     else if (password === '') alert('Please enter a password');
     const authData = {authName, password};

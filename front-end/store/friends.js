@@ -18,7 +18,14 @@ const GOT_FRIENDS = 'GOT_FRIENDS';
 
 const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
 
+const ADD_FRIEND = 'ADD_FRIEND';
 // Action Creator
+const gotAddFriend = friend => {
+  return {
+    type: ADD_FRIEND,
+    friend
+  };
+};
 const gotFriends = friends => {
   return {
     type: GOT_FRIENDS,
@@ -34,6 +41,18 @@ const gotSingleFriend = friend => {
 };
 
 // Thunk Creator
+// TODO:
+export const addFriendThunk = friendIds => async dispatch => {
+  try {
+    const {data} = await axios.post(
+      `${apiUrl}/api/friends/addfriend${friendIds}`
+    );
+    console.log('what is data from magic method', data);
+    dispatch(gotAddFriend(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 export const getFriendsThunk = userId => async dispatch => {
   try {
     const tempUserId = 1;

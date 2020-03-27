@@ -14,4 +14,18 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.post('/addFriend', async (req, res, next) => {
+  try {
+    const data = await User.addFriend(req.body.receiver, {
+      through: {
+        sender_id: req.body.sender,
+        receiver_id: req.body.receiver
+      }
+    });
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
