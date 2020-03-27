@@ -23,7 +23,10 @@ class SnapShotsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.allSnapshotsThunk()
+        if (this.props.user) {
+            console.log(this.props.user)
+            this.props.allSnapshotsThunk(this.props.user.id);
+        }
     }
 
     render() {
@@ -69,12 +72,13 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
+    user: state.user,
     allSnapshots: state.snapshots.allSnapshots,
     allLoading: state.snapshots.allLoading
 });
 
 const mapDispatch = dispatch => ({
-    allSnapshotsThunk: () => dispatch(allSnapshotsThunk())
+    allSnapshotsThunk: (id) => dispatch(allSnapshotsThunk(id))
 })
 
 export default connect(mapState, mapDispatch)(SnapShotsScreen)

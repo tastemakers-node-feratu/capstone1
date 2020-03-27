@@ -18,7 +18,7 @@ const GOT_ONE = 'GOT_ONE';
 const ADD_ONE = 'ADD_ONE';
 
 const addOneSnapshot = snapshot => {
-  return{
+  return {
     type: ADD_ONE,
     snapshot
   }
@@ -39,11 +39,10 @@ const gotSingleSnapshot = info => {
 };
 
 // Thunk Creator
-export const allSnapshotsThunk = () => {
+export const allSnapshotsThunk = (userId) => {
   return async dispatch => {
     try {
-      const tempUserId = 1;
-      const { data } = await axios.get(`${apiUrl}/api/snapshots/${tempUserId}`);
+      const { data } = await axios.get(`${apiUrl}/api/snapshots/${userId}`);
       dispatch(gotAllSnapshots(data));
     } catch (error) {
       console.error(error);
@@ -66,7 +65,7 @@ export const addSnapshotThunk = (snapshot, userId) => {
   return async dispatch => {
     try {
       const category = snapshot.checkboxes.reduce((accum, curr) => {
-        if(curr.checked === true){
+        if (curr.checked === true) {
           accum.push(curr.name);
         }
         return accum;
@@ -82,11 +81,9 @@ export const addSnapshotThunk = (snapshot, userId) => {
         category,
         imageURL: snapshot.imageURL
       }
-      console.log('api url', apiUrl)
-      const {data} = await axios.put(`${apiUrl}/api/users/snapshot/${userId}`, snapshotInfo)
-      console.log('HUH?')
+      const { data } = await axios.put(`${apiUrl}/api/users/snapshot/${userId}`, snapshotInfo)
       dispatch(addOneSnapshot(data));
-    } catch(err){
+    } catch (err) {
       console.error(err);
     }
   }
