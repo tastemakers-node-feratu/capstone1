@@ -78,7 +78,8 @@ export const addSnapshotThunk = (snapshot, userId) => {
         location: snapshot.location,
         name: snapshot.placeName,
         tags,
-        category
+        category,
+        imageURL: snapshot.imageURL
       }
       const { data } = await axios.put(`${apiUrl}/api/users/snapshot/${userId}`, snapshotInfo)
       dispatch(addOneSnapshot(data));
