@@ -1,3 +1,7 @@
+import React from 'react';
+import { Text, View, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 'react-native'
+import { CheckBox } from 'react-native-elements'
+
 export const checkboxes = [
     { name: 'food', checked: false },
     { name: 'fitness', checked: false },

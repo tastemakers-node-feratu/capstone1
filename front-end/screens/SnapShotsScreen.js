@@ -27,6 +27,8 @@ class SnapShotsScreen extends React.Component {
     }
 
     render() {
+        console.log('state is', this.props)
+        console.log('next')
         const { navigate } = this.props.navigation;
         return !this.props.allLoading ? (
             <SafeAreaView style={styles.container} >

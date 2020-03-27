@@ -39,9 +39,10 @@ class CheckInScreen extends React.Component {
     this.done = this.done.bind(this);
   }
 
-  toggleCheckBox(index){
+  toggleCheckBox(name){
+    const boxIndex = this.state.checkboxes.findIndex(box => box.name === name);
     let newBoxes = this.state.checkboxes;
-    newBoxes[index].checked = !newBoxes[index].checked
+    newBoxes[boxIndex].checked = !newBoxes[boxIndex].checked
     this.setState({
       ...this.state,
       checkboxes: newBoxes,
@@ -81,6 +82,7 @@ class CheckInScreen extends React.Component {
     }
 
   render() {
+    console.log('check in props', this.props)
     return(
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -118,41 +120,16 @@ class CheckInScreen extends React.Component {
                 What'd you discover?
               </Text>
               <View>
-                <View style={styles.checkboxesRow}>
-                  <CheckBox
-                    title='food'
-                    checked={this.state.checkboxes[0].checked}
-                    onPress={() => this.toggleCheckBox(0)}
-                  />
-                  <CheckBox
-                    title='fitness'
-                    checked={this.state.checkboxes[1].checked}
-                    onPress={() => this.toggleCheckBox(1)}
-                  />
-                </View>
-                <View style={styles.checkboxesRow}>
-                  <CheckBox
-                    title='nightlife'
-                    checked={this.state.checkboxes[2].checked}
-                    onPress={() => this.toggleCheckBox(2)}
-                  />
-                  <CheckBox
-                    title='shop'
-                    checked={this.state.checkboxes[3].checked}
-                    onPress={() => this.toggleCheckBox(3)}
-                  />
-                </View>
-                <View style={styles.checkboxesRow}>
-                  <CheckBox
-                    title='beauty'
-                    checked={this.state.checkboxes[4].checked}
-                    onPress={() => this.toggleCheckBox(4)}
-                  />
-                  <CheckBox
-                    title='experience'
-                    checked={this.state.checkboxes[5].checked}
-                    onPress={() => this.toggleCheckBox(5)}
-                  />
+                <View /*style={styles.checkboxesRow}*/ >
+                  {this.state.checkboxes.map((checkbox) => {
+                    return(
+                      <CheckBox
+                      title={checkbox.name}
+                      checked={checkbox.checked}
+                      onPress={() => this.toggleCheckBox(checkbox.name)}
+                    />
+                    )
+                  })}
                 </View>
               </View>
               <Text style={{paddingTop: 10}}>
@@ -217,7 +194,6 @@ class CheckInScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: 20,
         backgroundColor: '#74b9ff',
     },
     contentContainer: {
@@ -244,7 +220,6 @@ const styles = StyleSheet.create({
     modal: {
       flex: 1,
       alignItems: 'center',
-      // backgroundColor: '#f7021a',
       paddingHorizontal: 50,
       paddingVertical: 100
    },
