@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const Op = Sequelize.Op;
 const Snapshot = require('./Snapshot')
 
 const Place = db.define('place', {
@@ -25,7 +26,6 @@ const Place = db.define('place', {
   location: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
   },
   // priceratingaverage
   all_tags: {
@@ -39,10 +39,28 @@ const Place = db.define('place', {
   }
 });
 
+Place.newSnapshot = function(info) {
+  const place = this.findOrCreate({
+    where: {
+      [Op.and]: [
+        {name: info.name},
+        {location: info.location}
+      ]
+    },
+    defaults: {
+      name: info.name,
+      location: info.location,
+      all_tags: info.tags,
+      category: info.category
+    }
+  })
+  return place;
+}
+
 Place.getSnapShot = function (id) {
   const snap = this.findOne({
     where: { id: id },
-    include: [{ model: Place, through: SnapShot }]
+    include: [{ model: Place, through: Snapshot }]
   })
   return snap
 }
