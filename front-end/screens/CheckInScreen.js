@@ -31,7 +31,6 @@ class CheckInScreen extends React.Component {
       description: '',
       tags: '',
       checkboxes: checkboxes,
-      imageURL: 'https://reactnative.dev/img/tiny_logo.png',
       modalVisible: false,
       imageURL: null
     }
