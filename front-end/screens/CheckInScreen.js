@@ -255,12 +255,12 @@ const styles = StyleSheet.create({
 
 const mapState = state => {
   return {
-    user: {
-      id: 1,
-      username: 'mtoff',
-      imageURL: 'https://reactnative.dev/img/tiny_logo.png'
-    },
-  // user: state.user,
+    // user: {
+    //   id: 1,
+    //   username: 'mtoff',
+    //   imageURL: 'https://reactnative.dev/img/tiny_logo.png'
+    // },
+  user: state.user,
   snapshot: state.snapshots.selectedSnapshot
   }
 }
