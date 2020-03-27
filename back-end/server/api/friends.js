@@ -1,41 +1,64 @@
 const router = require('express').Router();
 const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
-const User = require('../db/models/User')
-const Friend = require('../db/models/Friend')
+
+const {Op} = Sequelize;
+const User = require('../db/models/User');
+const Friend = require('../db/models/Friend');
 
 router.get('/:id', async (req, res, next) => {
   try {
     const data = await User.getFriends(req.params.id);
     const friendships = data.dataValues.friends;
-    const friends = friendships.filter((friendship) => {
-      return (friendship.dataValues.friend.friendship_status === 'approved')
-    })
-    res.send(friends)
+    const friends = friendships.filter(friendship => {
+      return friendship.dataValues.friend.friendship_status === 'approved';
+    });
+    res.send(friends);
   } catch (err) {
     next(err);
   }
 });
-
-router.post('/addFriend', async (req, res, next) => {
+// this route determines the addFriendButton status
+router.get('/friendStatus', async (req, res, next) => {
   try {
-    // return one of the following: 'we're friends', 'user sent request', 'friend sent request'
     let data = {
       status: ''
     };
-    if () {}
-    // const data = await User.addFriend(req.body.receiver, {
-    //   through: {
-    //     sender_id: req.body.sender,
-    //     receiver_id: req.body.receiver
-    //   }
-    // });
-    
+    const {userId, selectedFriendId} = req.body;
+    const user = await User.findOne({where: {id: userId}});
+    const friend = await User.findOne({where: {id: selectedFriendId}});
+    const userFriend = await user.getFriend({where: {id: selectedFriendId}});
+    const friendUser = await friend.getFriend({where: {id: userId}});
+    if (userFriend && friendUser) {
+      data = {status: 'already friends'};
+    } else if (userFriend) {
+      data = {status: 'user sent req'};
+    } else if (friendUser) {
+      data = {status: 'friend sent req'};
+    } else {
+      data = {status: 'not friends'};
+    }
     res.send(data);
   } catch (error) {
     next(error);
   }
 });
+router.post('/addFriend', async (req, res, next) => {
+  try {
+    const {userId, selectedFriendId} = req.body;
+    const user = await User.findOne({where: {id: userId}});
+    const friend = await User.findOne({where: {id: selectedFriendId}});
+    const data = await user.addFriend(friend, {
+      through: {
+        sender_id: userId,
+        receiver_id: selectedFriendId
+      }
+    });
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/friendship/:userId/:friendId', async (req, res, next) => {
   try {
     // const friendship = await Friend.findOne({
@@ -50,20 +73,19 @@ router.get('/friendship/:userId/:friendId', async (req, res, next) => {
     const idArr = [req.params.userId, req.params.friendId];
     const friendship = await Friend.findOne({
       where: {
-        userId:
-        {
+        userId: {
           [Op.in]: idArr
         },
         friendId: {
           [Op.in]: idArr
-        },
+        }
       }
-    })
+    });
 
-    res.send(friendship)
+    res.send(friendship);
   } catch (err) {
     next(err);
   }
-})
+});
 
 module.exports = router;

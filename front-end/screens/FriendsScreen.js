@@ -49,7 +49,8 @@ class FriendsScreen extends React.Component {
                     {
                         filteredFriends.map((friend) => {
                             return (
-                                <MiniFriendView key={friend.email} info={friend} navigate={navigate} userId ={this.props.userId}/>
+                                <MiniFriendView key={friend.email} info={friend} navigate={navigate} 
+                                />
                             )
                         })
                     }
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    userId: state.user.id,
+    // userId: state.user.id,
     friends: state.friends.friends
 });
 

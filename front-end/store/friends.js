@@ -2,7 +2,7 @@
 import axios from 'axios';
 import getEnvVars from '../environment';
 
-const { apiUrl } = getEnvVars();
+const {apiUrl} = getEnvVars();
 
 // initial State
 const initialState = {
@@ -17,13 +17,13 @@ const initialState = {
 const GOT_FRIENDS = 'GOT_FRIENDS';
 
 const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
-
+const GOT_FRIENDS_STATUS = 'GOT_FRIENDS_STATUS';
 const ADD_FRIEND = 'ADD_FRIEND';
 // Action Creator
-const gotAddFriend = status => {
+const gotAddFriend = newFriend => {
   return {
     type: ADD_FRIEND,
-    status
+    newFriend
   };
 };
 const gotFriends = friends => {
@@ -39,16 +39,26 @@ const gotSingleFriend = friend => {
     friend
   };
 };
-
+const gotFriendsStatus = status => {
+  return {
+    type: GOT_FRIENDS_STATUS,
+    status
+  };
+};
 // Thunk Creator
-// TODO:
 export const addFriendThunk = friendIds => async dispatch => {
   try {
-    const {data} = await axios.post(
-      `${apiUrl}/api/friends/addfriend${friendIds}`
-    );
-    console.log('what is data from magic method, data should be status', data);
+    const {data} = await axios.post(`${apiUrl}/api/friends/addFriend`);
     dispatch(gotAddFriend(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const getFriendStatus = friendsIds => async dispatch => {
+  try {
+    const {data} = await axios.get(`${apiUrl}/api/friends/friendStatus`);
+    console.log('what is data if it is a string?', data);
+    dispatch(gotFriendsStatus(data));
   } catch (error) {
     console.error(error);
   }
@@ -56,7 +66,7 @@ export const addFriendThunk = friendIds => async dispatch => {
 export const getFriendsThunk = userId => async dispatch => {
   try {
     const tempUserId = 1;
-    const { data } = await axios.get(`${apiUrl}/api/friends/${tempUserId}`);
+    const {data} = await axios.get(`${apiUrl}/api/friends/${tempUserId}`);
 
     dispatch(gotFriends(data));
   } catch (error) {
@@ -66,7 +76,7 @@ export const getFriendsThunk = userId => async dispatch => {
 
 export const getSingleFriendThunk = id => async dispatch => {
   try {
-    const { data } = await axios.get(`${apiUrl}/api/users/${id}`);
+    const {data} = await axios.get(`${apiUrl}/api/users/${id}`);
 
     dispatch(gotSingleFriend(data));
   } catch (error) {
@@ -77,7 +87,7 @@ export const getSingleFriendThunk = id => async dispatch => {
 const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_FRIENDS: {
-      return { ...state, friends: action.friends };
+      return {...state, friends: action.friends};
     }
     case GOT_ONE_FRIEND: {
       return {
@@ -89,8 +99,11 @@ const friendsReducer = (state = initialState, action) => {
     // case GOT_FRIENDSHIP: {
     //   return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
     // },
-    case ADD_FRIEND: {
+    case GOT_FRIENDS_STATUS: {
       return {...state, friendStatus: action.status};
+    }
+    case ADD_FRIEND: {
+      return {...state, friends: [...this.state.friends, action.newFriend]};
     }
     default:
       return state;

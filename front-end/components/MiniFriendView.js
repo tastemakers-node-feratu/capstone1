@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 'react-native'
-import AddFriendButton from './AddFriendButton';
 
 export default MiniFriendView = (props) => {
     const { info, navigate } = props
@@ -10,7 +9,6 @@ export default MiniFriendView = (props) => {
                 navigate('SingleFriend', { friendId: info.id })
             }} >
                 <View style={styles.container}>
-                    <AddFriendButton style={styles.addFriendButton} selectedFriend={info.id} user={props.userId}/>
                     <Text style={styles.name}>{info.username}</Text>
                     <Text style={styles.name}>{info.email}</Text>
                     <Image source={{ uri: info.imageURL }}
@@ -57,11 +55,5 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         marginBottom: 15,
         textAlign: 'center',
-    },
-    addFriendButton: {
-        color: '#FFFFFF',
-        backgroundColor: '#fc0398',
-        width: 200,
-        margin: 5
     }
 })

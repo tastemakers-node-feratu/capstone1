@@ -19,6 +19,7 @@ const Friend = db.define('friend', {
   }
 });
 
+
 // Friend.findFriends = function(id){
 //   return this.findAll({
 //     where: {

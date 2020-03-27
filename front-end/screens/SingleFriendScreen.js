@@ -12,7 +12,8 @@ import { Spinner } from 'native-base'
 import { getSingleFriendThunk, gotFriendshipThunk } from '../store/friends'
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
-import UserProfileSnapView from '../components/UserProfileSnapView'
+import UserProfileSnapView from '../components/UserProfileSnapView';
+import AddFriendButton from '../components/AddFriendButton';
 
 class SingleFriendScreen extends React.Component {
     constructor(props) {
@@ -35,6 +36,7 @@ class SingleFriendScreen extends React.Component {
             <SafeAreaView style={styles.outerContainer}>
                 <View style={styles.container}>
                     <View style={styles.userContainer}>
+                        <AddFriendButton style={styles.addFriendButton} selectedFriendId={singlefriend.id} />
                         <Image source={{ uri: singlefriend.imageURL }}
                             style={{ width: 150, height: 170, borderRadius: 30 }} />
 
@@ -106,7 +108,14 @@ const styles = StyleSheet.create({
     snapContainer: {
         marginLeft: 15,
     },
-})
+    addFriendButton: {
+        color: '#FFFFFF',
+        backgroundColor: '#fc0398',
+        width: 200,
+        margin: 5
+    }
+
+});
 
 const mapState = state => ({
     singlefriend: state.friends.singlefriend,

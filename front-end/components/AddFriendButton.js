@@ -4,7 +4,7 @@
 import React from 'react';
 import {Button, StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
-import {addFriendThunk} from '../store/friends';
+import {addFriendThunk, getFriendStatus} from '../store/friends';
 
 class AddFriendButton extends React.Component {
   constructor() {
@@ -14,13 +14,42 @@ class AddFriendButton extends React.Component {
       iSentRequest: false,
       theySendRequest: false
     };
+    this.handlePress = this.handlePress.bind(this);
   }
 
   componentDidMount() {
-    const {selectedFriend, user, addFriends} = this.props;
+    const {
+      selectedFriendId,
+      userId,
+      friendStatus,
+      getFriendStatus
+    } = this.props;
     const associateIds = {
-      selectedFriend,
-      user
+      selectedFriendId,
+      userId
+    };
+    getFriendStatus(associateIds);
+
+    if (friendStatus === 'already friends') {
+      this.setState({
+        myFriend: true
+      });
+    } else if (friendStatus === 'user sent req') {
+      this.setState({
+        iSentRequest: true
+      });
+    } else if (friendStatus === 'friend sent req') {
+      this.setState({
+        theySendRequest: true
+      });
+    }
+  }
+
+  handlePress() {
+    const {userId, selectedFriendId, addFriends} = this.props;
+    const associateIds = {
+      selectedFriendId,
+      userId
     };
     addFriends(associateIds);
   }
@@ -35,11 +64,15 @@ class AddFriendButton extends React.Component {
       </View>
     ) : theySendRequest ? (
       <View>
-        <Button style={styles.box}>Accept Friend Request</Button>
+        <Button style={styles.box} onPress={this.handlePress}>
+          Accept Friend Request
+        </Button>
       </View>
     ) : (
       <View>
-        <Button style={styles.box}>Send Friend Request</Button>
+        <Button style={styles.box} onPress={this.handlePress}>
+          Send Friend Request
+        </Button>
       </View>
     );
   }
@@ -53,11 +86,15 @@ const styles = StyleSheet.create({
 });
 
 const mapState = state => ({
-  friend: state.friend
+  friendStatus: state.friend.friendStatus,
+  userId: state.user.id
 });
 
 const mapDispatch = dispatch => ({
-  addFriends: data => dispatch(addFriendThunk(data))
+  addFriends: data => dispatch(addFriendThunk(data)),
+  getFriendStatus: data => dispatch(getFriendStatus(data))
 });
 
 export default connect(mapState, mapDispatch)(AddFriendButton);
+
+// TODO: this goes in component rendering button
