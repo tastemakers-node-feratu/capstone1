@@ -50,7 +50,7 @@ app.use(cors());
 // logging middleware
 app.use(morgan('dev'));
 // body parsing middleware
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // static middleware
 app.use(express.static(path.join(__dirname, './public')));
@@ -58,7 +58,7 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use('/api', require('./server/api'));
 app.use('/auth', require('./server/auth'));
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 

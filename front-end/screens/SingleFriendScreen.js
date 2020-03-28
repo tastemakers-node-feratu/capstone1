@@ -25,9 +25,9 @@ class SingleFriendScreen extends React.Component {
         this.props.getSingleFriendThunk(friendId)
         // this.props.gotFriendshipThunk(userId, friendId)
     }
+
     render() {
         const singlefriend = this.props.singlefriend
-
 
         const { navigate } = this.props.navigation;
         return !this.props.singleFriendLoading ? (

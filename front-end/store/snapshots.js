@@ -10,7 +10,7 @@ const initialState = {
   allLoading: true,
   selectedSnapshot: {},
   oneLoading: true,
-  catFilter: ''
+  catFilter: 'all'
 };
 
 // Action Types
@@ -41,11 +41,11 @@ const gotFilter = boxes => ({
 
 
 // Thunk Creator
-export const allSnapshotsThunk = (userId, categories = 'all') => {
+export const allSnapshotsThunk = (userId, categories) => {
   return async dispatch => {
     try {
+      console.log('GET THE SNAPS')
       const { data } = await axios.get(`${apiUrl}/api/snapshots/${userId}?categories=${categories}`);
-
       dispatch(gotAllSnapshots(data));
     } catch (error) {
       console.error(error);

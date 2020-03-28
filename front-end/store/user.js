@@ -60,10 +60,10 @@ export const logOut = () => async dispatch => {
 const userReducer = (state = user, action) => {
   switch (action.type) {
     case SIGN_UP: {
-      return action.userData;
+      return { ...action.userData };
     }
     case GOT_USER: {
-      return action.userData;
+      return { ...action.userData };
     }
     case LOG_OUT: {
       return user;

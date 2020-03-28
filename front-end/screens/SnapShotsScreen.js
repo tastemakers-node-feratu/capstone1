@@ -23,18 +23,28 @@ class SnapShotsScreen extends React.Component {
         this.state = {
             modalVisible: false,
         }
-        this.toggleModal = this.toggleModal.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
-        if (this.props.user && this.props.user.id) {
-            console.log(this.props.user)
+        if (this.props.user.id) {
             this.props.allSnapshotsThunk(this.props.user.id, this.props.catFilter);
+            console.log('SNAP', this.props.allSnapshots)
+        } else {
+            console.log('NO USer NO SNAPSHOTS')
         }
+        console.log('SNAP', this.props.allSnapshots)
     }
 
-    toggleModal() {
+    openModal() {
         this.setState({ modalVisible: !this.state.modalVisible });
+    }
+
+    closeModal() {
+        this.setState({ modalVisible: !this.state.modalVisible });
+        this.props.allSnapshotsThunk(this.props.user.id, this.props.catFilter);
+        console.log(this.props.catFilter)
     }
 
     render() {
@@ -44,14 +54,14 @@ class SnapShotsScreen extends React.Component {
                 <View style={styles.topContainer}>
                     <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
-                        <Button title="Filter" color={'white'} onPress={this.toggleModal} />
+                        <Button title="Filter" color={'white'} onPress={this.openModal} />
                         <Button title="My Friends" color={'white'} onPress={() => navigate('AllFriends')} />
                     </View>
                 </View>
                 <Modal visible={this.state.modalVisible} animationType='slide'>
                     <View style={styles.modal}>
                         <TouchableHighlight
-                            onPress={this.toggleModal} style={styles.buttonContainer}
+                            onPress={this.closeModal} style={styles.buttonContainer}
                         >
                             <Text style={styles.backBtn}>{'<<Back'}</Text>
                         </TouchableHighlight>

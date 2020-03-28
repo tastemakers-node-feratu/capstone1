@@ -5,7 +5,7 @@ const User = require('../db/models/User')
 const Place = require('../db/models/Place')
 
 // const userFriends = [4, 50]
-router.get('/:id', async (req, res, next) => {
+router.get('/:id?=categories', async (req, res, next) => {
   try {
     const friendsArr = await User.getFriends(req.params.id);
     const userFriends = friendsArr.friends.map(friend => friend.id)

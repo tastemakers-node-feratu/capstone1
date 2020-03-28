@@ -12,6 +12,7 @@ class SnapFilter extends React.Component {
             checkboxes: checkboxes
         }
         this.toggleCheckBox = this.toggleCheckBox.bind(this)
+        this.addCategories = this.addCategories.bind(this)
     }
 
     componentDidMount() {
@@ -33,6 +34,7 @@ class SnapFilter extends React.Component {
     }
 
     addCategories() {
+        // console.log('props!!!', this.props)
         if (this.props.snapFilterThunk) {
             this.props.snapFilterThunk(this.state);
         }
