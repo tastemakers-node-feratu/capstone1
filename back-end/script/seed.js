@@ -1,17 +1,20 @@
 /* eslint-disable no-console */
-const {green, red} = require('chalk');
+const { green, red } = require('chalk');
 const faker = require('faker');
 const db = require('../server/db');
 // importing all models
-const {User, Place} = require('../server/db/models');
+const { User, Place } = require('../server/db/models');
 
-faker.array = function(structure, count = 1) {
+faker.array = function (structure, count = 1) {
   let n = 0;
   const results = [];
   while (n < count) {
     if (typeof structure === 'object') {
-      const item = {...structure};
+      const item = { ...structure };
       Object.keys(item).forEach(property => {
+        if (property === 'category') {
+          item[property] = ([randomCategory()]);
+        }
         if (
           property !== 'category' &&
           property !== 'pushNotifs' &&
@@ -72,17 +75,17 @@ const fakerPlaces = faker.array(
 
 async function fakerSeed() {
   try {
-    await db.sync({force: true});
+    await db.sync({ force: true });
     // manually creating one user
-    await User.create({
-      username: 'user',
-      email: 'user@email.com',
-      password: 'password',
-      imageURL: faker.internet.avatar(),
-      bio: faker.lorem.sentence(),
-      phone: faker.phone.phoneNumber(),
-      pushNotifs: true
-    });
+    // await User.create({
+    //   username: 'user',
+    //   email: 'user@email.com',
+    //   password: 'password',
+    //   imageURL: faker.internet.avatar(),
+    //   bio: faker.lorem.sentence(),
+    //   phone: faker.phone.phoneNumber(),
+    //   pushNotifs: true
+    // });
     // creating all user and place instances
     await Promise.all(fakerPlaces.map(element => Place.create(element)));
     await Promise.all(fakerUsers.map(element => User.create(element)));

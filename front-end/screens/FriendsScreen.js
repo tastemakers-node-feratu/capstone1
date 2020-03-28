@@ -25,8 +25,7 @@ class FriendsScreen extends React.Component {
         this.setState({ searchName: name })
     }
     componentDidMount() {
-        const tempUserId = 2;
-        this.props.getFriends(tempUserId)
+        this.props.getFriends(this.props.userId)
     }
 
     render() {
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    // userId: state.user.id,
+    userId: state.user.id,
     friends: state.friends.friends
 });
 
