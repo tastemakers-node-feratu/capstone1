@@ -40,7 +40,9 @@ const LoginForm = props => {
 
   let passwordInput;
 
-  return ( user.id ? <View>{navigate('AllSnapShots')}</View> :
+  return user.id ? (
+    <View>{navigate('AllSnapShots')}</View>
+  ) : (
     <View style={styles.container}>
       <TextInput
         placeholder="username or email"

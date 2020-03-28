@@ -48,8 +48,18 @@ const gotFriendsStatus = status => {
 // Thunk Creator
 export const addFriendThunk = friendIds => async dispatch => {
   try {
-    const {data} = await axios.post(`${apiUrl}/api/friends/addFriend`);
-    dispatch(gotAddFriend(data));
+    const {data} = await axios.post(
+      `${apiUrl}/api/friends/addFriend`,
+      friendIds
+    );
+    // only update friendStatus if they are not approved friend
+    if (data === 'user sent req') {
+      dispatch(gotFriendsStatus(data));
+    } else {
+      // if data === 'already friends'
+      // got addFriend will update friendstatus and add new friend to friend array
+      dispatch(gotAddFriend(data));
+    }
   } catch (error) {
     console.error(error);
   }
@@ -106,7 +116,11 @@ const friendsReducer = (state = initialState, action) => {
       return {...state, friendStatus: action.status};
     }
     case ADD_FRIEND: {
-      return {...state, friends: [...this.state.friends, action.newFriend]};
+      return {
+        ...state,
+        friends: [...this.state.friends, action.newFriend],
+        friendStatus: action.status
+      };
     }
     default:
       return state;

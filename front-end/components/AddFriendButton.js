@@ -45,10 +45,11 @@ class AddFriendButton extends React.Component {
   }
 
   handlePress() {
-    const {userId, selectedFriendId, addFriends} = this.props;
+    const {userId, selectedFriendId, addFriends, friendStatus} = this.props;
     const associateIds = {
       selectedFriendId,
-      userId
+      userId,
+      friendStatus
     };
     addFriends(associateIds);
   }

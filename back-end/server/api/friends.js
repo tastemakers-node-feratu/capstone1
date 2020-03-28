@@ -47,17 +47,38 @@ router.get('/friendStatus', async (req, res, next) => {
 });
 router.post('/addFriend', async (req, res, next) => {
   try {
-    const {userId, selectedFriendId} = req.body;
-    console.log('in the addFriend Route', userId, selectedFriendId);
+    // userId: user that sent the request
+    // friendId: user that recieved the request
+    const {userId, selectedFriendId, friendStatus} = req.body;
+    let status;
     const user = await User.findOne({where: {id: userId}});
     const friend = await User.findOne({where: {id: selectedFriendId}});
-    const data = await user.addFriend(friend, {
-      through: {
-        sender_id: userId,
-        receiver_id: selectedFriendId
-      }
-    });
-    res.send(data);
+    if (friendStatus === 'friend sent req') {
+      await user.addFriend(friend, {
+        through: {
+          friendship_status: 'approved'
+        }
+      });
+      await Friend.update(
+        {
+          friendship_status: 'approved'
+        },
+        {
+          where: {userId: selectedFriendId, friendId: userId},
+          returning: true,
+          plain: true
+        }
+      );
+      status = 'already friends';
+    } else if (friendStatus === 'not friends') {
+      await user.addFriend(friend, {
+        through: {
+          friendship_status: 'pending'
+        }
+      });
+      status = 'user sent req';
+    }
+    res.send(status);
   } catch (error) {
     next(error);
   }

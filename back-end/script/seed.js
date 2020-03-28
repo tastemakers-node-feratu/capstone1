@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
-const { green, red } = require('chalk');
+const {green, red} = require('chalk');
 const faker = require('faker');
 const db = require('../server/db');
-// importing all models
-const { User, Place } = require('../server/db/models');
+const {User, Place} = require('../server/db/models');
 
-faker.array = function (structure, count = 1) {
+// this function simply creates an array of random data
+faker.array = function(structure, count = 1) {
   let n = 0;
   const results = [];
   while (n < count) {
     if (typeof structure === 'object') {
-      const item = { ...structure };
+      const item = {...structure};
       Object.keys(item).forEach(property => {
         if (property === 'category') {
           item[property] = [randomCategory()];
@@ -33,10 +33,12 @@ faker.array = function (structure, count = 1) {
   return results;
 };
 
+// generates a random number with a max and min
 const randomNumber = (max, min = 0) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
+// picks one of the categories randomly
 const randomCategory = () => {
   const categories = [
     'shop',
@@ -50,6 +52,7 @@ const randomCategory = () => {
   return categories[randomNumber(5)];
 };
 
+// sets up the structure of a user instance
 const fakerUsers = faker.array(
   {
     username: faker.internet.userName,
@@ -60,9 +63,10 @@ const fakerUsers = faker.array(
     phone: faker.phone.phoneNumber,
     pushNotifs: true
   },
-  50
+  100
 );
 
+// sets up the structure of a place instance
 const fakerPlaces = faker.array(
   {
     name: faker.name.findName,
@@ -70,22 +74,13 @@ const fakerPlaces = faker.array(
     location: faker.address.streetAddress,
     all_tags: faker.array(faker.lorem.word, randomNumber(4))
   },
-  50
+  100
 );
 
+// creates the instances
 async function fakerSeed() {
   try {
-    await db.sync({ force: true });
-    // manually creating one user
-    // await User.create({
-    //   username: 'user',
-    //   email: 'user@email.com',
-    //   password: 'password',
-    //   imageURL: faker.internet.avatar(),
-    //   bio: faker.lorem.sentence(),
-    //   phone: faker.phone.phoneNumber(),
-    //   pushNotifs: true
-    // });
+    await db.sync({force: true});
     // creating all user and place instances
     await Promise.all(fakerPlaces.map(element => Place.create(element)));
     await Promise.all(fakerUsers.map(element => User.create(element)));
@@ -120,20 +115,6 @@ async function fakerSeed() {
         }
       })
     );
-    await allUsers[2].addFriend(allUsers[3], {
-      through: {
-        sender_id: allUsers[2].id,
-        receiver_id: allUsers[3].id,
-        friendship_status: 'pending'
-      }
-    });
-    await allUsers[3].addFriend(allUsers[2], {
-      through: {
-        sender_id: allUsers[3].id,
-        receiver_id: allUsers[2].id,
-        friendship_status: 'pending'
-      }
-    });
     await Promise.all(
       allUsers.map(element => {
         return element.addPlace(allPlaces[randomNumber(49)], {
