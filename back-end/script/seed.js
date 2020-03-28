@@ -107,7 +107,7 @@ async function fakerSeed() {
         await allUsers[i].addPlace(allPlaces[randomNumber(max, min)], {
           through: {
             description: faker.lorem.sentence(),
-            photos: faker.image.imageUrl(),
+            photos: 'https://placeimg.com/640/480',
             price_rating: randomNumber(4, 1),
             tags: faker.array(faker.lorem.word, randomNumber(5))
           }
