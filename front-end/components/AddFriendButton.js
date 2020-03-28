@@ -17,7 +17,7 @@ class AddFriendButton extends React.Component {
     this.handlePress = this.handlePress.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {
       selectedFriendId,
       userId,
@@ -28,8 +28,7 @@ class AddFriendButton extends React.Component {
       selectedFriendId,
       userId
     };
-    getFriendStatus(associateIds);
-
+    await getFriendStatus(associateIds);
     if (friendStatus === 'already friends') {
       this.setState({
         myFriend: true

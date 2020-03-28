@@ -45,7 +45,6 @@ export const allSnapshotsThunk = snapshotData => {
   return async dispatch => {
     try {
       const {catFilter, userId} = snapshotData;
-      // let catFilter = 'all';
       const { data } = await axios.get(`${apiUrl}/api/snapshots/${userId}?categories=${catFilter}`);
       dispatch(gotAllSnapshots(data));
     } catch (error) {

@@ -56,8 +56,12 @@ export const addFriendThunk = friendIds => async dispatch => {
 };
 export const getFriendStatus = friendsIds => async dispatch => {
   try {
-    const {data} = await axios.get(`${apiUrl}/api/friends/friendStatus`);
-    console.log('what is data if it is a string?', data);
+    const {data} = await axios.get(`${apiUrl}/api/friends/friendStatus`, {
+      params: {
+        userId: friendsIds.userId,
+        selectedFriendId: friendsIds.selectedFriendId
+      }
+    });
     dispatch(gotFriendsStatus(data));
   } catch (error) {
     console.error(error);
@@ -65,7 +69,8 @@ export const getFriendStatus = friendsIds => async dispatch => {
 };
 export const getFriendsThunk = userId => async dispatch => {
   try {
-    const { data } = await axios.get(`${apiUrl}/api/friends/${userId}`);
+    // added '/all' to distinguish this route from other axios.get routes
+    const {data} = await axios.get(`${apiUrl}/api/friends/all/${userId}`);
     dispatch(gotFriends(data));
   } catch (error) {
     console.error(error);
