@@ -35,7 +35,7 @@ faker.array = function(structure, count = 1) {
 
 // generates a random number with a max and min
 const randomNumber = (max, min = 0) => {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 // picks one of the categories randomly
@@ -88,45 +88,34 @@ async function fakerSeed() {
     // get all users and places
     const allUsers = await User.findAll();
     const allPlaces = await Place.findAll();
-    // made all users friends with user[0]
-    await Promise.all(
-      allUsers.map(element => {
-        if (element.id !== allUsers[0].id) {
-          return element.addFriend(allUsers[0], {
-            through: {
-              sender_id: element.id,
-              receiver_id: allUsers[0].id,
-              friendship_status: 'approved'
-            }
-          });
-        }
-      })
-    );
-    await Promise.all(
-      allUsers.map(element => {
-        if (element.id !== allUsers[0].id) {
-          return allUsers[0].addFriend(element, {
-            through: {
-              sender_id: allUsers[0].id,
-              receiver_id: element.id,
-              friendship_status: 'approved'
-            }
-          });
-        }
-      })
-    );
-    await Promise.all(
-      allUsers.map(element => {
-        return element.addPlace(allPlaces[randomNumber(49)], {
+    // all users are friends with each other
+    for (let i = 0; i < allUsers.length; i += 1) {
+      for (let k = i + 1; k < allUsers.length; k += 1) {
+        await allUsers[i].addFriend(allUsers[k], {
+          through: {friendship_status: 'approved'}
+        });
+        await allUsers[k].addFriend(allUsers[i], {
+          through: {friendship_status: 'approved'}
+        });
+      }
+    }
+    // all users have 25 random places
+    for (let i = 0; i < allUsers.length; i += 1) {
+      let max = 3;
+      let min = 0;
+      for (let k = 0; k < 25; k += 1) {
+        await allUsers[i].addPlace(allPlaces[randomNumber(max, min)], {
           through: {
             description: faker.lorem.sentence(),
             photos: faker.image.imageUrl(),
-            price_rating: randomNumber(5, 1),
+            price_rating: randomNumber(4, 1),
             tags: faker.array(faker.lorem.word, randomNumber(5))
           }
         });
-      })
-    );
+        max += 3;
+        min += 0;
+      }
+    }
   } catch (error) {
     console.error(error);
   }
