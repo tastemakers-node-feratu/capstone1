@@ -5,7 +5,8 @@ const {Op} = Sequelize;
 const User = require('../db/models/User');
 const Friend = require('../db/models/Friend');
 
-router.get('/:id', async (req, res, next) => {
+// be careful when naming routes, added '/all' in front of '/:id' because it was conflicting with the other get routes
+router.get('/all/:id', async (req, res, next) => {
   try {
     const data = await User.getFriends(req.params.id);
     const friendships = data.dataValues.friends;
@@ -20,25 +21,26 @@ router.get('/:id', async (req, res, next) => {
 // this route determines the addFriendButton status
 router.get('/friendStatus', async (req, res, next) => {
   try {
-    let data = {
-      status: ''
-    };
-    const {userId, selectedFriendId} = req.body;
-    console.log('in the friendStatus Route', userId, selectedFriendId);
-    const user = await User.findOne({where: {id: userId}});
-    const friend = await User.findOne({where: {id: selectedFriendId}});
-    const userFriend = await user.getFriend({where: {id: selectedFriendId}});
-    const friendUser = await friend.getFriend({where: {id: userId}});
+    let status;
+    const {userId, selectedFriendId} = req.query;
+    // userFriend is when the user is the sender & friend is the receiver
+    const userFriend = await Friend.findOne({
+      where: {userId, friendId: selectedFriendId}
+    });
+    // friendUser is when the friend is the sender & user is the reciever
+    const friendUser = await Friend.findOne({
+      where: {userId: selectedFriendId, friendId: userId}
+    });
     if (userFriend && friendUser) {
-      data = {status: 'already friends'};
+      status = 'already friends';
     } else if (userFriend) {
-      data = {status: 'user sent req'};
+      status = 'user sent req';
     } else if (friendUser) {
-      data = {status: 'friend sent req'};
+      status = 'friend sent req';
     } else {
-      data = {status: 'not friends'};
+      status = 'not friends';
     }
-    res.send(data);
+    res.send(status);
   } catch (error) {
     next(error);
   }
