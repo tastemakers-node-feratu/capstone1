@@ -99,21 +99,25 @@ async function fakerSeed() {
         });
       }
     }
-    // all users have 25 random places
+    // all users have {2} random places
     for (let i = 0; i < allUsers.length; i += 1) {
       let max = 3;
       let min = 0;
-      for (let k = 0; k < 25; k += 1) {
+      for (let k = 0; k < 2; k += 1) {
         await allUsers[i].addPlace(allPlaces[randomNumber(max, min)], {
           through: {
             description: faker.lorem.sentence(),
-            photos: 'https://placeimg.com/640/480',
+            photos:
+              `https://i.picsum.photos/id/${randomNumber(
+                1000,
+                100
+              )}/200/200.jpg` || 'https://i.picsum.photos/id/999/200/200.jpg',
             price_rating: randomNumber(4, 1),
             tags: faker.array(faker.lorem.word, randomNumber(5))
           }
         });
-        max += 3;
-        min += 0;
+        max += 4;
+        min += 4;
       }
     }
   } catch (error) {

@@ -29,6 +29,7 @@ class AddFriendButton extends React.Component {
       userId
     };
     await getFriendStatus(associateIds);
+    console.log('whats the status', friendStatus);
     if (friendStatus === 'already friends') {
       this.setState({
         myFriend: true

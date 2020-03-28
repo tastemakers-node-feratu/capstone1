@@ -70,8 +70,8 @@ class SnapShotsScreen extends React.Component {
                     </View>
                 </Modal>
                 <ScrollView style={styles.contentContainer} >
-                    {this.props.allSnapshots.map(snapshot => (
-                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
+                    {this.props.allSnapshots.map((snapshot, index) => (
+                        <MiniSnapShot key={index} snapshot={snapshot} navigate={navigate} />
                     ))}
                 </ScrollView>
             </SafeAreaView>

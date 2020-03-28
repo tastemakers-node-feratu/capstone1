@@ -25,7 +25,6 @@ const LoginForm = props => {
     const authData = {authName, password};
     await getUserThunk(authData);
     clearTextInput();
-    console.log('is there a user?', user);
     // if (user.id) {
     //   navigate('AllSnapShots');
     // } else {
