@@ -21,7 +21,8 @@ router.post('/signup', async (req, res, next) => {
 // ./auth/login
 router.put('/login', async (req, res, next) => {
   try {
-    const {authName, password} = req.body;
+    const { authName, password } = req.body;
+    console.log('authNAME', authName, password)
     let field;
     if (authName.includes('@')) {
       field = 'email';
@@ -39,6 +40,7 @@ router.put('/login', async (req, res, next) => {
       res.status(401).send('invalid log in credentials');
     } else {
       req.login(user, err => (err ? next(err) : res.json(user)));
+      // res.json(user)
     }
   } catch (error) {
     next(error);

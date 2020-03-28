@@ -5,13 +5,13 @@ const User = require('../db/models/User')
 const Place = require('../db/models/Place')
 
 // const userFriends = [4, 50]
-router.get('/:id', async (req, res, next) => {
+router.get('/:id?=categories', async (req, res, next) => {
   try {
     let all = [];
     const friendsArr = await User.getFriends(req.params.id);
     if (friendsArr) {
       const userFriends = friendsArr.friends.map(friend => friend.id)
-      all = await User.getSnapShots(userFriends);
+      all = await User.getSnapShots(userFriends, req.query.categories);
     }
     res.send(all);
   } catch (err) {

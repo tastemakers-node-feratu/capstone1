@@ -65,7 +65,7 @@ export const getFriendStatus = friendsIds => async dispatch => {
 };
 export const getFriendsThunk = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`${apiUrl}/api/friends/${userId}`);
+    const { data } = await axios.get(`${apiUrl}/api/friends/${userId}`);
     dispatch(gotFriends(data));
   } catch (error) {
     console.error(error);
