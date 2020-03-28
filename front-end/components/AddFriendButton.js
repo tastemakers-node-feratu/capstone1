@@ -2,7 +2,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import {Button, StyleSheet, View, Text} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {addFriendThunk, getFriendStatus} from '../store/friends';
 
@@ -28,7 +28,7 @@ class AddFriendButton extends React.Component {
       selectedFriendId,
       userId
     };
-    getFriendStatus(associateIds);
+    // getFriendStatus(associateIds);
 
     if (friendStatus === 'already friends') {
       this.setState({
@@ -64,15 +64,15 @@ class AddFriendButton extends React.Component {
       </View>
     ) : theySendRequest ? (
       <View>
-        <Button style={styles.box} onPress={this.handlePress}>
-          Accept Friend Request
-        </Button>
+        <TouchableOpacity style={styles.box} onPress={this.handlePress}>
+          <Text>Accept Friend Request</Text>
+        </TouchableOpacity>
       </View>
     ) : (
       <View>
-        <Button style={styles.box} onPress={this.handlePress}>
-          Send Friend Request
-        </Button>
+        <TouchableOpacity style={styles.box} onPress={this.handlePress}>
+          <Text>Send Friend Request</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 });
 
 const mapState = state => ({
-  friendStatus: state.friend.friendStatus,
+  friendStatus: state.friends.friendStatus,
   userId: state.user.id
 });
 
@@ -96,5 +96,3 @@ const mapDispatch = dispatch => ({
 });
 
 export default connect(mapState, mapDispatch)(AddFriendButton);
-
-// TODO: this goes in component rendering button

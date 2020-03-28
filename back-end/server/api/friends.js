@@ -8,6 +8,7 @@ const Friend = require('../db/models/Friend');
 router.get('/:id', async (req, res, next) => {
   try {
     const data = await User.getFriends(req.params.id);
+    console.log('what is data', data);
     const friendships = data.dataValues.friends;
     const friends = friendships.filter(friendship => {
       return friendship.dataValues.friend.friendship_status === 'approved';
@@ -24,6 +25,8 @@ router.get('/friendStatus', async (req, res, next) => {
       status: ''
     };
     const {userId, selectedFriendId} = req.body;
+    console.log('is there a userId', userId);
+    console.log('is there a selectedFriendId', selectedFriendId);
     const user = await User.findOne({where: {id: userId}});
     const friend = await User.findOne({where: {id: selectedFriendId}});
     const userFriend = await user.getFriend({where: {id: selectedFriendId}});
