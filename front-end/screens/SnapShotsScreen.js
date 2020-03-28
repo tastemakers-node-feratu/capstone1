@@ -28,13 +28,15 @@ class SnapShotsScreen extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.user.id) {
-            this.props.allSnapshotsThunk(this.props.user.id, this.props.catFilter);
-            console.log('SNAP', this.props.allSnapshots)
+        if (this.props.userId) {
+            const snapshotData = {
+                userId: this.props.userId,
+                catFilter: this.props.catFilter
+            }
+            this.props.allSnapshotsThunk(snapshotData);
         } else {
-            console.log('NO USer NO SNAPSHOTS')
+            console.log('NO USER NO SNAPSHOTS')
         }
-        console.log('SNAP', this.props.allSnapshots)
     }
 
     openModal() {
@@ -44,7 +46,6 @@ class SnapShotsScreen extends React.Component {
     closeModal() {
         this.setState({ modalVisible: !this.state.modalVisible });
         this.props.allSnapshotsThunk(this.props.user.id, this.props.catFilter);
-        console.log(this.props.catFilter)
     }
 
     render() {
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
 })
 
 const mapState = state => ({
-    user: state.user,
+    userId: state.user.id,
     allSnapshots: state.snapshots.allSnapshots,
     catFilter: state.snapshots.catFilter,
     allLoading: state.snapshots.allLoading
@@ -137,4 +138,4 @@ const mapDispatch = dispatch => ({
     allSnapshotsThunk: (id) => dispatch(allSnapshotsThunk(id))
 })
 
-export default connect(mapState, mapDispatch)(SnapShotsScreen)
+export default connect(mapState, mapDispatch)(SnapShotsScreen);

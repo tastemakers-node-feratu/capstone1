@@ -22,7 +22,6 @@ router.post('/signup', async (req, res, next) => {
 router.put('/login', async (req, res, next) => {
   try {
     const { authName, password } = req.body;
-    console.log('authNAME', authName, password)
     let field;
     if (authName.includes('@')) {
       field = 'email';

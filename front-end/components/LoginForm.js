@@ -26,7 +26,7 @@ const LoginForm = props => {
     props.getUserThunk(authData);
     clearTextInput();
     // if (props.user) {
-      navigate('AllSnapShots');
+      // navigate('AllSnapShots');
     // } else {
     //   alert('try again');
     // }
