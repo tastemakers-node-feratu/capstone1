@@ -11,6 +11,9 @@ import OneSnapScreen from '../screens/OneSnapScreen'
 import { createStackNavigator } from '@react-navigation/stack';
 import SingleFriendScreen from '../screens/SingleFriendScreen';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+import UserProfileScreen from '../screens/UserProfileScreen';
+
 const BottomTab = createBottomTabNavigator();
 
 const INITIAL_ROUTE_NAME = 'Home';
@@ -95,6 +98,16 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: 'Friends',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="OwnProfile"
+        component={UserProfileScreen}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({focused}) => (
+            <Icon name="user" size={30} color="#900" />
+          )
         }}
       />
     </BottomTab.Navigator>

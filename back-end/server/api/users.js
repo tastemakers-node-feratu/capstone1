@@ -15,14 +15,29 @@ router.get('/:id', async (req, res, next) => {
 
 });
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const {imageURL, bio, email, name} = req.body;
+    const oldUser = await User.findByPk(req.params.id);
+    const updatedUser = await oldUser.update({
+      imageURL,
+      bio,
+      email,
+      name
+    });
+    await updatedUser.save();
+    res.send(updatedUser);
+  } catch(err) {
+    next(err);
+  }
+})
+
 router.put('/snapshot/:userId', async (req, res, next) => {
-  console.log('ok')
   const snapshotInfo = req.body;
   const { description, tags, imageURL } = snapshotInfo;
   try{
     const place = await Place.newSnapshot(snapshotInfo);
     const user = await User.findByPk(req.params.userId);
-    console.log("image url is", imageURL)
     await user.addPlace( place[0].id, { through: { description, tags, photos: imageURL } });
     const snapshot = await User.findOne({
       where: { id: user.id },
