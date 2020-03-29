@@ -90,20 +90,19 @@ async function fakerSeed() {
     // all users are friends with each other
     await Promise.all(
       allUsers.map((user, index) => {
-        if (index < allUsers.length - 1) {
-          return user.addFriend(allUsers[index + 1], {
+        console.log('what index', index);
+        let i = index;
+        while (i < 99) {
+          i += 1;
+          console.log('what i', i, index);
+          user.addFriend(allUsers[i], {
+            through: {friendship_status: 'approved'}
+          });
+          allUsers[i].addFriend(user, {
             through: {friendship_status: 'approved'}
           });
         }
-      })
-    );
-    await Promise.all(
-      allUsers.map((user, index) => {
-        if (index < allUsers.length - 1) {
-          return allUsers[index + 1].addFriend(user, {
-            through: {friendship_status: 'approved'}
-          });
-        }
+        return i;
       })
     );
     // all users have {2} random places

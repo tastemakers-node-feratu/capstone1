@@ -5,6 +5,7 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {addFriendThunk, getFriendStatus} from '../store/friends';
+import UnfriendButton from './UnfriendButton';
 
 class AddFriendButton extends React.Component {
   constructor() {
@@ -59,7 +60,11 @@ class AddFriendButton extends React.Component {
   // myFriend ? (yes)no button : (no)iSentRequest ? (yes)pendingRequest : (no)theySendRequest? (yes)acceptRequest : (no)sendRequest
   render() {
     const {myFriend, iSentRequest, theySendRequest} = this.state;
-    return myFriend ? null : iSentRequest ? (
+    return myFriend ? (
+      <View>
+        <UnfriendButton selectedFriendId={this.props.selectedFriendId} />
+      </View>
+    ) : iSentRequest ? (
       <View>
         <Text style={styles.box}>Request Pending</Text>
       </View>
