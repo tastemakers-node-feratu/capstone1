@@ -2,10 +2,10 @@
 import axios from 'axios';
 import getEnvVars from '../environment';
 
-const { apiUrl } = getEnvVars();
+const {apiUrl} = getEnvVars();
 
 // initial State
-const user = {};
+const initialState = {};
 
 // Action Types
 const GOT_USER = 'GOT_USER';
@@ -34,21 +34,23 @@ const gotLogOut = () => {
 // Thunk Creator
 export const getUserThunk = authData => async dispatch => {
   try {
-    const { data } = await axios.put(`${apiUrl}/auth/login`, authData);
-    dispatch(gotUser(data));
+    if (authData.authName) {
+      const {data} = await axios.put(`${apiUrl}/auth/login`, authData);
+      dispatch(gotUser(data));
+    }
   } catch (error) {
     console.error(error);
   }
 };
 export const signUp = userData => async dispatch => {
   try {
-    const { data } = await axios.post(`${apiUrl}/auth/signup`, userData);
+    const {data} = await axios.post(`${apiUrl}/auth/signup`, userData);
     dispatch(gotSignUp(data));
   } catch (error) {
     console.error(error);
   }
 };
-export const logOut = () => async dispatch => {
+export const logOutThunk = () => async dispatch => {
   try {
     await axios.put(`${apiUrl}/auth/logout`);
     dispatch(gotLogOut());
@@ -56,17 +58,24 @@ export const logOut = () => async dispatch => {
     console.error(error);
   }
 };
+export const getMeThunk = () => async dispatch => {
+  try {
+    await axios.get(`${apiUrl}/auth/me`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-const userReducer = (state = user, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_UP: {
-      return { ...action.userData };
+      return action.userData;
     }
     case GOT_USER: {
-      return { ...action.userData };
+      return action.userData;
     }
     case LOG_OUT: {
-      return user;
+      return {};
     }
     default:
       return state;

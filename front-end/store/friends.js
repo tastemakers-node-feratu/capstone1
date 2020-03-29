@@ -2,14 +2,14 @@
 import axios from 'axios';
 import getEnvVars from '../environment';
 
-const { apiUrl } = getEnvVars();
+const {apiUrl} = getEnvVars();
 
 // initial State
 const initialState = {
-  userId: null,
   friends: [],
   singlefriend: {},
-  singleFriendLoading: true
+  singleFriendLoading: true,
+  friendStatus: ''
 };
 
 // Action Types
@@ -17,8 +17,15 @@ const initialState = {
 const GOT_FRIENDS = 'GOT_FRIENDS';
 
 const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
-
+const GOT_FRIENDS_STATUS = 'GOT_FRIENDS_STATUS';
+const ADD_FRIEND = 'ADD_FRIEND';
 // Action Creator
+const gotAddFriend = newFriend => {
+  return {
+    type: ADD_FRIEND,
+    newFriend
+  };
+};
 const gotFriends = friends => {
   return {
     type: GOT_FRIENDS,
@@ -32,11 +39,48 @@ const gotSingleFriend = friend => {
     friend
   };
 };
-
+const gotFriendsStatus = status => {
+  return {
+    type: GOT_FRIENDS_STATUS,
+    status
+  };
+};
 // Thunk Creator
+export const addFriendThunk = friendIds => async dispatch => {
+  try {
+    const {data} = await axios.post(
+      `${apiUrl}/api/friends/addFriend`,
+      friendIds
+    );
+    // only update friendStatus if they are not approved friend
+    if (data === 'user sent req') {
+      dispatch(gotFriendsStatus(data));
+    } else {
+      // if data === 'already friends'
+      // got addFriend will update friendstatus and add new friend to friend array
+      dispatch(gotAddFriend(data));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const getFriendStatus = friendsIds => async dispatch => {
+  try {
+    const {data} = await axios.get(`${apiUrl}/api/friends/friendStatus`, {
+      params: {
+        userId: friendsIds.userId,
+        selectedFriendId: friendsIds.selectedFriendId
+      }
+    });
+    dispatch(gotFriendsStatus(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 export const getFriendsThunk = userId => async dispatch => {
   try {
-    const { data } = await axios.get(`${apiUrl}/api/friends/${userId}`);
+    // added '/all' to distinguish this route from other axios.get routes
+    const {data} = await axios.get(`${apiUrl}/api/friends/all/${userId}`);
     dispatch(gotFriends(data));
   } catch (error) {
     console.error(error);
@@ -45,7 +89,7 @@ export const getFriendsThunk = userId => async dispatch => {
 
 export const getSingleFriendThunk = id => async dispatch => {
   try {
-    const { data } = await axios.get(`${apiUrl}/api/users/${id}`);
+    const {data} = await axios.get(`${apiUrl}/api/users/${id}`);
 
     dispatch(gotSingleFriend(data));
   } catch (error) {
@@ -56,7 +100,7 @@ export const getSingleFriendThunk = id => async dispatch => {
 const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_FRIENDS: {
-      return { ...state, friends: action.friends };
+      return {...state, friends: action.friends};
     }
     case GOT_ONE_FRIEND: {
       return {
@@ -67,7 +111,17 @@ const friendsReducer = (state = initialState, action) => {
     }
     // case GOT_FRIENDSHIP: {
     //   return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
-    // }
+    // },
+    case GOT_FRIENDS_STATUS: {
+      return {...state, friendStatus: action.status};
+    }
+    case ADD_FRIEND: {
+      return {
+        ...state,
+        friends: [...this.state.friends, action.newFriend],
+        friendStatus: action.status
+      };
+    }
     default:
       return state;
   }

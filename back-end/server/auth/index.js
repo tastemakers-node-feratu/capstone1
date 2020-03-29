@@ -22,7 +22,6 @@ router.post('/signup', async (req, res, next) => {
 router.put('/login', async (req, res, next) => {
   try {
     const { authName, password } = req.body;
-    console.log('authNAME', authName, password)
     let field;
     if (authName.includes('@')) {
       field = 'email';
@@ -50,8 +49,8 @@ router.put('/login', async (req, res, next) => {
 // ./auth/logout
 router.put('/logout', async (req, res, next) => {
   try {
-    req.logout();
-    req.session.destroy();
+    await req.logout();
+    await req.session.destroy();
   } catch (error) {
     next(error);
   }
