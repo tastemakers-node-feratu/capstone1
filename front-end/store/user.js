@@ -52,19 +52,20 @@ export const signUp = userData => async dispatch => {
 };
 export const logOutThunk = () => async dispatch => {
   try {
-    await axios.put(`${apiUrl}/auth/logout`);
+    console.log('in logout thunk');
+    await axios.delete(`${apiUrl}/auth/logout`);
     dispatch(gotLogOut());
   } catch (error) {
     console.error(error);
   }
 };
-export const getMeThunk = () => async dispatch => {
-  try {
-    await axios.get(`${apiUrl}/auth/me`);
-  } catch (error) {
-    console.error(error);
-  }
-};
+// export const getMeThunk = () => async dispatch => {
+//   try {
+//     await axios.get(`${apiUrl}/auth/me`);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {

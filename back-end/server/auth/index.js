@@ -47,10 +47,11 @@ router.put('/login', async (req, res, next) => {
 });
 
 // ./auth/logout
-router.put('/logout', async (req, res, next) => {
+router.delete('/logout', (req, res, next) => {
   try {
-    await req.logout();
-    await req.session.destroy();
+    req.logout();
+    req.session.destroy();
+    res.status(204).end();
   } catch (error) {
     next(error);
   }

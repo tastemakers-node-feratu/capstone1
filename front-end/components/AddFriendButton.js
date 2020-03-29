@@ -22,13 +22,13 @@ class AddFriendButton extends React.Component {
       selectedFriendId,
       userId,
       friendStatus,
-      getFriendStatus
+      friendStatusThunk
     } = this.props;
     const associateIds = {
       selectedFriendId,
       userId
     };
-    await getFriendStatus(associateIds);
+    await friendStatusThunk(associateIds);
     console.log('whats the status', friendStatus);
     if (friendStatus === 'already friends') {
       this.setState({
@@ -93,7 +93,7 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   addFriends: data => dispatch(addFriendThunk(data)),
-  getFriendStatus: data => dispatch(getFriendStatus(data))
+  friendStatusThunk: data => dispatch(getFriendStatus(data))
 });
 
 export default connect(mapState, mapDispatch)(AddFriendButton);

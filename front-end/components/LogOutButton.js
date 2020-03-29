@@ -5,10 +5,11 @@ import {connect} from 'react-redux';
 import {logOutThunk} from '../store/user';
 
 const LogOutButton = props => {
-  const {navigate, logOutThunk} = props;
+  const {navigate, logOutThunk, user} = props;
 
-  const logout = async () => {
-    await logOutThunk();
+  const logout = () => {
+    logOutThunk();
+    console.log('user after logout', user.id);
     navigate('Home');
   };
 
