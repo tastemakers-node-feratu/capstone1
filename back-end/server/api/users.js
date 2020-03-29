@@ -19,13 +19,16 @@ router.put('/:id', async (req, res, next) => {
   try {
     const {imageURL, bio, email, name} = req.body;
     const oldUser = await User.findByPk(req.params.id);
+    console.log('before update')
     const updatedUser = await oldUser.update({
       imageURL,
       bio,
       email,
       name
     });
+    console.log('before saave')
     await updatedUser.save();
+
     res.send(updatedUser);
   } catch(err) {
     next(err);

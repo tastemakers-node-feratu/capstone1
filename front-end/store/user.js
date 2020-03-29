@@ -32,10 +32,10 @@ const gotLogOut = () => {
   };
 };
 
-const updateUser = (user) => {
+const updateUser = (userData) => {
   return {
     type: UPDATE_USER,
-    user
+    userData
   }
 }
 
@@ -77,8 +77,7 @@ export const updateUserThunk = (id, info) => async dispatch => {
 const userReducer = (state = user, action) => {
   switch (action.type) {
     case UPDATE_USER: {
-      console.log('updated user', action.user)
-      return action.user
+      return { ...action.userData };
     }
     case SIGN_UP: {
       return { ...action.userData };

@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { updateUserThunk } from '../store/user'
+import UserProifleLinks from '../components/userProfileLinks'
 
 class UserProfileScreen extends Component {
   constructor(props){
@@ -26,8 +27,20 @@ class UserProfileScreen extends Component {
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
   }
 
+  componentDidMount(){
+    const {email, name, bio, imageURL} = this.props.user
+    this.setState({
+      ...this.state,
+      email,
+      name,
+      bio,
+      imageURL
+    })
+  }
+
   handleUpdateUser(){
-    const {id} = this.props.user
+    // const {id} = this.props.user
+    const id = 1;
     this.props.updateUser(id, this.state);
     this.setState({
       ...this.state,
@@ -36,7 +49,6 @@ class UserProfileScreen extends Component {
   }
 
   render() {
-    console.log('user props', this.props.user)
     if(this.state.editingMode){
       return (
         <SafeAreaView>
@@ -49,7 +61,6 @@ class UserProfileScreen extends Component {
                 />
                 <Image style={styles.avatar}
                   source={{uri: this.props.user.imageURL}}/>
-                  <Icon name="pencil" size={30} color="black" />
                 </View>
                 <TextInput
                       autoCapitalize="words"
@@ -77,6 +88,7 @@ class UserProfileScreen extends Component {
                   </TouchableOpacity>
               </View>
             </View>
+            <UserProifleLinks />
         </SafeAreaView>
       )
     }
@@ -97,36 +109,7 @@ class UserProfileScreen extends Component {
                   <Text style={styles.userInfo}>{this.props.user.bio} </Text>
               </View>
             </View>
-
-            <View style={styles.body}>
-              <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Icon style={styles.icon} name="users" size={30} color="white"/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>My Friends</Text>
-                </View>
-              </View>
-
-              <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Icon style={styles.icon} name="tags" size={30} color="white"/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>My Pins</Text>
-                </View>
-              </View>
-
-              <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Icon style={styles.icon} name="gears" size={30} color="white"/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>Settings</Text>
-                </View>
-              </View>
-
-            </View>
+            <UserProifleLinks />
         </SafeAreaView>
       );
     }
