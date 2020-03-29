@@ -84,42 +84,53 @@ async function fakerSeed() {
     // creating all user and place instances
     await Promise.all(fakerPlaces.map(element => Place.create(element)));
     await Promise.all(fakerUsers.map(element => User.create(element)));
-
     // get all users and places
     const allUsers = await User.findAll();
     const allPlaces = await Place.findAll();
     // all users are friends with each other
-    for (let i = 0; i < allUsers.length; i += 1) {
-      for (let k = i + 1; k < allUsers.length; k += 1) {
-        await allUsers[i].addFriend(allUsers[k], {
-          through: {friendship_status: 'approved'}
-        });
-        await allUsers[k].addFriend(allUsers[i], {
-          through: {friendship_status: 'approved'}
-        });
-      }
-    }
+    await Promise.all(
+      allUsers.map((user, index) => {
+        if (index < allUsers.length - 1) {
+          return user.addFriend(allUsers[index + 1], {
+            through: {friendship_status: 'approved'}
+          });
+        }
+      })
+    );
+    await Promise.all(
+      allUsers.map((user, index) => {
+        if (index < allUsers.length - 1) {
+          return allUsers[index + 1].addFriend(user, {
+            through: {friendship_status: 'approved'}
+          });
+        }
+      })
+    );
     // all users have {2} random places
-    for (let i = 0; i < allUsers.length; i += 1) {
-      let max = 3;
-      let min = 0;
-      for (let k = 0; k < 2; k += 1) {
-        await allUsers[i].addPlace(allPlaces[randomNumber(max, min)], {
-          through: {
-            description: faker.lorem.sentence(),
-            photos:
-              `https://i.picsum.photos/id/${randomNumber(
-                1000,
-                100
-              )}/200/200.jpg` || 'https://i.picsum.photos/id/999/200/200.jpg',
-            price_rating: randomNumber(4, 1),
-            tags: faker.array(faker.lorem.word, randomNumber(5))
-          }
-        });
-        max += 4;
-        min += 4;
-      }
-    }
+    await Promise.all(
+      allUsers.map(user => {
+        const numOfPlaces = [1, 2];
+        let max = 3;
+        let min = 0;
+        return Promise.all(
+          numOfPlaces.map(() => {
+            max += 4;
+            min += 4;
+            return user.addPlace(allPlaces[randomNumber(max, min)], {
+              through: {
+                description: faker.lorem.sentence(),
+                photos: `https://i.picsum.photos/id/${randomNumber(
+                  1000,
+                  100
+                )}/200/200.jpg`,
+                price_rating: randomNumber(4, 1),
+                tags: faker.array(faker.lorem.word, randomNumber(5))
+              }
+            });
+          })
+        );
+      })
+    );
   } catch (error) {
     console.error(error);
   }
