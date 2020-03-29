@@ -36,9 +36,7 @@ const gotSingleFriend = friend => {
 // Thunk Creator
 export const getFriendsThunk = userId => async dispatch => {
   try {
-    const tempUserId = 1;
-    const { data } = await axios.get(`${apiUrl}/api/friends/${tempUserId}`);
-
+    const { data } = await axios.get(`${apiUrl}/api/friends/${userId}`);
     dispatch(gotFriends(data));
   } catch (error) {
     console.error(error);

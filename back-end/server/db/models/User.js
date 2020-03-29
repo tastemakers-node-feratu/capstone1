@@ -4,7 +4,7 @@ const moment = require('moment');
 const Friend = require('./Friend');
 const db = require('../db');
 
-const {Op} = Sequelize;
+const { Op } = Sequelize;
 const Place = require('./Place');
 const Snapshot = require('./Snapshot');
 
@@ -59,9 +59,9 @@ const User = db.define('user', {
   }
 });
 
-User.getFriends = function(id) {
+User.getFriends = function (id) {
   const friends = this.findOne({
-    where: {id},
+    where: { id },
     include: [
       {
         model: User,
@@ -72,15 +72,15 @@ User.getFriends = function(id) {
   return friends;
 };
 
-User.prototype.correctPassword = function(passw) {
+User.prototype.correctPassword = function (passw) {
   return User.encryptPassword(passw, this.salt()) === this.password();
 };
 
-User.generateSalt = function() {
+User.generateSalt = function () {
   return crypto.randomBytes(16).toString('base64');
 };
 
-User.encryptPassword = function(plainPW, salt) {
+User.encryptPassword = function (plainPW, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainPW)
@@ -101,7 +101,7 @@ User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPW);
 });
 
-User.getSnapShots = function (arr) {
+User.getSnapShots = function (arr, categories) {
   const oneMonthAgo = moment().subtract(1, 'months').format();
   // if (filter) {
   //   all = this.findAll(
@@ -122,6 +122,12 @@ User.getSnapShots = function (arr) {
   //   )
   // }
   // else {
+  let catArr
+  if (categories === 'all') {
+    catArr = ['food', 'fitness', 'nightlife', 'shop', 'beauty', 'experience']
+  } else {
+    catArr = categories.split(',')
+  }
   const all = this.findAll(
     {
       where: {
@@ -132,7 +138,8 @@ User.getSnapShots = function (arr) {
         where: {
           createdAt: {
             [Op.gte]: oneMonthAgo
-          }
+          },
+          category: { [Op.in]: catArr }
         }
       }]
     }
