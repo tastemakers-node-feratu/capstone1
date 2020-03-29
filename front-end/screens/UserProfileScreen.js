@@ -19,21 +19,23 @@ class UserProfileScreen extends Component {
     super(props);
     this.state={
       editingMode: false,
-      email: '',
+      // email: '',
       imageURL: '',
       bio: '',
+      username: '',
       name: ''
     }
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
   }
 
   componentDidMount(){
-    const {email, name, bio, imageURL} = this.props.user
+    const {username, name, bio, imageURL} = this.props.user
     this.setState({
       ...this.state,
-      email,
+      // email,
       name,
       bio,
+      username,
       imageURL
     })
   }
@@ -49,6 +51,8 @@ class UserProfileScreen extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     if(this.state.editingMode){
       return (
         <SafeAreaView>
@@ -56,7 +60,7 @@ class UserProfileScreen extends Component {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
-                <Icon name="close" size={30} color="black"
+                <Icon style={styles.icon} name="close" size={30} color="black"
                   onPress={() => this.setState({editingMode: false})}
                 />
                 <Image style={styles.avatar}
@@ -71,9 +75,9 @@ class UserProfileScreen extends Component {
                     />
                   <TextInput
                     style={styles.input}
-                    placeHolder={this.state.email}
-                    value={this.state.email}
-                    onChangeText={email => this.setState({email})}
+                    placeHolder={this.state.username}
+                    value={this.state.username}
+                    onChangeText={username => this.setState({username})}
                   />
                   <TextInput
                     style={styles.input}
@@ -88,7 +92,7 @@ class UserProfileScreen extends Component {
                   </TouchableOpacity>
               </View>
             </View>
-            <UserProifleLinks />
+            <UserProifleLinks navigate={navigate}/>
         </SafeAreaView>
       )
     }
@@ -105,11 +109,11 @@ class UserProfileScreen extends Component {
                   />
                 </View>
                   <Text style={styles.name}>{this.props.user.name}</Text>
-                  <Text style={styles.userInfo}>{this.props.user.email}</Text>
+                  <Text style={styles.userInfo}>{this.props.user.username}</Text>
                   <Text style={styles.userInfo}>{this.props.user.bio} </Text>
               </View>
             </View>
-            <UserProifleLinks />
+            <UserProifleLinks navigate={navigate}/>
         </SafeAreaView>
       );
     }
@@ -136,6 +140,9 @@ const styles = StyleSheet.create({
     padding:30,
     alignItems: 'center',
   },
+  icon: {
+    paddingRight: 1
+  },
   avatar: {
     width: 130,
     height: 130,
@@ -153,7 +160,7 @@ const styles = StyleSheet.create({
   },
   userInfo:{
     fontSize:16,
-    color:"#778899",
+    color:"white",
     fontWeight:'600',
   },
   avatarEdit: {

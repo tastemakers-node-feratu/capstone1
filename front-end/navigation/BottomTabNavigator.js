@@ -19,6 +19,7 @@ const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 const FeedTab = createStackNavigator();
 const FriendTab = createStackNavigator();
+const ProfileTab = createStackNavigator();
 
 function Feed() {
   return (
@@ -50,6 +51,24 @@ function Friends() {
     <FriendTab.Screen name="SingleFriend" component={SingleFriendScreen} />
     <FriendTab.Screen name="SingleSnap" component={OneSnapScreen} />
   </FriendTab.Navigator>)
+}
+
+function Profile() {
+  return (
+    <ProfileTab.Navigator initialRouteName="Profile"
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#74b9ff',
+      },
+      title: ''
+    }}
+    >
+      <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
+      <ProfileTab.Screen name="All Friends" component={FriendsScreen} />
+      {/* <ProfileTab.Screen name="My Pins" component={something} /> */}
+      {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
+    </ProfileTab.Navigator>
+  )
 }
 
 export default function BottomTabNavigator({ navigation, route }) {
@@ -101,8 +120,8 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="OwnProfile"
-        component={UserProfileScreen}
+        name="Profile"
+        component={Profile}
         options={{
           title: 'Profile',
           tabBarIcon: ({focused}) => (
