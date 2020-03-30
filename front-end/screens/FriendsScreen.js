@@ -48,7 +48,7 @@ class FriendsScreen extends React.Component {
                     {
                         filteredFriends.map((friend) => {
                             return (
-                                <MiniFriendView key={friend.email} info={friend} navigate={navigate} 
+                                <MiniFriendView key={friend.email} info={friend} navigate={navigate}
                                 />
                             )
                         })
@@ -88,7 +88,7 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-    getFriends: () => dispatch(getFriendsThunk(2))
+    getFriends: (id) => dispatch(getFriendsThunk(id))
 });
 
 export default connect(mapState, mapDispatch)(FriendsScreen);
