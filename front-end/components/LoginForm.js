@@ -42,7 +42,12 @@ const LoginForm = props => {
   return user.id ? (
     <View>{navigate('AllSnapShots')}</View>
   ) : (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={64}
+        behavior="padding"
+      >
+    <SafeAreaView style={styles.container}>
       <TextInput
         placeholder="username or email"
         placeholderTextColor="rgba(255,255,255,0.7)"
@@ -76,15 +81,16 @@ const LoginForm = props => {
       <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     backgroundColor: '#034f84'
   },
   input: {
@@ -94,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 15,
+    // marginBottom: 15,
     color: '#FFF',
     paddingHorizontal: 10
   },
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-    marginBottom: 10,
+    marginTop: 15,
     borderRadius: 10
   },
   buttonText: {

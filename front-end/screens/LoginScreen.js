@@ -6,6 +6,7 @@ import {
   StatusBar,
   SafeAreaView,
   StyleSheet,
+  ScrollView,
   Text,
   TextInput,
   KeyboardAvoidingView,
@@ -27,14 +28,12 @@ class LoginScreen extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
+
       // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
-      <KeyboardAvoidingView
-        style={styles.keyboardAvoid}
-        keyboardVerticalOffset={-150}
-        behavior="padding"
-      >
-        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+      //  <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+
         <SafeAreaView style={styles.container}>
+          <ScrollView contentContainerStyle={styles.contentContainer} >
           <View style={styles.inner}>
             <View>
               <Text style={styles.brandName}>Taste Makers</Text>
@@ -50,10 +49,9 @@ class LoginScreen extends React.Component {
                 <Text style={styles.buttonText}>Create New User</Text>
               </TouchableOpacity>
             </View>
-            {/* <View style={{ flex: 1 }} /> */}
           </View>
+          </ScrollView>
         </SafeAreaView>
-      </KeyboardAvoidingView>
     );
   }
 }
@@ -61,6 +59,7 @@ class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   keyboardAvoid: {},
   container: {
+    flex: 1,
     alignItems: 'center',
     backgroundColor: '#034f84'
   },
@@ -82,14 +81,14 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: 'center',
     color: '#FFF',
-    // marginTop: 10,
     width: 160,
     textAlign: 'center',
-    opacity: 0.9
+    opacity: 0.9,
+    paddingVertical: 5,
+    marginBottom: 20
   },
   logoContainer: {
     alignItems: 'center',
-    // flexGrow: 1,
     justifyContent: 'center'
   },
   logo: {
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     width: 200,
     paddingVertical: 10,
 
-    marginBottom: 250,
+    marginBottom: 100,
     borderRadius: 10
   },
   buttonText: {
@@ -110,7 +109,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700'
   },
-  loginForm: {}
+  contentContainer: {
+    paddingTop: 15,
+    paddingBottom: 15
+  },
 });
 
 const mapState = state => ({
