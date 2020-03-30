@@ -47,7 +47,6 @@ const gotSingleFriend = friend => {
   };
 };
 const gotFriendsStatus = status => {
-  console.log('in the action creator, status =', status);
   return {
     type: GOT_FRIENDS_STATUS,
     status
@@ -56,7 +55,6 @@ const gotFriendsStatus = status => {
 // Thunk Creator
 export const removeFriendThunk = friendsIds => async dispatch => {
   try {
-    console.log('whats in friendsIds', friendsIds);
     const {selectedFriendId} = friendsIds;
     const {data} = await axios.delete(`${apiUrl}/api/friends/unfriend`, {
       params: {
@@ -89,7 +87,6 @@ export const addFriendThunk = friendIds => async dispatch => {
 };
 export const getFriendStatus = friendsIds => async dispatch => {
   try {
-    console.log('getFriendStatusThunk userId:', friendsIds.userId, 'friendId:', friendsIds.selectedFriendId);
     const {data} = await axios.get(`${apiUrl}/api/friends/friendStatus`, {
       params: {
         userId: friendsIds.userId,
@@ -113,7 +110,6 @@ export const getFriendsThunk = userId => async dispatch => {
 
 export const getSingleFriendThunk = id => async dispatch => {
   try {
-    console.log('does getSingleFriendThunk work?', id);
     const {data} = await axios.get(`${apiUrl}/api/users/${id}`);
 
     dispatch(gotSingleFriend(data));
@@ -138,7 +134,6 @@ const friendsReducer = (state = initialState, action) => {
     //   return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
     // },
     case GOT_FRIENDS_STATUS: {
-      console.log('reducer function status:', action.status);
       return {...state, friendStatus: action.status};
     }
     case ADD_FRIEND: {

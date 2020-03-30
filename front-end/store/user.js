@@ -60,7 +60,6 @@ export const signUp = userData => async dispatch => {
 };
 export const logOutThunk = () => async dispatch => {
   try {
-    console.log('in logout thunk');
     await axios.delete(`${apiUrl}/auth/logout`);
     dispatch(gotLogOut());
   } catch (error) {

@@ -5,34 +5,25 @@ import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {removeFriendThunk} from '../store/friends';
 
-class UnfriendComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-    this.handleUnfriend = this.handleUnfriend.bind(this);
-  }
+const UnfriendComponent = props => {
+  const {userId, selectedFriendId, unfriend} = props;
 
-  componentDidMount() {}
-
-  handleUnfriend() {
-    const {userId, selectedFriendId, unfriend} = this.props;
+  const handleUnfriend = () => {
     const associateIds = {
       selectedFriendId,
       userId
     };
     unfriend(associateIds);
-  }
+  };
 
-  render() {
-    return (
-      <View>
-        <TouchableOpacity onPress={this.handleUnfriend}>
-          <Text style={styles.buttonText}>Unfriend</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+  return (
+    <View>
+      <TouchableOpacity onPress={handleUnfriend}>
+        <Text style={styles.buttonText}>Unfriend</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   buttonText: {

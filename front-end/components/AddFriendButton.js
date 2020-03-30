@@ -7,28 +7,19 @@ import {connect} from 'react-redux';
 import {addFriendThunk} from '../store/friends';
 import UnfriendComponent from './UnfriendComponent';
 
-class AddFriendButton extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-    this.handlePress = this.handlePress.bind(this);
-    this.whichButton = this.whichButton.bind(this);
-  }
+const AddFriendButton = props => {
+  const {userId, selectedFriendId, addFriends, friendStatus} = props;
 
-  async componentDidMount() {}
-
-  handlePress() {
-    const {userId, selectedFriendId, addFriends, friendStatus} = this.props;
+  const handlePress = () => {
     const associateIds = {
       selectedFriendId,
       userId,
       friendStatus
     };
     addFriends(associateIds);
-  }
+  };
 
-  whichButton() {
-    const {friendStatus, selectedFriendId} = this.props;
+  const whichButton = () => {
     switch (friendStatus) {
       case '': {
         return null;
@@ -41,14 +32,14 @@ class AddFriendButton extends React.Component {
       }
       case 'friend sent req': {
         return (
-          <TouchableOpacity onPress={this.handlePress}>
+          <TouchableOpacity onPress={handlePress}>
             <Text style={styles.buttonText}>Accept Friend Request</Text>
           </TouchableOpacity>
         );
       }
       case 'not friends': {
         return (
-          <TouchableOpacity onPress={this.handlePress}>
+          <TouchableOpacity onPress={handlePress}>
             <Text style={styles.buttonText}>Send Friend Request</Text>
           </TouchableOpacity>
         );
@@ -56,12 +47,9 @@ class AddFriendButton extends React.Component {
       default:
         return null;
     }
-  }
-
-  render() {
-    return <View style={styles.box}>{this.whichButton()}</View>;
-  }
-}
+  };
+  return <View style={styles.box}>{whichButton()}</View>;
+};
 
 const styles = StyleSheet.create({
   box: {
