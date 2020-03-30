@@ -60,7 +60,6 @@ class SnapShotsScreen extends React.Component {
                     <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
                         <Button title="Filter" color={'white'} onPress={this.openModal} />
-                        <Button title="My Friends" color={'white'} onPress={() => navigate('AllFriends')} />
                     </View>
                 </View>
                 <Modal visible={this.state.modalVisible} animationType='slide'>

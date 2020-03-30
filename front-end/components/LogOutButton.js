@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import {Button, StyleSheet, View} from 'react-native';
-import {connect} from 'react-redux';
-import {logOutThunk} from '../store/user';
+import { Button, StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
+import { logOutThunk } from '../store/user';
 
 const LogOutButton = props => {
-  const {navigate, logOutThunk, user} = props;
+  const { navigate, logOutThunk, user } = props;
 
   const logout = () => {
     logOutThunk();
-    navigate('Home');
+    navigate('Auth');
   };
 
   return (
