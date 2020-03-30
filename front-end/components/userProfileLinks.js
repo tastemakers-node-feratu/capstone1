@@ -7,12 +7,9 @@ import {
   TextInput
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function userProfileLinks(props) {
-    //   onPress={() => {
-  //     navigate('SingleFriend', { friendId: info.id })
-  // }}
   const {navigate} = props;
   return (
   <View style={styles.body}>
