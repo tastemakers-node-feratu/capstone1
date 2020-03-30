@@ -84,7 +84,6 @@ export const updateUserThunk = (id, info) => async dispatch => {
   }
 }
 
-const userReducer = (state = user, action) => {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_USER: {
