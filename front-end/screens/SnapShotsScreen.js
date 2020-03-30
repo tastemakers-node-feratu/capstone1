@@ -45,7 +45,11 @@ class SnapShotsScreen extends React.Component {
 
     closeModal() {
         this.setState({ modalVisible: !this.state.modalVisible });
-        this.props.allSnapshotsThunk(this.props.user.id, this.props.catFilter);
+        const snapshotData = {
+            userId: this.props.userId,
+            catFilter: this.props.catFilter
+        }
+        this.props.allSnapshotsThunk(snapshotData);
     }
 
     render() {
