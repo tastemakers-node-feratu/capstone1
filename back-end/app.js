@@ -35,11 +35,11 @@ app.use(
   })
 );
 // use function below to test/debug sessions
-app.use((req, res, next) => {
-  // testing session/cookie
-  console.log('SESSION: ', req.session, req.sessionID);
-  next();
-});
+// app.use((req, res, next) => {
+//   // testing session/cookie
+//   console.log('SESSION: ', req.session, req.sessionID);
+//   next();
+// });
 
 // passport middleware
 app.use(passport.initialize());
