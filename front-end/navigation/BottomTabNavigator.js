@@ -12,6 +12,8 @@ import SingleFriendScreen from '../screens/SingleFriendScreen';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import UserProfileScreen from '../screens/UserProfileScreen';
+import UserProfileSnapView from '../components/UserProfileSnapView'
+import MySnaps from '../screens/MySnaps'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -25,7 +27,7 @@ function Feed() {
     <FeedTab.Navigator initialRouteName="MainFeed"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#74b9ff',
+          backgroundColor: '#034f84',
         },
         title: ''
       }}
@@ -41,7 +43,7 @@ function Friends() {
   return (< FriendTab.Navigator initialRouteName="All Friends"
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
       },
       title: ''
     }}
@@ -55,11 +57,16 @@ function Friends() {
 function Profile() {
   return (
     <ProfileTab.Navigator initialRouteName="Profile"
-      headerMode="none"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#034f84',
+        },
+        title: ''
+      }}
     >
       <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
       <ProfileTab.Screen name="All Friends" component={Friends} />
-      {/* <ProfileTab.Screen name="My Pins" component={something} /> */}
+      <ProfileTab.Screen name="My Pins" component={MySnaps} />
       {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
     </ProfileTab.Navigator>
   )
@@ -73,23 +80,6 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator>
-
-      {/* //   <BottomTab.Screen
-    //     name="Home"
-    //     component={LoginScreen}
-    //     options={{
-    //       title: 'Home',
-    //       tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
-    //     }}
-    //   />
-    //   <BottomTab.Screen
-    //     name="SignUp"
-    //     component={SignUpScreen}
-    //     options={{
-    //       title: 'SignUp',
-    //       tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
-    //     }}
-    //   /> */}
       <BottomTab.Screen
         name="Check In"
         component={CheckInScreen}
@@ -104,14 +94,6 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: 'Feed',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="AllFriends"
-        component={Friends}
-        options={{
-          title: 'Friends',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
         }}
       />
       <BottomTab.Screen

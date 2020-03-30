@@ -12,7 +12,6 @@ import { Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import {
   getSingleFriendThunk,
-  //   gotFriendshipThunk,
   getFriendStatus
 } from '../store/friends';
 import { MonoText } from '../components/StyledText';
@@ -25,18 +24,15 @@ class SingleFriendScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const { route, getSingleFriendThunk, gotFriendshipThunk, user } = this.props;
+    const { route, getSingleFriendThunk, user } = this.props;
     const { friendId } = route.params;
     await getSingleFriendThunk(friendId);
-    // await gotFriendshipThunk(user.id, friendId);
     const { singlefriend, friendStatus, friendStatusThunk } = this.props;
-    console.log('is there user id', user.id)
     const associateIds = {
       selectedFriendId: singlefriend.id,
       userId: user.id
     };
     await friendStatusThunk(associateIds);
-    console.log('friendStatusThunk awwaited and finished?', friendStatus);
   }
 
   render() {
@@ -54,7 +50,7 @@ class SingleFriendScreen extends React.Component {
 
             <View style={styles.userInfo}>
               <Text style={styles.name}>{singlefriend.username}</Text>
-              <Text style={styles.email}>{singlefriend.email}</Text>
+              <Text style={styles.name}>{singlefriend.name}</Text>
               <AddFriendButton
                 style={styles.addFriendButton}
                 selectedFriendId={singlefriend.id}
@@ -82,7 +78,7 @@ class SingleFriendScreen extends React.Component {
             flex: 2,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#74b9ff'
+            backgroundColor: '#034f84'
           }}
         >
           <Spinner color="#7d5fff" />
@@ -94,11 +90,11 @@ class SingleFriendScreen extends React.Component {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#74b9ff'
+    backgroundColor: '#034f84'
   },
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
     margin: 20
   },
   userContainer: {
@@ -113,9 +109,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   name: {
-    // flex: 1,
     fontSize: 20,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     fontWeight: '400',
     flexWrap: 'wrap'
@@ -123,14 +118,14 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 18,
     fontStyle: 'italic',
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     margin: 10
   },
   userContent: {
     fontSize: 16,
     fontStyle: 'italic',
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     margin: 10
   },
@@ -142,16 +137,12 @@ const styles = StyleSheet.create({
 const mapState = state => ({
   singlefriend: state.friends.singlefriend,
   singleFriendLoading: state.friends.singleFriendLoading,
-  // singleFriendship: state.friends.singleFriendship,
-  // friendshipLoading: state.friends.friendshipLoading,
   friendStatus: state.friends.friendStatus,
   user: state.user
 });
 
 const mapDispatch = dispatch => ({
   getSingleFriendThunk: userId => dispatch(getSingleFriendThunk(userId)),
-  //   gotFriendshipThunk: (userId, friendId) =>
-  //     dispatch(gotFriendshipThunk(userId, friendId)),
   friendStatusThunk: data => dispatch(getFriendStatus(data))
 });
 

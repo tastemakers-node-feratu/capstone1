@@ -6,13 +6,10 @@ export default function UserProfileSnapView(props) {
 
     return (
         <View >
-            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId: userId, placeId: snapshot.id, }) }} >
+            <TouchableHighlight style={{ padding: 10, alignItems: 'center' }} onPress={() => { navigate('SingleSnap', { userId: userId, placeId: snapshot.id, }) }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.name}</Text>
                     <Text style={styles.content}>{snapshot.snapshot.description}</Text>
-                    {/* <Image source={{ uri: snapshot.snapshot.photos }}
-                        style={{ width: 150, height: 150, marginBottom: 10 }}
-                    /> */}
                     <Image source={require('../assets/images/right-arrow.png')} />
                 </View>
             </TouchableHighlight>
@@ -22,24 +19,23 @@ export default function UserProfileSnapView(props) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#a29bfe',
+        flex: 1,
+        backgroundColor: '#f7cac9',
         alignItems: 'center',
         borderRadius: 10,
         height: 150,
         width: 160,
-        paddingBottom: 10,
-        marginBottom: 10
     },
     name: {
         fontSize: 20,
-        color: '#FFFFFF',
+        color: '#f7786b',
         textAlign: 'center',
         fontWeight: '400',
         marginTop: 5,
         marginBottom: 5,
     },
     content: {
-        color: '#FFFFFF',
+        color: '#f7786b',
         fontStyle: 'italic',
         textAlign: 'center',
     }

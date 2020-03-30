@@ -95,7 +95,6 @@ class CheckInScreen extends React.Component {
             animationType={'slide'}
             transparent={false}
             visible={this.state.modalVisible}
-          // onRequestClose={() => console.log('modal closed')}
           >
             <View style={styles.modal}>
               <TouchableHighlight
@@ -121,7 +120,7 @@ class CheckInScreen extends React.Component {
                   What'd you discover?
               </Text>
                 <View>
-                  <View /*style={styles.checkboxesRow}*/ >
+                  <View>
                     {this.state.checkboxes.map((checkbox) => {
                       return (
                         <CheckBox
@@ -196,7 +195,7 @@ class CheckInScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
   },
   contentContainer: {
     paddingTop: 15,
@@ -215,7 +214,9 @@ const styles = StyleSheet.create({
   input: {
     padding: 8,
     marginBottom: 8,
+    backgroundColor: 'white',
     borderColor: 'gray',
+    color: 'black',
     borderWidth: 1,
     borderRadius: 4,
   },
@@ -255,11 +256,6 @@ const styles = StyleSheet.create({
 
 const mapState = state => {
   return {
-    // user: {
-    //   id: 1,
-    //   username: 'mtoff',
-    //   imageURL: 'https://reactnative.dev/img/tiny_logo.png'
-    // },
     user: state.user,
     snapshot: state.snapshots.selectedSnapshot
   }

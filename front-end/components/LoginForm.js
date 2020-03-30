@@ -1,10 +1,8 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-filename-extension */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import {
-  Button,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -12,17 +10,17 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {getUserThunk} from '../store/user';
+import { getUserThunk } from '../store/user';
 
 const LoginForm = props => {
   const [authName, setAuthName] = useState('');
   const [password, setPassword] = useState('');
-  const {navigate, getUserThunk, user} = props;
+  const { navigate, getUserThunk, user } = props;
 
   const handleSubmit = async () => {
     if (authName === '') alert('Please enter an email address');
     else if (password === '') alert('Please enter a password');
-    const authData = {authName, password};
+    const authData = { authName, password };
     await getUserThunk(authData);
     clearTextInput();
     // if (user.id) {
@@ -40,44 +38,44 @@ const LoginForm = props => {
   let passwordInput;
 
   return user.id ? (
-    <View>{navigate('AllSnapShots')}</View>
+    <View>{navigate('Home')}</View>
   ) : (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="username or email"
-        placeholderTextColor="rgba(255,255,255,0.7)"
-        returnKeyType="next"
-        onSubmitEditing={() => {
-          passwordInput.focus();
-        }}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-        style={styles.input}
-        onChangeText={value => setAuthName(value)}
-        clearButtonMode="always"
-        value={authName}
-      />
-      <TextInput
-        placeholder="password"
-        placeholderTextColor="rgba(255,255,255,0.7)"
-        secureTextEntry
-        returnKeyType="go"
-        style={styles.input}
-        clearButtonMode="always"
-        value={password}
-        name="passwordInput"
-        ref={input => {
-          passwordInput = input;
-        }}
-        onChangeText={value => setPassword(value)}
-      />
+      <View style={styles.container}>
+        <TextInput
+          placeholder="username or email"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            passwordInput.focus();
+          }}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.input}
+          onChangeText={value => setAuthName(value)}
+          clearButtonMode="always"
+          value={authName}
+        />
+        <TextInput
+          placeholder="password"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          secureTextEntry
+          returnKeyType="go"
+          style={styles.input}
+          clearButtonMode="always"
+          value={password}
+          name="passwordInput"
+          ref={input => {
+            passwordInput = input;
+          }}
+          onChangeText={value => setPassword(value)}
+        />
 
-      <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </View>
-  );
+        <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -85,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#74b9ff'
+    backgroundColor: '#034f84'
   },
   input: {
     width: 300,

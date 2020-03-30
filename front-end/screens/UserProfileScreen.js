@@ -19,7 +19,6 @@ class UserProfileScreen extends Component {
     super(props);
     this.state = {
       editingMode: false,
-      // email: '',
       imageURL: '',
       bio: '',
       username: '',
@@ -32,7 +31,6 @@ class UserProfileScreen extends Component {
     const { username, name, bio, imageURL } = this.props.user
     this.setState({
       ...this.state,
-      // email,
       name,
       bio,
       username,
@@ -41,8 +39,7 @@ class UserProfileScreen extends Component {
   }
 
   handleUpdateUser() {
-    // const {id} = this.props.user
-    const id = 1;
+    const { id } = this.props.user
     this.props.updateUser(id, this.state);
     this.setState({
       ...this.state,
@@ -60,7 +57,7 @@ class UserProfileScreen extends Component {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
-                <Icon style={styles.icon} name="close" size={30} color="black"
+                <Icon style={styles.icon} name="close" size={30} color="white"
                   onPress={() => this.setState({ editingMode: false })}
                 />
                 <Image style={styles.avatar}
@@ -104,7 +101,7 @@ class UserProfileScreen extends Component {
               <View style={styles.avatarEdit}>
                 <Image style={styles.avatar}
                   source={{ uri: this.props.user.imageURL }} />
-                <Icon name="edit" size={30} color="black" style={styles.editor}
+                <Icon name="edit" size={30} color="white" style={styles.editor}
                   onPress={() => this.setState({ editingMode: true })}
                 />
               </View>
@@ -112,9 +109,12 @@ class UserProfileScreen extends Component {
               <Text style={styles.userInfo}>{this.props.user.username}</Text>
               <Text style={styles.userInfo}>{this.props.user.bio} </Text>
             </View>
+            <Text style={styles.name}>{this.props.user.name}</Text>
+            <Text style={styles.userInfo}>{this.props.user.username}</Text>
+            <Text style={styles.userInfo}>{this.props.user.bio} </Text>
           </View>
           <UserProifleLinks navigate={navigate} />
-        </SafeAreaView>
+        </SafeAreaView >
       );
     }
   }
@@ -132,7 +132,7 @@ export default connect(mapState, mapDispatch)(UserProfileScreen)
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#74b9ff",
+    backgroundColor: "#034f84",
     paddingTop: 20,
     paddingBottom: 20
   },
@@ -141,26 +141,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    paddingRight: 1
+    paddingRight: 1,
+    color: 'white'
   },
   avatar: {
     width: 130,
     height: 130,
     borderRadius: 63,
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#f7786b",
     marginBottom: 10,
     marginLeft: 30,
 
   },
   name: {
     fontSize: 22,
-    color: "#000000",
+    color: "white",
     fontWeight: '600',
   },
   userInfo: {
     fontSize: 16,
-    color: "white",
+    color: "#f7cac9",
     fontWeight: '600',
   },
   avatarEdit: {
@@ -172,8 +173,9 @@ const styles = StyleSheet.create({
   input: {
     padding: 8,
     marginBottom: 8,
-    borderColor: 'black',
-    borderWidth: 1,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 2,
     borderRadius: 4,
     color: 'gray'
   }

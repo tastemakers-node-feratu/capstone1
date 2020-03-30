@@ -12,10 +12,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {connect} from 'react-redux';
-import {MonoText} from '../components/StyledText';
+import { connect } from 'react-redux';
+import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
-import {getMeThunk} from '../store/user';
+import { getMeThunk } from '../store/user';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -25,8 +25,8 @@ class LoginScreen extends React.Component {
   //   await getMeThunk();
   // }
   render() {
-    const {navigate} = this.props.navigation;
-    return ( 
+    const { navigate } = this.props.navigation;
+    return (
       // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
@@ -50,7 +50,6 @@ class LoginScreen extends React.Component {
                 <Text style={styles.buttonText}>Create New User</Text>
               </TouchableOpacity>
             </View>
-            {/* <View style={{ flex: 1 }} /> */}
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -62,34 +61,27 @@ const styles = StyleSheet.create({
   keyboardAvoid: {},
   container: {
     alignItems: 'center',
-    backgroundColor: '#74b9ff'
+    backgroundColor: '#034f84'
   },
   inner: {},
   brandName: {
     marginTop: 150,
     fontSize: 50,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center'
   },
-  // welcomeImage: {
-  //   width: 200,
-  //   height: 200,
-  //   marginTop: 30
-  // },
   error: {
     color: `#eb4034`
   },
   title: {
     alignSelf: 'center',
     color: '#FFF',
-    // marginTop: 10,
     width: 160,
     textAlign: 'center',
     opacity: 0.9
   },
   logoContainer: {
     alignItems: 'center',
-    // flexGrow: 1,
     justifyContent: 'center'
   },
   logo: {

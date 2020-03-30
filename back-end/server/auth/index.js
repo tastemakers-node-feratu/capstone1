@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../db/models/User');
+const {User, Place, Snapshot} = require('../db/models');
 
 // ./auth/google
 router.use('/google', require('./googleOAuth'));
@@ -31,7 +31,8 @@ router.put('/login', async (req, res, next) => {
     const user = await User.findOne({
       where: {
         [field]: authName
-      }
+      },
+      include: [{ model: Place, through: Snapshot }]
     });
     if (!user) {
       res.status(401).send('invalid log in credentials');

@@ -4,7 +4,6 @@ const { Op } = require('sequelize');
 
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log('this is get route :id working? ', req.params.id);
     const friend = await User.findOne({
       where: { id: req.params.id },
       include: [{ model: Place, through: Snapshot }]
@@ -19,7 +18,10 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const {imageURL, bio, email, name} = req.body;
-    const oldUser = await User.findByPk(req.params.id);
+    const oldUser = await User.findOne({
+      where: { id: req.params.id },
+      include: [{ model: Place, through: Snapshot }]
+    })
     const updatedUser = await oldUser.update({
       imageURL,
       bio,

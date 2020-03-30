@@ -12,24 +12,31 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export default function userProfileLinks(props) {
   const { navigate } = props;
   return (
-    <View style={styles.body}>
-      <View style={styles.item}>
-        <View style={styles.iconContent}>
-          <Icon style={styles.icon} name="users" size={30} color="white" />
+    <View>
+      <View style={styles.body}>
+        <View style={styles.item}>
+          <View style={styles.iconContent}>
+            <Icon style={styles.icon} name="users" size={30} color="white" />
+          </View>
+          <TouchableOpacity style={styles.infoContent} onPress={() => {
+            navigate('All Friends');
+          }}
+          >
+            <Text style={styles.info}>My Friends</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.infoContent} onPress={() => {
-          navigate('All Friends');
-        }}
-        >
-          <Text style={styles.info}>My Friends</Text>
-        </TouchableOpacity>
-      </View>
 
-      <View style={styles.item}>
-        <View style={styles.iconContent}>
-          <Icon style={styles.icon} name="tags" size={30} color="white" />
+        <View style={styles.item}>
+          <View style={styles.iconContent}>
+            <Icon style={styles.icon} name="tags" size={30} color="white" />
+          </View>
+          <TouchableOpacity style={styles.infoContent}>
+            <Text style={styles.info}>My Pins</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.infoContent}>
+        <TouchableOpacity style={styles.infoContent}
+          onPress={() => navigate("My Pins")}
+        >
           <Text style={styles.info}>My Pins</Text>
         </TouchableOpacity>
       </View>
@@ -42,39 +49,39 @@ export default function userProfileLinks(props) {
           <Text style={styles.info}>Settings</Text>
         </TouchableOpacity>
       </View>
-
-    </View>
+    </View >
   )
 }
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#a29bfe",
+    marginTop: -15,
+    backgroundColor: "#034f84",
     height: 500,
-    flexShrink: 1,
     alignItems: 'center',
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
+    margin: 5,
     paddingBottom: 5,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    backgroundColor: '#f7cac9'
   },
   iconContent: {
-    flex: 1,
     alignItems: 'center',
-    width: 80,
     paddingRight: 7,
   },
   icon: {
     width: 30,
     height: 30,
     marginTop: 30,
+    color: '#f7786b'
   },
   info: {
     fontSize: 18,
     marginTop: 20,
-    marginRight: 90,
-    color: "#FFFFFF",
-    // alignSelf: 'flex-start',
+    color: "#f7786b",
   },
 });
