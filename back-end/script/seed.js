@@ -90,11 +90,9 @@ async function fakerSeed() {
     // all users are friends with each other
     await Promise.all(
       allUsers.map((user, index) => {
-        console.log('what index', index);
         let i = index;
         while (i < 99) {
           i += 1;
-          console.log('what i', i, index);
           user.addFriend(allUsers[i], {
             through: {friendship_status: 'approved'}
           });

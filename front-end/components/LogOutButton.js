@@ -9,7 +9,6 @@ const LogOutButton = props => {
 
   const logout = () => {
     logOutThunk();
-    console.log('user after logout', user.id);
     navigate('Home');
   };
 
