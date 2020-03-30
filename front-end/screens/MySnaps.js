@@ -48,15 +48,10 @@ const styles = StyleSheet.create({
     },
 });
 
-// export default MySnaps;
 const mapState = state => {
     return{
         user: state.user
     }
 }
-
-const mapDispatch = dispatch => ({
-    // getUser: ()=>dispatch(getPlacesThunk)
-})
 
 export default connect(mapState)(MySnaps);
