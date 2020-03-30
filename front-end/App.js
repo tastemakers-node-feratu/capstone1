@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-
+import AppNavigator from './navigation/AppNavigator'
 
 import useLinking from './navigation/useLinking';
 
@@ -51,13 +51,14 @@ export default function App(props) {
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null
   } else {
+    console.log('AuthNavigator', AppNavigator)
     return (
       <Provider store={store}>
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
           <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
             <Stack.Navigator headerMode="none" >
-              <Stack.Screen name="Root" component={BottomTabNavigator} />
+              <Stack.Screen name="Root" component={AppNavigator} />
             </Stack.Navigator>
           </NavigationContainer>
         </View>
