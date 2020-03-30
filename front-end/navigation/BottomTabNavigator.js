@@ -28,7 +28,7 @@ function Feed() {
     <FeedTab.Navigator initialRouteName="MainFeed"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#74b9ff',
+          backgroundColor: '#034f84',
         },
         title: ''
       }}
@@ -44,7 +44,7 @@ function Friends() {
   return (< FriendTab.Navigator initialRouteName="All Friends"
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
       },
       title: ''
     }}
@@ -60,7 +60,7 @@ function Profile() {
     <ProfileTab.Navigator initialRouteName="Profile"
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
       },
       title: ''
     }}

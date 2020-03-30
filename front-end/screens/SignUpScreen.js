@@ -41,7 +41,7 @@ class SignUpScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   brandName: {
     fontSize: 50,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center'
   },
   input: {

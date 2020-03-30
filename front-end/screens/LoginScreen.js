@@ -34,7 +34,6 @@ class LoginScreen extends React.Component {
           <View style={styles.inner}>
             <View>
               <Text style={styles.brandName}>Taste Makers</Text>
-              {/* <Image source={../logo} style={styles.welcomeImage} /> */}
               <Text style={styles.title}>What are you loving this week? </Text>
             </View>
             <LoginForm style={styles.loginForm} navigate={navigate} />
@@ -46,7 +45,6 @@ class LoginScreen extends React.Component {
                 <Text style={styles.buttonText}>Create New User</Text>
               </TouchableOpacity>
             </View>
-            {/* <View style={{ flex: 1 }} /> */}
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -58,20 +56,15 @@ const styles = StyleSheet.create({
   keyboardAvoid: {},
   container: {
     alignItems: 'center',
-    backgroundColor: '#74b9ff'
+    backgroundColor: '#034f84'
   },
   inner: {},
   brandName: {
     marginTop: 150,
     fontSize: 50,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center'
   },
-  // welcomeImage: {
-  //   width: 200,
-  //   height: 200,
-  //   marginTop: 30
-  // },
   error: {
     color: `#eb4034`
   },

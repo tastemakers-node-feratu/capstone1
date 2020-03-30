@@ -54,7 +54,7 @@ const AddFriendButton = props => {
 const styles = StyleSheet.create({
   box: {
     color: '#FFFFFF',
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
     borderStyle: 'solid',
     borderColor: '#ffffff',
     borderWidth: 1,

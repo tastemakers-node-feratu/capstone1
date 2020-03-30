@@ -62,7 +62,7 @@ class FriendsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
     },
     contentContainer: {
         paddingTop: 15,

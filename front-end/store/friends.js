@@ -13,12 +13,12 @@ const initialState = {
 };
 
 // Action Types
-
 const GOT_FRIENDS = 'GOT_FRIENDS';
 const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
 const GOT_FRIENDS_STATUS = 'GOT_FRIENDS_STATUS';
 const ADD_FRIEND = 'ADD_FRIEND';
 const REMOVE_FRIEND = 'REMOVE_FRIEND';
+
 // Action Creator
 const gotRemoveFriend = (status, removeId) => {
   return {
@@ -52,7 +52,8 @@ const gotFriendsStatus = status => {
     status
   };
 };
-// Thunk Creator
+
+// Thunk Creators
 export const removeFriendThunk = friendsIds => async dispatch => {
   try {
     const {selectedFriendId} = friendsIds;
@@ -130,9 +131,6 @@ const friendsReducer = (state = initialState, action) => {
         singleFriendLoading: false
       };
     }
-    // case GOT_FRIENDSHIP: {
-    //   return { ...state, singleFriendship: action.friendship, friendshipLoading: false }
-    // },
     case GOT_FRIENDS_STATUS: {
       return {...state, friendStatus: action.status};
     }
