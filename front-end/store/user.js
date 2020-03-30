@@ -11,6 +11,7 @@ const initialState = {};
 const GOT_USER = 'GOT_USER';
 const SIGN_UP = 'SIGN_UP';
 const LOG_OUT = 'LOG_OUT';
+const UPDATE_USER = 'UPDATE_USER'
 
 // Action Creator
 const gotUser = userData => {
@@ -30,6 +31,13 @@ const gotLogOut = () => {
     type: LOG_OUT
   };
 };
+
+const updateUser = (userData) => {
+  return {
+    type: UPDATE_USER,
+    userData
+  }
+}
 
 // Thunk Creator
 export const getUserThunk = authData => async dispatch => {
@@ -67,8 +75,20 @@ export const logOutThunk = () => async dispatch => {
 //   }
 // };
 
+export const updateUserThunk = (id, info) => async dispatch => {
+  try {
+    const {data} = await axios.put(`${apiUrl}/api/users/${id}`, info);
+    dispatch(updateUser(data))
+  } catch(err) {
+    console.error(err)
+  }
+}
+
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_USER: {
+      return { ...action.userData };
+    }
     case SIGN_UP: {
       return action.userData;
     }
