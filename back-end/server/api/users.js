@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 
 router.get('/:id', async (req, res, next) => {
   try {
+    console.log('this is get route :id working? ', req.params.id);
     const friend = await User.findOne({
       where: { id: req.params.id },
       include: [{ model: Place, through: Snapshot }]

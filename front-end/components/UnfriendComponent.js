@@ -5,7 +5,7 @@ import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {removeFriendThunk} from '../store/friends';
 
-class UnfriendButton extends React.Component {
+class UnfriendComponent extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -27,7 +27,7 @@ class UnfriendButton extends React.Component {
     return (
       <View>
         <TouchableOpacity style={styles.box} onPress={this.handleUnfriend}>
-          <Text>Unfriend</Text>
+          <Text style={styles.buttonText}>Unfriend</Text>
         </TouchableOpacity>
       </View>
     );
@@ -37,7 +37,19 @@ class UnfriendButton extends React.Component {
 const styles = StyleSheet.create({
   box: {
     color: '#FFFFFF',
-    backgroundColor: '#fc0398'
+    backgroundColor: '#74b9ff',
+    borderStyle: 'solid',
+    borderColor: '#ffffff',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    width: 'auto'
+  },
+  buttonText: {
+    fontSize: 15,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontWeight: '400'
   }
 });
 
@@ -49,4 +61,4 @@ const mapDispatch = dispatch => ({
   unfriend: data => dispatch(removeFriendThunk(data))
 });
 
-export default connect(mapState, mapDispatch)(UnfriendButton);
+export default connect(mapState, mapDispatch)(UnfriendComponent);

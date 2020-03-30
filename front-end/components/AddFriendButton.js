@@ -5,7 +5,7 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {addFriendThunk, getFriendStatus} from '../store/friends';
-import UnfriendButton from './UnfriendButton';
+import UnfriendComponent from './UnfriendComponent';
 
 class AddFriendButton extends React.Component {
   constructor() {
@@ -13,7 +13,8 @@ class AddFriendButton extends React.Component {
     this.state = {
       myFriend: false,
       iSentRequest: false,
-      theySendRequest: false
+      theySendRequest: false,
+      noStatus: true
     };
     this.handlePress = this.handlePress.bind(this);
   }
@@ -29,19 +30,22 @@ class AddFriendButton extends React.Component {
       selectedFriendId,
       userId
     };
-    await friendStatusThunk(associateIds);
+    // await friendStatusThunk(associateIds);
     console.log('whats the status', friendStatus);
     if (friendStatus === 'already friends') {
       this.setState({
-        myFriend: true
+        myFriend: true,
+        noStatus: false
       });
     } else if (friendStatus === 'user sent req') {
       this.setState({
-        iSentRequest: true
+        iSentRequest: true,
+        noStatus: false
       });
     } else if (friendStatus === 'friend sent req') {
       this.setState({
-        theySendRequest: true
+        theySendRequest: true,
+        noStatus: false
       });
     }
   }
@@ -59,25 +63,26 @@ class AddFriendButton extends React.Component {
   // the statement logic:
   // myFriend ? (yes)no button : (no)iSentRequest ? (yes)pendingRequest : (no)theySendRequest? (yes)acceptRequest : (no)sendRequest
   render() {
-    const {myFriend, iSentRequest, theySendRequest} = this.state;
-    return myFriend ? (
+    const {myFriend, iSentRequest, theySendRequest, noStatus} = this.state;
+    const {selectedFriendId, friendStatus} = this.props;
+    return noStatus ? null : myFriend ? (
       <View>
-        <UnfriendButton selectedFriendId={this.props.selectedFriendId} />
+        <UnfriendComponent selectedFriendId={selectedFriendId} />
       </View>
     ) : iSentRequest ? (
-      <View>
-        <Text style={styles.box}>Request Pending</Text>
+      <View style={styles.box}>
+        <Text style={styles.buttonText}>Request Pending</Text>
       </View>
     ) : theySendRequest ? (
       <View>
         <TouchableOpacity style={styles.box} onPress={this.handlePress}>
-          <Text>Accept Friend Request</Text>
+          <Text style={styles.buttonText}>Accept Friend Request</Text>
         </TouchableOpacity>
       </View>
     ) : (
       <View>
         <TouchableOpacity style={styles.box} onPress={this.handlePress}>
-          <Text>Send Friend Request</Text>
+          <Text style={styles.buttonText}>Send Friend Request</Text>
         </TouchableOpacity>
       </View>
     );
@@ -87,7 +92,19 @@ class AddFriendButton extends React.Component {
 const styles = StyleSheet.create({
   box: {
     color: '#FFFFFF',
-    backgroundColor: '#fc0398'
+    backgroundColor: '#74b9ff',
+    borderStyle: 'solid',
+    borderColor: '#ffffff',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    width: 'auto'
+  },
+  buttonText: {
+    fontSize: 15,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontWeight: '400'
   }
 });
 

@@ -47,6 +47,7 @@ const gotSingleFriend = friend => {
   };
 };
 const gotFriendsStatus = status => {
+  console.log('in the action creator', status);
   return {
     type: GOT_FRIENDS_STATUS,
     status
@@ -111,6 +112,7 @@ export const getFriendsThunk = userId => async dispatch => {
 
 export const getSingleFriendThunk = id => async dispatch => {
   try {
+    console.log('does getSingleFriendThunk work?', id);
     const {data} = await axios.get(`${apiUrl}/api/users/${id}`);
 
     dispatch(gotSingleFriend(data));
