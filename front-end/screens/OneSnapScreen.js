@@ -55,7 +55,7 @@ class OneSnapScreen extends React.Component {
                 </ScrollView>
             </SafeAreaView >
         ) : (
-                <SafeAreaView style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: '#74b9ff' }
+                <SafeAreaView style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: '#034f84' }
                 }>
                     <Spinner color="#7d5fff" />
                 </SafeAreaView >
@@ -66,8 +66,8 @@ class OneSnapScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#74b9ff',
-
+        backgroundColor: '#034f84',
+        //74b9ff
     },
     contentContainer: {
         marginTop: 25

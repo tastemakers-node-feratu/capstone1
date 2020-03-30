@@ -195,7 +195,7 @@ class CheckInScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
   },
   contentContainer: {
     paddingTop: 15,
@@ -214,7 +214,9 @@ const styles = StyleSheet.create({
   input: {
     padding: 8,
     marginBottom: 8,
+    backgroundColor: 'white',
     borderColor: 'gray',
+    color: 'black',
     borderWidth: 1,
     borderRadius: 4,
   },

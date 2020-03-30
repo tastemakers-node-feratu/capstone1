@@ -25,7 +25,7 @@ export default function SnapPreview(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
 
   },
   contentContainer: {

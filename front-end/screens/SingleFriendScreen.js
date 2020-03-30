@@ -50,7 +50,7 @@ class SingleFriendScreen extends React.Component {
 
             <View style={styles.userInfo}>
               <Text style={styles.name}>{singlefriend.username}</Text>
-              <Text style={styles.email}>{singlefriend.email}</Text>
+              <Text style={styles.name}>{singlefriend.name}</Text>
               <AddFriendButton
               style={styles.addFriendButton}
               selectedFriendId={singlefriend.id}
@@ -78,7 +78,7 @@ class SingleFriendScreen extends React.Component {
           flex: 2,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#74b9ff'
+          backgroundColor: '#034f84'
         }}
       >
         <Spinner color="#7d5fff" />
@@ -90,11 +90,11 @@ class SingleFriendScreen extends React.Component {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#74b9ff'
+    backgroundColor: '#034f84'
   },
   container: {
     flex: 1,
-    backgroundColor: '#74b9ff',
+    backgroundColor: '#034f84',
     margin: 20
   },
   userContainer: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     fontWeight: '400',
     flexWrap: 'wrap'
@@ -118,14 +118,14 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 18,
     fontStyle: 'italic',
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     margin: 10
   },
   userContent: {
     fontSize: 16,
     fontStyle: 'italic',
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     margin: 10
   },

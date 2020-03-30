@@ -28,7 +28,7 @@ const UnfriendComponent = props => {
 const styles = StyleSheet.create({
   buttonText: {
     fontSize: 15,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center',
     fontWeight: '400'
   }

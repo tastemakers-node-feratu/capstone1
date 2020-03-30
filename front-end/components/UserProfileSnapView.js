@@ -20,7 +20,7 @@ export default function UserProfileSnapView(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#a29bfe',
+        backgroundColor: '#f7cac9',
         alignItems: 'center',
         borderRadius: 10,
         height: 150,
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 20,
-        color: '#FFFFFF',
+        color: '#f7786b',
         textAlign: 'center',
         fontWeight: '400',
         marginTop: 5,
         marginBottom: 5,
     },
     content: {
-        color: '#FFFFFF',
+        color: '#f7786b',
         fontStyle: 'italic',
         textAlign: 'center',
     }
