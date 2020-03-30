@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   iconContent:{
-    flex:1,
     alignItems:'center',
     paddingRight:7,
   },
@@ -72,6 +71,5 @@ const styles = StyleSheet.create({
     fontSize:18,
     marginTop:20,
     color: "#FFFFFF",
-    // alignSelf: 'flex-start',
   },
 });
