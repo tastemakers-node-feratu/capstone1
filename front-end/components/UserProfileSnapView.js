@@ -10,9 +10,6 @@ export default function UserProfileSnapView(props) {
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.name}</Text>
                     <Text style={styles.content}>{snapshot.snapshot.description}</Text>
-                    {/* <Image source={{ uri: snapshot.snapshot.photos }}
-                        style={{ width: 150, height: 150, marginBottom: 10 }}
-                    /> */}
                     <Image source={require('../assets/images/right-arrow.png')} />
                 </View>
             </TouchableHighlight>

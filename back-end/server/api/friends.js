@@ -90,15 +90,6 @@ router.delete('/unfriend', async (req, res, next) => {
 
 router.get('/friendship/:userId/:friendId', async (req, res, next) => {
   try {
-    // const friendship = await Friend.findOne({
-    //   where: {
-    //     id: req.params.userId
-    //   },
-    //   include: [{
-    //     model: User, as: 'friends',
-    //     where: { id: req.params.friendId }
-    //   }]
-    // })
     const idArr = [req.params.userId, req.params.friendId];
     const friendship = await Friend.findOne({
       where: {

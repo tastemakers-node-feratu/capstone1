@@ -36,7 +36,6 @@ Snapshot.getSnaps = function () {
   const oneMonthAgo = moment().subtract(1, 'months').format();
   const all = this.findAll({
     where: {
-      // userId: id,
       createdAt: {
         [Op.gte]: oneMonthAgo
       }

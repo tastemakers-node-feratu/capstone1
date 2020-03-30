@@ -37,7 +37,7 @@ const SignUpForm = props => {
     else if (password === '') alert('Please enter a password');
     else if (!passwordIsValid)
       alert(
-        `Password must contain 
+        `Password must contain
           at least 1 lowercase character
           at least 1 uppercase alphabetical character
           at least 1 numeric character
@@ -60,11 +60,7 @@ const SignUpForm = props => {
     };
     props.signUp(signUpData);
     clearTextInput();
-    // if (props.user) {
-      navigate('AllSnapShots');
-    // } else {
-    //   alert('try again');
-    // }
+    navigate('AllSnapShots');
   };
 
   let passwordInput;

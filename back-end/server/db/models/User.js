@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
 const moment = require('moment');
-const Friend = require('./Friend');
 const db = require('../db');
 
 const { Op } = Sequelize;
@@ -42,7 +41,6 @@ const User = db.define('user', {
   imageURL: {
     type: Sequelize.STRING,
     defaultValue: ''
-    // https://favpng.com/png_view/booth-vector-selfie-social-media-celebrity-png/PSp4WHDX
   },
   bio: {
     type: Sequelize.TEXT,
@@ -103,25 +101,6 @@ User.beforeBulkCreate(users => {
 
 User.getSnapShots = function (arr, categories) {
   const oneMonthAgo = moment().subtract(1, 'months').format();
-  // if (filter) {
-  //   all = this.findAll(
-  //     {
-  //       where: {
-  //         id: { [Op.in]: arr },
-  //       },
-  //       include: [{
-  //         model: Place, through: Snapshot,
-  //         where: {
-  //           createdAt: {
-  //             [Op.gte]: oneMonthAgo
-  //           },
-  //           category: { [Op.in]: filter }
-  //         }
-  //       }]
-  //     }
-  //   )
-  // }
-  // else {
   let catArr
   if (categories === 'all') {
     catArr = ['food', 'fitness', 'nightlife', 'shop', 'beauty', 'experience']

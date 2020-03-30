@@ -23,7 +23,7 @@ class OneSnapScreen extends React.Component {
         const { userId } = route.params
         const { placeId } = route.params
 
-   
+
         this.props.singleSnapshotThunk(userId, placeId)
     }
 
@@ -32,13 +32,6 @@ class OneSnapScreen extends React.Component {
         const { navigate } = this.props.navigation;
         return !this.props.oneLoading ? (
             <SafeAreaView style={styles.container} >
-                {/* <View style={styles.topContainer}>
-                    <Button title="Home" color={'white'} />
-                    <View style={styles.rightButtons}>
-                        <Button title="Check in" color={'white'} />
-                        <Button title="Find Friends" color={'white'} />
-                    </View>
-                </View>*/}
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     <SafeAreaView>
                         <View style={styles.container}>

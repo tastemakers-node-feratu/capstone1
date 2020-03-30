@@ -29,14 +29,6 @@ if (process.env.NODE_ENV === 'development') {
   );
 }
 
-// const db = new Sequelize('capstone', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-//   dialect: 'mysql',
-//   host: 'localhost',
-//   port: 3306
-// });
-
-// 'mysql://localhost:3306/capstone', {logging: false}
-
 // super permissions in terminal to allow access without username and password
 // super user permissions
 module.exports = db;

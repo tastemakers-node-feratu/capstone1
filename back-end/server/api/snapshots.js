@@ -13,17 +13,8 @@ router.get('/:id', async (req, res, next) => {
     let all;
     const friendsArr = await User.getFriends(req.params.id);
     if (friendsArr) {
-      //   const snapArray = friendsArr.map(friend => {
-
-      //   })
       const userFriends = friendsArr.friends.map(friend => friend.id);
       all = await User.getSnapShots(userFriends, req.query.categories);
-
-      //   const {count, rows} = await Snapshot.findAndCountAll({
-      //     where: {
-      //       userId: {[Op.in]: friendsArr}
-      //     }
-      //   });
     }
     res.send(all);
   } catch (err) {
