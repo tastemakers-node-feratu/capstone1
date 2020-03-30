@@ -23,6 +23,7 @@ router.get('/friendStatus', async (req, res, next) => {
   try {
     let status;
     const {userId, selectedFriendId} = req.query;
+    console.log('what;s userid and friendid', userId, selectedFriendId);
     // userFriend is when the user is the sender & friend is the receiver
     const userFriend = await Friend.findOne({
       where: {userId, friendId: selectedFriendId}
@@ -40,6 +41,7 @@ router.get('/friendStatus', async (req, res, next) => {
     } else {
       status = 'not friends';
     }
+    console.log('status at end of api', status);
     res.send(status);
   } catch (error) {
     next(error);
@@ -59,16 +61,7 @@ router.post('/addFriend', async (req, res, next) => {
           friendship_status: 'approved'
         }
       });
-      await Friend.update(
-        {
-          friendship_status: 'approved'
-        },
-        {
-          where: {userId: selectedFriendId, friendId: userId},
-          returning: true,
-          plain: true
-        }
-      );
+      await friend.update({friendship_status: 'approved'});
       status = 'already friends';
     } else if (friendStatus === 'not friends') {
       await user.addFriend(friend, {
@@ -78,6 +71,20 @@ router.post('/addFriend', async (req, res, next) => {
       });
       status = 'user sent req';
     }
+    res.send(status);
+  } catch (error) {
+    next(error);
+  }
+});
+// destroys rows with respective friend association
+router.delete('/unfriend', async (req, res, next) => {
+  try {
+    const {userId, selectedFriendId} = req.query;
+    console.log('whats req.query', req.query);
+    console.log('userId, selectedFriendId which is undefined?', userId, selectedFriendId);
+    await Friend.destroy({where: {userId, friendId: selectedFriendId}});
+    await Friend.destroy({where: {userId: selectedFriendId, friendId: userId}});
+    const status = 'not friends';
     res.send(status);
   } catch (error) {
     next(error);
