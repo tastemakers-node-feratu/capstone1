@@ -56,12 +56,7 @@ function Friends() {
 function Profile() {
   return (
     <ProfileTab.Navigator initialRouteName="Profile"
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: '#74b9ff',
-      },
-      title: ''
-    }}
+      headerMode="none"
     >
       <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
       <ProfileTab.Screen name="All Friends" component={Friends} />
@@ -124,7 +119,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={Profile}
         options={{
           title: 'Profile',
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <Icon name="user" size={30} color="#900" />
           )
         }}

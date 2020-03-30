@@ -36,13 +36,13 @@ class SingleFriendScreen extends React.Component {
             <SafeAreaView style={styles.outerContainer}>
                 <View style={styles.container}>
                     <View style={styles.userContainer}>
-                        <AddFriendButton style={styles.addFriendButton} selectedFriendId={singlefriend.id} />
                         <Image source={{ uri: singlefriend.imageURL }}
                             style={{ width: 150, height: 170, borderRadius: 30 }} />
 
                         <View style={styles.userInfo}>
                             <Text style={styles.name}>{singlefriend.username}</Text>
                             <Text style={styles.email}>{singlefriend.email}</Text>
+                            <AddFriendButton style={styles.addFriendButton} selectedFriendId={singlefriend.id} />
                         </View>
                     </View>
                     <Text style={styles.userContent}>Bio: {singlefriend.bio} {"\n"}
@@ -73,23 +73,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#74b9ff',
-        margin: 20
+        margin: 10
     },
     userContainer: {
         flexDirection: "row",
     },
     userInfo: {
         flexShrink: 1,
-        paddingTop: 20,
-        paddingBottom: 20
+        paddingTop: 10,
+        paddingBottom: 10
     },
     name: {
-        flex: 1,
         fontSize: 20,
         color: '#FFFFFF',
         textAlign: 'center',
         fontWeight: '400',
-        flexWrap: 'wrap'
+        // flexWrap: 'wrap'
     },
     email: {
         fontSize: 18,
@@ -106,13 +105,16 @@ const styles = StyleSheet.create({
         margin: 10
     },
     snapContainer: {
-        marginLeft: 15,
+        marginLeft: 10,
+        // flexShrink: 1,
+        flexDirection: "row",
     },
     addFriendButton: {
         color: '#FFFFFF',
         backgroundColor: '#fc0398',
-        width: 200,
-        margin: 5
+        width: 190,
+        textAlign: 'center',
+        margin: 10
     }
 
 });

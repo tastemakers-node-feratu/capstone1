@@ -38,8 +38,8 @@ router.put('/login', async (req, res, next) => {
     } else if (!user.correctPassword(password)) {
       res.status(401).send('invalid log in credentials');
     } else {
-      req.login(user, err => (err ? next(err) : res.json(user)));
-      // res.json(user)
+      // req.login(user, err => (err ? next(err) : res.json(user)));
+      res.json(user)
     }
   } catch (error) {
     next(error);

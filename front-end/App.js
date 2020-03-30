@@ -10,6 +10,7 @@ import store from './store';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 
+
 import useLinking from './navigation/useLinking';
 
 const Stack = createStackNavigator();
@@ -53,7 +54,7 @@ export default function App(props) {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
           <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
             <Stack.Navigator headerMode="none" >
               <Stack.Screen name="Root" component={BottomTabNavigator} />

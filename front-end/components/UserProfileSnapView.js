@@ -22,13 +22,13 @@ export default function UserProfileSnapView(props) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#a29bfe',
         alignItems: 'center',
         borderRadius: 10,
         height: 150,
         width: 160,
-        paddingBottom: 10
+        paddingBottom: 10,
+        marginBottom: 10
     },
     name: {
         fontSize: 20,
