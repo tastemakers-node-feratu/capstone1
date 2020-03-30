@@ -30,13 +30,13 @@ class SingleFriendScreen extends React.Component {
     await getSingleFriendThunk(friendId);
     // await gotFriendshipThunk(user.id, friendId);
     const {singlefriend, friendStatus, friendStatusThunk} = this.props;
-    console.log('is there user id', user.id)
+    console.log('-BEGIN- right before friendStatusThunk in singleFriendScreen) userid :', user.id)
     const associateIds = {
       selectedFriendId: singlefriend.id,
       userId: user.id
     };
     await friendStatusThunk(associateIds);
-    console.log('friendStatusThunk awwaited and finished?', friendStatus);
+    console.log('(after friendStatusThunk in singleFriendScreen) friendStatus:', friendStatus);
   }
 
   render() {

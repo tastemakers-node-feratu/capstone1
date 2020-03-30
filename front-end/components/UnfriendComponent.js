@@ -26,7 +26,7 @@ class UnfriendComponent extends React.Component {
   render() {
     return (
       <View>
-        <TouchableOpacity style={styles.box} onPress={this.handleUnfriend}>
+        <TouchableOpacity onPress={this.handleUnfriend}>
           <Text style={styles.buttonText}>Unfriend</Text>
         </TouchableOpacity>
       </View>
@@ -35,16 +35,6 @@ class UnfriendComponent extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  box: {
-    color: '#FFFFFF',
-    backgroundColor: '#74b9ff',
-    borderStyle: 'solid',
-    borderColor: '#ffffff',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 5,
-    width: 'auto'
-  },
   buttonText: {
     fontSize: 15,
     color: '#FFFFFF',

@@ -21,9 +21,10 @@ router.get('/all/:id', async (req, res, next) => {
 // this route determines the addFriendButton status
 router.get('/friendStatus', async (req, res, next) => {
   try {
+    // TODO: user req.user
     let status;
     const {userId, selectedFriendId} = req.query;
-    console.log('what;s userid and friendid', userId, selectedFriendId);
+    console.log('GET friendStatus userid:', userId, 'friendId:', selectedFriendId);
     // userFriend is when the user is the sender & friend is the receiver
     const userFriend = await Friend.findOne({
       where: {userId, friendId: selectedFriendId}
@@ -41,7 +42,7 @@ router.get('/friendStatus', async (req, res, next) => {
     } else {
       status = 'not friends';
     }
-    console.log('status at end of api', status);
+    console.log('bottom of GET friendstatus status:', status);
     res.send(status);
   } catch (error) {
     next(error);
