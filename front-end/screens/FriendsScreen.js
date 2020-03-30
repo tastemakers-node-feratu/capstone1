@@ -33,12 +33,12 @@ class FriendsScreen extends React.Component {
         const filteredFriends = this.props.friends.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
         return (
             <SafeAreaView style={styles.container} >
-                <View style={styles.topContainer}>
+                {/* <View style={styles.topContainer}>
                     <Button title="Home" color={'white'} />
                     <View style={styles.rightButtons}>
                         <Button title="Check in" color={'white'} />
                     </View>
-                </View>
+                </View> */}
                 <SearchInput
                     onChangeText={(name) => { this.searchUpdated(name) }}
                     style={styles.searchInput}
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
     contentContainer: {
         paddingTop: 15,
     },
-    topContainer: {
-        flexDirection: "row",
-        justifyContent: 'space-between'
-    },
+    // topContainer: {
+    //     flexDirection: "row",
+    //     justifyContent: 'space-between'
+    // },
     rightButtons: {
         flexDirection: "row",
     },

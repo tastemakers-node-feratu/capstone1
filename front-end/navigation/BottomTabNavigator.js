@@ -64,9 +64,11 @@ function Profile() {
       },
       title: ''
     }}
+    headerMode="none"
     >
       <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
-      <ProfileTab.Screen name="All Friends" component={Friends} />
+      <ProfileTab.Screen name="All Friends" component={Friends}
+      />
       <ProfileTab.Screen name="My Pins" component={MySnaps} />
       {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
     </ProfileTab.Navigator>

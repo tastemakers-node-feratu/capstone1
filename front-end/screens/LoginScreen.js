@@ -15,19 +15,15 @@ import {
 import {connect} from 'react-redux';
 import {MonoText} from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
-import {getMeThunk} from '../store/user';
 
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props)
   }
-  // async componentDidMount() {
-  //   await getMeThunk();
-  // }
+
   render() {
     const {navigate} = this.props.navigation;
-    return ( 
-      // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
+    return (
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
         keyboardVerticalOffset={-150}
@@ -82,14 +78,12 @@ const styles = StyleSheet.create({
   title: {
     alignSelf: 'center',
     color: '#FFF',
-    // marginTop: 10,
     width: 160,
     textAlign: 'center',
     opacity: 0.9
   },
   logoContainer: {
     alignItems: 'center',
-    // flexGrow: 1,
     justifyContent: 'center'
   },
   logo: {
@@ -117,8 +111,6 @@ const mapState = state => ({
   user: state.user
 });
 
-const mapDispatch = dispatch => ({
-  getMeThunk: data => dispatch(getMeThunk(data))
-});
+const mapDispatch = dispatch => ({});
 
 export default connect(mapState, mapDispatch)(LoginScreen);

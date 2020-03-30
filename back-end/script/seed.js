@@ -58,6 +58,8 @@ const fakerUsers = faker.array(
     username: faker.internet.userName,
     email: faker.internet.email,
     password: 'password',
+    firstName: faker.name.firstName,
+    lastName: faker.name.lastName,
     imageURL: faker.internet.avatar,
     bio: faker.lorem.sentence,
     phone: faker.phone.phoneNumber,
@@ -117,8 +119,8 @@ async function fakerSeed() {
               through: {
                 description: faker.lorem.sentence(),
                 photos: `https://i.picsum.photos/id/${randomNumber(
-                  1000,
-                  100
+                  219,
+                  5
                 )}/200/200.jpg`,
                 price_rating: randomNumber(4, 1),
                 tags: faker.array(faker.lorem.word, randomNumber(5))
@@ -136,10 +138,12 @@ async function fakerSeed() {
 async function runSeed() {
   console.log('seeding...');
   try {
+    console.time('fakerSeed ran for:');
     await fakerSeed();
+    console.timeEnd('fakerSeed ran for:');
     console.log(
       green(
-        'fakerSeed finished, may or may not have seeded successfully, check for error messages'
+        "fakerSeed finished, error messages in your console? (yes)resolve them (no)you're good to go!"
       )
     );
   } catch (error) {
