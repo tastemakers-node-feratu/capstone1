@@ -14,6 +14,7 @@ import SingleFriendScreen from '../screens/SingleFriendScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import UserProfileScreen from '../screens/UserProfileScreen';
 import UserProfileSnapView from '../components/UserProfileSnapView'
+import MySnaps from '../screens/MySnaps'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -66,7 +67,7 @@ function Profile() {
     >
       <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
       <ProfileTab.Screen name="All Friends" component={Friends} />
-      <ProfileTab.Screen name="My Pins" component={UserProfileSnapView} />
+      <ProfileTab.Screen name="My Pins" component={MySnaps} />
       {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
     </ProfileTab.Navigator>
   )
@@ -112,14 +113,6 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
         }}
       />
-      {/* <BottomTab.Screen
-        name="AllFriends"
-        component={Friends}
-        options={{
-          title: 'Friends',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-list-box" />,
-        }}
-      /> */}
       <BottomTab.Screen
         name="Profile"
         component={Profile}

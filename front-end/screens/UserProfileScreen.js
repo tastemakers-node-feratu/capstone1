@@ -19,7 +19,6 @@ class UserProfileScreen extends Component {
     super(props);
     this.state={
       editingMode: false,
-      // email: '',
       imageURL: '',
       bio: '',
       username: '',
@@ -32,7 +31,6 @@ class UserProfileScreen extends Component {
     const {username, name, bio, imageURL} = this.props.user
     this.setState({
       ...this.state,
-      // email,
       name,
       bio,
       username,
@@ -41,8 +39,7 @@ class UserProfileScreen extends Component {
   }
 
   handleUpdateUser(){
-    // const {id} = this.props.user
-    const id = 1;
+    const {id} = this.props.user
     this.props.updateUser(id, this.state);
     this.setState({
       ...this.state,

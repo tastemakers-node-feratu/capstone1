@@ -29,7 +29,9 @@ export default function userProfileLinks(props) {
       <View style={styles.iconContent}>
         <Icon style={styles.icon} name="tags" size={30} color="white"/>
       </View>
-      <TouchableOpacity style={styles.infoContent}>
+      <TouchableOpacity style={styles.infoContent}
+      onPress={() => navigate("My Pins")}
+      >
         <Text style={styles.info}>My Pins</Text>
       </TouchableOpacity>
     </View>
