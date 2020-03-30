@@ -17,19 +17,18 @@ import {getUserThunk} from '../store/user';
 const LoginForm = props => {
   const [authName, setAuthName] = useState('');
   const [password, setPassword] = useState('');
-  const {navigate} = props;
+  const {navigate, getUserThunk, user} = props;
 
-  const handleSubmit = () => {
-    // event.preventDefault();
+  const handleSubmit = async () => {
     if (authName === '') alert('Please enter an email address');
     else if (password === '') alert('Please enter a password');
     const authData = {authName, password};
-    props.getUserThunk(authData);
+    await getUserThunk(authData);
     clearTextInput();
-    // if (props.user) {
-      navigate('AllSnapShots');
+    // if (user.id) {
+    //   navigate('AllSnapShots');
     // } else {
-    //   alert('try again');
+    //   alert('Incorrect password or username. Try again.');
     // }
   };
 
@@ -40,7 +39,9 @@ const LoginForm = props => {
 
   let passwordInput;
 
-  return (
+  return user.id ? (
+    <View>{navigate('AllSnapShots')}</View>
+  ) : (
     <View style={styles.container}>
       <TextInput
         placeholder="username or email"

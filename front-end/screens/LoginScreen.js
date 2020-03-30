@@ -12,13 +12,22 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import {connect} from 'react-redux';
 import {MonoText} from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
+import {getMeThunk} from '../store/user';
 
 class LoginScreen extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  // async componentDidMount() {
+  //   await getMeThunk();
+  // }
   render() {
     const {navigate} = this.props.navigation;
-    return (
+    return ( 
+      // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
         keyboardVerticalOffset={-150}
@@ -104,4 +113,12 @@ const styles = StyleSheet.create({
   loginForm: {}
 });
 
-export default LoginScreen;
+const mapState = state => ({
+  user: state.user
+});
+
+const mapDispatch = dispatch => ({
+  getMeThunk: data => dispatch(getMeThunk(data))
+});
+
+export default connect(mapState, mapDispatch)(LoginScreen);

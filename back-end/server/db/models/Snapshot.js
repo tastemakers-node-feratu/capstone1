@@ -5,7 +5,6 @@ const moment = require('moment');
 
 const Snapshot = db.define('snapshot', {
   // we can access DATE from the created_at field
-
   description: {
     type: Sequelize.TEXT,
     allowNull: false

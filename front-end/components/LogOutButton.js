@@ -1,13 +1,15 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
-import {logOut} from '../store/user';
+import {logOutThunk} from '../store/user';
 
 const LogOutButton = props => {
-  const {navigate} = props;
+  const {navigate, logOutThunk, user} = props;
 
   const logout = () => {
-    props.logOut();
+    logOutThunk();
+    console.log('user after logout', user.id);
     navigate('Home');
   };
 
@@ -25,7 +27,7 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  logOut: () => dispatch(logOut())
+  logOutThunk: () => dispatch(logOutThunk())
 });
 
 export default connect(mapState, mapDispatch)(LogOutButton);

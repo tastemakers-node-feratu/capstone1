@@ -48,7 +48,8 @@ class FriendsScreen extends React.Component {
                     {
                         filteredFriends.map((friend) => {
                             return (
-                                <MiniFriendView key={friend.email} info={friend} navigate={navigate} />
+                                <MiniFriendView key={friend.email} info={friend} navigate={navigate} 
+                                />
                             )
                         })
                     }
