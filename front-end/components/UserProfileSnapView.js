@@ -6,7 +6,7 @@ export default function UserProfileSnapView(props) {
 
     return (
         <View >
-            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId: userId, placeId: snapshot.id, }) }} >
+            <TouchableHighlight style={{padding: 10, alignItems: 'center'}}onPress={() => { navigate('SingleSnap', { userId: userId, placeId: snapshot.id, }) }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.name}</Text>
                     <Text style={styles.content}>{snapshot.snapshot.description}</Text>
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 150,
         width: 160,
-        paddingBottom: 10
     },
     name: {
         fontSize: 20,

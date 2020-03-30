@@ -16,12 +16,19 @@ class MySnaps extends React.Component  {
         super(props)
     }
     render(){
+        const {user, navigate} = this.props
         return(
             <SafeAreaView style={styles.outerContainer}>
-            <View style={styles.continaer}>
-                <ScrollView style={styles.snapContainer}>
-                    <Text>Hello</Text>
-                    {/* <UserProfileSnapView /> */}
+            <View style={styles.container}>
+                <ScrollView>
+                    {user.places.map(place => (
+                        <UserProfileSnapView
+                        key={place.id}
+                        userId={user.id}
+                        snapshot={place}
+                        navigate={navigate}
+                        />
+                    ))}
                 </ScrollView>
             </View>
         </SafeAreaView>
@@ -39,46 +46,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#74b9ff',
         margin: 20
     },
-    userContainer: {
-        flexDirection: "row",
-    },
-    userInfo: {
-        flexShrink: 1,
-        paddingTop: 20,
-        paddingBottom: 20
-    },
-    name: {
-        flex: 1,
-        fontSize: 20,
-        color: '#FFFFFF',
-        textAlign: 'center',
-        fontWeight: '400',
-        flexWrap: 'wrap'
-    },
-    email: {
-        fontSize: 18,
-        fontStyle: 'italic',
-        color: '#FFFFFF',
-        textAlign: 'center',
-        margin: 10
-    },
-    userContent: {
-        fontSize: 16,
-        fontStyle: 'italic',
-        color: '#FFFFFF',
-        textAlign: 'center',
-        margin: 10
-    },
-    snapContainer: {
-        marginLeft: 15,
-    },
-    addFriendButton: {
-        color: '#FFFFFF',
-        backgroundColor: '#fc0398',
-        width: 200,
-        margin: 5
-    }
-
 });
 
 // export default MySnaps;
