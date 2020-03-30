@@ -10,7 +10,6 @@ export default MiniFriendView = (props) => {
             }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{info.username}</Text>
-                    <Text style={styles.name}>{info.email}</Text>
                     <Image source={{ uri: info.imageURL }}
                         style={{ width: 225, height: 175 }} />
                 </View>
