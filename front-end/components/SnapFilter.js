@@ -70,7 +70,7 @@ class SnapFilter extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
         paddingTop: 15,
         width: 380,
         height: 500,

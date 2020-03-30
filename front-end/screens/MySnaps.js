@@ -39,11 +39,12 @@ class MySnaps extends React.Component  {
 const styles = StyleSheet.create({
     outerContainer: {
         flex: 1,
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
+        //74b9ff
     },
     container: {
         flex: 1,
-        backgroundColor: '#74b9ff',
+        backgroundColor: '#034f84',
         margin: 20
     },
 });

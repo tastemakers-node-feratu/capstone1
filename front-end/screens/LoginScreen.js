@@ -26,7 +26,7 @@ class LoginScreen extends React.Component {
   // }
   render() {
     const {navigate} = this.props.navigation;
-    return ( 
+    return (
       // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
   keyboardAvoid: {},
   container: {
     alignItems: 'center',
-    backgroundColor: '#74b9ff'
+    backgroundColor: '#034f84'
   },
   inner: {},
   brandName: {
     marginTop: 150,
     fontSize: 50,
-    color: '#FFFFFF',
+    color: '#f7786b',
     textAlign: 'center'
   },
   // welcomeImage: {

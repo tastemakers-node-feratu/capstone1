@@ -27,7 +27,6 @@ const Place = db.define('place', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  // priceratingaverage
   all_tags: {
     type: Sequelize.STRING,
     get() {
