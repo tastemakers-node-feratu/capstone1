@@ -2,12 +2,12 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 'react-native'
 
 export default function Snapshots(props) {
-    const { snapshot, navigate } = props
+    const { snapshot, navigate} = props
     const places = snapshot.places;
 
     return places.length === 1 ? (
         <SafeAreaView >
-            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId: snapshot.id, placeId: snapshot.places[0].id, }) }} >
+            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId:`${snapshot.userId}${snapshot.placeId}`, placeId: snapshot.places[0].id, }) }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.username}</Text>
                     <Image source={{ uri: places[0].snapshot.photos }}
@@ -20,9 +20,9 @@ export default function Snapshots(props) {
             </TouchableHighlight>
         </SafeAreaView>
     ) : places.map(place => (
-        <SafeAreaView key={snapshot.id} >
+        <SafeAreaView key={place.id} >
             <TouchableHighlight onPress={() => {
-                navigate('SingleSnap', { userId: snapshot.id, placeId: place.id })
+                navigate('SingleSnap', { userId: `${snapshot.userId}${snapshot.placeId}`, placeId: place.id })
             }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.username}</Text>
