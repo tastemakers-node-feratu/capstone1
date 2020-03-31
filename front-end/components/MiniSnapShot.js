@@ -11,7 +11,7 @@ export default function Snapshots(props) {
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.username}</Text>
                     <Image source={{ uri: places[0].snapshot.photos }}
-                        style={{ width: 300, height: 250, }}
+                        style={{ width: 300, height: 250,}}
                     />
                     <Text style={styles.title}>{places[0].name} </Text>
                     <Text style={styles.content}>{places[0].snapshot.description}</Text>
