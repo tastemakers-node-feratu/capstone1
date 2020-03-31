@@ -7,6 +7,7 @@ import {
     TouchableHighlight,
     ScrollView,
     View,
+    FlatList
 } from 'react-native';
 import { Spinner } from 'native-base'
 import MiniSnapShot from '../components/MiniSnapShot'
@@ -72,12 +73,19 @@ class SnapShotsScreen extends React.Component {
                         <SnapFilter user={this.props.user} />
                     </View>
                 </Modal>
-                <ScrollView style={styles.contentContainer} >
-                    {this.props.allSnapshots.map((snapshot, index) => {
+                {/* <ScrollView style={styles.contentContainer} >
+                    {this.props.allSnapshots.map(snapshot => {
                         return (
                         <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
                     )})}
-                </ScrollView>
+                </ScrollView> */}
+                <View style={styles.contentContainer}>
+                <FlatList
+                keyExtractor={item => item.id.toString()}
+                data={this.props.allSnapshots}
+                renderItem={({item}) => (<MiniSnapShot snapshot={item} navigate={navigate} />)}
+                />
+                </View>
             </SafeAreaView>
         ) : (
                 <SafeAreaView style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: '#034f84' }}>
