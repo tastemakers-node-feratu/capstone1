@@ -65,7 +65,9 @@ class UserProfileScreen extends Component {
     if (this.state.editingMode) {
       return (
         <SafeAreaView>
-          {/* <StatusBar barStyle="light-content" backgroundColor="#74b9ff" /> */}
+          <View style={styles.topContainer}>
+            <LogOutButton navigate={navigate} />
+          </View>
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
