@@ -47,6 +47,7 @@ function Friends() {
       },
       title: ''
     }}
+    headerMode="none"
   >
     <FriendTab.Screen name="All Friends" component={FriendsScreen} />
     <FriendTab.Screen name="SingleFriend" component={SingleFriendScreen} />
@@ -63,7 +64,6 @@ function Profile() {
       },
       title: ''
     }}
-    headerMode="none"
     >
       <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
       <ProfileTab.Screen name="All Friends" component={Friends}
