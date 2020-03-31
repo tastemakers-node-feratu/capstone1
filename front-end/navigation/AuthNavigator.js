@@ -9,7 +9,6 @@ function AuthNavigator() {
     return (
         <Stack.Navigator initialRouteName={"Login"} headerMode='none'>
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
         </Stack.Navigator>
     );

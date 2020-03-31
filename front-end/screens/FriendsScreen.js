@@ -43,6 +43,7 @@ class FriendsScreen extends React.Component {
                     onChangeText={(name) => { this.searchUpdated(name) }}
                     style={styles.searchInput}
                     placeholder="Type a name to search"
+                    placeholderTextColor="#CCC"
                 />
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     {
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderColor: '#CCC',
         borderWidth: 1,
-        color: '#FFFFFF',
+        color: '#f7cac9',
     }
 })
 

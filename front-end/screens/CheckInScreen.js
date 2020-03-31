@@ -133,7 +133,10 @@ class CheckInScreen extends React.Component {
                     })}
                   </View>
                 </View>
-                <Text style={{ paddingTop: 10 }}>
+                <Text style={{
+                  paddingTop: 10, color: '#f7cac9',
+                  fontWeight: '500'
+                }}>
                   Does it have a name?
                     </Text>
                 <TextInput
@@ -143,7 +146,7 @@ class CheckInScreen extends React.Component {
                   value={this.state.placeName}
                   onChangeText={placeName => this.setState({ placeName })}
                 />
-                <Text>
+                <Text style={styles.textQuestion}>
                   Where is {this.state.placeName}?
                     </Text>
                 <TextInput
@@ -153,7 +156,7 @@ class CheckInScreen extends React.Component {
                   value={this.state.location}
                   onChangeText={location => { this.setState({ location }) }}
                 />
-                <Text>
+                <Text style={styles.textQuestion}>
                   Ok. Tell us about it.
                     </Text>
                 <TextInput
@@ -163,7 +166,7 @@ class CheckInScreen extends React.Component {
                   value={this.state.description}
                   onChangeText={description => { this.setState({ description }) }}
                 />
-                <Text>
+                <Text style={styles.textQuestion}>
                   Add some tags, denoted by hashtags and separated by a space, so we can learn more about it.
                     </Text>
                 <TextInput
@@ -251,6 +254,10 @@ const styles = StyleSheet.create({
   backBtn: {
     color: 'blue',
     fontSize: 20,
+  },
+  textQuestion: {
+    color: '#f7cac9',
+    fontWeight: '500'
   }
 })
 
