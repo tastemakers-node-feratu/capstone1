@@ -8,7 +8,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
-  View
+  View,
+  SafeAreaView
 } from 'react-native';
 import { getUserThunk } from '../store/user';
 
