@@ -9,7 +9,7 @@ import {
     View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import UserProfileSnapView from '../components/UserProfileSnapView'
+import MiniSnapShot from '../components/MiniSnapShot'
 
 class MySnaps extends React.Component  {
     constructor(props){
@@ -20,16 +20,16 @@ class MySnaps extends React.Component  {
         return(
             <SafeAreaView style={styles.outerContainer}>
             <View style={styles.container}>
-                <ScrollView>
-                    {user.places.map(place => (
-                        <UserProfileSnapView
-                        key={place.id}
-                        userId={user.id}
-                        snapshot={place}
-                        navigate={navigate}
-                        />
-                    ))}
-                </ScrollView>
+                <Text style={styles.header}>My Snapshots</Text>
+                    <ScrollView>
+                        {user.places.map(place => (
+                            <MiniSnapShot
+                            key={place.id}
+                            snapshot={user}
+                            navigate={navigate}
+                            />
+                        ))}
+                    </ScrollView>
             </View>
         </SafeAreaView>
         )
@@ -47,6 +47,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#034f84',
         margin: 20
     },
+    header: {
+        fontSize: 50,
+        color: '#f7786b',
+        textAlign: 'center',
+        paddingBottom: 5
+    }
 });
 
 const mapState = state => {

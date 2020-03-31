@@ -17,7 +17,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const { imageURL, bio, email, name } = req.body;
+    const { imageURL, bio, email, firstName, lastName } = req.body;
+    console.log('req body', req.body)
     const oldUser = await User.findOne({
       where: { id: req.params.id },
       include: [{ model: Place, through: Snapshot }]
@@ -26,7 +27,8 @@ router.put('/:id', async (req, res, next) => {
       imageURL,
       bio,
       email,
-      name
+      firstName,
+      lastName
     });
     await updatedUser.save();
 
@@ -49,7 +51,7 @@ router.put('/snapshot/:userId', async (req, res, next) => {
         model: Place, through: Snapshot,
         where: {
           //the newsnapshot method on Place used findOrCreate, which returned
-          //an array. the "place" itsel is the first item, therefore...
+          //an array. the "place" itself is the first item, therefore...
           id: place[0].id
         }
       }]

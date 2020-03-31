@@ -8,7 +8,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
-  View
+  View,
+  SafeAreaView
 } from 'react-native';
 import { getUserThunk } from '../store/user';
 
@@ -35,49 +36,55 @@ const LoginForm = props => {
   return user.id ? (
     <View>{navigate('Home')}</View>
   ) : (
-      <View style={styles.container}>
-        <TextInput
-          placeholder="username or email"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          returnKeyType="next"
-          onSubmitEditing={() => {
-            passwordInput.focus();
-          }}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={styles.input}
-          onChangeText={value => setAuthName(value)}
-          clearButtonMode="always"
-          value={authName}
-        />
-        <TextInput
-          placeholder="password"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          secureTextEntry
-          returnKeyType="go"
-          style={styles.input}
-          clearButtonMode="always"
-          value={password}
-          name="passwordInput"
-          ref={input => {
-            passwordInput = input;
-          }}
-          onChangeText={value => setPassword(value)}
-        />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={64}
+        behavior="padding"
+      >
+        <SafeAreaView style={styles.container}>
+          <TextInput
+            placeholder="username or email"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              passwordInput.focus();
+            }}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.input}
+            onChangeText={value => setAuthName(value)}
+            clearButtonMode="always"
+            value={authName}
+          />
+          <TextInput
+            placeholder="password"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            secureTextEntry
+            returnKeyType="go"
+            style={styles.input}
+            clearButtonMode="always"
+            value={password}
+            name="passwordInput"
+            ref={input => {
+              passwordInput = input;
+            }}
+            onChangeText={value => setPassword(value)}
+          />
 
-        <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     backgroundColor: '#034f84'
   },
   input: {
@@ -94,6 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
+    marginBottom: 15,
     borderRadius: 10
   },
   buttonText: {

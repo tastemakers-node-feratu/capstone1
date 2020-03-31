@@ -6,6 +6,7 @@ import {
   StatusBar,
   SafeAreaView,
   StyleSheet,
+  ScrollView,
   Text,
   Image,
   KeyboardAvoidingView,
@@ -25,14 +26,12 @@ class LoginScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <KeyboardAvoidingView
-        style={styles.keyboardAvoid}
-        keyboardVerticalOffset={-100}
-        behavior="padding"
-        enabled
-      >
-        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <SafeAreaView style={styles.container}>
+
+      // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
+      //  <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+
+      <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.contentContainer} >
           <View style={styles.inner}>
             <Image source={require('../assets/images/camera-logo.png')}
               style={{ flexShrink: 1, width: 200, height: 250, marginTop: 20 }} />
@@ -48,8 +47,8 @@ class LoginScreen extends React.Component {
             </TouchableOpacity>
 
           </View>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
@@ -57,6 +56,7 @@ class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   keyboardAvoid: {},
   container: {
+    flex: 1,
     alignItems: 'center',
     backgroundColor: '#034f84'
   },
@@ -77,7 +77,9 @@ const styles = StyleSheet.create({
     color: '#FFF',
     width: 160,
     textAlign: 'center',
-    opacity: 0.9
+    opacity: 0.9,
+    paddingVertical: 5,
+    marginBottom: 20
   },
   logoContainer: {
     alignItems: 'center',
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-    marginBottom: 180,
+    marginBottom: 100,
     borderRadius: 10
   },
   buttonText: {
@@ -96,7 +98,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700'
   },
-  loginForm: {}
+  contentContainer: {
+    paddingTop: 15,
+    paddingBottom: 15
+  },
 });
 
 const mapState = state => ({

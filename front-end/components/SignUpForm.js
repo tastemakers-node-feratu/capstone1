@@ -17,7 +17,7 @@ const SignUpForm = props => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {navigate} = props;
+  const {navigate, signUp} = props;
 
   const validateEmail = inputEmail => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail);
@@ -50,7 +50,7 @@ const SignUpForm = props => {
     setUsername();
     setEmail();
     setPassword();
-  }
+  };
   const submitHandler = () => {
     validateInput();
     const signUpData = {
@@ -58,9 +58,9 @@ const SignUpForm = props => {
       email,
       password
     };
-    props.signUp(signUpData);
+    signUp(signUpData);
     clearTextInput();
-    navigate('AllSnapShots');
+    navigate('Home');
   };
 
   let passwordInput;

@@ -5,8 +5,17 @@ const { Op } = Sequelize;
 const Snapshot = require('../db/models/Snapshot');
 const User = require('../db/models/User');
 const Place = require('../db/models/Place');
-
+// findAndCountAll(id, )
 // const userFriends = [4, 50]
+// const { count, rows } = await User.findAndCountAll({
+//   where: {
+//     title: {
+//       [Op.like]: 'foo%'
+//     }
+//   },
+//   offset: 10,
+//   limit: 10
+// });
 router.get('/:id', async (req, res, next) => {
   try {
     let all;
