@@ -13,6 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { updateUserThunk } from '../store/user'
 import UserProifleLinks from '../components/userProfileLinks'
+import LogOutButton from '../components/LogOutButton';
 
 class UserProfileScreen extends Component {
   constructor(props) {
@@ -119,6 +120,9 @@ class UserProfileScreen extends Component {
     else {
       return (
         <SafeAreaView style={styles.container}>
+          <View style={styles.topContainer}>
+            <LogOutButton navigate={navigate} />
+          </View>
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
@@ -151,6 +155,12 @@ const mapDispatch = dispatch => ({
 export default connect(mapState, mapDispatch)(UserProfileScreen)
 
 const styles = StyleSheet.create({
+  topContainer: {
+    backgroundColor: '#034f84',
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
+    alignItems: 'flex-start'
+  },
   header: {
     backgroundColor: "#034f84",
     paddingTop: 50,
