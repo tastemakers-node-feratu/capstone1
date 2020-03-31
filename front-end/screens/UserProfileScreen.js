@@ -22,9 +22,11 @@ class UserProfileScreen extends Component {
       imageURL: '',
       bio: '',
       username: '',
-      name: ''
+      firstName: '',
+      lastName: ''
     }
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
+    this.getPlaceHolder = this.getPlaceHolder.bind(this);
   }
 
   componentDidMount() {
@@ -47,8 +49,16 @@ class UserProfileScreen extends Component {
     })
   }
 
+  getPlaceHolder(content, field){
+    if(content === ''){
+      return field
+    }
+    return content
+  }
+
   render() {
     const { navigate } = this.props.navigation;
+    const {user} = this.props
 
     if (this.state.editingMode) {
       return (
@@ -63,13 +73,25 @@ class UserProfileScreen extends Component {
                 <Image style={styles.avatar}
                   source={{ uri: this.props.user.imageURL }} />
               </View>
-              <TextInput
-                autoCapitalize="words"
-                placeholder={this.state.name}
-                style={styles.input}
-                value={this.state.name}
-                onChangeText={name => { this.setState({ name }) }}
-              />
+              <View style={styles.nameInput}>
+                <TextInput
+                  autoCapitalize="words"
+                  placeholder={this.getPlaceHolder(this.state.firstName, 'first name')}
+                  style={styles.input}
+                  value={this.state.firstName}
+                  onChangeText={firstName => { this.setState({ firstName }) }}
+                />
+                <TextInput
+                  autoCapitalize="words"
+                  placeholder={this.getPlaceHolder(this.state.lastName, 'last name')}
+                  style={styles.input}
+                  value={this.state.lastName}
+                  onChangeText={lastName => {
+                    this.setState({ lastName });
+                    console.log('state',  this.state.lastName)
+                 }}
+                />
+              </View>
               <TextInput
                 style={styles.input}
                 placeHolder={this.state.username}
@@ -78,7 +100,7 @@ class UserProfileScreen extends Component {
               />
               <TextInput
                 style={styles.input}
-                placeHolder={this.state.bio}
+                placeHolder={this.getPlaceHolder(this.state.bio, 'bio')}
                 value={this.state.bio}
                 onChangeText={bio => this.setState({ bio })}
               />
@@ -100,18 +122,15 @@ class UserProfileScreen extends Component {
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
                 <Image style={styles.avatar}
-                  source={{ uri: this.props.user.imageURL }} />
+                  source={{ uri: user.imageURL }} />
                 <Icon name="edit" size={30} color="white" style={styles.editor}
                   onPress={() => this.setState({ editingMode: true })}
                 />
               </View>
-              <Text style={styles.name}>{this.props.user.name}</Text>
-              <Text style={styles.userInfo}>{this.props.user.username}</Text>
-              <Text style={styles.userInfo}>{this.props.user.bio} </Text>
+              <Text style={styles.name}>{user.firstName} {user.lastName}</Text>
+              <Text style={styles.userInfo}>{user.username}</Text>
+              <Text style={styles.userInfo}>{user.bio} </Text>
             </View>
-            <Text style={styles.name}>{this.props.user.name}</Text>
-            <Text style={styles.userInfo}>{this.props.user.username}</Text>
-            <Text style={styles.userInfo}>{this.props.user.bio} </Text>
           </View>
           <UserProifleLinks navigate={navigate} />
         </SafeAreaView >
@@ -177,6 +196,10 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 2,
     borderRadius: 4,
-    color: 'gray'
+    color: 'gray',
+    marginHorizontal: 5
+  },
+  nameInput: {
+    flexDirection: 'row'
   }
 });
