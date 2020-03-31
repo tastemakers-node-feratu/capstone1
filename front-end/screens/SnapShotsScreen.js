@@ -60,7 +60,7 @@ class SnapShotsScreen extends React.Component {
                 <View style={styles.topContainer}>
                     <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
-                        <Button title="Filter" color={'white'} onPress={this.openModal} />
+                        <Button title="Filter" color={'black'} onPress={this.openModal} />
                     </View>
                 </View>
                 <Modal visible={this.state.modalVisible} animationType='slide'>

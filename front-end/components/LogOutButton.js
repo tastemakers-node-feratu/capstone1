@@ -14,7 +14,7 @@ const LogOutButton = props => {
 
   return (
     <View>
-      <Button title="Log Out" color="white" onPress={logout} />
+      <Button title="Log Out" color="black" onPress={logout} />
     </View>
   );
 };
