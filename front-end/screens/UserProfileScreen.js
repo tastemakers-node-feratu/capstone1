@@ -30,10 +30,11 @@ class UserProfileScreen extends Component {
   }
 
   componentDidMount() {
-    const { username, name, bio, imageURL } = this.props.user
+    const { username, firstName, lastName, bio, imageURL } = this.props.user
     this.setState({
       ...this.state,
-      name,
+      firstName,
+      lastName,
       bio,
       username,
       imageURL
@@ -67,7 +68,7 @@ class UserProfileScreen extends Component {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
-                <Icon style={styles.icon} name="close" size={30} color="white"
+                <Icon style={styles.closeIcon} name="close" size={30} color="white"
                   onPress={() => this.setState({ editingMode: false })}
                 />
                 <Image style={styles.avatar}
@@ -152,16 +153,15 @@ export default connect(mapState, mapDispatch)(UserProfileScreen)
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#034f84",
-    paddingTop: 20,
+    paddingTop: 50,
     paddingBottom: 20
   },
   headerContent: {
     padding: 30,
     alignItems: 'center',
   },
-  icon: {
+  closeIcon: {
     paddingRight: 1,
-    color: 'white'
   },
   avatar: {
     width: 130,
@@ -170,7 +170,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#f7786b",
     marginBottom: 10,
-    marginLeft: 30,
+    paddingLeft: 10,
+    paddingRight: 10
 
   },
   name: {
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     fontSize: 16,
-    color: "#f7cac9",
+    color: "#f7786b",
     fontWeight: '600',
   },
   avatarEdit: {
