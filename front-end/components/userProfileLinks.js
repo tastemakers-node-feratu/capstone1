@@ -30,15 +30,12 @@ export default function userProfileLinks(props) {
           <View style={styles.iconContent}>
             <Icon style={styles.icon} name="tags" size={30} color="white" />
           </View>
-          <TouchableOpacity style={styles.infoContent}>
+          <TouchableOpacity style={styles.infoContent}
+            onPress={() => navigate("My Pins")}
+          >
             <Text style={styles.info}>My Pins</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.infoContent}
-          onPress={() => navigate("My Pins")}
-        >
-          <Text style={styles.info}>My Pins</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.item}>
@@ -67,7 +64,9 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: '#f7cac9'
+    backgroundColor: '#f7cac9',
+    borderWidth: 2,
+    borderColor: '#f7786b'
   },
   iconContent: {
     alignItems: 'center',

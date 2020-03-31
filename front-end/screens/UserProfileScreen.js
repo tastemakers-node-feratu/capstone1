@@ -13,6 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { updateUserThunk } from '../store/user'
 import UserProifleLinks from '../components/userProfileLinks'
+import LogOutButton from '../components/LogOutButton';
 
 class UserProfileScreen extends Component {
   constructor(props) {
@@ -22,16 +23,19 @@ class UserProfileScreen extends Component {
       imageURL: '',
       bio: '',
       username: '',
-      name: ''
+      firstName: '',
+      lastName: ''
     }
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
+    this.getPlaceHolder = this.getPlaceHolder.bind(this);
   }
 
   componentDidMount() {
-    const { username, name, bio, imageURL } = this.props.user
+    const { username, firstName, lastName, bio, imageURL } = this.props.user
     this.setState({
       ...this.state,
-      name,
+      firstName,
+      lastName,
       bio,
       username,
       imageURL
@@ -47,29 +51,51 @@ class UserProfileScreen extends Component {
     })
   }
 
+  getPlaceHolder(content, field){
+    if(content === ''){
+      return field
+    }
+    return content
+  }
+
   render() {
     const { navigate } = this.props.navigation;
+    const {user} = this.props
 
     if (this.state.editingMode) {
       return (
         <SafeAreaView>
-          {/* <StatusBar barStyle="light-content" backgroundColor="#74b9ff" /> */}
+          <View style={styles.topContainer}>
+            <LogOutButton navigate={navigate} />
+          </View>
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
-                <Icon style={styles.icon} name="close" size={30} color="white"
+                <Icon style={styles.closeIcon} name="close" size={30} color="white"
                   onPress={() => this.setState({ editingMode: false })}
                 />
                 <Image style={styles.avatar}
                   source={{ uri: this.props.user.imageURL }} />
               </View>
-              <TextInput
-                autoCapitalize="words"
-                placeholder={this.state.name}
-                style={styles.input}
-                value={this.state.name}
-                onChangeText={name => { this.setState({ name }) }}
-              />
+              <View style={styles.nameInput}>
+                <TextInput
+                  autoCapitalize="words"
+                  placeholder={this.getPlaceHolder(this.state.firstName, 'first name')}
+                  style={styles.input}
+                  value={this.state.firstName}
+                  onChangeText={firstName => { this.setState({ firstName }) }}
+                />
+                <TextInput
+                  autoCapitalize="words"
+                  placeholder={this.getPlaceHolder(this.state.lastName, 'last name')}
+                  style={styles.input}
+                  value={this.state.lastName}
+                  onChangeText={lastName => {
+                    this.setState({ lastName });
+                    console.log('state',  this.state.lastName)
+                 }}
+                />
+              </View>
               <TextInput
                 style={styles.input}
                 placeHolder={this.state.username}
@@ -78,7 +104,7 @@ class UserProfileScreen extends Component {
               />
               <TextInput
                 style={styles.input}
-                placeHolder={this.state.bio}
+                placeHolder={this.getPlaceHolder(this.state.bio, 'bio')}
                 value={this.state.bio}
                 onChangeText={bio => this.setState({ bio })}
               />
@@ -96,22 +122,22 @@ class UserProfileScreen extends Component {
     else {
       return (
         <SafeAreaView style={styles.container}>
+          <View style={styles.topContainer}>
+            <LogOutButton navigate={navigate} />
+          </View>
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
                 <Image style={styles.avatar}
-                  source={{ uri: this.props.user.imageURL }} />
+                  source={{ uri: user.imageURL }} />
                 <Icon name="edit" size={30} color="white" style={styles.editor}
                   onPress={() => this.setState({ editingMode: true })}
                 />
               </View>
-              <Text style={styles.name}>{this.props.user.name}</Text>
-              <Text style={styles.userInfo}>{this.props.user.username}</Text>
-              <Text style={styles.userInfo}>{this.props.user.bio} </Text>
+              <Text style={styles.name}>{user.firstName} {user.lastName}</Text>
+              <Text style={styles.userInfo}>{user.username}</Text>
+              <Text style={styles.userInfo}>{user.bio} </Text>
             </View>
-            <Text style={styles.name}>{this.props.user.name}</Text>
-            <Text style={styles.userInfo}>{this.props.user.username}</Text>
-            <Text style={styles.userInfo}>{this.props.user.bio} </Text>
           </View>
           <UserProifleLinks navigate={navigate} />
         </SafeAreaView >
@@ -131,18 +157,23 @@ const mapDispatch = dispatch => ({
 export default connect(mapState, mapDispatch)(UserProfileScreen)
 
 const styles = StyleSheet.create({
+  topContainer: {
+    backgroundColor: '#034f84',
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
+    alignItems: 'flex-start'
+  },
   header: {
     backgroundColor: "#034f84",
-    paddingTop: 20,
+    paddingTop: 50,
     paddingBottom: 20
   },
   headerContent: {
     padding: 30,
     alignItems: 'center',
   },
-  icon: {
+  closeIcon: {
     paddingRight: 1,
-    color: 'white'
   },
   avatar: {
     width: 130,
@@ -151,7 +182,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#f7786b",
     marginBottom: 10,
-    marginLeft: 30,
+    paddingLeft: 10,
+    paddingRight: 10
 
   },
   name: {
@@ -161,7 +193,7 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     fontSize: 16,
-    color: "#f7cac9",
+    color: "#f7786b",
     fontWeight: '600',
   },
   avatarEdit: {
@@ -177,6 +209,10 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 2,
     borderRadius: 4,
-    color: 'gray'
+    color: 'gray',
+    marginHorizontal: 5
+  },
+  nameInput: {
+    flexDirection: 'row'
   }
 });
