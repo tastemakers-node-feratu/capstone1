@@ -57,15 +57,17 @@ function Friends() {
 function Profile() {
   return (
     <ProfileTab.Navigator initialRouteName="Profile"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#034f84',
-        },
-        title: ''
-      }}
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#034f84',
+      },
+      title: ''
+    }}
+    headerMode="none"
     >
       <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
-      <ProfileTab.Screen name="All Friends" component={Friends} />
+      <ProfileTab.Screen name="All Friends" component={Friends}
+      />
       <ProfileTab.Screen name="My Pins" component={MySnaps} />
       {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
     </ProfileTab.Navigator>

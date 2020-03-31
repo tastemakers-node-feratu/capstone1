@@ -22,9 +22,7 @@ class LoginScreen extends React.Component {
   constructor(props) {
     super(props)
   }
-  // async componentDidMount() {
-  //   await getMeThunk();
-  // }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -37,7 +35,6 @@ class LoginScreen extends React.Component {
           <View style={styles.inner}>
             <View>
               <Text style={styles.brandName}>Taste Makers</Text>
-              {/* <Image source={../logo} style={styles.welcomeImage} /> */}
               <Text style={styles.title}>What are you loving this week? </Text>
             </View>
             <LoginForm style={styles.loginForm} navigate={navigate} />
@@ -114,8 +111,6 @@ const mapState = state => ({
   user: state.user
 });
 
-const mapDispatch = dispatch => ({
-  getMeThunk: data => dispatch(getMeThunk(data))
-});
+const mapDispatch = dispatch => ({});
 
 export default connect(mapState, mapDispatch)(LoginScreen);

@@ -24,11 +24,6 @@ const LoginForm = props => {
     const authData = { authName, password };
     await getUserThunk(authData);
     clearTextInput();
-    // if (user.id) {
-    //   navigate('AllSnapShots');
-    // } else {
-    //   alert('Incorrect password or username. Try again.');
-    // }
   };
 
   const clearTextInput = () => {
