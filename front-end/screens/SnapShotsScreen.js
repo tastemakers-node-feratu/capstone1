@@ -76,8 +76,9 @@ class SnapShotsScreen extends React.Component {
                     {this.props.allSnapshots.map((snapshot, index) => {
                         console.log(snapshot.id);
                         return (
-                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
-                    )})}
+                            <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
+                        )
+                    })}
                 </ScrollView>
             </SafeAreaView>
         ) : (

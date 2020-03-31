@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
+  Image,
   KeyboardAvoidingView,
   TouchableOpacity,
   View
@@ -27,25 +27,26 @@ class LoginScreen extends React.Component {
     return (
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
-        keyboardVerticalOffset={-150}
+        keyboardVerticalOffset={-100}
         behavior="padding"
+        enabled
       >
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView style={styles.container}>
           <View style={styles.inner}>
-            <View>
-              <Text style={styles.brandName}>Taste Makers</Text>
-              <Text style={styles.title}>What are you loving this week? </Text>
-            </View>
+            <Image source={require('../assets/images/camera-logo.png')}
+              style={{ flexShrink: 1, width: 200, height: 250, marginTop: 20 }} />
+            <Text style={styles.brandName}>Taste Makers</Text>
+            <Text style={styles.title}>What are you loving this week? </Text>
             <LoginForm style={styles.loginForm} navigate={navigate} />
-            <View>
-              <TouchableOpacity
-                onPress={() => navigate('SignUp')}
-                style={styles.buttonContainer}
-              >
-                <Text style={styles.buttonText}>Create New User</Text>
-              </TouchableOpacity>
-            </View>
+
+            <TouchableOpacity
+              onPress={() => navigate('SignUp')}
+              style={styles.buttonContainer}
+            >
+              <Text style={styles.buttonText}>Create New User</Text>
+            </TouchableOpacity>
+
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -59,12 +60,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#034f84'
   },
-  inner: {},
+  inner: {
+    textAlign: 'center',
+    alignItems: 'center',
+  },
   brandName: {
-    marginTop: 150,
-    fontSize: 50,
+    fontSize: 40,
     color: '#f7786b',
-    textAlign: 'center'
+
   },
   error: {
     color: `#eb4034`
@@ -80,17 +83,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logo: {
-    width: 100,
-    height: 100
-  },
   buttonContainer: {
     alignSelf: 'center',
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-
-    marginBottom: 250,
+    marginBottom: 180,
     borderRadius: 10
   },
   buttonText: {

@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 300,
-    marginTop: 10,
     padding: 10,
     borderRadius: 5,
     height: 40,
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-    marginBottom: 10,
     borderRadius: 10
   },
   buttonText: {

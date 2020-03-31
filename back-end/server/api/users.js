@@ -17,7 +17,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const {imageURL, bio, email, name} = req.body;
+    const { imageURL, bio, email, name } = req.body;
     const oldUser = await User.findOne({
       where: { id: req.params.id },
       include: [{ model: Place, through: Snapshot }]
@@ -31,7 +31,7 @@ router.put('/:id', async (req, res, next) => {
     await updatedUser.save();
 
     res.send(updatedUser);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 })
@@ -39,10 +39,10 @@ router.put('/:id', async (req, res, next) => {
 router.put('/snapshot/:userId', async (req, res, next) => {
   const snapshotInfo = req.body;
   const { description, tags, imageURL } = snapshotInfo;
-  try{
+  try {
     const place = await Place.newSnapshot(snapshotInfo);
     const user = await User.findByPk(req.params.userId);
-    await user.addPlace( place[0].id, { through: { description, tags, photos: imageURL } });
+    await user.addPlace(place[0].id, { through: { description, tags, photos: imageURL } });
     const snapshot = await User.findOne({
       where: { id: user.id },
       include: [{
@@ -56,7 +56,7 @@ router.put('/snapshot/:userId', async (req, res, next) => {
     })
 
     res.send(snapshot);
-  }catch(err){
+  } catch (err) {
     next(err)
   }
 })
