@@ -7,7 +7,7 @@
     "start": "node main.js",
     "start-dev": "NODE_ENV=development nodemon main.js",
     "seed": "NODE_ENV=development node script/seed.js",
-    "seed-heroku": "node script/seed.js"
+    "seed-heroku": "node script/heroku-seed.js"
   },
   "keywords": [],
   "author": "",
