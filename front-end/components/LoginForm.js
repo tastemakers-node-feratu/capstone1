@@ -1,10 +1,8 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-filename-extension */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import {
-  Button,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -12,17 +10,17 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {getUserThunk} from '../store/user';
+import { getUserThunk } from '../store/user';
 
 const LoginForm = props => {
   const [authName, setAuthName] = useState('');
   const [password, setPassword] = useState('');
-  const {navigate, getUserThunk, user} = props;
+  const { navigate, getUserThunk, user } = props;
 
   const handleSubmit = async () => {
     if (authName === '') alert('Please enter an email address');
     else if (password === '') alert('Please enter a password');
-    const authData = {authName, password};
+    const authData = { authName, password };
     await getUserThunk(authData);
     clearTextInput();
     // if (user.id) {
@@ -40,7 +38,7 @@ const LoginForm = props => {
   let passwordInput;
 
   return user.id ? (
-    <View>{navigate('AllSnapShots')}</View>
+    <View>{navigate('Home')}</View>
   ) : (
     <KeyboardAvoidingView
         style={{ flex: 1 }}

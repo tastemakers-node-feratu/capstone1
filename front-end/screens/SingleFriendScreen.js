@@ -8,13 +8,13 @@ import {
   Image,
   View
 } from 'react-native';
-import {Spinner} from 'native-base';
-import {connect} from 'react-redux';
+import { Spinner } from 'native-base';
+import { connect } from 'react-redux';
 import {
   getSingleFriendThunk,
   getFriendStatus
 } from '../store/friends';
-import {MonoText} from '../components/StyledText';
+import { MonoText } from '../components/StyledText';
 import UserProfileSnapView from '../components/UserProfileSnapView';
 import AddFriendButton from '../components/AddFriendButton';
 
@@ -24,10 +24,10 @@ class SingleFriendScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const {route, getSingleFriendThunk, user} = this.props;
-    const {friendId} = route.params;
+    const { route, getSingleFriendThunk, user } = this.props;
+    const { friendId } = route.params;
     await getSingleFriendThunk(friendId);
-    const {singlefriend, friendStatus, friendStatusThunk} = this.props;
+    const { singlefriend, friendStatus, friendStatusThunk } = this.props;
     const associateIds = {
       selectedFriendId: singlefriend.id,
       userId: user.id
@@ -38,22 +38,22 @@ class SingleFriendScreen extends React.Component {
   render() {
     const singlefriend = this.props.singlefriend;
 
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return !this.props.singleFriendLoading ? (
       <SafeAreaView style={styles.outerContainer}>
         <View style={styles.container}>
           <View style={styles.userContainer}>
             <Image
-              source={{uri: singlefriend.imageURL}}
-              style={{width: 150, height: 170, borderRadius: 30}}
+              source={{ uri: singlefriend.imageURL }}
+              style={{ width: 150, height: 170, borderRadius: 30 }}
             />
 
             <View style={styles.userInfo}>
               <Text style={styles.name}>{singlefriend.username}</Text>
               <Text style={styles.name}>{singlefriend.name}</Text>
               <AddFriendButton
-              style={styles.addFriendButton}
-              selectedFriendId={singlefriend.id}
+                style={styles.addFriendButton}
+                selectedFriendId={singlefriend.id}
               />
             </View>
           </View>
@@ -73,17 +73,17 @@ class SingleFriendScreen extends React.Component {
         </View>
       </SafeAreaView>
     ) : (
-      <SafeAreaView
-        style={{
-          flex: 2,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#034f84'
-        }}
-      >
-        <Spinner color="#7d5fff" />
-      </SafeAreaView>
-    );
+        <SafeAreaView
+          style={{
+            flex: 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#034f84'
+          }}
+        >
+          <Spinner color="#7d5fff" />
+        </SafeAreaView>
+      );
   }
 }
 

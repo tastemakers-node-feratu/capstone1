@@ -13,10 +13,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {connect} from 'react-redux';
-import {MonoText} from '../components/StyledText';
+import { connect } from 'react-redux';
+import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
-import {getMeThunk} from '../store/user';
+import { getMeThunk } from '../store/user';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class LoginScreen extends React.Component {
   //   await getMeThunk();
   // }
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
 
       // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
@@ -70,11 +70,6 @@ const styles = StyleSheet.create({
     color: '#f7786b',
     textAlign: 'center'
   },
-  // welcomeImage: {
-  //   width: 200,
-  //   height: 200,
-  //   marginTop: 30
-  // },
   error: {
     color: `#eb4034`
   },
