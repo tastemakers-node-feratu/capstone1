@@ -12,9 +12,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {connect} from 'react-redux';
-import {MonoText} from '../components/StyledText';
+import { connect } from 'react-redux';
+import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
+import { getMeThunk } from '../store/user';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class LoginScreen extends React.Component {
   }
 
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}

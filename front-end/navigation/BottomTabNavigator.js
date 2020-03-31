@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
-import LoginScreen from '../screens/LoginScreen';
+// import LoginScreen from '../screens/LoginScreen';
+// import SignUpScreen from '../screens/SignUpScreen';
 import CheckInScreen from '../screens/CheckInScreen';
-import SignUpScreen from '../screens/SignUpScreen';
 import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 import OneSnapScreen from '../screens/OneSnapScreen'
@@ -84,22 +83,6 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator>
       <BottomTab.Screen
-        name="Home"
-        component={LoginScreen}
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{
-          title: 'SignUp',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
-        }}
-      />
-      <BottomTab.Screen
         name="Check In"
         component={CheckInScreen}
         options={{
@@ -120,12 +103,12 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={Profile}
         options={{
           title: 'Profile',
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <Icon name="user" size={30} color="#900" />
           )
         }}
       />
-    </BottomTab.Navigator>
+    </BottomTab.Navigator >
   );
 }
 
