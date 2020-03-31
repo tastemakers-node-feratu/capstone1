@@ -69,7 +69,7 @@ class SnapShotsScreen extends React.Component {
                         >
                             <Text style={styles.backBtn}>{'<<Back'}</Text>
                         </TouchableHighlight>
-                        <SnapFilter user={this.props.user} />
+                        <SnapFilter user={this.props.user} closeModal={this.closeModal} />
                     </View>
                 </Modal>
                 <ScrollView style={styles.contentContainer} >
