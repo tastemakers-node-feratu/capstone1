@@ -7,13 +7,12 @@ export default function Snapshots(props) {
 
     return places.length === 1 ? (
         <SafeAreaView >
-            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId:`${snapshot.userId}${snapshot.placeId}`, placeId: snapshot.places[0].id, }) }} >
+            <TouchableHighlight onPress={() => { navigate('SingleSnap', { userId: snapshot.id, placeId: snapshot.places[0].id, }) }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.username}</Text>
                     <Image source={{ uri: places[0].snapshot.photos }}
                         style={{ width: 300, height: 250, }}
                     />
-
                     <Text style={styles.title}>{places[0].name} </Text>
                     <Text style={styles.content}>{places[0].snapshot.description}</Text>
                 </View>
@@ -22,7 +21,7 @@ export default function Snapshots(props) {
     ) : places.map((place, index) => (
         <SafeAreaView key={index} >
             <TouchableHighlight onPress={() => {
-                navigate('SingleSnap', { userId: `${snapshot.userId}${snapshot.placeId}`, placeId: place.id })
+                navigate('SingleSnap', { userId: snapshot.id , placeId: place.id })
             }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.username}</Text>
