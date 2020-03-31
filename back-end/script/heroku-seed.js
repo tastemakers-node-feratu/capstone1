@@ -93,7 +93,7 @@ async function fakerSeed() {
     await Promise.all(
       allUsers.map((user, index) => {
         let i = index;
-        while (i < 99) {
+        while (i < 18) {
           i += 1;
           user.addFriend(allUsers[i], {
             through: {friendship_status: 'approved'}
