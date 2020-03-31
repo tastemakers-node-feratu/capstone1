@@ -19,8 +19,8 @@ export default function Snapshots(props) {
                 </View>
             </TouchableHighlight>
         </SafeAreaView>
-    ) : places.map(place => (
-        <SafeAreaView key={snapshot.id} >
+    ) : places.map((place, index) => (
+        <SafeAreaView key={index} >
             <TouchableHighlight onPress={() => {
                 navigate('SingleSnap', { userId: snapshot.id, placeId: place.id })
             }} >
