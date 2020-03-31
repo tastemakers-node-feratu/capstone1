@@ -39,7 +39,6 @@ const gotFilter = boxes => ({
   boxes
 });
 
-
 // Thunk Creator
 export const allSnapshotsThunk = snapshotData => {
   return async dispatch => {

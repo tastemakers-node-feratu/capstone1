@@ -67,7 +67,8 @@ User.getFriends = function (id) {
     include: [
       {
         model: User,
-        as: 'friends'
+        as: 'friends',
+        // where: {friendship_status: 'approved'}
       }
     ]
   });
@@ -103,6 +104,7 @@ User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPW);
 });
 
+// TODO: findAndCountAll
 User.getSnapShots = function (arr, categories) {
   const oneMonthAgo = moment().subtract(1, 'months').format();
   let catArr
@@ -125,6 +127,8 @@ User.getSnapShots = function (arr, categories) {
           category: { [Op.in]: catArr }
         }
       }]
+      // offset: 10,
+      // limit: 10
     }
   )
 

@@ -74,7 +74,6 @@ class SnapShotsScreen extends React.Component {
                 </Modal>
                 <ScrollView style={styles.contentContainer} >
                     {this.props.allSnapshots.map((snapshot, index) => {
-                        console.log(snapshot.id);
                         return (
                         <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
                     )})}
