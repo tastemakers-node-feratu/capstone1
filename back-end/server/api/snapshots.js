@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const Sequelize = require('sequelize');
 
-const {Op} = Sequelize;
+const { Op } = Sequelize;
 const Snapshot = require('../db/models/Snapshot');
-const Friend = require('../db/models/Friend');
 const User = require('../db/models/User');
 const Place = require('../db/models/Place');
 
@@ -26,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/snapshot/:userId/:placeId', async (req, res, next) => {
   try {
     const snapshot = await User.findOne({
-      where: {id: req.params.userId},
+      where: { id: req.params.userId },
       include: [
         {
           model: Place,
