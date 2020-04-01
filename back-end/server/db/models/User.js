@@ -78,11 +78,6 @@ User.getFriends = function (id) {
 User.getNonFriends = function (id, friends) {
   const notFriends = this.findAll({
     where: { id: { [Op.notIn]: [id] } },
-    // include: [
-    //   {
-    //     model: User,
-    //     as: 'friends',
-    //   }]
   })
   const friendIds = friends.map(friend => friend.id);
   let nonFrds = notFriends.filter(user => !friendIds.includes(user.id))
