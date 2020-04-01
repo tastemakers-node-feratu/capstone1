@@ -1,13 +1,10 @@
 import React from 'react';
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     Text,
-    Image,
     ScrollView,
     View,
-    TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getUserSnapsThunk } from '../store/snapshots'
@@ -42,7 +39,6 @@ const styles = StyleSheet.create({
     outerContainer: {
         flex: 1,
         backgroundColor: '#034f84',
-        //74b9ff
     },
     container: {
         flex: 1,
