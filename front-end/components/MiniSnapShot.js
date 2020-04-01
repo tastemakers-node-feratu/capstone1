@@ -9,32 +9,34 @@ import {
   TouchableHighlight,
   SafeAreaView
 } from 'react-native';
+import OneSnapFullView from './OneSnapFullView'
 
-const handleImage = (src) => {
-    return src ? src : ''
-}
+// const handleImage = (src) => {
+//     return src ? src : ''
+// }
 
 export default function Snapshots(props) {
   const {snapshot, navigate} = props;
   const {places} = snapshot;
   return places.map(place => (
-    <SafeAreaView key={place.id}>
-      <TouchableHighlight
-        onPress={() => {
-          navigate('SingleSnap', {userId: snapshot.id, placeId: place.id});
-        }}
-      >
-        <View style={styles.container}>
-          <Text style={styles.name}>{snapshot.username}</Text>
-          <Image
-            source={{uri: handleImage(place.snapshot.photos)}}
-            style={{width: 300, height: 250}}
-          />
-          <Text style={styles.title}>{place.name}</Text>
-          <Text style={styles.content}>{place.snapshot.description}</Text>
-        </View>
-      </TouchableHighlight>
-    </SafeAreaView>
+    <OneSnapFullView key={place.id} user={snapshot} place={place}/>
+    // <SafeAreaView key={place.id}>
+    //   <TouchableHighlight
+    //     onPress={() => {
+    //       navigate('SingleSnap', {userId: snapshot.id, placeId: place.id});
+    //     }}
+    //   >
+    //     <View style={styles.container}>
+    //       <Text style={styles.name}>{snapshot.username}</Text>
+    //       <Image
+    //         source={{uri: handleImage(place.snapshot.photos)}}
+    //         style={{width: 300, height: 250}}
+    //       />
+    //       <Text style={styles.title}>{place.name}</Text>
+    //       <Text style={styles.content}>{place.snapshot.description}</Text>
+    //     </View>
+    //   </TouchableHighlight>
+    // </SafeAreaView>
   ));
 }
 

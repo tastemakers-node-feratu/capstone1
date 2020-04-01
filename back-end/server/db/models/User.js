@@ -131,8 +131,18 @@ User.getSnapShots = function (arr, categories) {
       // limit: 10
     }
   )
-
   return all;
 };
+
+User.getOwnSnaps = function(id) {
+  const user = this.findOne({
+    where: { id: id },
+    include: [{
+      model: Place, through: Snapshot
+    }]
+  });
+  return user;
+
+}
 
 module.exports = User;
