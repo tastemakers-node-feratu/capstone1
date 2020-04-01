@@ -1,12 +1,12 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
-import {connect} from 'react-redux';
-import {removeFriendThunk} from '../store/friends';
+import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { removeFriendThunk, getStrangersThunk } from '../store/friends';
 
 const UnfriendComponent = props => {
-  const {userId, selectedFriendId, unfriend} = props;
+  const { userId, selectedFriendId, unfriend, getStrangers } = props;
 
   const handleUnfriend = () => {
     const associateIds = {
@@ -14,6 +14,7 @@ const UnfriendComponent = props => {
       userId
     };
     unfriend(associateIds);
+    getStrangers(userId)
   };
 
   return (
@@ -39,7 +40,8 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  unfriend: data => dispatch(removeFriendThunk(data))
+  unfriend: data => dispatch(removeFriendThunk(data)),
+  getStrangers: (id) => dispatch(getStrangersThunk(id))
 });
 
 export default connect(mapState, mapDispatch)(UnfriendComponent);

@@ -7,6 +7,7 @@ import CheckInScreen from '../screens/CheckInScreen';
 import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 import OneSnapScreen from '../screens/OneSnapScreen'
+import FindFriendScreen from '../screens/FindFriendScreen'
 import { createStackNavigator } from '@react-navigation/stack';
 import SingleFriendScreen from '../screens/SingleFriendScreen';
 
@@ -21,6 +22,7 @@ const INITIAL_ROUTE_NAME = 'Home';
 const FeedTab = createStackNavigator();
 const FriendTab = createStackNavigator();
 const ProfileTab = createStackNavigator();
+const FindFriendsTab = createStackNavigator();
 
 function Feed() {
   return (
@@ -58,20 +60,36 @@ function Friends() {
 function Profile() {
   return (
     <ProfileTab.Navigator initialRouteName="Profile"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#034f84',
+        },
+        title: ''
+      }}
+    >
+      <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
+      <ProfileTab.Screen name="All Friends" component={Friends}
+      />
+      <ProfileTab.Screen name="My Pins" component={MySnaps} />
+      <ProfileTab.Screen name="Find Friends" component={FindFriendScreen} />
+      {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
+    </ProfileTab.Navigator>
+  )
+}
+
+function FindFriends() {
+  return (< FindFriendsTab.Navigator initialRouteName="Find Friends"
     screenOptions={{
       headerStyle: {
         backgroundColor: '#034f84',
       },
       title: ''
     }}
-    >
-      <ProfileTab.Screen name="Profile" component={UserProfileScreen} />
-      <ProfileTab.Screen name="All Friends" component={Friends}
-      />
-      <ProfileTab.Screen name="My Pins" component={MySnaps} />
-      {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
-    </ProfileTab.Navigator>
-  )
+  >
+    <FindFriendsTab.Screen name="Find Friends" component={FindFriendScreen} />
+    <FindFriendsTab.Screen name="SingleFriend" component={SingleFriendScreen} />
+    <FindFriendsTab.Screen name="SingleSnap" component={OneSnapScreen} />
+  </FindFriendsTab.Navigator>)
 }
 
 export default function BottomTabNavigator({ navigation, route }) {
@@ -105,6 +123,16 @@ export default function BottomTabNavigator({ navigation, route }) {
           title: 'Profile',
           tabBarIcon: ({ focused }) => (
             <Icon name="user" size={30} color="#900" />
+          )
+        }}
+      />
+      <BottomTab.Screen
+        name="FindFriends"
+        component={FindFriends}
+        options={{
+          title: 'FindFriends',
+          tabBarIcon: ({ focused }) => (
+            <Icon name="search" size={30} color="#900" />
           )
         }}
       />

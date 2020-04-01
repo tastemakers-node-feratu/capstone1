@@ -2,14 +2,15 @@
 import axios from 'axios';
 import getEnvVars from '../environment';
 
-const {apiUrl} = getEnvVars();
+const { apiUrl } = getEnvVars();
 
 // initial State
 const initialState = {
   friends: [],
   singlefriend: {},
   singleFriendLoading: true,
-  friendStatus: ''
+  friendStatus: '',
+  strangers: []
 };
 
 // Action Types
@@ -18,6 +19,7 @@ const GOT_ONE_FRIEND = 'GOT_ONE_FRIEND';
 const GOT_FRIENDS_STATUS = 'GOT_FRIENDS_STATUS';
 const ADD_FRIEND = 'ADD_FRIEND';
 const REMOVE_FRIEND = 'REMOVE_FRIEND';
+const GOT_STRANGERS = 'GOT_STRANGERS'
 
 // Action Creator
 const gotRemoveFriend = (status, removeId) => {
@@ -53,11 +55,19 @@ const gotFriendsStatus = status => {
   };
 };
 
+const gotStrangers = strangers => {
+  return {
+    type: GOT_STRANGERS,
+    strangers
+  }
+}
+
+
 // Thunk Creators
 export const removeFriendThunk = friendsIds => async dispatch => {
   try {
-    const {selectedFriendId} = friendsIds;
-    const {data} = await axios.delete(`${apiUrl}/api/friends/unfriend`, {
+    const { selectedFriendId } = friendsIds;
+    const { data } = await axios.delete(`${apiUrl}/api/friends/unfriend`, {
       params: {
         userId: friendsIds.userId,
         selectedFriendId: friendsIds.selectedFriendId
@@ -70,7 +80,7 @@ export const removeFriendThunk = friendsIds => async dispatch => {
 };
 export const addFriendThunk = friendIds => async dispatch => {
   try {
-    const {data} = await axios.post(
+    const { data } = await axios.post(
       `${apiUrl}/api/friends/addFriend`,
       friendIds
     );
@@ -88,7 +98,7 @@ export const addFriendThunk = friendIds => async dispatch => {
 };
 export const getFriendStatus = friendsIds => async dispatch => {
   try {
-    const {data} = await axios.get(`${apiUrl}/api/friends/friendStatus`, {
+    const { data } = await axios.get(`${apiUrl}/api/friends/friendStatus`, {
       params: {
         userId: friendsIds.userId,
         selectedFriendId: friendsIds.selectedFriendId
@@ -102,8 +112,18 @@ export const getFriendStatus = friendsIds => async dispatch => {
 export const getFriendsThunk = userId => async dispatch => {
   try {
     // added '/all' to distinguish this route from other axios.get routes
-    const {data} = await axios.get(`${apiUrl}/api/friends/all/${userId}`);
+    const { data } = await axios.get(`${apiUrl}/api/friends/all/${userId}`);
     dispatch(gotFriends(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getStrangersThunk = userId => async dispatch => {
+  try {
+    // added '/nonfriends' to distinguish this route from other axios.get routes
+    const { data } = await axios.get(`${apiUrl}/api/friends/nonfriends/${userId}`);
+    dispatch(gotStrangers(data));
   } catch (error) {
     console.error(error);
   }
@@ -111,7 +131,7 @@ export const getFriendsThunk = userId => async dispatch => {
 
 export const getSingleFriendThunk = id => async dispatch => {
   try {
-    const {data} = await axios.get(`${apiUrl}/api/users/${id}`);
+    const { data } = await axios.get(`${apiUrl}/api/users/${id}`);
 
     dispatch(gotSingleFriend(data));
   } catch (error) {
@@ -122,7 +142,7 @@ export const getSingleFriendThunk = id => async dispatch => {
 const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_FRIENDS: {
-      return {...state, friends: action.friends};
+      return { ...state, friends: action.friends };
     }
     case GOT_ONE_FRIEND: {
       return {
@@ -132,7 +152,7 @@ const friendsReducer = (state = initialState, action) => {
       };
     }
     case GOT_FRIENDS_STATUS: {
-      return {...state, friendStatus: action.status};
+      return { ...state, friendStatus: action.status };
     }
     case ADD_FRIEND: {
       return {
@@ -150,6 +170,12 @@ const friendsReducer = (state = initialState, action) => {
         friends: remainingFriends,
         friendStatus: action.status
       };
+    }
+    case GOT_STRANGERS: {
+      return {
+        ...state,
+        strangers: action.strangers
+      }
     }
     default:
       return state;
