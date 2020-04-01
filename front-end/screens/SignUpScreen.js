@@ -5,30 +5,31 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  Image,
   TextInput,
   KeyboardAvoidingView,
   SafeAreaView
 } from 'react-native';
 
-import {MonoText} from '../components/StyledText';
+import { MonoText } from '../components/StyledText';
 import SignUpForm from '../components/SignUpForm';
 
 class SignUpScreen extends React.Component {
 
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         keyboardVerticalOffset={64}
         behavior="padding"
         enabled
       >
         <SafeAreaView style={styles.container}>
+          <Image source={require('../assets/images/camera-logo.png')}
+            style={{ flexShrink: 1, width: 200, height: 250, }} />
           <View style={styles.inner}>
             <Text style={styles.brandName}>Taste Makers</Text>
-            {/* <Image source={../logo} style={styles.welcomeImage} /> */}
             <Text style={styles.title}>What are you loving this week? </Text>
             <SignUpForm navigate={navigate} />
           </View>
@@ -47,23 +48,13 @@ const styles = StyleSheet.create({
   },
   inner: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 100
   },
   brandName: {
-    fontSize: 50,
+    fontSize: 40,
     color: '#f7786b',
     textAlign: 'center'
-  },
-  input: {
-    width: 300,
-    marginTop: 10,
-    padding: 10,
-    borderRadius: 5,
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 15,
-    color: '#FFF',
-    paddingHorizontal: 10
   },
   title: {
     color: '#FFF',
@@ -76,10 +67,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexGrow: 1,
     justifyContent: 'center'
-  },
-  logo: {
-    width: 100,
-    height: 100
   },
   buttonContainer: {
     backgroundColor: '#2980b9',

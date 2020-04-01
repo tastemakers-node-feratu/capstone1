@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Place, Snapshot} = require('../db/models');
+const { User, Place, Snapshot } = require('../db/models');
 
 // ./auth/google
 router.use('/google', require('./googleOAuth'));

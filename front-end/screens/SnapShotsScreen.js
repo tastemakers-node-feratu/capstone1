@@ -70,7 +70,7 @@ class SnapShotsScreen extends React.Component {
                         >
                             <Text style={styles.backBtn}>{'<<Back'}</Text>
                         </TouchableHighlight>
-                        <SnapFilter user={this.props.user} />
+                        <SnapFilter user={this.props.user} closeModal={this.closeModal} />
                     </View>
                 </Modal>
                 {/* <ScrollView style={styles.contentContainer} >
@@ -80,11 +80,11 @@ class SnapShotsScreen extends React.Component {
                     )})}
                 </ScrollView> */}
                 <View style={styles.contentContainer}>
-                <FlatList
-                keyExtractor={item => item.id.toString()}
-                data={this.props.allSnapshots}
-                renderItem={({item}) => (<MiniSnapShot snapshot={item} navigate={navigate} />)}
-                />
+                    <FlatList
+                        keyExtractor={item => item.id.toString()}
+                        data={this.props.allSnapshots}
+                        renderItem={({ item }) => (<MiniSnapShot snapshot={item} navigate={navigate} />)}
+                    />
                 </View>
             </SafeAreaView>
         ) : (

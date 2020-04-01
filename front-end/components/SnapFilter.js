@@ -36,6 +36,7 @@ class SnapFilter extends React.Component {
     addCategories() {
         if (this.props.snapFilterThunk) {
             this.props.snapFilterThunk(this.state);
+            this.props.closeModal()
         }
     }
 

@@ -36,48 +36,48 @@ const LoginForm = props => {
   return user.id ? (
     <View>{navigate('Home')}</View>
   ) : (
-    <KeyboardAvoidingView
+      <KeyboardAvoidingView
         style={{ flex: 1 }}
         keyboardVerticalOffset={64}
         behavior="padding"
       >
-    <SafeAreaView style={styles.container}>
-      <TextInput
-        placeholder="username or email"
-        placeholderTextColor="rgba(255,255,255,0.7)"
-        returnKeyType="next"
-        onSubmitEditing={() => {
-          passwordInput.focus();
-        }}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-        style={styles.input}
-        onChangeText={value => setAuthName(value)}
-        clearButtonMode="always"
-        value={authName}
-      />
-      <TextInput
-        placeholder="password"
-        placeholderTextColor="rgba(255,255,255,0.7)"
-        secureTextEntry
-        returnKeyType="go"
-        style={styles.input}
-        clearButtonMode="always"
-        value={password}
-        name="passwordInput"
-        ref={input => {
-          passwordInput = input;
-        }}
-        onChangeText={value => setPassword(value)}
-      />
+        <SafeAreaView style={styles.container}>
+          <TextInput
+            placeholder="username or email"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              passwordInput.focus();
+            }}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.input}
+            onChangeText={value => setAuthName(value)}
+            clearButtonMode="always"
+            value={authName}
+          />
+          <TextInput
+            placeholder="password"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            secureTextEntry
+            returnKeyType="go"
+            style={styles.input}
+            clearButtonMode="always"
+            value={password}
+            name="passwordInput"
+            ref={input => {
+              passwordInput = input;
+            }}
+            onChangeText={value => setPassword(value)}
+          />
 
-      <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
-    </KeyboardAvoidingView>
-  );
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -89,12 +89,11 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 300,
-    marginTop: 10,
     padding: 10,
     borderRadius: 5,
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
-    // marginBottom: 15,
+    marginBottom: 15,
     color: '#FFF',
     paddingHorizontal: 10
   },
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-    marginTop: 15,
+    marginBottom: 15,
     borderRadius: 10
   },
   buttonText: {
