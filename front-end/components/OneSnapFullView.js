@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     alignItems: 'center',
-    borderRadius: 10
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#f7786b'
   },
   contentContainer: {
     paddingTop: 15
