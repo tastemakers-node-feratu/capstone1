@@ -14,12 +14,16 @@ const LogOutButton = props => {
 
   return (
     <View>
-      <Button title="Log Out" color="black" onPress={logout} />
+      <Button title="Log Out" color='white' onPress={logout} />
     </View>
   );
 };
 
-// const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({
+//   button: {
+//   
+//   }
+// });
 
 const mapState = state => ({
   user: state.user
