@@ -36,11 +36,6 @@ const LoginForm = props => {
   return user.id ? (
     <View>{navigate('Home')}</View>
   ) : (
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={64}
-        behavior="padding"
-      >
         <SafeAreaView style={styles.container}>
           <TextInput
             placeholder="username or email"
@@ -76,7 +71,6 @@ const LoginForm = props => {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
         </SafeAreaView>
-      </KeyboardAvoidingView>
     );
 };
 

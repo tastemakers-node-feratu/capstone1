@@ -29,7 +29,11 @@ class LoginScreen extends React.Component {
 
       // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
       //  <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={64}
+        behavior="padding"
+      >
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer} >
           <View style={styles.inner}>
@@ -49,6 +53,7 @@ class LoginScreen extends React.Component {
           </View>
         </ScrollView>
       </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2980b9',
     width: 200,
     paddingVertical: 10,
-    marginBottom: 100,
+    // marginBottom: 100,
     borderRadius: 10
   },
   buttonText: {

@@ -10,10 +10,13 @@ import {
   SafeAreaView
 } from 'react-native';
 
+const handleImage = (src) => {
+    return src ? src : ''
+}
+
 export default function Snapshots(props) {
   const {snapshot, navigate} = props;
   const {places} = snapshot;
-
   return places.map(place => (
     <SafeAreaView key={place.id}>
       <TouchableHighlight
@@ -24,7 +27,7 @@ export default function Snapshots(props) {
         <View style={styles.container}>
           <Text style={styles.name}>{snapshot.username}</Text>
           <Image
-            source={{uri: place.snapshot.photos}}
+            source={{uri: handleImage(place.snapshot.photos)}}
             style={{width: 300, height: 250}}
           />
           <Text style={styles.title}>{place.name}</Text>
