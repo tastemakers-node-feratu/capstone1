@@ -8,13 +8,12 @@ import {
     View
 } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
-import { getFriendsThunk } from '../store/friends'
-import MiniFriendView from '../components/MiniFriendView'
+import { getStrangersThunk } from '../store/friends'
 import { connect } from 'react-redux'
 const KEYS_TO_FILTERS = ['username'];
 import { MonoText } from '../components/StyledText';
 
-class FriendsScreen extends React.Component {
+class FindFriendScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,18 +24,15 @@ class FriendsScreen extends React.Component {
         this.setState({ searchName: name })
     }
     componentDidMount() {
-        this.props.getFriends(this.props.userId)
+        this.props.getStrangers(this.props.userId)
     }
 
     render() {
         const { navigate } = this.props.navigation;
-        const filteredFriends = this.props.friends.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
+        const filteredUsers = this.props.strangers.filter(createFilter(this.state.searchName, KEYS_TO_FILTERS))
         return (
             <SafeAreaView style={styles.container} >
                 <View style={styles.topContainer}>
-                    {/* <View style={styles.rightButtons}>
-                        <Button title="Find New Friend" color={'white'} />
-                    </View> */}
                 </View>
                 <SearchInput
                     onChangeText={(name) => { this.searchUpdated(name) }}
@@ -46,7 +42,7 @@ class FriendsScreen extends React.Component {
                 />
                 <ScrollView contentContainerStyle={styles.contentContainer} >
                     {
-                        filteredFriends.map((friend) => {
+                        filteredUsers.map((friend) => {
                             return (
                                 <MiniFriendView key={friend.email} info={friend} navigate={navigate}
                                 />
@@ -67,10 +63,6 @@ const styles = StyleSheet.create({
     contentContainer: {
         paddingTop: 15,
     },
-    // topContainer: {
-    //     flexDirection: "row",
-    //     justifyContent: 'space-between'
-    // },
     rightButtons: {
         flexDirection: "row",
     },
@@ -84,11 +76,11 @@ const styles = StyleSheet.create({
 
 const mapState = state => ({
     userId: state.user.id,
-    friends: state.friends.friends
+    strangers: state.friends.strangers
 });
 
 const mapDispatch = dispatch => ({
-    getFriends: (id) => dispatch(getFriendsThunk(id))
+    getStrangers: (id) => dispatch(getStrangersThunk(id))
 });
 
-export default connect(mapState, mapDispatch)(FriendsScreen);
+export default connect(mapState, mapDispatch)(FindFriendScreen);

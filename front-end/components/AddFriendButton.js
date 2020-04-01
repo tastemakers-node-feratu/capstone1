@@ -2,13 +2,13 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
-import {connect} from 'react-redux';
-import {addFriendThunk} from '../store/friends';
+import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { addFriendThunk, getFriendsThunk, getStrangersThunk } from '../store/friends';
 import UnfriendComponent from './UnfriendComponent';
 
 const AddFriendButton = props => {
-  const {userId, selectedFriendId, addFriends, friendStatus} = props;
+  const { userId, selectedFriendId, addFriends, friendStatus, getFriends, getStrangers } = props;
 
   const handlePress = () => {
     const associateIds = {
@@ -17,6 +17,8 @@ const AddFriendButton = props => {
       friendStatus
     };
     addFriends(associateIds);
+    getFriends(userId)
+    getStrangers(userId)
   };
 
   const whichButton = () => {
@@ -76,7 +78,9 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  addFriends: data => dispatch(addFriendThunk(data))
+  addFriends: data => dispatch(addFriendThunk(data)),
+  getFriends: (id) => dispatch(getFriendsThunk(id)),
+  getStrangers: (id) => dispatch(getStrangersThunk(id))
 });
 
 export default connect(mapState, mapDispatch)(AddFriendButton);

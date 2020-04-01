@@ -75,6 +75,15 @@ User.getFriends = function (id) {
   return friends;
 };
 
+User.getNonFriends = function (id, friends) {
+  const notFriends = this.findAll({
+    where: { id: { [Op.notIn]: [id] } },
+  })
+  const friendIds = friends.map(friend => friend.id);
+  let nonFrds = notFriends.filter(user => !friendIds.includes(user.id))
+  return nonFrds
+}
+
 User.prototype.correctPassword = function (passw) {
   return User.encryptPassword(passw, this.salt()) === this.password();
 };

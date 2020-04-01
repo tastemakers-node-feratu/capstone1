@@ -12,7 +12,6 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-
 });
 
 router.get('/snapshots/:id', async (req, res, next) => {
