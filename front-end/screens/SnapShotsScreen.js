@@ -13,6 +13,7 @@ import { Spinner } from 'native-base'
 import MiniSnapShot from '../components/MiniSnapShot'
 import SnapFilter from '../components/SnapFilter'
 import { allSnapshotsThunk } from '../store/snapshots'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import LogOutButton from '../components/LogOutButton';
@@ -60,7 +61,9 @@ class SnapShotsScreen extends React.Component {
                 <View style={styles.topContainer}>
                     <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
-                        <Button title="Filter" color={'black'} onPress={this.openModal} />
+                        <TouchableHighlight onPress={this.openModal} style={styles.filter}>
+                            <Icon name="filter-outline" size={30} color="#f2f2f2" />
+                        </TouchableHighlight>
                     </View>
                 </View>
                 <Modal visible={this.state.modalVisible} animationType='slide'>
@@ -110,13 +113,14 @@ const styles = StyleSheet.create({
     rightButtons: {
         flexDirection: "row",
     },
-    modalToggle: {
+    filter: {
         borderWidth: 1,
         borderColor: '#f2f2f2',
         borderRadius: 10,
-        padding: 10,
-        width: 45,
-        marginLeft: 10
+        width: 40,
+        alignItems: 'center',
+        margin: 5,
+        marginRight: 10
     },
     modal: {
         flex: 1,

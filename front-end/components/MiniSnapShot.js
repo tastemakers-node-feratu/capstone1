@@ -9,26 +9,50 @@ import {
   TouchableHighlight,
   SafeAreaView
 } from 'react-native';
-
 const handleImage = (src) => {
-    return src ? src : ''
+  return src ? src : ''
+}
+const handleIcon = (category) => {
+  switch (category) {
+    case 'fitness':
+      return <Image source={require('../assets/images/Icons/fitness-48.png')}
+        style={styles.image} />
+    case 'shop':
+      return <Image source={require('../assets/images/Icons/shop-64.png')}
+        style={styles.image} />
+    case 'food':
+      return <Image source={require('../assets/images/Icons/food.png')}
+        style={styles.image} />
+    case 'nightlife':
+      return <Image source={require('../assets/images/Icons/dancing-64.png')}
+        style={styles.image} />
+    case 'beauty':
+      return <Image source={require('../assets/images/Icons/lipstick-40.png')}
+        style={styles.image} />
+    default:
+      return <Image source={require('../assets/images/Icons/experience-40.png')}
+        style={styles.image} />
+  }
 }
 
 export default function Snapshots(props) {
-  const {snapshot, navigate} = props;
-  const {places} = snapshot;
+  const { snapshot, navigate } = props;
+  const { places } = snapshot;
   return places.map(place => (
     <SafeAreaView key={place.id}>
       <TouchableHighlight
         onPress={() => {
-          navigate('SingleSnap', {userId: snapshot.id, placeId: place.id});
+          navigate('SingleSnap', { userId: snapshot.id, placeId: place.id });
         }}
       >
         <View style={styles.container}>
-          <Text style={styles.name}>{snapshot.username}</Text>
+          <View style={styles.topContainer}>
+            <Text style={styles.name}>{snapshot.username}</Text>
+            {handleIcon(place.category[0])}
+          </View>
           <Image
-            source={{uri: handleImage(place.snapshot.photos)}}
-            style={{width: 300, height: 250}}
+            source={{ uri: handleImage(place.snapshot.photos) }}
+            style={{ width: 300, height: 250 }}
           />
           <Text style={styles.title}>{place.name}</Text>
           <Text style={styles.content}>{place.snapshot.description}</Text>
@@ -51,13 +75,17 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 15
   },
+  topContainer: {
+    flexDirection: 'row'
+  },
   name: {
     fontSize: 20,
     color: '#f7786b',
     textAlign: 'center',
     fontWeight: '400',
     marginTop: 15,
-    marginBottom: 5
+    marginBottom: 5,
+    marginLeft: 80
   },
   title: {
     fontSize: 20,
@@ -71,5 +99,10 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginBottom: 15,
     textAlign: 'center'
+  },
+  image: {
+    width: 40,
+    height: 40,
+    marginLeft: 70
   }
 });
