@@ -14,6 +14,15 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.get('/snapshots/:id', async (req, res, next) => {
+  try{
+    const userWithSnaps = await User.getOwnSnaps(req.params.id);
+    res.send(userWithSnaps.places);
+  } catch(err){
+    next(err)
+  }
+})
+
 router.put('/:id', async (req, res, next) => {
   try {
     const { imageURL, bio, email, firstName, lastName } = req.body;
