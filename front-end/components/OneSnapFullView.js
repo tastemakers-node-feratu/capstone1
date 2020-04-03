@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '400',
     marginTop: 15,
-    marginBottom: 5
+    marginBottom: 5,
+    // marginLeft: 60,
   },
   title: {
     fontSize: 20,
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 40,
-    height: 40
+    height: 40,
+    alignItems: 'flex-end'
   }
 })
