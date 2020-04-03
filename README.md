@@ -1,47 +1,6 @@
-# capstone1
-Have you ever read through reviews on yelp and google and wonder if they are real?
-Hello Everyone, thank you for joining us today. I and my team of .. name1, name 2
-
-Table of Contents
-SoleMate
-Table of Contents
-Download
-Team
-    Melinda
-    Isabel Jao
-    Mi
-
-Tech Stack
-React Native
-Redux
-Expo
-Node.js
-Express
-MySQL
-Tutorial
-Examples
-
-
-
-Application  
-1 - 1.5 min - intro + app demo 
-2 mins - tech + problems
- 30 seconds close, or less 
-
-
-What is it ?
-what problem does it solve?
-What was your motivation for creating it?
-What are the major features?
-what are the unique and interesting features?
-There is this technical challenge that we would like to incorporate in the next version
-Thank team mates
-
 # Taste Makers
 
-Taste Makers is a review based social media app that leverages geolocation technology to match users with runners in their area. Users are able to view a feed of posts from within the current month and filter the feed by categories. Users are able to access 
-
-Visit [Taste Makers](https://expo.io/@mdonnelly/sole-mate-app) to try us out!
+Tastemakers is a mobile social media app that allows friends to share recent discoveries in food, fitness, nightlife, shopping, beauty, and more through posts called “snapshots.”  A snapshot is composed of a name, location, photo and description of an experience you had. Tastemakers is a unique way for friends to share recent discoveries.
 
 ## Table of Contents
 
