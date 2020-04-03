@@ -115,7 +115,6 @@ export const getUserSnapsThunk = (userId) => {
   return async dispatch => {
     try{
       const { data } = await axios.get(`${apiUrl}/api/users/snapshots/${userId}`)
-      console.log('data is', data);
       dispatch(gotUserSnaps(data));
     } catch(err) {
       console.error(err);

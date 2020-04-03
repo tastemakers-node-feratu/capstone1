@@ -92,7 +92,6 @@ class UserProfileScreen extends Component {
                   value={this.state.lastName}
                   onChangeText={lastName => {
                     this.setState({ lastName });
-                    console.log('state',  this.state.lastName)
                  }}
                 />
               </View>
