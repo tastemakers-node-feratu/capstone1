@@ -23,10 +23,8 @@ export default function OneSnapFullView(props){
       >
         <View style={styles.container}>
           <Text style={styles.name}>{user.username}</Text>
-          <Image
-            source={{uri: handleImage(place.snapshot.photos)}}
-            style={{width: 300, height: 250}}
-          />
+          {place.snapshot.photos!== '' ? <Image source={{uri: handleImage(place.snapshot.photos)}}
+            style={{width: 300, height: 250}}/> : null }
           <Text style={styles.title}>{place.name}</Text>
           <Text style={styles.content}>{place.snapshot.description}</Text>
         </View>

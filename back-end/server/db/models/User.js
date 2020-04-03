@@ -44,7 +44,7 @@ const User = db.define('user', {
   },
   imageURL: {
     type: Sequelize.STRING,
-    defaultValue: ''
+    defaultValue: 'https://reactnative.dev/img/tiny_logo.png'
   },
   bio: {
     type: Sequelize.TEXT,
