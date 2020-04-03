@@ -8,10 +8,6 @@ import {
   SafeAreaView
 } from 'react-native';
 
-const handleImage = (src) => {
-  return src ? src : ''
-}
-
 const handleIcon = (category) => {
   switch (category) {
     case 'fitness':
@@ -49,10 +45,7 @@ export default function OneSnapFullView(props) {
             <Text style={styles.name}>{user.username}</Text>
             {place.category.map(category => handleIcon(category))}
           </View>
-          <Image
-            source={{ uri: handleImage(place.snapshot.photos) }}
-            style={{ width: 300, height: 250 }}
-          />
+          {place.snapshot.photos!== '' ? <Image source={{ uri: place.snapshot.photos }} style={{ width: 225, height: 175 }} /> : null}
           <Text style={styles.title}>{place.name}</Text>
           <Text style={styles.content}>{place.snapshot.description}</Text>
         </View>
