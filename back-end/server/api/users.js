@@ -26,7 +26,6 @@ router.get('/snapshots/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const { imageURL, bio, email, firstName, lastName } = req.body;
-    console.log('req body', req.body)
     const oldUser = await User.findOne({
       where: { id: req.params.id },
       include: [{ model: Place, through: Snapshot }]

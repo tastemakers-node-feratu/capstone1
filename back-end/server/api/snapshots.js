@@ -25,7 +25,6 @@ router.get('/:id', async (req, res, next) => {
       const userFriends = friendsArr.friends.map(friend => friend.id);
       all = await User.getSnapShots(userFriends, req.query.categories);
     }
-    console.log('all snaps looks like this', all, '\n\n')
     res.send(all);
   } catch (err) {
     next(err);

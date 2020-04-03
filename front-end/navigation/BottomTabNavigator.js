@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import UserProfileScreen from '../screens/UserProfileScreen';
 import UserProfileSnapView from '../components/UserProfileSnapView'
 import MySnaps from '../screens/MySnaps'
+// import Explore from '../screens/Explore'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -136,6 +137,16 @@ export default function BottomTabNavigator({ navigation, route }) {
           )
         }}
       />
+      {/* <BottomTab.Screen
+        name="Explore"
+        component={Explore}
+        options={{
+          title: 'Explore',
+          tabBarIcon: ({ focused }) => (
+            <Icon name="search" size={30} color="#900" />
+          )
+        }}
+      /> */}
     </BottomTab.Navigator >
   );
 }
