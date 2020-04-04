@@ -8,7 +8,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import BottomTabNavigator from './navigation/BottomTabNavigator';
 import AppNavigator from './navigation/AppNavigator'
 
 import useLinking from './navigation/useLinking';

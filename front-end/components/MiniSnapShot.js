@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 
-
 import OneSnapFullView from './OneSnapFullView'
 
 export default function Snapshots(props) {
