@@ -11,7 +11,8 @@ const initialState = {
   selectedSnapshot: {},
   oneLoading: true,
   catFilter: 'all',
-  userSnaps: []
+  userSnaps: [],
+  curatedSnaps: []
 };
 
 // Action Types
@@ -20,6 +21,7 @@ const GOT_ONE = 'GOT_ONE';
 const ADD_ONE = 'ADD_ONE';
 const ADD_FILTER = 'ADD_FILTER';
 const GOT_USER_SNAPS = 'GOT_USER_SNAPS';
+const GOT_CURATED_SNAPS = 'GOT_CURATED_SNAPS';
 
 const addOneSnapshot = snapshot => ({
   type: ADD_ONE,
@@ -45,6 +47,13 @@ const gotUserSnaps = info => ({
   type: GOT_USER_SNAPS,
   info
 })
+
+const gotCuratedSnaps = info => {
+  return{
+    type: GOT_CURATED_SNAPS,
+    info
+  }
+}
 
 // Thunk Creator
 export const allSnapshotsThunk = snapshotData => {
@@ -122,8 +131,24 @@ export const getUserSnapsThunk = (userId) => {
   }
 }
 
+export const getCuratedSnapsThunk = userId => {
+  return async dispatch => {
+    try{
+      const { data } = await axios.get(`${apiUrl}/api/snapshots/explore/${userId}`);
+      dispatch(gotCuratedSnaps(data));
+    } catch(err){
+      console.error(err)
+    }
+  }
+}
+
 const snapshotReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GOT_CURATED_SNAPS:{
+      // console.log('i got it');
+      return {...state, curatedSnaps: [...action.info] }
+    }
+
     case GOT_USER_SNAPS:
       return {...state, userSnaps: action.info}
     case ADD_ONE:

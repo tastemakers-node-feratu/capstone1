@@ -166,4 +166,24 @@ User.getOwnSnaps = function(id) {
   return user;
 };
 
+User.getRandomSnapsByCategory = function(id, max, category){
+  const userSnaps = this.findAll({
+    where: {
+      [Op.not]: [
+        { id: id }
+      ]
+    },
+    include: [{
+      model: Place, through: Snapshot,
+      //for now, it's only getting instances that contain that category and ONLY
+      //that category (i.e, just 'food', not something with 'food, fitness.').
+      //For future, must continue research on querying our db to include instances that
+      //contain the category, potentially alongside other categories.
+      where: { category: category }
+    }],
+    limit: max
+  })
+  return userSnaps;
+}
+
 module.exports = User;

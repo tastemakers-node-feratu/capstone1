@@ -32,7 +32,7 @@ const handleIcon = (category) => {
 }
 
 export default function OneSnapFullView(props) {
-  const { place, user } = props;
+  const { place, user, navigate } = props;
   return (
     <SafeAreaView key={place.id}>
       <TouchableHighlight
