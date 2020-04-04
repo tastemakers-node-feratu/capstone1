@@ -18,12 +18,18 @@
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.0.0",
     "@react-navigation/web": "~1.0.0-alpha.9",
+    "@tensorflow-models/universal-sentence-encoder": "^1.2.2",
+    "@tensorflow/tfjs": "^1.7.1",
+    "@tensorflow/tfjs-react-native": "^0.2.3",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "expo": "~36.0.0",
     "expo-asset": "~8.0.0",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
+    "expo-google-app-auth": "^8.1.0",
+    "expo-google-sign-in": "~8.0.0",
+    "expo-image-picker": "~8.0.1",
     "expo-web-browser": "~8.0.0",
     "native-base": "2.13.8",
     "node-fetch": "^2.6.0",
@@ -43,8 +49,7 @@
     "react-navigation-tabs": "^2.8.6",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "expo-image-picker": "~8.0.1"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

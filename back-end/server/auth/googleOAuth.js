@@ -1,51 +1,29 @@
-const passport = require('passport');
 const router = require('express').Router();
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('../db/models/User');
 
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  console.warn(
-    'Hi, Google client ID / secret not found. Skipping Google OAuth.'
-  );
-} else {
-  const googleConfig = {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
-  };
-
-  const strategy = new GoogleStrategy(
-    googleConfig,
-    (token, refreshToken, profile, done) => {
-      const googleId = profile.id;
-      const email = profile.emails[0].value;
-      const imageURL = profile.photos[0].value;
-      const name = profile.displayName;
-
-      User.findOrCreate({
-        where: {googleId},
-        defaults: {email, imageURL, name}
-      })
-        .then(([user]) => done(null, user))
-        .catch(done);
+router.post('/', async (req, res, next) => {
+  try {
+    const {firstName, email, googleId, imageURL} = req.body;
+    let user = await User.findOne({
+      where: {
+        email,
+        googleId
+      }
+    });
+    if (!user) {
+      user = await User.create({
+        where: {
+          firstName,
+          email,
+          googleId,
+          imageURL
+        }
+      });
     }
-  );
-
-  passport.use(strategy);
-
-  router.get(
-    '/',
-    passport.authenticate('google', {scope: ['email', 'profile']})
-  );
-
-  // TODO: change redirects
-  router.get(
-    '/callback',
-    passport.authenticate('google', {
-      successRedirect: '/home',
-      failureRedirect: '/login'
-    })
-  );
-}
+    req.login(user, err => (err ? next(err) : res.json(user)));
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

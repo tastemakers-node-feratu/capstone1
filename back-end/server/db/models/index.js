@@ -2,6 +2,8 @@ const User = require('./User');
 const Place = require('./Place');
 const Friend = require('./Friend');
 const Snapshot = require('./Snapshot');
+const Score = require('./Score');
+const Category = require('./Category');
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -14,9 +16,17 @@ User.belongsToMany(User, { through: Friend, as: 'friends' });
 Place.belongsToMany(User, { through: Snapshot });
 User.belongsToMany(Place, { through: Snapshot });
 
+User.belongsToMany(Category, {through: Score});
+Category.belongsToMany(User, {through: Score});
+
+Place.belongsToMany(Category, {through: 'placeCategory'});
+Category.belongsToMany(Place, {through: 'placeCategory'});
+
 module.exports = {
   User,
   Place,
   Friend,
-  Snapshot
+  Snapshot,
+  Category,
+  Score
 };

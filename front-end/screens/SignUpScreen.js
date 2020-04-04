@@ -13,6 +13,7 @@ import {
 
 import { MonoText } from '../components/StyledText';
 import SignUpForm from '../components/SignUpForm';
+import GoogleOAuth from '../components/GoogleOAuth';
 
 class SignUpScreen extends React.Component {
 
@@ -32,6 +33,7 @@ class SignUpScreen extends React.Component {
             <Text style={styles.brandName}>Taste Makers</Text>
             <Text style={styles.title}>What are you loving this week? </Text>
             <SignUpForm navigate={navigate} />
+            <GoogleOAuth navigate={navigate} />
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
