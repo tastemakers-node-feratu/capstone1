@@ -86,7 +86,7 @@ class SnapShotsScreen extends React.Component {
                     <FlatList
                         keyExtractor={item => item.id.toString()}
                         data={this.props.allSnapshots}
-                        renderItem={({ item }) => (<MiniSnapShot snapshot={item} navigate={navigate} />)}
+                        renderItem={({ item }) => (<MiniSnapShot snapshot={item} navigate={navigate}/>)}
                     />
                 </View>
             </SafeAreaView>
