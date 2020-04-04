@@ -119,19 +119,19 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator>
       <BottomTab.Screen
-        name="Check In"
-        component={CheckInScreen}
-        options={{
-          title: 'Check In',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
-        }}
-      />
-      <BottomTab.Screen
         name="AllSnapShots"
         component={Feed}
         options={{
           title: 'Feed',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Check In"
+        component={CheckInScreen}
+        options={{
+          title: 'Check In',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
         }}
       />
       <BottomTab.Screen
