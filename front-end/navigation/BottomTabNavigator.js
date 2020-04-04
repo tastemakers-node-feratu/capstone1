@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import UserProfileScreen from '../screens/UserProfileScreen';
 import UserProfileSnapView from '../components/UserProfileSnapView'
 import MySnaps from '../screens/MySnaps'
-// import Explore from '../screens/Explore'
+import Explore from '../screens/Explore'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -24,6 +24,7 @@ const FeedTab = createStackNavigator();
 const FriendTab = createStackNavigator();
 const ProfileTab = createStackNavigator();
 const FindFriendsTab = createStackNavigator();
+const ExploreTab = createStackNavigator();
 
 function Feed() {
   return (
@@ -93,6 +94,22 @@ function FindFriends() {
   </FindFriendsTab.Navigator>)
 }
 
+function ExplorePage(){
+  return(
+    <ExploreTab.Navigator initialRouteName="Explore"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#034f84'
+        },
+        title: ''
+      }}
+    >
+      <ExploreTab.Screen name="Explore" component={Explore} />
+      <ExploreTab.Screen name="SingleSnap" component={OneSnapScreen} />
+    </ExploreTab.Navigator>
+  )
+}
+
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
@@ -137,16 +154,16 @@ export default function BottomTabNavigator({ navigation, route }) {
           )
         }}
       />
-      {/* <BottomTab.Screen
+      <BottomTab.Screen
         name="Explore"
-        component={Explore}
+        component={ExplorePage}
         options={{
           title: 'Explore',
           tabBarIcon: ({ focused }) => (
             <Icon name="search" size={30} color="#900" />
           )
         }}
-      /> */}
+      />
     </BottomTab.Navigator >
   );
 }
