@@ -8,12 +8,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import AppNavigator from './navigation/AppNavigator'
+import AppNavigator from './navigation/AppNavigator';
 
 import useLinking from './navigation/useLinking';
 
 const Stack = createStackNavigator();
-
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -33,7 +32,11 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf')
+          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+          // 'comic-neue': require('./assets/fonts/ComicNeue-Regular.ttf'),
+          'comic-neue-light': require('./assets/fonts/ComicNeue-Light.ttf'),
+          'amatic-sc': require('./assets/fonts/AmaticSC-Regular.ttf'),
+          'handl-ee': require('./assets/fonts/Handlee-Regular.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
