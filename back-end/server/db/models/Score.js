@@ -31,7 +31,8 @@ module.exports = Score;
 
 // Score.beforeUpdate(instance, options);
 // Score.beforeUpdate((score, options) => {
-//   const newScore = score.averageScore + ____ /score.counter
+    //  score.counter += 1
+//   const newScore = (score.sum + score) /score.counter
 //   score.averageScore = newScore;
 // });
 // Method 3 via the direct method

@@ -3,14 +3,15 @@ import { Text, View, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 
 
 export default function UserProfileSnapView(props) {
     const { snapshot, userId, navigate } = props
-
+    const { description } = snapshot.snapshot
+    const miniDescription = description.split('.')[0];
     return (
         <View >
             <TouchableHighlight style={{ padding: 10, alignItems: 'center' }} onPress={() => { navigate('SingleSnap', { userId: userId, placeId: snapshot.id, }) }} >
                 <View style={styles.container}>
                     <Text style={styles.name}>{snapshot.name}</Text>
-                    <Text style={styles.content}>{snapshot.snapshot.description}</Text>
-                    <Image source={require('../assets/images/right-arrow.png')} />
+                    <Text style={styles.content}>{miniDescription}</Text>
+
                 </View>
             </TouchableHighlight>
         </View>

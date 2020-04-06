@@ -1,8 +1,14 @@
 const router = require('express').Router();
-const { User, Snapshot, Place } = require('../db/models')
+const { User, Snapshot, Place, Score, Category } = require('../db/models')
 const { Op } = require('sequelize');
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
+const positiveBlurb =
+  "I came to this place twice, once with a group of friends and once with my parents. After coming with two groups of people, I'm impressed by how many options they have here! You can order both an affordable (NYC-standards, of course) experience or go all out. I would recommend this to everyone!";
+
+const negativeBlurb =
+  "I've been coming to this experience for several years but today was very disappointing. The staff was rude and the prices were too high! The new decor is horrible. I will not come back.";
+
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -22,8 +28,9 @@ router.get('/snapshots/:id', async (req, res, next) => {
     userWithSnaps.places.forEach(snapshot => {
       console.log(sentiment.analyze(snapshot.snapshot.description))
     })
-    var { score } = sentiment.analyze('the movie was awful.');
-    console.log(score)
+    var posResult = sentiment.analyze(positiveBlurb);
+    var negResult = sentiment.analyze(negativeBlurb);
+    console.log('positive', posResult, 'negative', negResult)
     res.send(userWithSnaps.places);
   } catch (err) {
     next(err)
@@ -54,12 +61,15 @@ router.put('/:id', async (req, res, next) => {
 
 router.put('/snapshot/:userId', async (req, res, next) => {
   const snapshotInfo = req.body;
+  console.log('req.body')
   const { description, tags, imageURL } = snapshotInfo;
   console.log(snapshotInfo)
   try {
     const place = await Place.newSnapshot(snapshotInfo);
     const user = await User.findByPk(req.params.userId);
+    const category = await Category.findOne(req.body.category)
     const { score } = sentiment.analyze(description);
+    await user.addScore(category, { through: { totalScore: score } })
     console.log(score)
     await user.addPlace(place[0].id, { through: { description, tags, photos: imageURL } });
     const snapshot = await User.findOne({
