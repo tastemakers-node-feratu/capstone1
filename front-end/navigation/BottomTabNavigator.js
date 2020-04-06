@@ -12,6 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SingleFriendScreen from '../screens/SingleFriendScreen';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Iconic from 'react-native-vector-icons/MaterialIcons';
 import UserProfileScreen from '../screens/UserProfileScreen';
 import UserProfileSnapView from '../components/UserProfileSnapView'
 import MySnaps from '../screens/MySnaps'
@@ -94,8 +95,8 @@ function FindFriends() {
   </FindFriendsTab.Navigator>)
 }
 
-function ExplorePage(){
-  return(
+function ExplorePage() {
+  return (
     <ExploreTab.Navigator initialRouteName="Explore"
       screenOptions={{
         headerStyle: {
@@ -160,7 +161,11 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: 'Explore',
           tabBarIcon: ({ focused }) => (
-            <Icon name="search" size={30} color="#900" />
+            < Iconic
+              name='explore'
+              color='#900'
+              size={30}
+            />
           )
         }}
       />

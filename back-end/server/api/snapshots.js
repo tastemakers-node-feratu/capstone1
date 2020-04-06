@@ -33,7 +33,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/snapshot/:userId/:placeId', async (req, res, next) => {
   try {
-    const {userId} = req.params.userId
+    const { userId } = req.params.userId
     const snapshot = await User.findOne({
       where: { id: req.params.userId },
       include: [
@@ -52,8 +52,8 @@ router.get('/snapshot/:userId/:placeId', async (req, res, next) => {
   }
 });
 
-router.get('/explore/:userId', async(req,res,next) => {
-  try{
+router.get('/explore/:userId', async (req, res, next) => {
+  try {
     const { userId } = req.params;
     const userPlaces = await User.findOne({
       where: { id: req.params.userId },
@@ -76,7 +76,7 @@ router.get('/explore/:userId', async(req,res,next) => {
       accum[curr.category]++;
       return accum;
     }, categoryCount);
-    for(const category in countByCategory){
+    for (const category in countByCategory) {
       countByCategory[category] = (countByCategory[category] * 2 + 5);
     }
 
@@ -84,17 +84,17 @@ router.get('/explore/:userId', async(req,res,next) => {
 
     const curatedSnaps = [];
     const placeIdsUsed = [];
-    for(const category in countByCategory){
+    for (const category in countByCategory) {
       // for(let i=0; i<countByCategory[category]; i++){
-        const max = countByCategory[category]
-        const snapGroup = await User.getRandomSnapsByCategory(userId, max, category)
-        // console.log('snapGroup size', snapGroup.length)
-        snapGroup.forEach((snap) => curatedSnaps.push(snap));
+      const max = countByCategory[category]
+      const snapGroup = await User.getRandomSnapsByCategory(userId, max, category)
+      // console.log('snapGroup size', snapGroup.length)
+      snapGroup.forEach((snap) => curatedSnaps.push(snap));
       // }
     }
 
-   res.send(curatedSnaps)
-  }catch(err){
+    res.send(curatedSnaps)
+  } catch (err) {
     next(err)
   }
 })
