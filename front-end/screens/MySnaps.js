@@ -10,27 +10,27 @@ import { connect } from 'react-redux';
 import { getUserSnapsThunk } from '../store/snapshots'
 import OneSnapFullView from '../components/OneSnapFullView'
 
-class MySnaps extends React.Component  {
-    constructor(props){
+class MySnaps extends React.Component {
+    constructor(props) {
         super(props)
     }
-    componentDidMount(){
-        const {id} = this.props.user;
+    componentDidMount() {
+        const { id } = this.props.user;
         this.props.getSnaps(id);
     }
-    render(){
-        const {user, navigate, userSnaps} = this.props
-        return(
+    render() {
+        const { user, navigate, userSnaps } = this.props
+        return (
             <SafeAreaView style={styles.outerContainer}>
-            <View style={styles.container}>
-                <Text style={styles.header}>My Snapshots</Text>
+                <View style={styles.container}>
+                    <Text style={styles.header}>My Snapshots</Text>
                     <ScrollView style={styles.contentContainer}>
                         {this.props.userSnaps.map((place) => {
-                            return (<OneSnapFullView key={place.id} user={user} place={place} />)
+                            return (<OneSnapFullView key={place.id} user={user} place={place} navigate={navigate} />)
                         })}
                     </ScrollView>
-            </View>
-        </SafeAreaView>
+                </View>
+            </SafeAreaView>
         )
     }
 }
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 });
 
 const mapState = state => {
-    return{
+    return {
         user: state.user,
         userSnaps: state.snapshots.userSnaps
     }
