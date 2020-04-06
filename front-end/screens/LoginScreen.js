@@ -16,6 +16,7 @@ import {
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
+import GoogleOAuth from '../components/GoogleOAuth';
 import { getMeThunk } from '../store/user';
 
 class LoginScreen extends React.Component {
@@ -41,8 +42,8 @@ class LoginScreen extends React.Component {
               style={{ flexShrink: 1, width: 200, height: 250, marginTop: 20 }} />
             <Text style={styles.brandName}>Taste Makers</Text>
             <Text style={styles.title}>What are you loving this week? </Text>
-            <LoginForm style={styles.loginForm} navigate={navigate} />
-
+            <LoginForm navigate={navigate} />
+            <GoogleOAuth navigate={navigate} />
             <TouchableOpacity
               onPress={() => navigate('SignUp')}
               style={styles.buttonContainer}
@@ -92,21 +93,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignSelf: 'center',
-    backgroundColor: '#2980b9',
     width: 200,
-    paddingVertical: 10,
-    // marginBottom: 100,
-    borderRadius: 10
+    paddingVertical: 0,
   },
   buttonText: {
     textAlign: 'center',
     color: '#FFFFFF',
-    fontWeight: '700'
+    fontWeight: '400'
   },
   contentContainer: {
     paddingTop: 15,
     paddingBottom: 15
-  },
+  }
 });
 
 const mapState = state => ({

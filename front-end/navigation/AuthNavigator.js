@@ -7,7 +7,13 @@ const Stack = createStackNavigator();
 
 function AuthNavigator() {
     return (
-        <Stack.Navigator initialRouteName={"Login"} headerMode='none'>
+        <Stack.Navigator initialRouteName={"Login"}
+            screenOptions={{
+                headerStyle: {
+                  backgroundColor: '#034f84'
+                }, 
+                title: ''
+        }}>
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
         </Stack.Navigator>
