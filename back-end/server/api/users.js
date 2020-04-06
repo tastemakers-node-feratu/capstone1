@@ -61,16 +61,13 @@ router.put('/:id', async (req, res, next) => {
 
 router.put('/snapshot/:userId', async (req, res, next) => {
   const snapshotInfo = req.body;
-  console.log('req.body')
   const { description, tags, imageURL } = snapshotInfo;
-  console.log(snapshotInfo)
   try {
     const place = await Place.newSnapshot(snapshotInfo);
     const user = await User.findByPk(req.params.userId);
-    const category = await Category.findOne(req.body.category)
+    const category = await Category.findOne({ where: { cat: req.body.category[0] } })
     const { score } = sentiment.analyze(description);
-    await user.addScore(category, { through: { totalScore: score } })
-    console.log(score)
+    await user.addCategory(category, { through: { totalScore: score } })
     await user.addPlace(place[0].id, { through: { description, tags, photos: imageURL } });
     const snapshot = await User.findOne({
       where: { id: user.id },
@@ -83,7 +80,6 @@ router.put('/snapshot/:userId', async (req, res, next) => {
         }
       }]
     })
-    console.log(snapshot)
     res.send(snapshot);
   } catch (err) {
     next(err)
