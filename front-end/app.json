@@ -14,9 +14,9 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "splash": {
-      "image": "./assets/images/camera-logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#034f84"
+      "image": "./assets/images/5.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

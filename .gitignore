@@ -106,8 +106,3 @@ dist
 # storing private variables
 secrets.js
 environment.js
-
-#incomplete models
-Score.js
-Category.js
-tensorFlow

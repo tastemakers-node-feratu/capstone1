@@ -39,7 +39,7 @@ const LoginForm = props => {
         <SafeAreaView style={styles.container}>
           <TextInput
             placeholder="username or email"
-            placeholderTextColor="rgba(255,255,255,0.7)"
+            placeholderTextColor="rgba(0, 0, 0, 0.7)"
             returnKeyType="next"
             onSubmitEditing={() => {
               passwordInput.focus();
@@ -54,9 +54,9 @@ const LoginForm = props => {
           />
           <TextInput
             placeholder="password"
-            placeholderTextColor="rgba(255,255,255,0.7)"
+            placeholderTextColor="rgba(0, 0, 0, 0.7)"
             secureTextEntry
-            returnKeyType="go"
+            returnKeyType="done"
             style={styles.input}
             clearButtonMode="always"
             value={password}
@@ -66,40 +66,50 @@ const LoginForm = props => {
             }}
             onChangeText={value => setPassword(value)}
           />
-
+          <View styles={styles.container}>
           <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Log In</Text>
           </TouchableOpacity>
+          </View>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    backgroundColor: '#034f84'
+    flex: 1,
+    alignItems: 'center'
   },
   input: {
     width: 300,
     padding: 10,
-    borderRadius: 5,
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0,0.5)',
     height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(255,255,255,0.8)',
     marginBottom: 15,
-    color: '#FFF',
+    color: '#000',
     paddingHorizontal: 10
   },
   buttonContainer: {
-    backgroundColor: '#2980b9',
-    width: 200,
-    paddingVertical: 10,
-    marginBottom: 15,
-    borderRadius: 10
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    height: 70,
+    marginHorizontal: 20,
+    width: 300,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 7,
+    borderWidth: 1,
+    borderColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowColor: '#000',
+    shadowOpacity: 0.3
   },
   buttonText: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: '700'
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'playfair-display'
   }
 });
 
