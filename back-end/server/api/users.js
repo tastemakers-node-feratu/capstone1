@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { User, Snapshot, Place } = require('../db/models')
 const { Op } = require('sequelize');
+var Sentiment = require('sentiment');
+var sentiment = new Sentiment();
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -15,10 +17,15 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.get('/snapshots/:id', async (req, res, next) => {
-  try{
+  try {
     const userWithSnaps = await User.getOwnSnaps(req.params.id);
+    userWithSnaps.places.forEach(snapshot => {
+      console.log(sentiment.analyze(snapshot.snapshot.description))
+    })
+    var { score } = sentiment.analyze('the movie was awful.');
+    console.log(score)
     res.send(userWithSnaps.places);
-  } catch(err){
+  } catch (err) {
     next(err)
   }
 })
@@ -48,9 +55,12 @@ router.put('/:id', async (req, res, next) => {
 router.put('/snapshot/:userId', async (req, res, next) => {
   const snapshotInfo = req.body;
   const { description, tags, imageURL } = snapshotInfo;
+  console.log(snapshotInfo)
   try {
     const place = await Place.newSnapshot(snapshotInfo);
     const user = await User.findByPk(req.params.userId);
+    const { score } = sentiment.analyze(description);
+    console.log(score)
     await user.addPlace(place[0].id, { through: { description, tags, photos: imageURL } });
     const snapshot = await User.findOne({
       where: { id: user.id },
@@ -63,7 +73,7 @@ router.put('/snapshot/:userId', async (req, res, next) => {
         }
       }]
     })
-
+    console.log(snapshot)
     res.send(snapshot);
   } catch (err) {
     next(err)
