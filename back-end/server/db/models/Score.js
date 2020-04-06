@@ -2,24 +2,27 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Score = db.define('score', {
-  sum: {
+  totalScore: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
     set(value) {
-      return this.setDataValue('sum', value + this.sum);
+      if (this.totalScore) {
+        return this.setDataValue('totalScore', value + this.totalScore);
+      }
+      return this.setDataValue('totalScore', value);
     }
   },
   averageScore: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
     set() {
-      const newValue = Math.round(this.sum / this.counter);
+      const newValue = Math.round(this.totalScore / this.counter);
       return this.setDataValue('averageScore', newValue);
     }
   },
   counter: {
     type: Sequelize.INTEGER,
-    defaultValue: 0,
+    defaultValue: 1,
     set() {
       const newCounterValue = this.counter + 1;
       return this.setDataValue('counter', newCounterValue);
@@ -28,14 +31,3 @@ const Score = db.define('score', {
 });
 
 module.exports = Score;
-
-// Score.beforeUpdate(instance, options);
-// Score.beforeUpdate((score, options) => {
-//   const newScore = score.averageScore + ____ /score.counter
-//   score.averageScore = newScore;
-// });
-// Method 3 via the direct method
-// User.beforeCreate(async (user, options) => {
-//   const hashedPassword = await hashPassword(user.password);
-//   user.password = hashedPassword;
-// });

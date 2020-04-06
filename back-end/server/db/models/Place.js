@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const Op = Sequelize.Op;
-const Snapshot = require('./Snapshot')
+const Snapshot = require('./Snapshot');
 
 const Place = db.define('place', {
   name: {

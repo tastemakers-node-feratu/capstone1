@@ -2,7 +2,7 @@
 const {green, red} = require('chalk');
 const faker = require('faker');
 const db = require('../server/db');
-const {User, Place} = require('../server/db/models');
+const {User, Place, Snapshot, Category, Score} = require('../server/db/models');
 
 // this function simply creates an array of random data
 faker.array = function(structure, count = 1) {
@@ -79,11 +79,20 @@ const fakerPlaces = faker.array(
   100
 );
 
+const categoriesArray = [
+  'shop',
+  'beauty',
+  'food',
+  'fitness',
+  'nightlife',
+  'experience'
+];
+
 const positiveBlurb =
   "I came to this place twice, once with a group of friends and once with my parents. After coming with two groups of people, I'm impressed by how many options they have here! You can order both an affordable (NYC-standards, of course) experience or go all out. I would recommend this to everyone!";
 
 const negativeBlurb =
-  "I've been coming to this experience for several years but today was very disappointing. The staff was rude and the prices were too high! The new decor is horrible. I will not come back.";
+  "We've been coming to this experience for several years but today was very disappointing. The staff was rude and the prices were too high! The new decor is horrible. I will not come back.";
 
 const blurbArray = [positiveBlurb, negativeBlurb];
 
@@ -91,12 +100,15 @@ const blurbArray = [positiveBlurb, negativeBlurb];
 async function fakerSeed() {
   try {
     await db.sync({force: true});
-    // creating all user and place instances
+    // creating all user, place, category instances
     await Promise.all(fakerPlaces.map(element => Place.create(element)));
     await Promise.all(fakerUsers.map(element => User.create(element)));
+    await Promise.all(categoriesArray.map(element => Category.create({cat: element})));
     // get all users and places
     const allUsers = await User.findAll();
     const allPlaces = await Place.findAll();
+    const allCats = await Category.findAll();
+    const allSnapshots = await Snapshot.findAll(); // TODO:
     // all users are friends with each other
     await Promise.all(
       allUsers.map((user, index) => {
@@ -113,10 +125,19 @@ async function fakerSeed() {
         return i;
       })
     );
-    // all users have {2} random places
+    // all places have categories
+    await Promise.all(
+      allPlaces.map(place => {
+        const cat = allCats.filter(cate => cate.cat === place.category[0]);
+        if (cat[0]) {
+          return place.addCategory(cat[0]);
+        }
+      })
+    );
+    // all users have {1} random places
     await Promise.all(
       allUsers.map(user => {
-        const numOfPlaces = [1, 2];
+        const numOfPlaces = [1]; // add elements to this array to increase nested loop iterations
         let max = 3;
         let min = 0;
         return Promise.all(
@@ -136,6 +157,18 @@ async function fakerSeed() {
             });
           })
         );
+      })
+    );
+    // adding category to users
+    await Promise.all(
+      allUsers.map(user => {
+        const snapObj = allSnapshots.filter(snap => {
+          return snap.userId === user.id;
+        });
+        const catObj = allCats.filter(cate => {
+          return cate.placeId === snapObj.placeId;
+        });
+        return user.addCategory(catObj, {through: {totalScore: 0}});
       })
     );
   } catch (error) {
