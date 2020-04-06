@@ -11,14 +11,13 @@ const Category = require('./Category');
  */
 
 User.belongsToMany(User, { through: Friend, as: 'friends' });
-// one place can have many users
-// one user can have many places
+// one place can have many users, one user can have many places
 Place.belongsToMany(User, { through: Snapshot });
 User.belongsToMany(Place, { through: Snapshot });
-
+// one user can have many categories, one catergory can have many users
 User.belongsToMany(Category, {through: Score});
 Category.belongsToMany(User, {through: Score});
-
+// one place can have many categories, one category can have many places
 Place.belongsToMany(Category, {through: 'placeCategory'});
 Category.belongsToMany(Place, {through: 'placeCategory'});
 
