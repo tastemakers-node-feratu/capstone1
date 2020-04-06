@@ -79,6 +79,14 @@ const fakerPlaces = faker.array(
   100
 );
 
+const positiveBlurb =
+  "I came to this place twice, once with a group of friends and once with my parents. After coming with two groups of people, I'm impressed by how many options they have here! You can order both an affordable (NYC-standards, of course) experience or go all out. I would recommend this to everyone!";
+
+const negativeBlurb =
+  "I've been coming to this experience for several years but today was very disappointing. The staff was rude and the prices were too high! The new decor is horrible. I will not come back.";
+
+const blurbArray = [positiveBlurb, negativeBlurb];
+
 // creates the instances
 async function fakerSeed() {
   try {
@@ -117,7 +125,7 @@ async function fakerSeed() {
             min += 4;
             return user.addPlace(allPlaces[randomNumber(max, min)], {
               through: {
-                description: faker.lorem.sentence(),
+                description: blurbArray[randomNumber(1, 0)],
                 photos: `https://i.picsum.photos/id/${randomNumber(
                   219,
                   5

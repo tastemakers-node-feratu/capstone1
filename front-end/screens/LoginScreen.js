@@ -16,7 +16,8 @@ import {
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
-import { getMeThunk } from '../store/user';
+import GoogleOAuth from '../components/GoogleOAuth';
+// import { getMeThunk } from '../store/user';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -24,11 +25,8 @@ class LoginScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const navigate = this.props.navigation;
     return (
-
-      // this.props.user.id ? <View>{navigate('AllSnapShots')}</View>:
-      //  <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         keyboardVerticalOffset={64}
@@ -37,12 +35,12 @@ class LoginScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer} >
           <View style={styles.inner}>
-            <Image source={require('../assets/images/camera-logo.png')}
-              style={{ flexShrink: 1, width: 200, height: 250, marginTop: 20 }} />
-            <Text style={styles.brandName}>Taste Makers</Text>
-            <Text style={styles.title}>What are you loving this week? </Text>
-            <LoginForm style={styles.loginForm} navigate={navigate} />
-
+            {/* <Image source={require('../assets/images/camera-logo.png')}
+              style={{ flexShrink: 1, width: 200, height: 250, marginTop: 20 }} /> */}
+            {/* <Text style={styles.brandName}>Taste Makers</Text>
+            <Text style={styles.title}>What are you loving this week? </Text> */}
+            <LoginForm navigate={navigate} />
+            <GoogleOAuth navigate={navigate} />
             <TouchableOpacity
               onPress={() => navigate('SignUp')}
               style={styles.buttonContainer}
@@ -62,29 +60,14 @@ const styles = StyleSheet.create({
   keyboardAvoid: {},
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#034f84'
+    alignItems: 'center'
   },
   inner: {
     textAlign: 'center',
-    alignItems: 'center',
-  },
-  brandName: {
-    fontSize: 40,
-    color: '#f7786b',
-
+    alignItems: 'center'
   },
   error: {
     color: `#eb4034`
-  },
-  title: {
-    alignSelf: 'center',
-    color: '#FFF',
-    width: 160,
-    textAlign: 'center',
-    opacity: 0.9,
-    paddingVertical: 5,
-    marginBottom: 20
   },
   logoContainer: {
     alignItems: 'center',
@@ -92,21 +75,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignSelf: 'center',
-    backgroundColor: '#2980b9',
     width: 200,
-    paddingVertical: 10,
-    // marginBottom: 100,
-    borderRadius: 10
+    paddingVertical: 0
   },
   buttonText: {
     textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: '700'
+    color: '#000',
+    fontWeight: '400'
   },
   contentContainer: {
     paddingTop: 15,
     paddingBottom: 15
-  },
+  }
 });
 
 const mapState = state => ({

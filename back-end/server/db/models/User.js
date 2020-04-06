@@ -3,14 +3,14 @@ const crypto = require('crypto');
 const moment = require('moment');
 const db = require('../db');
 
-const { Op } = Sequelize;
+const {Op} = Sequelize;
 const Place = require('./Place');
 const Snapshot = require('./Snapshot');
 
 const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     unique: true
   },
   email: {
@@ -61,13 +61,13 @@ const User = db.define('user', {
   }
 });
 
-User.getFriends = function (id) {
+User.getFriends = function(id) {
   const friends = this.findOne({
-    where: { id },
+    where: {id},
     include: [
       {
         model: User,
-        as: 'friends',
+        as: 'friends'
         // where: {friendship_status: 'approved'}
       }
     ]
@@ -75,29 +75,36 @@ User.getFriends = function (id) {
   return friends;
 };
 
-User.getNonFriends = function (id, friends) {
+User.getNonFriends = function(id, friends) {
   const notFriends = this.findAll({
-    where: { id: { [Op.notIn]: [id] } },
-  })
+    where: {id: {[Op.notIn]: [id]}}
+  });
   const friendIds = friends.map(friend => friend.id);
-  let nonFrds = notFriends.filter(user => !friendIds.includes(user.id))
-  return nonFrds
-}
+  const nonFrds = notFriends.filter(user => !friendIds.includes(user.id));
+  return nonFrds;
+};
 
-User.prototype.correctPassword = function (passw) {
+User.prototype.correctPassword = function(passw) {
   return User.encryptPassword(passw, this.salt()) === this.password();
 };
 
-User.generateSalt = function () {
+User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64');
 };
 
-User.encryptPassword = function (plainPW, salt) {
-  return crypto
-    .createHash('RSA-SHA256')
-    .update(plainPW)
-    .update(salt)
-    .digest('hex');
+User.encryptPassword = function(plainPW, salt) {
+  try {
+    if (plainPW) {
+      return crypto
+        .createHash('RSA-SHA256')
+        .update(plainPW)
+        .update(salt)
+        .digest('hex');
+    }
+    console.error('there was no password input');
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const setSaltAndPW = user => {
@@ -114,47 +121,53 @@ User.beforeBulkCreate(users => {
 });
 
 // TODO: findAndCountAll
-User.getSnapShots = function (arr, categories) {
-  const oneMonthAgo = moment().subtract(1, 'months').format();
-  let catArr
+User.getSnapShots = function(arr, categories) {
+  const oneMonthAgo = moment()
+    .subtract(1, 'months')
+    .format();
+  let catArr;
   if (categories === 'all') {
-    catArr = ['food', 'fitness', 'nightlife', 'shop', 'beauty', 'experience']
+    catArr = ['food', 'fitness', 'nightlife', 'shop', 'beauty', 'experience'];
   } else {
-    catArr = categories.split(',')
+    catArr = categories.split(',');
   }
-  const all = this.findAll(
-    {
-      where: {
-        id: { [Op.in]: arr },
-      },
-      include: [{
-        model: Place, through: Snapshot,
+  const all = this.findAll({
+    where: {
+      id: {[Op.in]: arr}
+    },
+    include: [
+      {
+        model: Place,
+        through: Snapshot,
         where: {
           createdAt: {
             [Op.gte]: oneMonthAgo
           },
-          category: { [Op.in]: catArr }
+          category: {[Op.in]: catArr}
         }
-      }]
-      // offset: 10,
-      // limit: 10
-    }
-  )
+      }
+    ]
+    // offset: 10,
+    // limit: 10
+  });
   return all;
 };
 
 User.getOwnSnaps = function(id) {
   const user = this.findOne({
-    where: { id: id },
-    include: [{
-      model: Place, through: Snapshot
-    }]
+    where: {id},
+    include: [
+      {
+        model: Place,
+        through: Snapshot
+      }
+    ]
   });
   return user;
-}
+};
 
 User.getRandomSnapsByCategory = function(id, max, category){
-  const userSnaps =this.findAll({
+  const userSnaps = this.findAll({
     where: {
       [Op.not]: [
         { id: id }
