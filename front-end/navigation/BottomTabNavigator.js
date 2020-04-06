@@ -150,7 +150,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: 'FindFriends',
           tabBarIcon: ({ focused }) => (
-            <Icon name="search" size={30} color="#900" />
+            <Icon name="group" size={30} color="#900" />
           )
         }}
       />
