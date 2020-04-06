@@ -34,7 +34,7 @@ class PreScreen extends React.Component {
   }
 
   async _loadAssetsAsync() {
-    const imageAssets = cacheImages([require('../assets/images/city.jpg')]);
+    const imageAssets = cacheImages([require('../assets/images/14.png')]);
     
     await Promise.all([...imageAssets]);
   }

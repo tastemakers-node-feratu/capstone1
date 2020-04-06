@@ -6,7 +6,7 @@ import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import Animated, {Easing} from 'react-native-reanimated';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
-import {HandleeText, ComicLightText} from '../components/StyledText';
+import {PlayText} from '../components/StyledText';
 import LoginScreen from './LoginScreen';
 
 const {width, height} = Dimensions.get('window');
@@ -227,32 +227,37 @@ const styles = StyleSheet.create({
   brandContainer: {
     padding: 10,
     transform: [{translateY: -280}],
-    marginHorizontal: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderWidth: 1,
-    borderRadius: 20,
-    justifyContent: 'center'
+    // marginHorizontal: 10,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    // borderWidth: 1,
+    // borderRadius: 20,
+    justifyContent: 'center',
+    // alignItems: 'center'
   },
   brand: {
     textAlign: 'center',
     fontSize: 40,
-    fontFamily: 'handl-ee'
+    fontFamily: 'playfair-display',
+    shadowOffset: {width: 2, height: 2},
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 0.7
   },
   button: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
     height: 70,
-    marginHorizontal: 20,
+    marginHorizontal: 50,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 7,
-    borderWidth: 1,
-    borderColor: '#000'
+    marginVertical: 10,
+    // borderWidth: 1,
+    // borderColor: '#000'
   },
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'comic-neue-light'
+    fontFamily: 'playfair-display'
   },
   xButton: {
     height: 40,

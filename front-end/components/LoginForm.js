@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
   input: {
     width: 300,
     padding: 10,
-    borderRadius: 5,
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0,0.5)',
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.8)',
     marginBottom: 15,
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'comic-neue-light'
+    fontFamily: 'playfair-display'
   }
 });
 

@@ -33,10 +33,7 @@ export default function App(props) {
         await Font.loadAsync({
           ...Ionicons.font,
           'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-          // 'comic-neue': require('./assets/fonts/ComicNeue-Regular.ttf'),
-          'comic-neue-light': require('./assets/fonts/ComicNeue-Light.ttf'),
-          'amatic-sc': require('./assets/fonts/AmaticSC-Regular.ttf'),
-          'handl-ee': require('./assets/fonts/Handlee-Regular.ttf')
+          'playfair-display': require('./assets/fonts/PlayfairDisplay-Regular.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
