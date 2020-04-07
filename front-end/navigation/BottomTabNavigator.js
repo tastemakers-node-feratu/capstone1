@@ -122,7 +122,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={Feed}
         options={{
           title: 'Feed',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
+          tabBarIcon: ({ focused }) => <Icon name="film" size={30} color="#900" />,
         }}
       />
       <BottomTab.Screen
@@ -130,7 +130,21 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={CheckInScreen}
         options={{
           title: 'Check In',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
+          tabBarIcon: ({ focused }) => <Icon name="hand-peace-o" size={30} color="#900" />
+        }}
+      />
+      <BottomTab.Screen
+        name="Explore"
+        component={ExplorePage}
+        options={{
+          title: 'Explore',
+          tabBarIcon: ({ focused }) => (
+            < Iconic
+              name='search'
+              color='#900'
+              size={30}
+            />
+          )
         }}
       />
       <BottomTab.Screen
@@ -144,26 +158,12 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Explore"
-        component={ExplorePage}
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ focused }) => (
-            < Iconic
-              name='explore'
-              color='#900'
-              size={30}
-            />
-          )
-        }}
-      />
-      <BottomTab.Screen
         name="Profile"
         component={Profile}
         options={{
           title: 'Profile',
           tabBarIcon: ({ focused }) => (
-            <Icon name="user" size={30} color="#900" />
+            <Icon name="user-o" size={30} color="#900" />
           )
         }}
       />
