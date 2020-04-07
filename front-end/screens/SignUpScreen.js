@@ -27,13 +27,8 @@ class SignUpScreen extends React.Component {
         enabled
       >
         <SafeAreaView style={styles.container}>
-          <Image source={require('../assets/images/camera-logo.png')}
-            style={{ flexShrink: 1, width: 200, height: 250, }} />
           <View style={styles.inner}>
-            <Text style={styles.brandName}>Taste Makers</Text>
-            <Text style={styles.title}>What are you loving this week? </Text>
             <SignUpForm navigate={navigate} />
-            <GoogleOAuth navigate={navigate} />
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -44,7 +39,7 @@ class SignUpScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#034f84',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center'
   },

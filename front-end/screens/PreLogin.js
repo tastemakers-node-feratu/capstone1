@@ -2,12 +2,14 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prefer-stateless-function */
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import Animated, {Easing} from 'react-native-reanimated';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
 import {PlayText} from '../components/StyledText';
 import LoginScreen from './LoginScreen';
+import GoogleOAuth from '../components/GoogleOAuth';
+import SignUpScreen from './SignUpScreen';
 
 const {width, height} = Dimensions.get('window');
 const {
@@ -72,7 +74,6 @@ class PreLogin extends Component {
           ])
       }
     ]);
-
     this.onCloseState = event([
       {
         nativeEvent: ({state}) =>
@@ -101,13 +102,11 @@ class PreLogin extends Component {
       outputRange: [1, -1],
       extrapolate: Extrapolate.CLAMP
     });
-
     this.logInOpacity = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
       outputRange: [1, 0],
       extrapolate: Extrapolate.CLAMP
     });
-
     this.logInY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
       outputRange: [0, 100],
@@ -181,29 +180,27 @@ class PreLogin extends Component {
               <Text style={styles.buttonText}>Log In</Text>
             </Animated.View>
           </TapGestureHandler>
-          <TapGestureHandler onHandlerStateChange={this.onStateChange}>
-            <Animated.View
-              style={{
-                ...styles.button,
-                opacity: this.buttonOpacity,
-                transform: [{translateY: this.buttonY}]
-              }}
-            >
-              <Text style={styles.buttonText}>Sign In With Google</Text>
-            </Animated.View>
-          </TapGestureHandler>
-          <TapGestureHandler onHandlerStateChange={this.onStateChange}>
-            <Animated.View
-              style={{
-                ...styles.button,
-                opacity: this.buttonOpacity,
-                transform: [{translateY: this.buttonY}],
-                marginBottom: 70
-              }}
-            >
+          <Animated.View
+            style={{
+              ...styles.button,
+              opacity: this.buttonOpacity,
+              transform: [{translateY: this.buttonY}]
+            }}
+          >
+            <GoogleOAuth navigate={this.props.navigation} />
+          </Animated.View>
+          <Animated.View
+            style={{
+              ...styles.button,
+              opacity: this.buttonOpacity,
+              transform: [{translateY: this.buttonY}],
+              marginBottom: 70
+            }}
+          >
+            <TouchableOpacity onPress={() => this.props.navigation('SignUp')}>
               <Text style={styles.buttonText}>New Account</Text>
-            </Animated.View>
-          </TapGestureHandler>
+            </TouchableOpacity>
+          </Animated.View>
           <Animated.View
             style={{
               height: height / 1.55,
@@ -227,12 +224,8 @@ const styles = StyleSheet.create({
   brandContainer: {
     padding: 10,
     transform: [{translateY: -280}],
-    // marginHorizontal: 10,
     backgroundColor: 'rgba(255, 255, 255, 1)',
-    // borderWidth: 1,
-    // borderRadius: 20,
-    justifyContent: 'center',
-    // alignItems: 'center'
+    justifyContent: 'center'
   },
   brand: {
     textAlign: 'center',
@@ -251,8 +244,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,
-    // borderWidth: 1,
-    // borderColor: '#000'
+    borderWidth: 0.5,
+    borderColor: '#000'
   },
   buttonText: {
     fontSize: 20,

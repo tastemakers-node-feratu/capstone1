@@ -15,19 +15,31 @@ const Score = db.define('score', {
   averageScore: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
-    set() {
-      const newValue = Math.round(this.totalScore / this.counter);
-      return this.setDataValue('averageScore', newValue);
-    }
+    // set() {
+    //   const newValue = Math.round(this.totalScore / this.counter);
+    //   return this.setDataValue('averageScore', newValue);
+    // }
   },
   counter: {
     type: Sequelize.INTEGER,
     defaultValue: 1,
-    set() {
-      const newCounterValue = this.counter + 1;
-      return this.setDataValue('counter', newCounterValue);
-    }
+    // set() {
+    //   const newCounterValue = this.counter + 1;
+    //   return this.setDataValue('counter', newCounterValue);
+    // }
   }
 });
+
+Score.beforeValidate((score, options) => {
+  score.counter = score.counter ? score.counter + 1 : 1;
+  console.log('this is score.totalScore', score.totalScore);
+  score.averageScore = Math.round(score.totalScore / score.counter);
+});
+
+// beforeValidate
+// User.beforeCreate(async (user, options) => {
+//   const hashedPassword = await hashPassword(user.password);
+//   user.password = hashedPassword;
+// });
 
 module.exports = Score;

@@ -66,18 +66,15 @@ const LoginForm = props => {
             }}
             onChangeText={value => setPassword(value)}
           />
-          <View styles={styles.container}>
           <TouchableOpacity onPress={handleSubmit} style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Log In</Text>
           </TouchableOpacity>
-          </View>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center'
   },
   input: {

@@ -16,8 +16,9 @@ import {
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
-import GoogleOAuth from '../components/GoogleOAuth';
+// import GoogleOAuth from '../components/GoogleOAuth';
 // import { getMeThunk } from '../store/user';
+import SignUpForm from '../components/SignUpForm';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -32,25 +33,13 @@ class LoginScreen extends React.Component {
         keyboardVerticalOffset={64}
         behavior="padding"
       >
-      <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.contentContainer} >
-          <View style={styles.inner}>
-            {/* <Image source={require('../assets/images/camera-logo.png')}
-              style={{ flexShrink: 1, width: 200, height: 250, marginTop: 20 }} /> */}
-            {/* <Text style={styles.brandName}>Taste Makers</Text>
-            <Text style={styles.title}>What are you loving this week? </Text> */}
-            <LoginForm navigate={navigate} />
-            <GoogleOAuth navigate={navigate} />
-            <TouchableOpacity
-              onPress={() => navigate('SignUp')}
-              style={styles.buttonContainer}
-            >
-              <Text style={styles.buttonText}>Create New User</Text>
-            </TouchableOpacity>
-
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        <SafeAreaView style={styles.container}>
+          <ScrollView contentContainerStyle={styles.contentContainer}>
+            <View style={styles.inner}>
+              <LoginForm navigate={navigate} />
+            </View>
+          </ScrollView>
+        </SafeAreaView>
       </KeyboardAvoidingView>
     );
   }
