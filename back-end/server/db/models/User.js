@@ -6,6 +6,8 @@ const db = require('../db');
 const {Op} = Sequelize;
 const Place = require('./Place');
 const Snapshot = require('./Snapshot');
+const Category = require('./Category')
+const Score = require('./Score')
 
 const User = db.define('user', {
   username: {
@@ -166,6 +168,18 @@ User.getOwnSnaps = function(id) {
   return user;
 };
 
+User.getCategoryScores = function(userId){
+  return this.findOne({
+    where: {id: userId},
+    include: [
+      {
+        model: Category,
+        through: Score,
+      }
+    ]
+  });
+}
+
 User.getRandomSnapsByCategory = function(id, max, category){
   const userSnaps = this.findAll({
     where: {
@@ -175,11 +189,11 @@ User.getRandomSnapsByCategory = function(id, max, category){
     },
     include: [{
       model: Place, through: Snapshot,
-      //for now, it's only getting instances that contain that category and ONLY
-      //that category (i.e, just 'food', not something with 'food, fitness.').
-      //For future, must continue research on querying our db to include instances that
-      //contain the category, potentially alongside other categories.
-      where: { category: category }
+      where: {
+        category: {
+          [Op.like]: `%${category}%`
+        }
+      }
     }],
     limit: max
   })
