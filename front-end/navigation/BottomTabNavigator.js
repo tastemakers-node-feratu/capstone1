@@ -72,7 +72,7 @@ function Profile() {
       <ProfileTab.Screen name="All Friends" component={Friends}
       />
       <ProfileTab.Screen name="My Pins" component={MySnaps} />
-      <ProfileTab.Screen name="Find Friends" component={FindFriendScreen} />
+      <ProfileTab.Screen name="Find Friends" component={FindFriends} />
       {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
     </ProfileTab.Navigator>
   )
@@ -144,16 +144,6 @@ export default function BottomTabNavigator({ navigation, route }) {
               color='#900'
               size={30}
             />
-          )
-        }}
-      />
-      <BottomTab.Screen
-        name="FindFriends"
-        component={FindFriends}
-        options={{
-          title: 'FindFriends',
-          tabBarIcon: ({ focused }) => (
-            <Icon name="group" size={30} color="#900" />
           )
         }}
       />
