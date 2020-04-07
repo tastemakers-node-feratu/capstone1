@@ -57,14 +57,18 @@ export default function OneSnapFullView(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7cac9',
+    backgroundColor: '#fff',
     margin: 15,
     marginLeft: 20,
     marginRight: 20,
     alignItems: 'center',
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#f7786b'
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    shadowRadius: 0.8,
+    shadowOffset: {width: 0, height: 3},
+    shadowColor: '#000',
+    shadowOpacity: 0.3
   },
   contentContainer: {
     paddingTop: 15

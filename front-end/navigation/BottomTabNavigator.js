@@ -30,7 +30,7 @@ function Feed() {
     <FeedTab.Navigator initialRouteName="MainFeed"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#034f84',
+          backgroundColor: '#FFF',
         },
         title: ''
       }}
@@ -63,7 +63,7 @@ function Profile() {
     <ProfileTab.Navigator initialRouteName="Profile"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#034f84',
+          backgroundColor: '#FFF',
         },
         title: ''
       }}
@@ -82,7 +82,7 @@ function FindFriends() {
   return (< FindFriendsTab.Navigator initialRouteName="Find Friends"
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
       },
       title: ''
     }}
@@ -98,7 +98,7 @@ function ExplorePage() {
     <ExploreTab.Navigator initialRouteName="Explore"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#034f84'
+          backgroundColor: '#FFF'
         },
         title: ''
       }}

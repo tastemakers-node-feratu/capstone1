@@ -117,7 +117,7 @@ class CheckInScreen extends React.Component {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View style={styles.inner}>
                 <Text style={styles.title}>
-                  What'd you discover?
+                  What did you discover?
               </Text>
                 <View>
                   <View>
@@ -134,14 +134,15 @@ class CheckInScreen extends React.Component {
                   </View>
                 </View>
                 <Text style={{
-                  paddingTop: 10, color: '#f7cac9',
-                  fontWeight: '500'
+                  ...styles.textQuestion,
+                  paddingTop: 20,
                 }}>
                   Does it have a name?
                     </Text>
                 <TextInput
                   autoCapitalize="words"
                   placeholder={'The Butcher\'s daughter'}
+                  placeholderTextColor="rgba(201, 201, 201, 0.7)"
                   style={styles.input}
                   value={this.state.placeName}
                   onChangeText={placeName => this.setState({ placeName })}
@@ -152,6 +153,7 @@ class CheckInScreen extends React.Component {
                 <TextInput
                   autoCapitalize="words"
                   placeholder={'10 Streetname St., Brooklyn, NY 11202'}
+                  placeholderTextColor="rgba(201, 201, 201, 0.7)"
                   style={styles.input}
                   value={this.state.location}
                   onChangeText={location => { this.setState({ location }) }}
@@ -162,6 +164,7 @@ class CheckInScreen extends React.Component {
                 <TextInput
                   autoCapitalize="sentences"
                   placeholder={'some filter text'}
+                  placeholderTextColor="rgba(201, 201, 201, 0.7)"
                   style={styles.input}
                   value={this.state.description}
                   onChangeText={description => { this.setState({ description }) }}
@@ -171,6 +174,7 @@ class CheckInScreen extends React.Component {
                     </Text>
                 <TextInput
                   placeholder={'#AvocadoToast'}
+                  placeholderTextColor="rgba(201, 201, 201, 0.7)"
                   style={styles.input}
                   onChangeText={tags => { this.setState({ tags }) }}
                 />
@@ -198,7 +202,7 @@ class CheckInScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#034f84',
+    backgroundColor: '#FFF',
   },
   contentContainer: {
     paddingTop: 15,
@@ -220,8 +224,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'gray',
     color: 'black',
-    borderWidth: 1,
-    borderRadius: 4,
+    borderBottomWidth: 1,
   },
   modal: {
     flex: 1,
@@ -231,33 +234,40 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: 'white',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 12,
+    marginBottom: 10,
+    backgroundColor: '#fafafa',
     overflow: 'hidden',
-    padding: 12,
     alignSelf: 'center',
+    justifyContent: 'center',
+    borderColor: '#dbdbdb',
+    borderRadius: 12,
+    borderWidth: 0.5,
+    width: 100,
+    padding: 6
   },
   buttonTxt: {
     textAlign: 'center',
-    fontSize: 24,
-    color: 'black',
-    paddingHorizontal: 10
+    fontSize: 20,
+    color: '#1f1f1f',
+    fontFamily: 'playfair-display'
   },
   title: {
     alignSelf: 'center',
     fontSize: 25,
-    color: '#FFFFFF',
-    margin: 10
+    color: '#000',
+    marginTop: 10,
+    marginBottom: 15,
+    fontFamily: 'playfair-display'
   },
   backBtn: {
     color: 'blue',
     fontSize: 20,
   },
   textQuestion: {
-    color: '#f7cac9',
-    fontWeight: '500'
+    color: '#ff8482',
+    fontWeight: '400',
+    fontSize: 14,
+    // textAlign: 'center'
   }
 })
 

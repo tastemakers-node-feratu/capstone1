@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { updateUserThunk } from '../store/user'
-import UserProifleLinks from '../components/userProfileLinks'
+import UserProfileLinks from '../components/userProfileLinks'
 import LogOutButton from '../components/LogOutButton';
 
 class UserProfileScreen extends Component {
@@ -71,7 +71,7 @@ class UserProfileScreen extends Component {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.avatarEdit}>
-                <Icon style={styles.closeIcon} name="close" size={30} color="white"
+                <Icon style={styles.closeIcon} name="close" size={30} color="black"
                   onPress={() => this.setState({ editingMode: false })}
                 />
                 <Image style={styles.avatar}
@@ -114,7 +114,7 @@ class UserProfileScreen extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <UserProifleLinks navigate={navigate} />
+          <UserProfileLinks navigate={navigate} />
         </SafeAreaView>
       )
     }
@@ -129,16 +129,18 @@ class UserProfileScreen extends Component {
               <View style={styles.avatarEdit}>
                 <Image style={styles.avatar}
                   source={{ uri: user.imageURL }} />
-                <Icon name="edit" size={30} color="white" style={styles.editor}
+                <Icon name="edit" size={30} color="black" style={styles.editor}
                   onPress={() => this.setState({ editingMode: true })}
                 />
               </View>
-              <Text style={styles.name}>{user.firstName} {user.lastName}</Text>
-              <Text style={styles.userInfo}>{user.username}</Text>
-              <Text style={styles.userInfo}>{user.bio} </Text>
+              <View  style={styles.userInfo}>
+                <Text style={{...styles.userInfoText, fontSize: 22, fontWeight: '600', marginTop: 15}}>{user.firstName} {user.lastName}</Text>
+                <Text style={styles.userInfoText}>{user.username}</Text>
+                <Text style={styles.userInfoText}>{user.bio} </Text>
+              </View>
             </View>
           </View>
-          <UserProifleLinks navigate={navigate} />
+          <UserProfileLinks navigate={navigate} />
         </SafeAreaView >
       );
     }
@@ -157,13 +159,13 @@ export default connect(mapState, mapDispatch)(UserProfileScreen)
 
 const styles = StyleSheet.create({
   topContainer: {
-    backgroundColor: '#034f84',
+    backgroundColor: '#FFF',
     borderBottomWidth: 1,
     borderBottomColor: 'white',
     alignItems: 'flex-start'
   },
   header: {
-    backgroundColor: "#034f84",
+    backgroundColor: '#FFF',
     paddingTop: 20,
     paddingBottom: 20
   },
@@ -185,17 +187,17 @@ const styles = StyleSheet.create({
     paddingRight: 10
 
   },
-  name: {
-    fontSize: 22,
-    color: "white",
-    fontWeight: '600',
-  },
   userInfo: {
     fontSize: 16,
-    color: "#f7786b",
+    color: '#f7786b',
     fontWeight: '600',
   },
+  userInfoText: {
+    margin: 3
+  },
   avatarEdit: {
+    marginLeft: 125,
+    marginRight: 100,
     flexDirection: 'row'
   },
   editor: {
