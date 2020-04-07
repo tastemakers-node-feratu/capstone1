@@ -43,9 +43,9 @@ export default function OneSnapFullView(props) {
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <Text style={styles.name}>{user.username}</Text>
-            {place.category.map(category => handleIcon(category))}
+            {handleIcon(place.category[0])}
           </View>
-          {place.snapshot.photos!== '' ? <Image source={{ uri: place.snapshot.photos }} style={{ width: 225, height: 175 }} /> : null}
+          {place.snapshot.photos !== '' ? <Image source={{ uri: place.snapshot.photos }} style={{ width: 225, height: 175 }} /> : null}
           <Text style={styles.title}>{place.name}</Text>
           <Text style={styles.content}>{place.snapshot.description}</Text>
         </View>

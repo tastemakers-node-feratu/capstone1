@@ -36,7 +36,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/snapshot/:userId/:placeId', async (req, res, next) => {
   try {
-    const {userId} = req.params.userId
+    const { userId } = req.params.userId
     const snapshot = await User.findOne({
       where: { id: req.params.userId },
       include: [
@@ -55,8 +55,8 @@ router.get('/snapshot/:userId/:placeId', async (req, res, next) => {
   }
 });
 
-router.get('/explore/:userId', async(req,res,next) => {
-  try{
+router.get('/explore/:userId', async (req, res, next) => {
+  try {
     const { userId } = req.params;
     //get back an obj with key-val pairs of category:score
     const categoryScores = await User.getCategoryScores(userId);
