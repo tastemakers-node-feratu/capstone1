@@ -5,6 +5,9 @@ const { Op } = Sequelize;
 const Snapshot = require('../db/models/Snapshot');
 const User = require('../db/models/User');
 const Place = require('../db/models/Place');
+const Category = require('../db/models/Category')
+const Score = require('../db/models/Score')
+
 // findAndCountAll(id, )
 // const userFriends = [4, 50]
 // const { count, rows } = await User.findAndCountAll({
@@ -55,46 +58,34 @@ router.get('/snapshot/:userId/:placeId', async (req, res, next) => {
 router.get('/explore/:userId', async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const userPlaces = await User.findOne({
-      where: { id: req.params.userId },
-      include: [
-        {
-          model: Place,
-          through: Snapshot
-        }
-      ]
+    //get back an obj with key-val pairs of category:score
+    const categoryScores = await User.getCategoryScores(userId);
+    const numSnapsPerCategory = categoryScores.dataValues.categories.map(categoryObj => {
+      const score = categoryObj.score.averageScore;
+      return { [categoryObj.cat] : score };
     })
-    const categoryCount = {
-      'food': 0,
-      'fitness': 0,
-      'beauty': 0,
-      'nightlife': 0,
-      'experience': 0,
-      'shop': 0
-    }
-    const countByCategory = userPlaces.places.reduce((accum, curr) => {
-      accum[curr.category]++;
-      return accum;
-    }, categoryCount);
-    for (const category in countByCategory) {
-      countByCategory[category] = (countByCategory[category] * 2 + 5);
-    }
+    .map((catScore) => { //based on score, come up with # of snaps per category
+      console.log(Object.keys(catScore));
+      const catKey = Object.keys(catScore)[0];
+      return catScore[catKey] < 0 ? {[catKey] : 0} : { [catKey]: catScore[catKey] * 2 + 5};
+    })
 
-    // console.log('countbycategory', countByCategory);
-
+    //query snapshots by category, limited by numSnapsPerCategory, and push into
+    //curatedSnaps array.
     const curatedSnaps = [];
-    const placeIdsUsed = [];
-    for (const category in countByCategory) {
-      // for(let i=0; i<countByCategory[category]; i++){
-      const max = countByCategory[category]
-      const snapGroup = await User.getRandomSnapsByCategory(userId, max, category)
-      // console.log('snapGroup size', snapGroup.length)
-      snapGroup.forEach((snap) => curatedSnaps.push(snap));
-      // }
+    for(let i=0; i<numSnapsPerCategory.length; i++){
+      const catSnap = numSnapsPerCategory[i];
+      const catName = Object.keys(catSnap)[0];
+      const max = catSnap[catName];
+      const snapGroup = await User.getRandomSnapsByCategory(userId, max, catName);
+      snapGroup.forEach((snap) => {
+        curatedSnaps.push(snap)
+      });
     }
 
-    res.send(curatedSnaps)
-  } catch (err) {
+   res.send(curatedSnaps)
+
+  }catch(err){
     next(err)
   }
 })
