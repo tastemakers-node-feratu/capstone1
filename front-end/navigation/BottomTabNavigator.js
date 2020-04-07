@@ -134,16 +134,6 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ focused }) => (
-            <Icon name="user" size={30} color="#900" />
-          )
-        }}
-      />
-      <BottomTab.Screen
         name="FindFriends"
         component={FindFriends}
         options={{
@@ -164,6 +154,16 @@ export default function BottomTabNavigator({ navigation, route }) {
               color='#900'
               size={30}
             />
+          )
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ focused }) => (
+            <Icon name="user" size={30} color="#900" />
           )
         }}
       />
