@@ -72,7 +72,7 @@ function Profile() {
       <ProfileTab.Screen name="All Friends" component={Friends}
       />
       <ProfileTab.Screen name="My Pins" component={MySnaps} />
-      <ProfileTab.Screen name="Find Friends" component={FindFriendScreen} />
+      <ProfileTab.Screen name="Find Friends" component={FindFriends} />
       {/* <ProfileTab.Screen name="Settings" component={Settings} /> */}
     </ProfileTab.Navigator>
   )
@@ -122,7 +122,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={Feed}
         options={{
           title: 'Feed',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />,
+          tabBarIcon: ({ focused }) => <Icon name="film" size={30} color="#900" />,
         }}
       />
       <BottomTab.Screen
@@ -130,27 +130,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={CheckInScreen}
         options={{
           title: 'Check In',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-photos" />
-        }}
-      />
-      <BottomTab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ focused }) => (
-            <Icon name="user" size={30} color="#900" />
-          )
-        }}
-      />
-      <BottomTab.Screen
-        name="FindFriends"
-        component={FindFriends}
-        options={{
-          title: 'FindFriends',
-          tabBarIcon: ({ focused }) => (
-            <Icon name="group" size={30} color="#900" />
-          )
+          tabBarIcon: ({ focused }) => <Icon name="hand-peace-o" size={30} color="#900" />
         }}
       />
       <BottomTab.Screen
@@ -160,10 +140,20 @@ export default function BottomTabNavigator({ navigation, route }) {
           title: 'Explore',
           tabBarIcon: ({ focused }) => (
             < Iconic
-              name='explore'
+              name='search'
               color='#900'
               size={30}
             />
+          )
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ focused }) => (
+            <Icon name="user-o" size={30} color="#900" />
           )
         }}
       />

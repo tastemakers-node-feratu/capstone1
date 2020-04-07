@@ -64,7 +64,6 @@ router.get('/explore/:userId', async (req, res, next) => {
       return { [categoryObj.cat] : score };
     })
     .map((catScore) => { //based on score, come up with # of snaps per category
-      console.log(Object.keys(catScore));
       const catKey = Object.keys(catScore)[0];
       return catScore[catKey] < 0 ? {[catKey] : 0} : { [catKey]: catScore[catKey] * 2 + 5};
     })

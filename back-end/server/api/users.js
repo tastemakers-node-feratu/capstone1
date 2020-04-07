@@ -30,7 +30,6 @@ router.get('/snapshots/:id', async (req, res, next) => {
     })
     var posResult = sentiment.analyze(positiveBlurb);
     var negResult = sentiment.analyze(negativeBlurb);
-    console.log('positive', posResult, 'negative', negResult)
     res.send(userWithSnaps.places);
   } catch (err) {
     next(err)

@@ -14,6 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { updateUserThunk } from '../store/user'
 import UserProfileLinks from '../components/userProfileLinks'
 import LogOutButton from '../components/LogOutButton';
+import FindFriendsButton from '../components/FindFriendsButton'
 
 class UserProfileScreen extends Component {
   constructor(props) {
@@ -123,6 +124,7 @@ class UserProfileScreen extends Component {
         <SafeAreaView style={styles.container}>
           <View style={styles.topContainer}>
             <LogOutButton navigate={navigate} />
+            <FindFriendsButton navigate={navigate} />
           </View>
           <View style={styles.header}>
             <View style={styles.headerContent}>
@@ -159,10 +161,11 @@ export default connect(mapState, mapDispatch)(UserProfileScreen)
 
 const styles = StyleSheet.create({
   topContainer: {
+    flexDirection: 'row',
     backgroundColor: '#FFF',
     borderBottomWidth: 1,
     borderBottomColor: 'white',
-    alignItems: 'flex-start'
+    justifyContent: 'space-between'
   },
   header: {
     backgroundColor: '#FFF',
