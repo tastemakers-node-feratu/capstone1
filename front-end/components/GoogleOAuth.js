@@ -46,11 +46,9 @@ class GoogleOAuth extends React.Component {
     return googleId ? (
       <View>{navigate('Home')}</View>
     ) : (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.signIn} style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Sign In With Google</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={this.signIn}>
+        <Text style={styles.buttonText}>Sign In With Google</Text>
+      </TouchableOpacity>
     );
   }
 }
@@ -59,16 +57,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center'
   },
-  buttonContainer: {
-    width: 200,
-    paddingVertical: 1,
-    marginBottom: 15,
-    borderRadius: 10
-  },
   buttonText: {
-    textAlign: 'center',
-    color: '#000',
-    fontWeight: '400'
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'playfair-display'
   }
 });
 

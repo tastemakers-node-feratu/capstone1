@@ -23,16 +23,19 @@ export default MiniFriendView = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f7cac9',
+        backgroundColor: '#FFF',
         margin: 15,
         marginLeft: 30,
         marginRight: 30,
         alignItems: 'center',
         borderRadius: 10,
-        paddingBottom: 15
-    },
-    contentContainer: {
-        paddingTop: 15,
+        paddingBottom: 15,
+        borderWidth: 1,
+        // borderColor: '#f7786b',
+        shadowRadius: 0.8,
+        shadowOffset: {width: 0, height: 3},
+        shadowColor: '#f7786b',
+        shadowOpacity: 0.3
     },
     name: {
         fontSize: 20,
@@ -41,18 +44,5 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         marginTop: 15,
         marginBottom: 5,
-    },
-    title: {
-        fontSize: 20,
-        fontStyle: 'italic',
-        color: '#f7786b',
-        margin: 10
-    },
-    content: {
-        color: '#FFFFFF',
-        marginRight: 25,
-        marginLeft: 25,
-        marginBottom: 15,
-        textAlign: 'center',
     }
 })

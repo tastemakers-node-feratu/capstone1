@@ -28,7 +28,7 @@ class Explore extends React.Component {
           <LogOutButton navigate={navigate} />
           <View style={styles.rightButtons}>
             <TouchableHighlight onPress={this.openModal} style={styles.filter}>
-              <Icon name="filter-outline" size={30} color="#f2f2f2" />
+              <Icon name="filter-outline" size={25} color="#000" />
             </TouchableHighlight>
           </View>
         </View>
@@ -47,7 +47,7 @@ class Explore extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#034f84',
+    backgroundColor: '#FFF',
   },
   contentContainer: {
     paddingTop: 15,
@@ -61,12 +61,14 @@ const styles = StyleSheet.create({
   },
   filter: {
     borderWidth: 1,
-    borderColor: '#f2f2f2',
+    borderColor: '#000',
     borderRadius: 10,
     width: 40,
     alignItems: 'center',
     margin: 5,
-    marginRight: 10
+    marginRight: 10,
+    justifyContent: 'center',
+    height: 30
   },
   modal: {
     flex: 1,

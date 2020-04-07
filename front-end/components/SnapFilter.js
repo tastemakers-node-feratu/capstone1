@@ -60,7 +60,7 @@ class SnapFilter extends React.Component {
                         onPress={this.addCategories}
                         style={styles.buttonContainer}
                     >
-                        <Text style={styles.buttonText}>Confirm</Text>
+                        <Text style={styles.buttonText}>{`- Confirm -`}</Text>
                     </TouchableHighlight>
                 </View>
             </SafeAreaView>
@@ -71,7 +71,7 @@ class SnapFilter extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#034f84',
+        backgroundColor: '#fff',
         paddingTop: 15,
         width: 380,
         height: 500,
@@ -80,17 +80,22 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         alignSelf: 'center',
-        backgroundColor: '#2980b9',
-        width: 100,
-        paddingVertical: 10,
-        paddingTop: 10,
+        backgroundColor: '#fff',
+        width: 170,
+        paddingVertical: 8,
+        justifyContent: "center",
+        marginTop: 20,
         marginBottom: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        borderRadius: 10,
+        borderWidth: 0.5
     },
     buttonText: {
         textAlign: 'center',
-        color: '#FFFFFF',
-        fontWeight: '700'
+        color: '#000',
+        fontSize: 20,
+        fontWeight: '600',
+        fontFamily: 'playfair-display'
     },
 })
 

@@ -53,34 +53,35 @@ export default function userProfileLinks(props) {
 const styles = StyleSheet.create({
   body: {
     marginTop: -15,
-    backgroundColor: "#034f84",
+    backgroundColor: "#FFF",
     height: 500,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 5,
-    paddingBottom: 5,
+    margin: 10,
+    padding: 5,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: '#f7cac9',
-    borderWidth: 2,
-    borderColor: '#f7786b'
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#000',
+    justifyContent: 'center',
+    width: 200
   },
   iconContent: {
     alignItems: 'center',
-    paddingRight: 7,
+    paddingRight: 7
   },
   icon: {
     width: 30,
     height: 30,
-    marginTop: 30,
     color: '#f7786b'
   },
   info: {
-    fontSize: 18,
-    marginTop: 20,
-    color: "#f7786b",
-  },
+    fontSize: 20,
+    color: '#f7786b',
+    fontFamily: 'playfair-display',
+  }
 });

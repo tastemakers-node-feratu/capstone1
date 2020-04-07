@@ -62,7 +62,7 @@ class SnapShotsScreen extends React.Component {
                     <LogOutButton navigate={navigate} />
                     <View style={styles.rightButtons}>
                         <TouchableHighlight onPress={this.openModal} style={styles.filter}>
-                            <Icon name="filter-outline" size={30} color="#f2f2f2" />
+                            <Icon name="filter-outline" size={25} color="#000" />
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -76,12 +76,6 @@ class SnapShotsScreen extends React.Component {
                         <SnapFilter user={this.props.user} closeModal={this.closeModal} />
                     </View>
                 </Modal>
-                {/* <ScrollView style={styles.contentContainer} >
-                    {this.props.allSnapshots.map(snapshot => {
-                        return (
-                        <MiniSnapShot key={snapshot.id} snapshot={snapshot} navigate={navigate} />
-                    )})}
-                </ScrollView> */}
                 <View style={styles.contentContainer}>
                     <FlatList
                         keyExtractor={item => item.id.toString()}
@@ -101,7 +95,7 @@ class SnapShotsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
     },
     contentContainer: {
         paddingTop: 15,
@@ -115,12 +109,14 @@ const styles = StyleSheet.create({
     },
     filter: {
         borderWidth: 1,
-        borderColor: '#f2f2f2',
+        borderColor: '#000',
         borderRadius: 10,
         width: 40,
         alignItems: 'center',
         margin: 5,
-        marginRight: 10
+        marginRight: 10,
+        justifyContent: 'center',
+        height: 30
     },
     modal: {
         flex: 1,
@@ -128,18 +124,20 @@ const styles = StyleSheet.create({
         paddingVertical: 100
     },
     backBtn: {
-        color: '#FFF',
+        color: '#000',
         fontSize: 15,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'playfair-display'
     },
     buttonContainer: {
         alignSelf: 'flex-start',
-        backgroundColor: '#2980b9',
+        backgroundColor: '#FFF',
         width: 90,
         paddingVertical: 10,
         marginLeft: 20,
         marginBottom: 5,
-        borderRadius: 10
+        borderRadius: 10,
+        borderWidth: 0.5
     }
 })
 

@@ -38,17 +38,19 @@ class MySnaps extends React.Component {
 const styles = StyleSheet.create({
     outerContainer: {
         flex: 1,
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
     },
     container: {
         flex: 1,
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
+        marginTop: 15
     },
     header: {
         fontSize: 50,
         color: '#f7786b',
         textAlign: 'center',
-        paddingBottom: 5
+        paddingBottom: 5,
+        fontFamily: 'playfair-display'
     },
     contentContainer: {
         paddingTop: 15,

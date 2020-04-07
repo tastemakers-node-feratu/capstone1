@@ -22,7 +22,6 @@ const Score = require('../db/models/Score')
 router.get('/:id', async (req, res, next) => {
   try {
     let all;
-    // TODO: i dont understand what is happening here
     const friendsArr = await User.getFriends(req.params.id);
     if (friendsArr) {
       const userFriends = friendsArr.friends.map(friend => friend.id);

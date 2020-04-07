@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
-// import LoginScreen from '../screens/LoginScreen';
-// import SignUpScreen from '../screens/SignUpScreen';
 import CheckInScreen from '../screens/CheckInScreen';
 import SnapShotsScreen from '../screens/SnapShotsScreen';
 import FriendsScreen from '../screens/FriendsScreen';
@@ -32,7 +30,7 @@ function Feed() {
     <FeedTab.Navigator initialRouteName="MainFeed"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#034f84',
+          backgroundColor: '#FFF',
         },
         title: ''
       }}
@@ -65,7 +63,7 @@ function Profile() {
     <ProfileTab.Navigator initialRouteName="Profile"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#034f84',
+          backgroundColor: '#FFF',
         },
         title: ''
       }}
@@ -84,7 +82,7 @@ function FindFriends() {
   return (< FindFriendsTab.Navigator initialRouteName="Find Friends"
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
       },
       title: ''
     }}
@@ -100,7 +98,7 @@ function ExplorePage() {
     <ExploreTab.Navigator initialRouteName="Explore"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#034f84'
+          backgroundColor: '#FFF'
         },
         title: ''
       }}

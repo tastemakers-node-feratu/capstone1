@@ -62,23 +62,23 @@ class FriendsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
     },
     contentContainer: {
         paddingTop: 15,
     },
-    // topContainer: {
-    //     flexDirection: "row",
-    //     justifyContent: 'space-between'
-    // },
     rightButtons: {
         flexDirection: "row",
     },
     searchInput: {
+        marginTop: 10,
         padding: 10,
-        borderColor: '#CCC',
+        borderColor: '#000',
         borderWidth: 1,
         color: '#f7cac9',
+        borderRadius: 20,
+        marginLeft: 10,
+        marginRight: 10
     }
 })
 
