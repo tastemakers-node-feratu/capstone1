@@ -64,15 +64,11 @@ router.get('/explore/:userId', async (req, res, next) => {
       const score = categoryObj.score.averageScore;
       return { [categoryObj.cat] : score };
     })
-    //use below algorithm to come up with number of snaps per category based
-    //on the score.
-    .map((catScore) => {
+    .map((catScore) => { //based on score, come up with # of snaps per category
       console.log(Object.keys(catScore));
       const catKey = Object.keys(catScore)[0];
       return catScore[catKey] < 0 ? {[catKey] : 0} : { [catKey]: catScore[catKey] * 2 + 5};
     })
-
-    // res.send(numSnapsPerCategory)
 
     //query snapshots by category, limited by numSnapsPerCategory, and push into
     //curatedSnaps array.
