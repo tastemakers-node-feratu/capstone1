@@ -2,7 +2,7 @@
 
 Tastemakers is a mobile social media app that allows friends to share recent discoveries in food, fitness, nightlife, shopping, beauty, and more through posts called “snapshots.”  A snapshot is composed of a name, location, photo and description of an experience you had. Tastemakers is a unique way for friends to share recent discoveries.
 
-![alt text](-gif url here -)
+<img src="https://github.com/tastemakers-node-feratu/capstone1/blob/master/quickdemo.gif" width="150">
 
 ## Table of Contents
 
