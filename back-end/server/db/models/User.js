@@ -65,12 +65,11 @@ const User = db.define('user', {
 
 User.getFriends = function(id) {
   const friends = this.findOne({
-    where: {id},
+    where: {id, friendship_status: 'approved'},
     include: [
       {
         model: User,
         as: 'friends'
-        // where: {friendship_status: 'approved'}
       }
     ]
   });
@@ -122,7 +121,6 @@ User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPW);
 });
 
-// TODO: findAndCountAll
 User.getSnapShots = function(arr, categories) {
   const oneMonthAgo = moment()
     .subtract(1, 'months')
@@ -149,8 +147,6 @@ User.getSnapShots = function(arr, categories) {
         }
       }
     ]
-    // offset: 10,
-    // limit: 10
   });
   return all;
 };

@@ -90,11 +90,11 @@ class SingleFriendScreen extends React.Component {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#034f84'
+    backgroundColor: '#FFF'
   },
   container: {
     flex: 1,
-    backgroundColor: '#034f84',
+    backgroundColor: '#FFF',
     margin: 20
   },
   userContainer: {

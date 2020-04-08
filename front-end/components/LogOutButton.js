@@ -2,7 +2,6 @@
 import React from 'react';
 import {Button, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
-// import * as GoogleSignIn from 'expo-google-sign-in';
 import * as Google from 'expo-google-app-auth';
 import {logOutThunk} from '../store/user';
 import {androidClientId, iosClientId} from '../superSecret';
@@ -18,18 +17,14 @@ const LogOutButton = props => {
   return (
     <View>
       <TouchableOpacity style={styles.button} onPress={logout}>
-      {/* <Button title="Log Out" color="black"onPress={logout}> */}
         <Text style={styles.buttonText}>Log Out</Text>
       </TouchableOpacity>
-      {/* </Button> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    // backgroundColor: '#FFF',
-    // borderBottomWidth: 0.5,
     marginLeft: 10,
     borderWidth: 1,
     borderColor: '#000',

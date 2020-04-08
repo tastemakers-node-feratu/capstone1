@@ -104,11 +104,13 @@ async function fakerSeed() {
     await Promise.all(fakerPlaces.map(element => Place.create(element)));
     await Promise.all(fakerUsers.map(element => User.create(element)));
     await Promise.all(categoriesArray.map(element => Category.create({cat: element})));
+
     // get all users and places
     const allUsers = await User.findAll();
     const allPlaces = await Place.findAll();
     const allCats = await Category.findAll();
-    const allSnapshots = await Snapshot.findAll(); // TODO:
+    const allSnapshots = await Snapshot.findAll();
+
     // all users are friends with each other
     await Promise.all(
       allUsers.map((user, index) => {
@@ -125,6 +127,7 @@ async function fakerSeed() {
         return i;
       })
     );
+
     // all places have categories
     await Promise.all(
       allPlaces.map(place => {
@@ -159,6 +162,7 @@ async function fakerSeed() {
         );
       })
     );
+
     // adding category to users
     await Promise.all(
       allUsers.map(user => {

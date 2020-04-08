@@ -16,8 +16,6 @@ import {
 import { connect } from 'react-redux';
 import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm';
-// import GoogleOAuth from '../components/GoogleOAuth';
-// import { getMeThunk } from '../store/user';
 import SignUpForm from '../components/SignUpForm';
 
 class LoginScreen extends React.Component {

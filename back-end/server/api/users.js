@@ -66,11 +66,9 @@ router.put('/snapshot/:userId', async (req, res, next) => {
     const user = await User.findByPk(req.params.userId);
     const category = await Category.findOne({ where: { cat: req.body.category[0] } })
     const { score } = sentiment.analyze(description);
-    // await Score.update({ totalScore: score }, { where: { categoryId: category.id, userId: user.id } })
     const newscore = await Score.findOne({ where: { categoryId: category.id, userId: user.id } })
     newscore.totalScore += score;
-    newscore.save()
-    // console.log('NEW SCORE', newscore)
+    newscore.save();
     await user.addPlace(place[0].id, { through: { description, tags, photos: imageURL } });
     const snapshot = await User.findOne({
       where: { id: user.id },

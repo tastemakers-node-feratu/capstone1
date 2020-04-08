@@ -5,13 +5,10 @@ const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const db = require('./server/db');
 
 const app = express();
-
-// const sessionStore = new SequelizeStore({db});
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
@@ -34,12 +31,6 @@ app.use(
     saveUninitialized: false
   })
 );
-// use function below to test/debug sessions
-// app.use((req, res, next) => {
-//   // testing session/cookie
-//   console.log('SESSION: ', req.session, req.sessionID);
-//   next();
-// });
 
 // passport middleware
 app.use(passport.initialize());

@@ -266,8 +266,7 @@ const styles = StyleSheet.create({
   textQuestion: {
     color: '#ff8482',
     fontWeight: '400',
-    fontSize: 14,
-    // textAlign: 'center'
+    fontSize: 14
   }
 })
 
