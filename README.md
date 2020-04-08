@@ -2,13 +2,15 @@
 
 Tastemakers is a mobile social media app that allows friends to share recent discoveries in food, fitness, nightlife, shopping, beauty, and more through posts called “snapshots.”  A snapshot is composed of a name, location, photo and description of an experience you had. Tastemakers is a unique way for friends to share recent discoveries.
 
+![alt text](-gif url here -)
+
 ## Table of Contents
 
 - [Taste Makers](#Taste-Makers)
 - [Table of Contents](#Table-of-Contents)
 - [Download](#Download)
 - [Team](#Team)
-  - [Xiaoqing Lin](#Xiaoqing-Lin)
+  - [Malinda Lin](#Malinda-Lin)
   - [Isabel Jao](#Isabel-Jao)
   - [Mikayla Toffler](#Mikayla-Toffler)
 - [Tech Stack](#Tech-Stack)
@@ -51,7 +53,7 @@ Go to http://localhost:19001 to use Taste Makers!
 
 ## Team
 
-### `Xiaoqing Lin`
+### `Malinda Lin`
 
 Github: https://github.com/malinda-lin
 
