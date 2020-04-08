@@ -35,5 +35,4 @@ module.exports = Score;
 Score.beforeSave((score, options) => {
   score.counter += 1
   score.averageScore = Math.round(score.totalScore / score.counter);
-  // console.log('NEW HOOOK', score.averageScore)
 });

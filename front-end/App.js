@@ -50,7 +50,6 @@ export default function App(props) {
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null
   } else {
-    console.log('AuthNavigator', AppNavigator)
     return (
       <Provider store={store}>
         <View style={styles.container}>
