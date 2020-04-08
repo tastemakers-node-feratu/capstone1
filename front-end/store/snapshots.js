@@ -144,8 +144,7 @@ export const getCuratedSnapsThunk = userId => {
 
 const snapshotReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GOT_CURATED_SNAPS:{
-      // console.log('i got it');
+    case GOT_CURATED_SNAPS: {
       return {...state, curatedSnaps: [...action.info] }
     }
 

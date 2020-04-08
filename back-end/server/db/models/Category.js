@@ -12,12 +12,4 @@ const Category = db.define('category', {
   }
 });
 
-// Category.getUserScores = function(userId){
-//   return this.findAll({
-//     include: [{
-//       model: User, through: Score,
-//       where: { id: userId }
-//     }],
-//   })
-// }
 module.exports = Category;

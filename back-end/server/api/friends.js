@@ -33,7 +33,6 @@ router.get('/nonfriends/:id', async (req, res, next) => {
 // this route determines the addFriendButton status
 router.get('/friendStatus', async (req, res, next) => {
   try {
-    // TODO: user req.user
     let status;
     const { userId, selectedFriendId } = req.query;
     // userFriend is when the user is the sender & friend is the receiver

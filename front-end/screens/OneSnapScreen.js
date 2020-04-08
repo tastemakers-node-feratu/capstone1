@@ -66,8 +66,7 @@ class OneSnapScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        //74b9ff
+        backgroundColor: '#FFF'
     },
     contentContainer: {
         marginTop: 25

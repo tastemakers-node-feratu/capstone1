@@ -80,8 +80,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '400',
     marginTop: 15,
-    marginBottom: 5,
-    // marginLeft: 60,
+    marginBottom: 5
   },
   title: {
     fontSize: 20,
