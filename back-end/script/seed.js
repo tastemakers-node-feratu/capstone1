@@ -51,6 +51,33 @@ const randomCategory = () => {
   // 5 is the max index of our array
   return categories[randomNumber(5)];
 };
+// Isabel User
+// const isabelUser = {
+//   username: 'isabel.j',
+//   email: 'isabel@email.com',
+//   password: 'password',
+//   firstName: 'Isabel',
+//   lastName: 'Jao',
+//   imageURL:
+//     'https://media-exp1.licdn.com/dms/image/C4D03AQEPfgOcgPi_NA/profile-displayphoto-shrink_800_800/0?e=1591833600&v=beta&t=jcDf4c9_vWEFg9dq10MG6mTQnXMDJhFhA6JJmgEN6aI',
+//   bio:
+//     "I'm a fullstack developer based in NYC. I was born in New York city but grew up in Asia and have a background in finance and hospitality.",
+//   phone: faker.phone.phoneNumber(),
+//   pushNotifs: true
+// };
+// const mikaylaUser = {
+//   username: 'mikayla.t',
+//   email: 'mikayla@email.com',
+//   password: 'password',
+//   firstName: 'Mikayla',
+//   lastName: 'Toffler',
+//   imageURL:
+//     'https://media-exp1.licdn.com/dms/image/C4E03AQHXxtwbx846XQ/profile-displayphoto-shrink_800_800/0?e=1591833600&v=beta&t=dEeLYDs3iJ3CB5wsfjdPj1yokGJ6eIPA5xSDrylfvAY',
+//   bio:
+//     "I discovered my passion for software development in college, almost by accident.",
+//   phone: faker.phone.phoneNumber(),
+//   pushNotifs: true
+// };
 
 // sets up the structure of a user instance
 const fakerUsers = faker.array(
@@ -104,16 +131,24 @@ async function fakerSeed() {
     await Promise.all(fakerPlaces.map(element => Place.create(element)));
     await Promise.all(fakerUsers.map(element => User.create(element)));
     await Promise.all(categoriesArray.map(element => Category.create({cat: element})));
+    // await User.create(isabelUser);
+    // await User.create(mikaylaUser);
     // get all users and places
     const allUsers = await User.findAll();
     const allPlaces = await Place.findAll();
     const allCats = await Category.findAll();
-    const allSnapshots = await Snapshot.findAll(); // TODO:
+    const allSnapshots = await Snapshot.findAll();
+    // const isabelObj = await User.findOne({where: {
+    //   firstName: 'Isabel'
+    // }});
+    // const mikaylaObj = await User.findOne({where: {
+    //   firstName: 'Mikayla'
+    // }});
     // all users are friends with each other
     await Promise.all(
       allUsers.map((user, index) => {
         let i = index;
-        while (i < 99) {
+        while (i < 99 && user.name !== 'Isabel') {
           i += 1;
           user.addFriend(allUsers[i], {
             through: {friendship_status: 'approved'}
@@ -125,6 +160,26 @@ async function fakerSeed() {
         return i;
       })
     );
+    // isabel friends
+    // await Promise.all(
+    //   allUsers.map((user, index) => {
+    //     if (index < 10) {
+    //       user.addFriend(isabelObj, {
+    //         through: {friendship_status: 'approved'}
+    //       });
+    //       isabelObj.addFriend(user, {
+    //         through: {friendship_status: 'approved'}
+    //       });
+    //     }
+    //     return index;
+    //   })
+    // );
+    // await isabelObj.addFriend(mikaylaObj, {
+    //   through: {friendship_status: 'approved'}
+    // });
+    // await mikaylaObj.addFriend(isabelObj, {
+    //   through: {friendship_status: 'approved'}
+    // });
     // all places have categories
     await Promise.all(
       allPlaces.map(place => {
@@ -159,6 +214,42 @@ async function fakerSeed() {
         );
       })
     );
+    // await mikaylaObj.addPlace(allPlaces[0], {
+    //   through: {
+    //     description: blurbArray[randomNumber(1, 0)],
+    //     photos: `https://i.picsum.photos/id/${randomNumber(219,5
+    //     )}/200/200.jpg`,
+    //     price_rating: randomNumber(4, 1),
+    //     tags: faker.array(faker.lorem.word, randomNumber(5))
+    //   }
+    // });
+    // await mikaylaObj.addPlace(allPlaces[1], {
+    //   through: {
+    //     description: 'new makeup look!! check it out',
+    //     category: ['beauty'],
+    //     photos: `https://i.pinimg.com/564x/18/fa/9e/18fa9e6a1d0d265ace39a22b466f4455.jpg`,
+    //     price_rating: randomNumber(4, 1),
+    //     tags: faker.array(faker.lorem.word, randomNumber(5))
+    //   }
+    // });
+    // await mikaylaObj.addPlace(allPlaces[2], {
+    //   through: {
+    //     description: blurbArray[randomNumber(1, 0)],
+    //     photos: `https://i.picsum.photos/id/${randomNumber(219,5
+    //     )}/200/200.jpg`,
+    //     price_rating: randomNumber(4, 1),
+    //     tags: faker.array(faker.lorem.word, randomNumber(5))
+    //   }
+    // });
+    // await mikaylaObj.addPlace(allPlaces[3], {
+    //   through: {
+    //     description: blurbArray[randomNumber(1, 0)],
+    //     photos: `https://i.picsum.photos/id/${randomNumber(219,5
+    //     )}/200/200.jpg`,
+    //     price_rating: randomNumber(4, 1),
+    //     tags: faker.array(faker.lorem.word, randomNumber(5))
+    //   }
+    // });
     // adding category to users
     await Promise.all(
       allUsers.map(user => {

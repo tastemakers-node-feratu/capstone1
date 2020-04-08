@@ -66,7 +66,7 @@ class OneSnapScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#034f84',
+        backgroundColor: '#FFF',
         //74b9ff
     },
     contentContainer: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     name: {
         flex: 1,
         fontSize: 20,
-        color: '#FFFFFF',
+        color: '#000',
         textAlign: 'center',
         fontWeight: '400',
         flexWrap: 'wrap'
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     location: {
-        color: '#FFFFFF',
+        color: '#000',
         marginLeft: 15,
         fontStyle: 'italic',
         fontSize: 16,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     content: {
-        color: '#FFFFFF',
+        color: '#000',
         marginRight: 25,
         marginLeft: 25,
         marginBottom: 15,

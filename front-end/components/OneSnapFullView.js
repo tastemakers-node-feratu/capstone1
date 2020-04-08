@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableHighlight,
+  TouchableOpacity,
   SafeAreaView
 } from 'react-native';
 
@@ -35,7 +36,7 @@ export default function OneSnapFullView(props) {
   const { place, user, navigate } = props;
   return (
     <SafeAreaView key={place.id}>
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() => {
           navigate('SingleSnap', { userId: user.id, placeId: place.id });
         }}
@@ -49,7 +50,7 @@ export default function OneSnapFullView(props) {
           <Text style={styles.title}>{place.name}</Text>
           <Text style={styles.content}>{place.snapshot.description}</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </SafeAreaView>
   )
 }
